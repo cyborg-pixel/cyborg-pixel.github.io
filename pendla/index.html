@@ -58,7 +58,7 @@
     }
   </style>
 </head>
-<body onload="updateDepartures()">
+<body onload="startAutoRefresh()">
 
   <div class="site-box departure-to-island">
     <h2>Pendelfärja 80 från Tranholmen</h2>
@@ -144,6 +144,11 @@
       fetchDepartures(9117, 'BUS', '50', 1, 360, 'odenplan');
       fetchDepartures(9201, 'BUS', '601', 1, 360, 'ds');
       fetchDepartures(9220, 'SHIP', '80', 1, 360, 'ropsten');
+    }
+
+    function startAutoRefresh() {
+      updateDepartures();
+      setInterval(updateDepartures, 30000);
     }
   </script>
 
