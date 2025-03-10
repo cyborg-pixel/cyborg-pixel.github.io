@@ -121,6 +121,49 @@
     function closePopup(id) {
       document.getElementById(id).style.display = 'none';
     }
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+
+    function updateDepartures() {
+      fetchDepartures(2103, 'BUS', '601', 2, 360, 'buss');
+      fetchDepartures(961, 'SHIP', '80', 1, 360, 'farja', 'Ropsten');
+      fetchDepartures(1180, 'BUS', '50', 2, 360, 'lektorsstigen');
+      fetchDepartures(9117, 'BUS', '50', 1, 360, 'odenplan');
+      fetchDepartures(9201, 'BUS', '601', 1, 360, 'ds');
+      fetchDepartures(9220, 'SHIP', '80', 1, 360, 'ropsten');
+    }
+
+    async function fetchDepartures(siteId, transportMode, lineNumber, directionCode, forecast, elementId, destinationFilter = '') {
+      const url = `https://transport.integration.sl.se/v1/sites/${siteId}/departures?forecast=${forecast}&direction=${directionCode}`;
+      try {
+        const res = await fetch(url);
+        if (!res.ok) return;
+        const data = await res.json();
+        const departures = data.departures.filter(dep => dep.line && dep.line.transport_mode === transportMode && dep.line.designation === lineNumber && (!destinationFilter || dep.destination.includes(destinationFilter))).slice(0, 5);
+        const listElement = document.getElementById(elementId);
+        listElement.innerHTML = '';
+        if (departures.length === 0) {
+          listElement.innerHTML = '<li>Inga avgångar hittades.</li>';
+          return;
+        }
+        departures.forEach((dep, idx) => {
+          const departureTime = new Date(dep.expected);
+          const minutesLeft = Math.round((departureTime - new Date()) / 60000);
+          const timeStr = departureTime.toLocaleTimeString('sv-SE', {hour: '2-digit', minute: '2-digit'});
+          const displayTime = minutesLeft <= 0 ? 'Nu' : `${timeStr} (${minutesLeft} min)`;
+          const li = document.createElement('li');
+          if (idx === 0) li.classList.add('big');
+          li.innerHTML = `${dep.destination} - ${displayTime}`;
+          listElement.appendChild(li);
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    window.onload = updateDepartures;
   </script>
 </body>
 </html>
