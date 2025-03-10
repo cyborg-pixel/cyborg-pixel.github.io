@@ -14,24 +14,26 @@
       padding: 20px;
       background: linear-gradient(135deg, #cfe8ff, #a8d3ff);
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      align-items: center;
       height: 100vh;
       box-sizing: border-box;
     }
 
-    .column {
-      width: 48%;
-      background-color: rgba(255, 255, 255, 0.8);
+    .site-box {
+      width: 90%;
+      background-color: rgba(255, 255, 255, 0.9);
       border-radius: 15px;
       padding: 15px;
       box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
     }
 
-    .left-column {
-      background-color: rgba(220, 230, 245, 0.8);
+    .departure-to-city {
+      background-color: rgba(255, 200, 220, 0.8);
     }
 
-    .right-column {
+    .departure-to-island {
       background-color: rgba(200, 230, 200, 0.8);
     }
 
@@ -41,16 +43,14 @@
     }
 
     .station {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     h2 {
       color: #444;
-      font-size: 75%;
     }
 
     body {
-      font-size: 75%;
     }
 
     .time {
@@ -65,41 +65,34 @@
 </head>
 <body>
 
-  <div class="column left-column">
-    <div class="station">
-      <h2>Pendelfärja 80 från Tranholmen</h2>
-      <ul id="farja"></ul>
-    </div>
-
-    <div class="station">
-      <h2>Buss 601 från Svanholmsvägen</h2>
-      <ul id="buss"></ul>
-    </div>
-
-
-    <div class="station">
-      <h2>Buss 50 från Lektorsstigen</h2>
-      <ul id="lektorsstigen"></ul>
-    </div>
+  <div class="site-box departure-to-island">
+    <h2>Pendelfärja 80 från Tranholmen</h2>
+    <ul id="farja"></ul>
   </div>
 
-  <div class="column right-column">
-    <div class="station">
-      <h2>Pendelfärja 80 från Ropsten</h2>
-      <ul id="ropsten"></ul>
-    </div>
+  <div class="site-box departure-to-island">
+    <h2>Buss 601 från Svanholmsvägen</h2>
+    <ul id="buss"></ul>
+  </div>
 
-    <div class="station">
-      <h2>Buss 601 från Danderyds sjukhus</h2>
-      <ul id="ds"></ul>
-    </div>
+  <div class="site-box departure-to-island">
+    <h2>Buss 50 från Lektorsstigen</h2>
+    <ul id="lektorsstigen"></ul>
+  </div>
 
-    <div class="station">
-      <h2>Buss 50 från Odenplan</h2>
-      <ul id="odenplan"></ul>
-    </div>
+  <div class="site-box departure-to-city">
+    <h2>Pendelfärja 80 från Ropsten</h2>
+    <ul id="ropsten"></ul>
+  </div>
 
+  <div class="site-box departure-to-city">
+    <h2>Buss 601 från Danderyds sjukhus</h2>
+    <ul id="ds"></ul>
+  </div>
 
+  <div class="site-box departure-to-city">
+    <h2>Buss 50 från Odenplan</h2>
+    <ul id="odenplan"></ul>
   </div>
 
   <script>
