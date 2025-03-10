@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nästa avgångar - Tranholmen</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#cfe8ff">
+  <link rel="apple-touch-icon" href="icon.png">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #cfe8ff, #a8d3ff);
+      display: flex;
+      justify-content: space-between;
+      height: 100vh;
+      box-sizing: border-box;
+    }
+
+    .column {
+      width: 48%;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    .left-column {
+      background-color: rgba(220, 230, 245, 0.8);
+    }
+
+    .right-column {
+      background-color: rgba(200, 230, 200, 0.8);
+    }
+
+    .big {
+      font-weight: bold;
+      font-size: 1.0em;
+    }
+
+    .station {
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      color: #444;
+    }
+
+    .time {
+      color: #555;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="column left-column">
+    <div class="station">
+      <h2>Pendelfärja 80 från Tranholmen</h2>
+      <ul id="farja"></ul>
+    </div>
+
+    <div class="station">
+      <h2>Buss 601 från Svanholmsvägen</h2>
+      <ul id="buss"></ul>
+    </div>
+
+
+    <div class="station">
+      <h2>Buss 50 från Lektorsstigen</h2>
+      <ul id="lektorsstigen"></ul>
+    </div>
+  </div>
+
+  <div class="column right-column">
+    <div class="station">
+      <h2>Pendelfärja 80 från Ropsten</h2>
+      <ul id="ropsten"></ul>
+    </div>
+
+    <div class="station">
+      <h2>Buss 601 från Danderyds sjukhus</h2>
+      <ul id="ds"></ul>
+    </div>
+
+    <div class="station">
+      <h2>Buss 50 från Odenplan</h2>
+      <ul id="odenplan"></ul>
+    </div>
+
+
+  </div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+
+    const svanholmsvagenSiteId = 2103;
+    const tranholmenSiteId = 961;
+    const lektorsstigenSiteId = 1180;
+
+    async function fetchDepartures(siteId, transportMode, lineNumber, directionCode, forecast, elementId, destinationFilter = '') {
+      const url = `https://transport.integration.sl.se/v1/sites/${siteId}/departures?forecast=${forecast}&direction=${directionCode}`;
+
+      try {
+        const res = await fetch(url);
+        if (!res.ok) return;
+
+        const data = await res.json();
+        const departures = data.departures
+          .filter(dep => dep.line && dep.line.transport_mode === transportMode && dep.line.designation === lineNumber && (!destinationFilter || dep.destination.includes(destinationFilter)))
+          .slice(0, 5);
+
+        const listElement = document.getElementById(elementId);
+        listElement.innerHTML = '';
+
+        if (departures.length === 0) {
+          listElement.innerHTML = '<li>Inga avgångar hittades.</li>';
+          return;
+        }
+
+        departures.forEach((dep, idx) => {
+          const departureTime = new Date(dep.expected);
+          const minutesLeft = Math.round((departureTime - new Date()) / 60000);
+          const timeStr = departureTime.toLocaleTimeString('sv-SE', {hour: '2-digit', minute: '2-digit'});
+          const displayTime = minutesLeft <= 0 ? 'Nu' : `${timeStr} (${minutesLeft} min)`;
+
+          const li = document.createElement('li');
+          if (idx === 0) li.classList.add('big');
+          li.innerHTML = `${dep.destination} - ${displayTime}`;
+          listElement.appendChild(li);
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function updateDepartures() {
+      fetchDepartures(svanholmsvagenSiteId, 'BUS', '601', 2, 360, 'buss');
+      fetchDepartures(tranholmenSiteId, 'SHIP', '80', 1, 360, 'farja', 'Ropsten');
+      fetchDepartures(lektorsstigenSiteId, 'BUS', '50', 2, 360, 'lektorsstigen');
+      fetchDepartures(9117, 'BUS', '50', 1, 360, 'odenplan');
+      fetchDepartures(9201, 'BUS', '601', 1, 360, 'ds');
+      fetchDepartures(9220, 'SHIP', '80', 1, 360, 'ropsten');
+    }
+
+    window.onload = updateDepartures;
+  </script>
+
+</body>
+</html>
