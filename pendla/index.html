@@ -12,12 +12,45 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 20px;
-      background: linear-gradient(90deg, #e3f2fd 0%, #90caf9 100%, #42a5f5 200%);
+      background: linear-gradient(135deg, #e3f2fd 0%, #90caf9 40%, #42a5f5 200%);
       display: flex;
       flex-direction: column;
       align-items: center;
       height: 100vh;
       box-sizing: border-box;
+    }
+
+    .menu {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 100;
+    }
+
+    .menu-button {
+      background: #444;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .menu-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 10px;
+    }
+
+    .menu-content button {
+      display: block;
+      margin-bottom: 5px;
+      width: 100%;
+      padding: 8px;
     }
 
     .site-box {
@@ -36,34 +69,17 @@
     .departure-to-island {
       background-color: rgba(200, 230, 200, 0.8);
     }
-
-    .big {
-      font-weight: bold;
-      font-size: 1.0em;
-    }
-
-    .station {
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      color: #444;
-    }
-
-    body {
-    }
-
-    .time {
-      color: #555;
-    }
-
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
   </style>
 </head>
 <body>
+
+  <div class="menu">
+    <button class="menu-button" onclick="toggleMenu()">☰</button>
+    <div class="menu-content" id="menuContent">
+      <button onclick="showInstallInstructions()">Lägg till på hemskärmen</button>
+      <button onclick="showAbout()">About</button>
+    </div>
+  </div>
 
   <div class="site-box departure-to-island">
     <h2>Pendelfärja 80 från Tranholmen</h2>
@@ -95,62 +111,26 @@
     <ul id="odenplan"></ul>
   </div>
 
+  <div style="text-align: center; font-size: 0.8em; margin-top: 20px;">
+    <a href="#" onclick="showInstallInstructions()" style="font-size: 0.7em; text-decoration: none; color: #666;">Lägg till på hemskärmen</a> | 
+    <a href="#" onclick="showAbout()" style="font-size: 0.7em; text-decoration: none; color: #666;">Om appen</a>
+  </div>
+
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js');
+    function toggleMenu() {
+      const menu = document.getElementById('menuContent');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
     }
 
-    const svanholmsvagenSiteId = 2103;
-    const tranholmenSiteId = 961;
-    const lektorsstigenSiteId = 1180;
-
-    async function fetchDepartures(siteId, transportMode, lineNumber, directionCode, forecast, elementId, destinationFilter = '') {
-      const url = `https://transport.integration.sl.se/v1/sites/${siteId}/departures?forecast=${forecast}&direction=${directionCode}`;
-
-      try {
-        const res = await fetch(url);
-        if (!res.ok) return;
-
-        const data = await res.json();
-        const departures = data.departures
-          .filter(dep => dep.line && dep.line.transport_mode === transportMode && dep.line.designation === lineNumber && (!destinationFilter || dep.destination.includes(destinationFilter)))
-          .slice(0, 5);
-
-        const listElement = document.getElementById(elementId);
-        listElement.innerHTML = '';
-
-        if (departures.length === 0) {
-          listElement.innerHTML = '<li>Inga avgångar hittades.</li>';
-          return;
-        }
-
-        departures.forEach((dep, idx) => {
-          const departureTime = new Date(dep.expected);
-          const minutesLeft = Math.round((departureTime - new Date()) / 60000);
-          const timeStr = departureTime.toLocaleTimeString('sv-SE', {hour: '2-digit', minute: '2-digit'});
-          const displayTime = minutesLeft <= 0 ? 'Nu' : `${timeStr} (${minutesLeft} min)`;
-
-          const li = document.createElement('li');
-          if (idx === 0) li.classList.add('big');
-          li.innerHTML = `${dep.destination} - ${displayTime}`;
-          listElement.appendChild(li);
-        });
-      } catch (err) {
-        console.error(err);
-      }
+    function showInstallInstructions() {
+      alert("För att lägga till appen på hemskärmen:\n\n" +
+            "På iOS (Safari): Tryck på dela-ikonen och välj 'Lägg till på hemskärmen'.\n\n" +
+            "På Android (Chrome): Tryck på menyknappen och välj 'Lägg till på hemskärmen'.");
     }
 
-    function updateDepartures() {
-      fetchDepartures(svanholmsvagenSiteId, 'BUS', '601', 2, 360, 'buss');
-      fetchDepartures(tranholmenSiteId, 'SHIP', '80', 1, 360, 'farja', 'Ropsten');
-      fetchDepartures(lektorsstigenSiteId, 'BUS', '50', 2, 360, 'lektorsstigen');
-      fetchDepartures(9117, 'BUS', '50', 1, 360, 'odenplan');
-      fetchDepartures(9201, 'BUS', '601', 1, 360, 'ds');
-      fetchDepartures(9220, 'SHIP', '80', 1, 360, 'ropsten');
+    function showAbout() {
+      alert("Made with love from Tranholmen");
     }
-
-    window.onload = updateDepartures;
   </script>
-
 </body>
 </html>
