@@ -1,6 +1,6 @@
 {
-  "name": "Pendla",
-  "short_name": "Pendla Tranholmen",
+  "name": "Pendla Tranholmen",
+  "short_name": "Pendla",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#cfe8ff",
