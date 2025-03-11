@@ -61,7 +61,7 @@
 <body onload="startAutoRefresh()">
 
   <div class="site-box departure-to-island">
-    <h2>Pendelfärja 80 från Tranholmen</h2>
+    <h2>Färja 80 från Tranholmen</h2>
     <ul id="farja"></ul>
   </div>
 
@@ -76,7 +76,7 @@
   </div>
 
   <div class="site-box departure-to-city">
-    <h2>Pendelfärja 80 från Ropsten</h2>
+    <h2>Färja 80 från Ropsten</h2>
     <ul id="ropsten"></ul>
   </div>
 
@@ -150,6 +150,13 @@
       updateDepartures();
       setInterval(updateDepartures, 30000);
     }
+
+document.addEventListener("visibilitychange", function() {
+  if (!document.hidden) {
+    updateDepartures();
+  }
+});
+
   </script>
 
 </body>
