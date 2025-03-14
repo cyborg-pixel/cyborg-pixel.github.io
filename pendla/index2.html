@@ -138,7 +138,8 @@ ul {
           const departureTime = new Date(dep.expected);
           const minutesLeft = Math.round((departureTime - new Date()) / 60000);
           const timeStr = departureTime.toLocaleTimeString('sv-SE', {hour: '2-digit', minute: '2-digit'});
-          const displayTime = minutesLeft <= 0 ? 'Nu' : `${timeStr} (${minutesLeft} min)`;
+          //const displayTime = minutesLeft <= 0 ? 'Nu' : `${timeStr} (${minutesLeft} min)`;
+          const displayTime = dep.display;
 
           const li = document.createElement('li');
           if (idx === 0) li.classList.add('big');
