@@ -1,3 +1,11 @@
+// Funktion för att översätta vindriktning (grader) till en 16-kompassriktning
+function getCompassDirection(degrees) {
+    const directions = ["N", "NNO", "NO", "ONO", "O", "OSO", "SO", "SSO",
+                        "S", "SSV", "SV", "VSV", "V", "VNV", "NV", "NNV"];
+    return directions[Math.round((degrees % 360) / 22.5) % 16];
+}
+
+
 async function fetchWeather() {
     const lat = "59.3293";  // Stockholm latitud
     const lon = "18.0686";  // Stockholm longitud
@@ -36,6 +44,8 @@ function displayWeather(data) {
 
     // Hämta aktuell temperatur
     const currentTemp = timeseries[0].data.instant.details.air_temperature;
+    const currentWind = timeseries[0].data.instant.details.air_temperature;
+    const currentWindDir = timeseries[0].data.instant.details.air_temperature;
     
     // Hämta dagens min/max temperatur
     const today = new Date().toISOString().split("T")[0];
@@ -43,19 +53,31 @@ function displayWeather(data) {
     let maxTemp = Number.MIN_VALUE;
     let weatherSymbol = "";
 
+
+
     timeseries.forEach(entry => {
         const timestamp = entry.time.split("T")[0];
         if (timestamp === today) {
-            const temp = entry.data.instant.details.air_temperature;
+            const temp = Math.round(entry.data.instant.details.air_temperature);
             if (temp < minTemp) minTemp = temp;
             if (temp > maxTemp) maxTemp = temp;
         }
-
-        // Hämta vädersymbol för nästa 6 timmar (om det finns)
-        if (entry.data.next_6_hours && !weatherSymbol) {
-            weatherSymbol = entry.data.next_6_hours.summary.symbol_code;
-        }
     });
+
+
+
+
+weatherSymbol = timeseries[0].data.next_12_hours.summary.symbol_code;
+let firstEntry = timeseries[0];
+let windSpeed = Math.round(firstEntry.data.instant.details.wind_speed);  // Avrundad vindstyrka
+let windDirection = getCompassDirection(firstEntry.data.instant.details.wind_from_direction); // Kompassriktning
+
+// Skapa kompakt sträng
+let wind = `${windSpeed} m/s ${windDirection}`;
+
+
+
+
 
     // Hantera om ingen symbol hittas
     if (!weatherSymbol) {
@@ -67,6 +89,7 @@ function displayWeather(data) {
         "clearsky": "klart",
         "fair": "mestadels soligt",
         "partlycloudy": "delvis molnigt",
+        "partlycloudy_night": "delvis molnigt",
         "cloudy": "molnigt",
         "lightrain": "lätt regn",
         "rain": "regn",
@@ -85,7 +108,7 @@ function displayWeather(data) {
 
     // Uppdatera vädertexten
     document.getElementById("weather-summary").textContent =
-        `Nu: ${currentTemp}°C ${weatherIcon}, min ${minTemp}°C, max ${maxTemp}°C, ${weatherDescription}.`;
+        `${currentTemp}°C (${minTemp}-${maxTemp}), ${wind}, ${weatherDescription} `; 
 }
 
 // Funktion för att konvertera symbol_code till emoji
