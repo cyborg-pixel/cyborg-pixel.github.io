@@ -43,8 +43,8 @@ function displayWeather(data) {
     }
 
     // Hämta aktuell temperatur
-    const currentTemp = timeseries[0].data.instant.details.air_temperature;
-    const currentWind = timeseries[0].data.instant.details.air_temperature;
+    const currentTemp = Math.round(timeseries[0].data.instant.details.air_temperature);
+    const currentWind = Math.round(timeseries[0].data.instant.details.air_temperature);
     const currentWindDir = timeseries[0].data.instant.details.air_temperature;
     
     // Hämta dagens min/max temperatur
@@ -67,7 +67,7 @@ function displayWeather(data) {
 
 
 
-weatherSymbol = timeseries[0].data.next_12_hours.summary.symbol_code;
+weatherSymbol = timeseries[0].data.next_1_hours.summary.symbol_code;
 let firstEntry = timeseries[0];
 let windSpeed = Math.round(firstEntry.data.instant.details.wind_speed);  // Avrundad vindstyrka
 let windDirection = getCompassDirection(firstEntry.data.instant.details.wind_from_direction); // Kompassriktning
@@ -84,31 +84,91 @@ let wind = `${windSpeed} m/s ${windDirection}`;
         weatherSymbol = "unknown";
     }
 
-    // Översättning av vädersymbol till svenska
-    const weatherTranslations = {
-        "clearsky": "klart",
-        "fair": "mestadels soligt",
-        "partlycloudy": "delvis molnigt",
-        "partlycloudy_night": "delvis molnigt",
-        "cloudy": "molnigt",
-        "lightrain": "lätt regn",
-        "rain": "regn",
-        "heavyrain": "kraftigt regn",
-        "snow": "snö",
-        "lightsnow": "lätt snö",
-        "heavysnow": "kraftig snö",
-        "fog": "dimma",
-        "sleet": "snöblandat regn",
-        "thunderstorm": "åska",
-        "unknown": "okänt väder"
-    };
+    // Översättning av vädersymboler till svenska
+const weatherTranslations = {
+    // Klart väder
+    "clearsky_day": "klart",
+    "clearsky_night": "klart",
+    "clearsky_polartwilight": "klart",
+
+    // Lätt molnighet
+    "fair_day": "mestadels soligt",
+    "fair_night": "mestadels klart",
+    "fair_polartwilight": "mestadels klart",
+
+    // Delvis molnigt
+    "partlycloudy_day": "delvis molnigt",
+    "partlycloudy_night": "delvis molnigt",
+    "partlycloudy_polartwilight": "delvis molnigt",
+
+    // Molnigt
+    "cloudy": "molnigt",
+
+    // Regnskurar
+    "rainshowers_day": "regnskurar",
+    "rainshowers_night": "regnskurar",
+    "rainshowers_polartwilight": "regnskurar",
+
+    // Regnskurar med åska
+    "rainshowersandthunder_day": "regnskurar med åska",
+    "rainshowersandthunder_night": "regnskurar med åska",
+    "rainshowersandthunder_polartwilight": "regnskurar med åska",
+
+    // Snöblandade regnskurar
+    "sleetshowers_day": "snöblandade regnskurar",
+    "sleetshowers_night": "snöblandade regnskurar",
+    "sleetshowers_polartwilight": "snöblandade regnskurar",
+
+    // Snöbyar
+    "snowshowers_day": "snöbyar",
+    "snowshowers_night": "snöbyar",
+    "snowshowers_polartwilight": "snöbyar",
+
+    // Regn
+    "lightrain": "lätt regn",
+    "rain": "regn",
+    "heavyrain": "kraftigt regn",
+
+    // Regn med åska
+    "rainandthunder": "regn med åska",
+    "heavyrainandthunder": "kraftigt regn med åska",
+
+    // Snöblandat regn
+    "sleet": "snöblandat regn",
+    "sleetandthunder": "snöblandat regn med åska",
+
+    // Snö
+    "lightsnow": "lätt snö",
+    "snow": "snö",
+    "heavysnow": "kraftig snö",
+
+    // Snöbyar med åska
+    "snowshowersandthunder_day": "snöbyar med åska",
+    "snowshowersandthunder_night": "snöbyar med åska",
+    "snowshowersandthunder_polartwilight": "snöbyar med åska",
+
+    // Snö med åska
+    "snowandthunder": "snö med åska",
+
+    // Lätta regnskurar med åska
+    "lightrainshowersandthunder_day": "lätta regnskurar med åska",
+    "lightrainshowersandthunder_night": "lätta regnskurar med åska",
+    "lightrainshowersandthunder_polartwilight": "lätta regnskurar med åska",
+
+    // Dimma
+    "fog": "dimma",
+
+    // Okänt
+    "unknown": "okänt väder"
+};
+
 
     const weatherDescription = weatherTranslations[weatherSymbol] || "okänt väder";
     const weatherIcon = getWeatherIcon(weatherSymbol);
 
     // Uppdatera vädertexten
     document.getElementById("weather-summary").textContent =
-        `${currentTemp}°C (${minTemp}-${maxTemp}), ${wind}, ${weatherDescription} `; 
+        `${currentTemp}°C, ${wind}, ${weatherDescription} `; 
 }
 
 // Funktion för att konvertera symbol_code till emoji
