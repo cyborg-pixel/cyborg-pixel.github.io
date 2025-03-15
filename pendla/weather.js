@@ -2,21 +2,12 @@ async function fetchWeather() {
     const lat = "59.3293";  // Stockholm latitud
     const lon = "18.0686";  // Stockholm longitud
     const url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${lat}&lon=${lon}`;
-    const userAgent = "Mozilla/5.0 (compatible; MyWeatherApp/1.0; email@example.com)"; // Anpassa detta!
-
-    // Kontrollera cache
-    const cachedData = localStorage.getItem("weatherData");
-    const cachedTime = localStorage.getItem("weatherTime");
-    const now = new Date().getTime();
-
-    // Använd cache om den är färsk (mindre än 30 min gammal)
-    if (cachedData && cachedTime && now - cachedTime < 30 * 60 * 1000) {
-        return displayWeather(JSON.parse(cachedData));
-    }
 
     try {
         const response = await fetch(url, {
-            headers: { "User-Agent": userAgent }
+            method: "GET",
+            mode: "cors",  // Viktigt: Säkerställer CORS-stöd
+            cache: "no-cache"  // Förhindrar cacheproblem
         });
 
         if (!response.ok) {
@@ -24,14 +15,17 @@ async function fetchWeather() {
         }
 
         const data = await response.json();
-        localStorage.setItem("weatherData", JSON.stringify(data));
-        localStorage.setItem("weatherTime", now);
         displayWeather(data);
     } catch (error) {
         console.error("Fel vid hämtning av väderdata:", error);
         document.getElementById("weather-summary").textContent = "Väderdata ej tillgänglig.";
     }
 }
+
+// Starta väderhämtning
+fetchWeather();
+setInterval(fetchWeather, 30 * 60 * 1000);
+
 
 function displayWeather(data) {
     const timeseries = data.properties.timeseries;
