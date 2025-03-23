@@ -6,6 +6,7 @@ function getCompassDirection(degrees) {
 }
 
 
+
 async function fetchWeather() {
     //const lat = "59.3293";  // Stockholm latitud
     //const lon = "18.0686";  // Stockholm longitud
