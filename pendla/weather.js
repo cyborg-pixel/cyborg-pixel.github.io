@@ -85,84 +85,83 @@ let wind = `${windSpeed} m/s ${windDirection}`;
         weatherSymbol = "unknown";
     }
 
-    // Översättning av vädersymboler till svenska
+// Översättning av vädersymboler till svenska med emojis
 const weatherTranslations = {
     // Klart väder
-    "clearsky_day": "klart",
-    "clearsky_night": "klart",
-    "clearsky_polartwilight": "klart",
+    "clearsky_day": "klart ☀️😎",
+    "clearsky_night": "klart 🌙✨",
+    "clearsky_polartwilight": "klart 🌌",
 
     // Lätt molnighet
-    "fair_day": "mestadels soligt",
-    "fair_night": "mestadels klart",
-    "fair_polartwilight": "mestadels klart",
+    "fair_day": "mestadels soligt 🌤️😊",
+    "fair_night": "mestadels klart 🌙🌤️",
+    "fair_polartwilight": "mestadels klart 🌥️🌌",
 
     // Delvis molnigt
-    "partlycloudy_day": "delvis molnigt",
-    "partlycloudy_night": "delvis molnigt",
-    "partlycloudy_polartwilight": "delvis molnigt",
+    "partlycloudy_day": "delvis molnigt ⛅🙂",
+    "partlycloudy_night": "delvis molnigt 🌙☁️",
+    "partlycloudy_polartwilight": "delvis molnigt 🌥️🌌",
 
     // Molnigt
-    "cloudy": "molnigt",
+    "cloudy": "molnigt ☁️😐",
 
     // Regnskurar
-    "rainshowers_day": "regnskurar",
-    "rainshowers_night": "regnskurar",
-    "rainshowers_polartwilight": "regnskurar",
+    "rainshowers_day": "regnskurar 🌦️🌈",
+    "rainshowers_night": "regnskurar 🌧️🌙",
+    "rainshowers_polartwilight": "regnskurar 🌧️🌌",
 
     // Regnskurar med åska
-    "rainshowersandthunder_day": "regnskurar med åska",
-    "rainshowersandthunder_night": "regnskurar med åska",
-    "rainshowersandthunder_polartwilight": "regnskurar med åska",
+    "rainshowersandthunder_day": "regnskurar med åska ⛈️⚡😱",
+    "rainshowersandthunder_night": "regnskurar med åska ⛈️⚡🌙",
+    "rainshowersandthunder_polartwilight": "regnskurar med åska ⛈️⚡🌌",
 
     // Snöblandade regnskurar
-    "sleetshowers_day": "snöblandade regnskurar",
-    "sleetshowers_night": "snöblandade regnskurar",
-    "sleetshowers_polartwilight": "snöblandade regnskurar",
+    "sleetshowers_day": "snöblandade regnskurar 🌨️🌧️🥶",
+    "sleetshowers_night": "snöblandade regnskurar 🌨️🌧️🌙",
+    "sleetshowers_polartwilight": "snöblandade regnskurar 🌨️🌧️🌌",
 
     // Snöbyar
-    "snowshowers_day": "snöbyar",
-    "snowshowers_night": "snöbyar",
-    "snowshowers_polartwilight": "snöbyar",
+    "snowshowers_day": "snöbyar 🌨️❄️",
+    "snowshowers_night": "snöbyar 🌨️🌙",
+    "snowshowers_polartwilight": "snöbyar 🌨️🌌",
 
     // Regn
-    "lightrain": "lätt regn",
-    "rain": "regn",
-    "heavyrain": "kraftigt regn",
+    "lightrain": "lätt regn 🌧️🌂",
+    "rain": "regn 🌧️☔",
+    "heavyrain": "kraftigt regn ⛈️💦😓☔",
 
     // Regn med åska
-    "rainandthunder": "regn med åska",
-    "heavyrainandthunder": "kraftigt regn med åska",
+    "rainandthunder": "regn med åska ⛈️⚡😨☔",
+    "heavyrainandthunder": "kraftigt regn med åska ⛈️⚡🌧️😱☔",
 
     // Snöblandat regn
-    "sleet": "snöblandat regn",
-    "sleetandthunder": "snöblandat regn med åska",
+    "sleet": "snöblandat regn 🌨️🌧️",
+    "sleetandthunder": "snöblandat regn med åska 🌨️⚡🥶",
 
     // Snö
-    "lightsnow": "lätt snö",
-    "snow": "snö",
-    "heavysnow": "kraftig snö",
+    "lightsnow": "lätt snö 🌨️❄️",
+    "snow": "snö ❄️⛄",
+    "heavysnow": "kraftig snö ☃️🌨️🥶",
 
     // Snöbyar med åska
-    "snowshowersandthunder_day": "snöbyar med åska",
-    "snowshowersandthunder_night": "snöbyar med åska",
-    "snowshowersandthunder_polartwilight": "snöbyar med åska",
+    "snowshowersandthunder_day": "snöbyar med åska 🌨️⚡😱",
+    "snowshowersandthunder_night": "snöbyar med åska 🌨️⚡🌙",
+    "snowshowersandthunder_polartwilight": "snöbyar med åska 🌨️⚡🌌",
 
     // Snö med åska
-    "snowandthunder": "snö med åska",
+    "snowandthunder": "snö med åska 🌨️⚡😳",
 
     // Lätta regnskurar med åska
-    "lightrainshowersandthunder_day": "lätta regnskurar med åska",
-    "lightrainshowersandthunder_night": "lätta regnskurar med åska",
-    "lightrainshowersandthunder_polartwilight": "lätta regnskurar med åska",
+    "lightrainshowersandthunder_day": "lätta regnskurar med åska 🌦️⚡🙂",
+    "lightrainshowersandthunder_night": "lätta regnskurar med åska 🌦️⚡🌙",
+    "lightrainshowersandthunder_polartwilight": "lätta regnskurar med åska 🌦️⚡🌌",
 
     // Dimma
-    "fog": "dimma",
+    "fog": "dimma 🌫️😶‍🌫️",
 
     // Okänt
-    "unknown": "okänt väder"
+    "unknown": "okänt väder ❓🤷‍♂️"
 };
-
 
     const weatherDescription = weatherTranslations[weatherSymbol] || "okänt väder";
     const weatherIcon = getWeatherIcon(weatherSymbol);
@@ -175,23 +174,24 @@ const weatherTranslations = {
 // Funktion för att konvertera symbol_code till emoji
 function getWeatherIcon(symbol) {
     const icons = {
-        "clearsky": "☀",
-        "fair": "🌤",
-        "partlycloudy": "⛅",
-        "cloudy": "☁",
-        "lightrain": "🌦",
-        "rain": "🌧",
-        "heavyrain": "⛈",
-        "snow": "❄",
-        "lightsnow": "🌨",
-        "heavysnow": "☃",
-        "fog": "🌫",
-        "sleet": "🌨🌧",
-        "thunderstorm": "⚡",
-        "unknown": "❓"
+        "clearsky": "☀️😎",
+        "fair": "🌤️😊",
+        "partlycloudy": "⛅🙂",
+        "cloudy": "☁️😐",
+        "lightrain": "🌦️🌈",
+        "rain": "🌧️☔",
+        "heavyrain": "⛈️🌩️💦",
+        "snow": "❄️⛄️",
+        "lightsnow": "🌨️❄️",
+        "heavysnow": "☃️🌨️🥶",
+        "fog": "🌫️😶‍🌫️",
+        "sleet": "🌨️🌧️🥶",
+        "thunderstorm": "🌩️⚡️😱",
+        "unknown": "❓🤷‍♂️"
     };
-    return icons[symbol] || "❓";
+    return icons[symbol] || "❓🤷‍♂️";
 }
+
 
 // Uppdatera vädret var 30:e minut
 setInterval(fetchWeather, 30 * 60 * 1000);
