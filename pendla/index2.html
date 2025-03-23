@@ -9,25 +9,28 @@
   <meta name="theme-color" content="#cfe8ff">
   <link rel="apple-touch-icon" href="icon.png">
   <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
     body {
       font-family: Arial, sans-serif;
       font-size: 1.0em;
-      margin: 0;
-      padding: 20px;
       background: linear-gradient(90deg, #e3f2fd 0%, #90caf9 100%, #42a5f5 200%);
       display: flex;
       flex-direction: column;
       align-items: center;
-      height: 100vh;
       box-sizing: border-box;
     }
 
     h2 {
-       font-size: 1.2em;
-       margin-top: 2px;
-       margin-bottom: 5px;
-       line-height: 1.0;
+      font-size: 1.2em;
+      margin-top: 2px;
+      margin-bottom: 5px;
+      line-height: 1.0;
     }
+
     ul {
       font-size: 0.9em; 
       list-style-type: none;
@@ -36,7 +39,8 @@
     }
 
     .site-box {
-      width: 90%;
+      width: calc(100% - 40px);
+      
       background-color: rgba(255, 255, 255, 0.9);
       border-radius: 15px;
       padding: 10px;
@@ -85,7 +89,8 @@
     }
 
     .config-section {
-      width: 90%;
+      width: calc(100% - 40px);
+      max-width: 600px;
       background-color: rgba(255, 255, 255, 0.95);
       border-radius: 15px;
       padding: 20px;
@@ -98,30 +103,7 @@
     Laddar väderdata...
   </div>
 
-  <div class="site-box departure-to-island">
-    <h2>Färja 80 Tranholmen</h2>
-    <ul id="farja"></ul>
-  </div>
-  <div class="site-box departure-to-island">
-    <h2>Buss 601 Svanholmsvägen</h2>
-    <ul id="buss"></ul>
-  </div>
-  <div class="site-box departure-to-island">
-    <h2>Buss 50 Lektorsstigen</h2>
-    <ul id="lektorsstigen"></ul>
-  </div>
-  <div class="site-box departure-to-city">
-    <h2>Färja 80 Ropsten</h2>
-    <ul id="ropsten"></ul>
-  </div>
-  <div class="site-box departure-to-city">
-    <h2>Buss 601 Danderyds sjukhus</h2>
-    <ul id="ds"></ul>
-  </div>
-  <div class="site-box departure-to-city">
-    <h2>Buss 50 Odenplan</h2>
-    <ul id="odenplan"></ul>
-  </div>
+  <div id="main-view"></div>
 
   <div class="config-link" onclick="toggleConfig(true)">Konfigurationsläge</div>
   <div id="config-view" class="hidden config-section"></div>
@@ -146,7 +128,7 @@
 
     function toggleConfig(show) {
       document.getElementById('config-view').classList.toggle('hidden', !show);
-      document.querySelectorAll('.site-box').forEach(el => el.classList.toggle('hidden', show));
+      document.getElementById('main-view').classList.toggle('hidden', show);
       if (show) renderConfig();
     }
 
@@ -178,8 +160,7 @@
           newPrefs[stop.id] = form.elements[stop.id].checked;
         });
         savePreferences(newPrefs);
-        toggleConfig(false);
-        updateDepartures();
+        location.reload();
       };
       config.appendChild(form);
     }
@@ -211,6 +192,19 @@
       }
     }
 
+    function renderMain() {
+      const prefs = loadPreferences();
+      const mainView = document.getElementById('main-view');
+      mainView.innerHTML = '';
+      stops.forEach(stop => {
+        if (prefs[stop.id] === false) return;
+        const box = document.createElement('div');
+        box.className = `site-box ${stop.bg}`;
+        box.innerHTML = `<h2>${stop.title}</h2><ul id="${stop.id}"></ul>`;
+        mainView.appendChild(box);
+      });
+    }
+
     function updateDepartures() {
       const prefs = loadPreferences();
       stops.forEach(stop => {
@@ -220,6 +214,7 @@
     }
 
     function startAutoRefresh() {
+      renderMain();
       updateDepartures();
       setInterval(updateDepartures, 30000);
     }
@@ -232,3 +227,4 @@
   </script>
 </body>
 </html>
+
