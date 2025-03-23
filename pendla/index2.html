@@ -5,33 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nästa avgångar - Tranholmen</title>
   <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#ffffff" />
+  <meta name="theme-color" content="#cfe8ff" />
   <link rel="apple-touch-icon" href="icon.png" />
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 17px;
-      background-color: #f2f2f7;
-      color: #000;
+      font-family: Arial, sans-serif;
+      font-size: 0.9em;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+/*      background: linear-gradient(90deg, #e3f2fd 0%, #90caf9 100%, #42a5f5 200%);*/
+      background: linear-gradient(90deg, #004e92 0%, #001f3f 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
+      box-sizing: border-box;
     }
 
-    #main-view, .config-section {
+    #main-view {
       width: 100%;
-      max-width: 600px;
-      padding: 15px;
+      max-width: 800px;
+      padding: 20px;
       box-sizing: border-box;
     }
 
     h2 {
-      font-size: 20px;
-      font-weight: 600;
-      margin: 8px 0;
+      font-size: 1.2em;
+      margin-top: 2px;
+      margin-bottom: 5px;
+      line-height: 1.0;
     }
 
     ul {
@@ -41,69 +42,72 @@
     }
 
     .site-box {
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      padding: 12px;
-      margin-bottom: 12px;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      padding: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
+      box-sizing: border-box;
     }
 
     .departure-to-city {
-      background-color: #ffefef;
+      background-color: rgba(255, 200, 220, 0.8);
     }
 
     .departure-to-island {
-      background-color: #efffef;
+      background-color: rgba(200, 230, 200, 0.8);
     }
 
     .big {
-      font-weight: 600;
-      font-size: 18px;
+      font-weight: bold;
+      font-size: 1.0em;
     }
 
     .refresh-button {
-      background-color: #007aff;
-      color: #fff;
-      padding: 10px;
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #007bff;
+      color: white;
       border: none;
-      border-radius: 10px;
-      font-size: 17px;
+      border-radius: 5px;
       cursor: pointer;
-      width: 100%;
-      margin-top: 15px;
     }
 
-    .refresh-button:active {
-      background-color: #0051a8;
+    .refresh-button:hover {
+      background-color: #0056b3;
     }
 
     .config-link {
-      font-size: 15px;
-      color: #007aff;
-      text-align: center;
-      margin: 10px;
+      font-size: 0.8em;
       cursor: pointer;
+      text-decoration: underline;
+      color: #004488;
+      text-align: center;
+      margin: 20px 0;
     }
 
     .hidden {
       display: none;
     }
 
-    label {
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    input[type="checkbox"] {
-      transform: scale(1.3);
-      margin-right: 8px;
+    .config-section {
+      width: 100%;
+      max-width: 800px;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      margin: 20px;
+      /* OBS: ingen fixed height – den anpassar sig efter innehållet */
     }
 
     #weather-summary {
-      font-size: 15px;
-      padding: 5px;
+      padding: 3px;
+      border-radius: 5px;
     }
-
   </style>
 </head>
 <body onload="startAutoRefresh()">
@@ -123,8 +127,13 @@
       { id: 'odenplan', title: 'Buss 50 Odenplan', siteId: 9117, mode: 'BUS', line: '50', dir: 1, bg: 'departure-to-city' },
     ];
 
-    function loadPreferences() { return JSON.parse(localStorage.getItem('visibleStops') || '{}'); }
-    function savePreferences(prefs) { localStorage.setItem('visibleStops', JSON.stringify(prefs)); }
+    function loadPreferences() {
+      return JSON.parse(localStorage.getItem('visibleStops') || '{}');
+    }
+
+    function savePreferences(prefs) {
+      localStorage.setItem('visibleStops', JSON.stringify(prefs));
+    }
 
     async function fetchDepartures({ siteId, mode, line, dir, id, filter }) {
       const url = `https://transport.integration.sl.se/v1/sites/${siteId}/departures?forecast=360&direction=${dir}`;
@@ -135,15 +144,24 @@
         const departures = data.departures
           .filter(d => d.line && d.line.transport_mode === mode && d.line.designation === line && (!filter || d.destination.includes(filter)))
           .slice(0, 5);
+
         const list = document.getElementById(id);
-        list.innerHTML = departures.length === 0 ? '<li>Inga avgångar hittades.</li>' : '';
+        list.innerHTML = '';
+
+        if (departures.length === 0) {
+          list.innerHTML = '<li>Inga avgångar hittades.</li>';
+          return;
+        }
+
         departures.forEach((dep, i) => {
           const li = document.createElement('li');
           if (i === 0) li.classList.add('big');
           li.textContent = `${dep.display} → ${dep.destination}`;
           list.appendChild(li);
         });
-      } catch (err) { console.error(err); }
+      } catch (err) {
+        console.error(err);
+      }
     }
 
     function renderMain() {
@@ -152,11 +170,20 @@
       container.innerHTML = '';
       stops.forEach(stop => {
         if (prefs[stop.id] === false) return;
+
         const box = document.createElement('div');
         box.className = `site-box ${stop.bg || ''}`;
-        box.innerHTML = stop.isWeather ? `<h2>${stop.title}</h2><div id="weather-summary">Laddar väderdata...</div>` : `<h2>${stop.title}</h2><ul id="${stop.id}"></ul>`;
+        if (stop.isWeather) {
+          box.style.backgroundColor = 'white';
+          box.innerHTML = `<h2>${stop.title}</h2><div id="weather-summary">Laddar väderdata...</div>`;
+        } else {
+          box.innerHTML = `<h2>${stop.title}</h2><ul id="${stop.id}"></ul>`;
+        }
+
         container.appendChild(box);
       });
+
+      // Lägg till konfiglänken under allt
       const configLink = document.createElement('div');
       configLink.className = 'config-link';
       configLink.textContent = 'Inställningar';
@@ -164,15 +191,82 @@
       container.appendChild(configLink);
     }
 
-    function updateDepartures() { stops.forEach(s => !s.isWeather && fetchDepartures(s)); }
-    function reloadWeatherScript() { const script=document.createElement('script');script.src='weather.js';document.body.appendChild(script); }
-    function startAutoRefresh() { renderMain(); updateDepartures(); reloadWeatherScript(); setInterval(updateDepartures, 30000); }
-    function toggleConfig(show) { document.getElementById('main-view').classList.toggle('hidden', show); document.getElementById('config-view').classList.toggle('hidden', !show); show && renderConfig(); }
+    function updateDepartures() {
+      const prefs = loadPreferences();
+      stops.forEach(stop => {
+        if (prefs[stop.id] === false) return;
+        if (!stop.isWeather) {
+          fetchDepartures(stop);
+        }
+        // vädret hanteras av weather.js
+      });
+    }
+
+    function reloadWeatherScript() {
+      const oldScript = document.querySelector('script[data-weather]');
+      if (oldScript) oldScript.remove();
+
+      const script = document.createElement('script');
+      script.src = 'weather.js';
+      script.defer = true;
+      script.setAttribute('data-weather', 'true');
+      document.body.appendChild(script);
+    }
+
+    function startAutoRefresh() {
+      renderMain();
+      updateDepartures();
+      reloadWeatherScript(); // ladda väder
+      setInterval(updateDepartures, 30000);
+    }
+
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden) updateDepartures();
+    });
+
+    function toggleConfig(show) {
+      document.getElementById('main-view').classList.toggle('hidden', show);
+      document.getElementById('config-view').classList.toggle('hidden', !show);
+      if (show) {
+        renderConfig();
+      } else {
+        renderMain();
+        updateDepartures();
+        reloadWeatherScript(); // uppdatera vädret
+      }
+    }
 
     function renderConfig() {
-      const prefs = loadPreferences(); const form=document.createElement('form');
-      stops.forEach(s=>{const l=document.createElement('label'),c=document.createElement('input');c.type='checkbox';c.name=s.id;c.checked=prefs[s.id]!==false;l.appendChild(c);l.append(` ${s.title}`);form.appendChild(l);});
-      form.innerHTML+='<button class="refresh-button">Spara</button>';form.onsubmit=e=>{e.preventDefault();const np={};stops.forEach(s=>np[s.id]=form.elements[s.id].checked);savePreferences(np);toggleConfig(false);};document.getElementById('config-view').innerHTML='<h2>Välj info</h2>';document.getElementById('config-view').appendChild(form);
+      const prefs = loadPreferences();
+      const config = document.getElementById('config-view');
+      config.innerHTML = '<h2>Välj info som ska visas</h2>';
+      const form = document.createElement('form');
+      stops.forEach(stop => {
+        const label = document.createElement('label');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.name = stop.id;
+        checkbox.checked = prefs[stop.id] !== false;
+        label.appendChild(checkbox);
+        label.append(` ${stop.title}`);
+        form.appendChild(label);
+        form.appendChild(document.createElement('br'));
+      });
+      const saveBtn = document.createElement('button');
+      saveBtn.textContent = 'Spara';
+      saveBtn.type = 'submit';
+      saveBtn.className = 'refresh-button';
+      form.appendChild(saveBtn);
+      form.onsubmit = e => {
+        e.preventDefault();
+        const newPrefs = {};
+        stops.forEach(stop => {
+          newPrefs[stop.id] = form.elements[stop.id].checked;
+        });
+        savePreferences(newPrefs);
+        toggleConfig(false);
+      };
+      config.appendChild(form);
     }
   </script>
 </body>
