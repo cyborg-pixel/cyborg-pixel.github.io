@@ -1,56 +1,69 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nästa avgångar - Tranholmen</title>
-  <script src="weather.js" defer></script>
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#cfe8ff">
-  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#cfe8ff" />
+  <link rel="apple-touch-icon" href="icon.png" />
   <style>
     body {
       font-family: Arial, sans-serif;
       font-size: 1em;
       margin: 0;
-      padding: 20px;
+      padding: 0;
       background: linear-gradient(90deg, #e3f2fd 0%, #90caf9 100%, #42a5f5 200%);
       display: flex;
       flex-direction: column;
       align-items: center;
-      height: 100vh;
       box-sizing: border-box;
     }
+
+    #main-view {
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
     h2 {
       font-size: 1.2em;
       margin-top: 2px;
       margin-bottom: 5px;
       line-height: 1.0;
     }
+
     ul {
       font-size: 0.9em;
       list-style-type: none;
       padding: 0;
       margin: 0;
     }
+
     .site-box {
-      width: 90%;
+      width: 100%;
       background-color: rgba(255, 255, 255, 0.9);
       border-radius: 15px;
       padding: 10px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
       margin-bottom: 15px;
+      box-sizing: border-box;
     }
+
     .departure-to-city {
       background-color: rgba(255, 200, 220, 0.8);
     }
+
     .departure-to-island {
       background-color: rgba(200, 230, 200, 0.8);
     }
+
     .big {
       font-weight: bold;
       font-size: 1.0em;
     }
+
     .refresh-button {
       margin-top: 20px;
       padding: 10px 20px;
@@ -61,26 +74,36 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
     .refresh-button:hover {
       background-color: #0056b3;
     }
+
     .config-link {
-      margin-top: 20px;
       font-size: 0.8em;
       cursor: pointer;
       text-decoration: underline;
       color: #004488;
+      text-align: center;
+      margin: 20px 0;
     }
+
     .hidden {
       display: none;
     }
+
     .config-section {
-      width: 90%;
+      width: 100%;
+      max-width: 800px;
       background-color: rgba(255, 255, 255, 0.95);
       border-radius: 15px;
       padding: 20px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      margin: 20px;
+      /* OBS: ingen fixed height – den anpassar sig efter innehållet */
     }
+
     #weather-summary {
       font-size: 13px;
       padding: 3px;
@@ -91,8 +114,6 @@
 <body onload="startAutoRefresh()">
 
   <div id="main-view"></div>
-
-  <div class="config-link" onclick="toggleConfig(true)">Konfigurationsläge</div>
 
   <div id="config-view" class="hidden config-section"></div>
 
@@ -115,7 +136,7 @@
       localStorage.setItem('visibleStops', JSON.stringify(prefs));
     }
 
-    async function fetchDepartures({siteId, mode, line, dir, id, filter}) {
+    async function fetchDepartures({ siteId, mode, line, dir, id, filter }) {
       const url = `https://transport.integration.sl.se/v1/sites/${siteId}/departures?forecast=360&direction=${dir}`;
       try {
         const res = await fetch(url);
@@ -162,6 +183,13 @@
 
         container.appendChild(box);
       });
+
+      // Lägg till konfiglänken under allt
+      const configLink = document.createElement('div');
+      configLink.className = 'config-link';
+      configLink.textContent = 'Konfigurationsläge';
+      configLink.onclick = () => toggleConfig(true);
+      container.appendChild(configLink);
     }
 
     function updateDepartures() {
@@ -171,13 +199,25 @@
         if (!stop.isWeather) {
           fetchDepartures(stop);
         }
-        // vädret uppdateras av weather.js, så inget behövs här
+        // vädret hanteras av weather.js
       });
+    }
+
+    function reloadWeatherScript() {
+      const oldScript = document.querySelector('script[data-weather]');
+      if (oldScript) oldScript.remove();
+
+      const script = document.createElement('script');
+      script.src = 'weather.js';
+      script.defer = true;
+      script.setAttribute('data-weather', 'true');
+      document.body.appendChild(script);
     }
 
     function startAutoRefresh() {
       renderMain();
       updateDepartures();
+      reloadWeatherScript(); // ladda väder
       setInterval(updateDepartures, 30000);
     }
 
@@ -188,7 +228,13 @@
     function toggleConfig(show) {
       document.getElementById('main-view').classList.toggle('hidden', show);
       document.getElementById('config-view').classList.toggle('hidden', !show);
-      if (show) renderConfig();
+      if (show) {
+        renderConfig();
+      } else {
+        renderMain();
+        updateDepartures();
+        reloadWeatherScript(); // uppdatera vädret
+      }
     }
 
     function renderConfig() {
@@ -220,8 +266,6 @@
         });
         savePreferences(newPrefs);
         toggleConfig(false);
-        renderMain();
-        updateDepartures();
       };
       config.appendChild(form);
     }

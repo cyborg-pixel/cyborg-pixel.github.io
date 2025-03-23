@@ -2,7 +2,7 @@
 function getCompassDirection(degrees) {
     const directions = ["N", "NNO", "NO", "ONO", "O", "OSO", "SO", "SSO",
                         "S", "SSV", "SV", "VSV", "V", "VNV", "NV", "NNV"];
-    return directions[Math.round((degrees % 360) / 22.5) % 16];
+    return directions[Math.round((degrees % 360) / 22.5) % 16] + degrees;
 }
 
 
