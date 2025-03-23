@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sv"> 
+<html lang="sv">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      font-size: 1.0em;
+      font-size: 1em;
       margin: 0;
       padding: 20px;
       background: linear-gradient(90deg, #e3f2fd 0%, #90caf9 100%, #42a5f5 200%);
@@ -21,21 +21,18 @@
       height: 100vh;
       box-sizing: border-box;
     }
-
     h2 {
       font-size: 1.2em;
       margin-top: 2px;
       margin-bottom: 5px;
       line-height: 1.0;
     }
-
     ul {
-      font-size: 0.9em; 
+      font-size: 0.9em;
       list-style-type: none;
       padding: 0;
       margin: 0;
     }
-
     .site-box {
       width: 90%;
       background-color: rgba(255, 255, 255, 0.9);
@@ -44,20 +41,16 @@
       box-shadow: 0 8px 16px rgba(0,0,0,0.1);
       margin-bottom: 15px;
     }
-
     .departure-to-city {
       background-color: rgba(255, 200, 220, 0.8);
     }
-
     .departure-to-island {
       background-color: rgba(200, 230, 200, 0.8);
     }
-
     .big {
       font-weight: bold;
       font-size: 1.0em;
     }
-
     .refresh-button {
       margin-top: 20px;
       padding: 10px 20px;
@@ -68,11 +61,9 @@
       border-radius: 5px;
       cursor: pointer;
     }
-
     .refresh-button:hover {
       background-color: #0056b3;
     }
-
     .config-link {
       margin-top: 20px;
       font-size: 0.8em;
@@ -80,11 +71,9 @@
       text-decoration: underline;
       color: #004488;
     }
-
     .hidden {
       display: none;
     }
-
     .config-section {
       width: 90%;
       background-color: rgba(255, 255, 255, 0.95);
@@ -92,20 +81,24 @@
       padding: 20px;
       box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     }
+    #weather-summary {
+      font-size: 13px;
+      padding: 3px;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body onload="startAutoRefresh()">
-  <div id="weather-summary" style="position: absolute; top: 0; right: 8%; font-size: 13px; padding: 3px; border-radius: 5px;">
-    Laddar väderdata...
-  </div>
 
   <div id="main-view"></div>
 
   <div class="config-link" onclick="toggleConfig(true)">Konfigurationsläge</div>
+
   <div id="config-view" class="hidden config-section"></div>
 
   <script>
     const stops = [
+      { id: 'weather', title: 'Vädret på Tranholmen', isWeather: true },
       { id: 'farja', title: 'Färja 80 Tranholmen', siteId: 961, mode: 'SHIP', line: '80', dir: 1, bg: 'departure-to-island', filter: 'Ropsten' },
       { id: 'buss', title: 'Buss 601 Svanholmsvägen', siteId: 2103, mode: 'BUS', line: '601', dir: 2, bg: 'departure-to-island' },
       { id: 'lektorsstigen', title: 'Buss 50 Lektorsstigen', siteId: 1180, mode: 'BUS', line: '50', dir: 2, bg: 'departure-to-island' },
@@ -122,9 +115,79 @@
       localStorage.setItem('visibleStops', JSON.stringify(prefs));
     }
 
+    async function fetchDepartures({siteId, mode, line, dir, id, filter}) {
+      const url = `https://transport.integration.sl.se/v1/sites/${siteId}/departures?forecast=360&direction=${dir}`;
+      try {
+        const res = await fetch(url);
+        if (!res.ok) return;
+        const data = await res.json();
+        const departures = data.departures
+          .filter(d => d.line && d.line.transport_mode === mode && d.line.designation === line && (!filter || d.destination.includes(filter)))
+          .slice(0, 5);
+
+        const list = document.getElementById(id);
+        list.innerHTML = '';
+
+        if (departures.length === 0) {
+          list.innerHTML = '<li>Inga avgångar hittades.</li>';
+          return;
+        }
+
+        departures.forEach((dep, i) => {
+          const li = document.createElement('li');
+          if (i === 0) li.classList.add('big');
+          li.textContent = `${dep.display} → ${dep.destination}`;
+          list.appendChild(li);
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function renderMain() {
+      const prefs = loadPreferences();
+      const container = document.getElementById('main-view');
+      container.innerHTML = '';
+      stops.forEach(stop => {
+        if (prefs[stop.id] === false) return;
+
+        const box = document.createElement('div');
+        box.className = `site-box ${stop.bg || ''}`;
+        if (stop.isWeather) {
+          box.style.backgroundColor = 'white';
+          box.innerHTML = `<h2>${stop.title}</h2><div id="weather-summary">Laddar väderdata...</div>`;
+        } else {
+          box.innerHTML = `<h2>${stop.title}</h2><ul id="${stop.id}"></ul>`;
+        }
+
+        container.appendChild(box);
+      });
+    }
+
+    function updateDepartures() {
+      const prefs = loadPreferences();
+      stops.forEach(stop => {
+        if (prefs[stop.id] === false) return;
+        if (!stop.isWeather) {
+          fetchDepartures(stop);
+        }
+        // vädret uppdateras av weather.js, så inget behövs här
+      });
+    }
+
+    function startAutoRefresh() {
+      renderMain();
+      updateDepartures();
+      setInterval(updateDepartures, 30000);
+    }
+
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden) updateDepartures();
+    });
+
     function toggleConfig(show) {
-      document.getElementById('config-view').classList.toggle('hidden', !show);
       document.getElementById('main-view').classList.toggle('hidden', show);
+      document.getElementById('config-view').classList.toggle('hidden', !show);
       if (show) renderConfig();
     }
 
@@ -156,70 +219,12 @@
           newPrefs[stop.id] = form.elements[stop.id].checked;
         });
         savePreferences(newPrefs);
-        location.reload();
+        toggleConfig(false);
+        renderMain();
+        updateDepartures();
       };
       config.appendChild(form);
     }
-
-    async function fetchDepartures(siteId, transportMode, lineNumber, directionCode, forecast, elementId, destinationFilter = '') {
-      const url = `https://transport.integration.sl.se/v1/sites/${siteId}/departures?forecast=${forecast}&direction=${directionCode}`;
-      try {
-        const res = await fetch(url);
-        if (!res.ok) return;
-        const data = await res.json();
-        const departures = data.departures
-          .filter(dep => dep.line && dep.line.transport_mode === transportMode && dep.line.designation === lineNumber && (!destinationFilter || dep.destination.includes(destinationFilter)))
-          .slice(0, 5);
-        const listElement = document.getElementById(elementId);
-        listElement.innerHTML = '';
-        if (departures.length === 0) {
-          listElement.innerHTML = '<li>Inga avgångar hittades.</li>';
-          return;
-        }
-        departures.forEach((dep, idx) => {
-          const displayTime = dep.display;
-          const li = document.createElement('li');
-          if (idx === 0) li.classList.add('big');
-          li.innerHTML = ` ${displayTime} → ${dep.destination}`;
-          listElement.appendChild(li);
-        });
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    function renderMain() {
-      const prefs = loadPreferences();
-      const mainView = document.getElementById('main-view');
-      mainView.innerHTML = '';
-      stops.forEach(stop => {
-        if (prefs[stop.id] === false) return;
-        const box = document.createElement('div');
-        box.className = `site-box ${stop.bg}`;
-        box.innerHTML = `<h2>${stop.title}</h2><ul id="${stop.id}"></ul>`;
-        mainView.appendChild(box);
-      });
-    }
-
-    function updateDepartures() {
-      const prefs = loadPreferences();
-      stops.forEach(stop => {
-        if (prefs[stop.id] === false) return;
-        fetchDepartures(stop.siteId, stop.mode, stop.line, stop.dir, 360, stop.id, stop.filter);
-      });
-    }
-
-    function startAutoRefresh() {
-      renderMain();
-      updateDepartures();
-      setInterval(updateDepartures, 30000);
-    }
-
-    document.addEventListener("visibilitychange", function() {
-      if (!document.hidden) {
-        updateDepartures();
-      }
-    });
   </script>
 </body>
 </html>
