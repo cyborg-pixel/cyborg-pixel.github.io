@@ -164,32 +164,10 @@ const weatherTranslations = {
 };
 
     const weatherDescription = weatherTranslations[weatherSymbol] || "okänt väder";
-    const weatherIcon = getWeatherIcon(weatherSymbol);
 
     // Uppdatera vädertexten
     document.getElementById("weather-summary").textContent =
         `${currentTemp}°C, ${wind}, ${weatherDescription} `; 
-}
-
-// Funktion för att konvertera symbol_code till emoji
-function getWeatherIcon(symbol) {
-    const icons = {
-        "clearsky": "☀️😎",
-        "fair": "🌤️😊",
-        "partlycloudy": "⛅🙂",
-        "cloudy": "☁️😐",
-        "lightrain": "🌦️🌈",
-        "rain": "🌧️☔",
-        "heavyrain": "⛈️🌩️💦",
-        "snow": "❄️⛄️",
-        "lightsnow": "🌨️❄️",
-        "heavysnow": "☃️🌨️🥶",
-        "fog": "🌫️😶‍🌫️",
-        "sleet": "🌨️🌧️🥶",
-        "thunderstorm": "🌩️⚡️😱",
-        "unknown": "❓🤷‍♂️"
-    };
-    return icons[symbol] || "❓🤷‍♂️";
 }
 
 
