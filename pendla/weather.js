@@ -31,10 +31,6 @@ async function fetchWeather() {
     }
 }
 
-// Starta väderhämtning
-fetchWeather();
-setInterval(fetchWeather, 30 * 60 * 1000);
-
 
 function displayWeather(data) {
     const timeseries = data.properties.timeseries;
@@ -171,6 +167,6 @@ const weatherTranslations = {
 }
 
 
-// Uppdatera vädret var 30:e minut
-setInterval(fetchWeather, 30 * 60 * 1000);
+// Uppdatera vädret var 10:e minut
+setInterval(fetchWeather, 10 * 60 * 1000);
 fetchWeather();
