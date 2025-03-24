@@ -103,10 +103,11 @@
       /* OBS: ingen fixed height – den anpassar sig efter innehållet */
     }
 
-    #weather-summary {
-      padding: 3px;
-      border-radius: 5px;
-    }
+/*    #weather-summary {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    } */
   </style>
 </head>
 <body onload="startAutoRefresh()">
@@ -174,9 +175,9 @@
         box.className = `site-box ${stop.bg || ''}`;
         if (stop.isWeather) {
           box.style.backgroundColor = 'white';
-          box.innerHTML = `<h2>${stop.title}</h2><div id="weather-summary">Laddar väderdata...</div>`;
+          box.innerHTML = `<h2>${stop.title}</h2><ul id="weather-summary">Laddar väderdata...</ul>`;
         } else {
-          box.innerHTML = `<h2>${stop.title}</h2><ul id="${stop.id}"></ul>`;
+          box.innerHTML = `<h2>${stop.title}</h2><ul id="${stop.id}">Laddar hållplatsdata...</ul>`;
         }
 
         container.appendChild(box);

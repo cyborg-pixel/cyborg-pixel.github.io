@@ -162,10 +162,17 @@ const weatherTranslations = {
     const weatherDescription = weatherTranslations[weatherSymbol] || "okänt väder";
 
     // Uppdatera vädertexten
-    document.getElementById("weather-summary").textContent =
-        `${currentTemp}°C, ${wind}, ${weatherDescription} `; 
+    document.getElementById("weather-summary").innerHTML =
+        `<li>${currentTemp}°C, ${wind}, ${weatherDescription}</li>`; 
 }
 
+
+// Uppdatera väder när sidan blir synlig igen
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+        fetchWeather();
+    }
+});
 
 // Uppdatera vädret var 10:e minut
 setInterval(fetchWeather, 10 * 60 * 1000);
