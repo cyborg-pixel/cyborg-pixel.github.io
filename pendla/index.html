@@ -58,6 +58,10 @@
       background-color: rgba(200, 230, 200, 0.8);
     }
 
+    .schoolferry-box {
+      background-color: #e6ccff;
+    }
+
     .big {
       font-weight: bold;
       font-size: 1.0em;
@@ -103,11 +107,12 @@
       /* OBS: ingen fixed height – den anpassar sig efter innehållet */
     }
 
-/*    #weather-summary {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    } */
+  .strikethrough {
+  text-decoration: line-through;
+  color: black;
+  }
+
+
   </style>
 </head>
 <body onload="startAutoRefresh()">
@@ -117,7 +122,91 @@
   <div id="config-view" class="hidden config-section"></div>
 
   <script>
-    const stops = [
+
+    const schoolFerryConfig = {
+      startDate: '2025-04-22',
+      endDate: '2025-06-13T23:59:59',
+      redDays: ['2025-05-01', '2025-05-29', '2025-05-30', '2025-06-06', '2025-06-09']
+    };
+
+    const schoolFerryTrips = [
+      { from: "Tranholmen", departure: "07:20", to: "Stocksunds hamn", arrival: "07:30" },
+      { from: "Tranholmen", departure: "07:45", to: "Lagman Linds väg", arrival: "07:50" },
+      { from: "Lagman Linds väg", departure: "07:50", to: "Stocksunds hamn", arrival: "08:00" },
+      { from: "Stocksunds hamn", departure: "15:15", to: "Lagman Linds väg", arrival: "15:25" },
+      { from: "Lagman Linds väg", departure: "15:25", to: "Tranholmen", arrival: "15:30" },
+      { from: "Stocksunds hamn", departure: "16:25", to: "Lagman Linds väg", arrival: "16:35" },
+      { from: "Lagman Linds väg", departure: "16:35", to: "Tranholmen", arrival: "16:40" }
+    ];
+
+    function isRedDay(date) {
+      const iso = date.toISOString().split('T')[0];
+      return schoolFerryConfig.redDays.includes(iso);
+    }
+
+  function renderSchoolFerryWidget() {
+  const prefs = loadPreferences();
+  if (prefs.schoolferry === false) return;
+
+  if (!document.getElementById('schoolferry-box')) {
+    const box = document.createElement('div');
+    box.className = 'site-box schoolferry-box';
+    box.id = 'schoolferry-box';
+    box.innerHTML = `<h2>Skolbåten (22 april – 13 juni)</h2><ul id="schoolferry-list">Laddar avgångar...</ul>`;
+    document.getElementById('main-view').appendChild(box);
+  }
+
+  updateSchoolFerryContent(); // fyll i innehållet direkt första gången
+}
+
+function updateSchoolFerryContent() {
+  const prefs = loadPreferences();
+  if (prefs.schoolferry === false) return;
+
+  const now = new Date();
+  const startDate = new Date(schoolFerryConfig.startDate);
+  const endDate = new Date(schoolFerryConfig.endDate);
+  const isActivePeriod = now >= startDate && now <= endDate;
+
+  const ul = document.getElementById('schoolferry-list');
+  if (!ul) return; // inget att uppdatera om boxen inte finns
+
+  ul.innerHTML = '';
+
+  const futureTrips = schoolFerryTrips.map(trip => {
+    const [h, m] = trip.departure.split(":").map(Number);
+    const dep = new Date(now);
+    dep.setHours(h, m, 0, 0);
+    if (dep < now) dep.setDate(dep.getDate() + 1);
+    return { ...trip, depDate: dep };
+  }).filter(trip => {
+    const diffMin = (trip.depDate - now) / 60000;
+    const weekday = trip.depDate.getDay();
+    return diffMin >= 0 && diffMin <= 1440 &&
+           weekday >= 1 && weekday <= 5 &&
+           !isRedDay(trip.depDate);
+  }).sort((a, b) => a.depDate - b.depDate).slice(0, 4);
+
+  if (futureTrips.length === 0) {
+    ul.innerHTML = '<li>Inga avgångar hittades.</li>';
+  } else {
+    futureTrips.forEach((trip, index) => {
+      const diffMin = Math.round((trip.depDate - now) / 60000);
+      let depText = '';
+      if (diffMin < 1) depText = 'Nu';
+      else if (diffMin < 60) depText = `${diffMin} min`;
+      else depText = trip.departure;
+      const li = document.createElement('li');
+      if (index === 0) li.classList.add('big');
+      if (!isActivePeriod) li.classList.add('strikethrough');
+      li.textContent = `${depText} ${trip.from} → ${trip.to}`;
+      ul.appendChild(li);
+    });
+  }
+}
+
+
+    const widgets = [
       { id: 'weather', title: 'Vädret på Tranholmen', isWeather: true },
       { id: 'farja', title: 'Färja 80 Tranholmen', siteId: 961, mode: 'SHIP', line: '80', dir: 1, bg: 'departure-to-island', filter: 'Ropsten' },
       { id: 'buss', title: 'Buss 601 Svanholmsvägen', siteId: 2103, mode: 'BUS', line: '601', dir: 2, bg: 'departure-to-island' },
@@ -125,17 +214,19 @@
       { id: 'ropsten', title: 'Färja 80 Ropsten', siteId: 9220, mode: 'SHIP', line: '80', dir: 1, bg: 'departure-to-city' },
       { id: 'ds', title: 'Buss 601 Danderyds sjukhus', siteId: 9201, mode: 'BUS', line: '601', dir: 1, bg: 'departure-to-city' },
       { id: 'odenplan', title: 'Buss 50 Odenplan', siteId: 9117, mode: 'BUS', line: '50', dir: 1, bg: 'departure-to-city' },
+      { id: 'schoolferry', title: 'Skolbåten', isSchoolFerry: true, bg: 'schoolferry-box' }
+
     ];
 
     function loadPreferences() {
-      return JSON.parse(localStorage.getItem('visibleStops') || '{}');
+      return JSON.parse(localStorage.getItem('visibleWidgets') || '{}');
     }
 
     function savePreferences(prefs) {
-      localStorage.setItem('visibleStops', JSON.stringify(prefs));
+      localStorage.setItem('visibleWidgets', JSON.stringify(prefs));
     }
 
-    async function fetchDepartures({ siteId, mode, line, dir, id, filter }) {
+    async function updateSlWidgetData({ siteId, mode, line, dir, id, filter }) {
       const url = `https://transport.integration.sl.se/v1/sites/${siteId}/departures?forecast=360&direction=${dir}`;
       try {
         const res = await fetch(url);
@@ -164,24 +255,29 @@
       }
     }
 
-    function renderMain() {
+    function renderAllWidgets() {
       const prefs = loadPreferences();
       const container = document.getElementById('main-view');
       container.innerHTML = '';
-      stops.forEach(stop => {
-        if (prefs[stop.id] === false) return;
+    widgets.forEach(widget => {
+  if (prefs[widget.id] === false) return;
 
-        const box = document.createElement('div');
-        box.className = `site-box ${stop.bg || ''}`;
-        if (stop.isWeather) {
-          box.style.backgroundColor = 'white';
-          box.innerHTML = `<h2>${stop.title}</h2><ul id="weather-summary">Laddar väderdata...</ul>`;
-        } else {
-          box.innerHTML = `<h2>${stop.title}</h2><ul id="${stop.id}">Laddar hållplatsdata...</ul>`;
-        }
+  if (widget.isWeather) {
+    const box = document.createElement('div');
+    box.className = 'site-box';
+    box.style.backgroundColor = 'white';
+    box.innerHTML = `<h2>${widget.title}</h2><ul id="weather-summary">Laddar väderdata...</ul>`;
+    container.appendChild(box);
+  } else if (widget.isSchoolFerry) {
+    renderSchoolFerryWidget(); // hanteras separat
+  } else {
+    const box = document.createElement('div');
+    box.className = `site-box ${widget.bg || ''}`;
+    box.innerHTML = `<h2>${widget.title}</h2><ul id="${widget.id}">Laddar hållplatsdata...</ul>`;
+    container.appendChild(box);
+  }
+});
 
-        container.appendChild(box);
-      });
 
       // Lägg till konfiglänken under allt
       const configLink = document.createElement('div');
@@ -191,16 +287,16 @@
       container.appendChild(configLink);
     }
 
-    function updateDepartures() {
-      const prefs = loadPreferences();
-      stops.forEach(stop => {
-        if (prefs[stop.id] === false) return;
-        if (!stop.isWeather) {
-          fetchDepartures(stop);
-        }
-        // vädret hanteras av weather.js
-      });
-    }
+
+
+function updateSlWidgets() {
+  const prefs = loadPreferences();
+  widgets.forEach(widget => {
+    if (prefs[widget.id] === false) return;
+    if (widget.isWeather || widget.isSchoolFerry) return; // hoppa över väder och skolbåt
+    updateSlWidgetData(widget);
+  });
+}
 
     function reloadWeatherScript() {
       const oldScript = document.querySelector('script[data-weather]');
@@ -213,15 +309,21 @@
       document.body.appendChild(script);
     }
 
-    function startAutoRefresh() {
-      renderMain();
-      updateDepartures();
-      reloadWeatherScript(); // ladda väder
-      setInterval(updateDepartures, 30000);
-    }
+
+function updateAllWidgets() {
+  updateSlWidgets();         // SL-data
+  updateSchoolFerryContent();  // Skolbåten
+}
+
+function startAutoRefresh() {
+  renderAllWidgets();
+  updateAllWidgets();                  // första uppdateringen
+  reloadWeatherScript();              // väder
+  setInterval(updateAllWidgets, 30000); // uppdatera allt var 30s
+}
 
     document.addEventListener("visibilitychange", function () {
-      if (!document.hidden) updateDepartures();
+      if (!document.hidden) updateSlWidgets();
     });
 
     function toggleConfig(show) {
@@ -230,8 +332,8 @@
       if (show) {
         renderConfig();
       } else {
-        renderMain();
-        updateDepartures();
+        renderAllWidgets();
+        updateAllWidgets();
         reloadWeatherScript(); // uppdatera vädret
       }
     }
@@ -241,14 +343,14 @@
       const config = document.getElementById('config-view');
       config.innerHTML = '<h2>Välj info som ska visas</h2>';
       const form = document.createElement('form');
-      stops.forEach(stop => {
+      widgets.forEach(widget => {
         const label = document.createElement('label');
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
-        checkbox.name = stop.id;
-        checkbox.checked = prefs[stop.id] !== false;
+        checkbox.name = widget.id;
+        checkbox.checked = prefs[widget.id] !== false;
         label.appendChild(checkbox);
-        label.append(` ${stop.title}`);
+        label.append(` ${widget.title}`);
         form.appendChild(label);
         form.appendChild(document.createElement('br'));
       });
@@ -260,14 +362,21 @@
       form.onsubmit = e => {
         e.preventDefault();
         const newPrefs = {};
-        stops.forEach(stop => {
-          newPrefs[stop.id] = form.elements[stop.id].checked;
+        widgets.forEach(widget => {
+          newPrefs[widget.id] = form.elements[widget.id].checked;
         });
         savePreferences(newPrefs);
         toggleConfig(false);
       };
       config.appendChild(form);
     }
+
+
   </script>
 </body>
 </html>
+
+
+
+
+
