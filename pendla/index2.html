@@ -3,271 +3,109 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nästa avgångar - Tranholmen</title>
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#cfe8ff" />
-  <link rel="apple-touch-icon" href="icon.png" />
+  <title>Skolbåten - Tranholmen</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      font-size: 0.9em;
-      margin: 0;
-      padding: 0;
-/*      background: linear-gradient(90deg, #e3f2fd 0%, #90caf9 100%, #42a5f5 200%);*/
-      background: linear-gradient(90deg, #004e92 0%, #001f3f 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-sizing: border-box;
-    }
-
-    #main-view {
-      width: 100%;
-      max-width: 800px;
+      background: #f0f0ff;
       padding: 20px;
-      box-sizing: border-box;
+      margin: 0;
+      display: flex;
+      justify-content: center;
     }
-
-    h2 {
-      font-size: 1.2em;
-      margin-top: 2px;
-      margin-bottom: 5px;
-      line-height: 1.0;
+    .site-box {
+      background-color: #e6ccff;
+      border-radius: 12px;
+      padding: 15px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-
-    ul {
+    .site-box h2 {
+      margin-top: 0;
+    }
+    .site-box ul {
       list-style-type: none;
       padding: 0;
-      margin: 0;
+      color: #000;
     }
-
-    .site-box {
-      width: 100%;
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
-      padding: 10px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      margin-bottom: 15px;
-      box-sizing: border-box;
-    }
-
-    .departure-to-city {
-      background-color: rgba(255, 200, 220, 0.8);
-    }
-
-    .departure-to-island {
-      background-color: rgba(200, 230, 200, 0.8);
-    }
-
-    .big {
+    .site-box ul li.big {
       font-weight: bold;
-      font-size: 1.0em;
-    }
-
-    .refresh-button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 1em;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .refresh-button:hover {
-      background-color: #0056b3;
-    }
-
-    .config-link {
-      font-size: 0.8em;
-      cursor: pointer;
-      text-decoration: underline;
-      color: #004488;
-      text-align: center;
-      margin: 20px 0;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .config-section {
-      width: 100%;
-      max-width: 800px;
-      background-color: rgba(255, 255, 255, 0.95);
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      box-sizing: border-box;
-      margin: 20px;
-      /* OBS: ingen fixed height – den anpassar sig efter innehållet */
-    }
-
-    #weather-summary {
-      padding: 3px;
-      border-radius: 5px;
     }
   </style>
 </head>
-<body onload="startAutoRefresh()">
-
-  <div id="main-view"></div>
-
-  <div id="config-view" class="hidden config-section"></div>
+<body>
+  <div class="site-box" id="schoolferry-box"></div>
 
   <script>
-    const stops = [
-      { id: 'weather', title: 'Vädret på Tranholmen', isWeather: true },
-      { id: 'farja', title: 'Färja 80 Tranholmen', siteId: 961, mode: 'SHIP', line: '80', dir: 1, bg: 'departure-to-island', filter: 'Ropsten' },
-      { id: 'buss', title: 'Buss 601 Svanholmsvägen', siteId: 2103, mode: 'BUS', line: '601', dir: 2, bg: 'departure-to-island' },
-      { id: 'lektorsstigen', title: 'Buss 50 Lektorsstigen', siteId: 1180, mode: 'BUS', line: '50', dir: 2, bg: 'departure-to-island' },
-      { id: 'ropsten', title: 'Färja 80 Ropsten', siteId: 9220, mode: 'SHIP', line: '80', dir: 1, bg: 'departure-to-city' },
-      { id: 'ds', title: 'Buss 601 Danderyds sjukhus', siteId: 9201, mode: 'BUS', line: '601', dir: 1, bg: 'departure-to-city' },
-      { id: 'odenplan', title: 'Buss 50 Odenplan', siteId: 9117, mode: 'BUS', line: '50', dir: 1, bg: 'departure-to-city' },
+    const schoolFerryConfig = {
+      startDate: '2025-04-22',
+      endDate: '2025-06-13T23:59:59',
+      redDays: ['2025-05-01', '2025-05-29', '2025-05-30', '2025-06-06', '2025-06-09']
+    };
+
+    const schoolFerryTrips = [
+      { from: "Tranholmen", departure: "07:20", to: "Stocksunds hamn", arrival: "07:30" },
+      { from: "Tranholmen", departure: "07:45", to: "Lagman Linds väg", arrival: "07:50" },
+      { from: "Lagman Linds väg", departure: "07:50", to: "Stocksunds hamn", arrival: "08:00" },
+      { from: "Stocksunds hamn", departure: "15:15", to: "Lagman Linds väg", arrival: "15:25" },
+      { from: "Lagman Linds väg", departure: "15:25", to: "Tranholmen", arrival: "15:30" },
+      { from: "Stocksunds hamn", departure: "16:25", to: "Lagman Linds väg", arrival: "16:35" },
+      { from: "Lagman Linds väg", departure: "16:35", to: "Tranholmen", arrival: "16:40" }
     ];
 
-    function loadPreferences() {
-      return JSON.parse(localStorage.getItem('visibleStops') || '{}');
+    function isRedDay(date) {
+      const iso = date.toISOString().split('T')[0];
+      return schoolFerryConfig.redDays.includes(iso);
     }
 
-    function savePreferences(prefs) {
-      localStorage.setItem('visibleStops', JSON.stringify(prefs));
-    }
+    function renderSchoolFerry() {
+      const now = new Date();
+      const weekday = now.getDay();
+      const startDate = new Date(schoolFerryConfig.startDate);
+      const endDate = new Date(schoolFerryConfig.endDate);
+      const isActivePeriod = now >= startDate && now <= endDate;
+      const textColor = isActivePeriod ? 'black' : '#aaa';
+      const box = document.getElementById('schoolferry-box');
+      const ul = document.createElement('ul');
+      ul.style.color = textColor;
 
-    async function fetchDepartures({ siteId, mode, line, dir, id, filter }) {
-      const url = `https://transport.integration.sl.se/v1/sites/${siteId}/departures?forecast=360&direction=${dir}`;
-      try {
-        const res = await fetch(url);
-        if (!res.ok) return;
-        const data = await res.json();
-        const departures = data.departures
-          .filter(d => d.line && d.line.transport_mode === mode && d.line.designation === line && (!filter || d.destination.includes(filter)))
-          .slice(0, 5);
+      const futureTrips = schoolFerryTrips.map(trip => {
+        const [h, m] = trip.departure.split(":").map(Number);
+        const dep = new Date(now);
+        dep.setHours(h, m, 0, 0);
+        if (dep < now) dep.setDate(dep.getDate() + 1);
+        return { ...trip, depDate: dep };
+      }).filter(trip => {
+        const diffMin = (trip.depDate - now) / 60000;
+        const weekday = trip.depDate.getDay();
+        return diffMin >= 0 && diffMin <= 1440 &&
+               weekday >= 1 && weekday <= 5 &&
+               !isRedDay(trip.depDate);
+      }).sort((a, b) => a.depDate - b.depDate).slice(0, 4);
 
-        const list = document.getElementById(id);
-        list.innerHTML = '';
-
-        if (departures.length === 0) {
-          list.innerHTML = '<li>Inga avgångar hittades.</li>';
-          return;
-        }
-
-        departures.forEach((dep, i) => {
-          const li = document.createElement('li');
-          if (i === 0) li.classList.add('big');
-          li.textContent = `${dep.display} → ${dep.destination}`;
-          list.appendChild(li);
-        });
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    function renderMain() {
-      const prefs = loadPreferences();
-      const container = document.getElementById('main-view');
-      container.innerHTML = '';
-      stops.forEach(stop => {
-        if (prefs[stop.id] === false) return;
-
-        const box = document.createElement('div');
-        box.className = `site-box ${stop.bg || ''}`;
-        if (stop.isWeather) {
-          box.style.backgroundColor = 'white';
-          box.innerHTML = `<h2>${stop.title}</h2><div id="weather-summary">Laddar väderdata...</div>`;
-        } else {
-          box.innerHTML = `<h2>${stop.title}</h2><ul id="${stop.id}"></ul>`;
-        }
-
-        container.appendChild(box);
-      });
-
-      // Lägg till konfiglänken under allt
-      const configLink = document.createElement('div');
-      configLink.className = 'config-link';
-      configLink.textContent = 'Inställningar';
-      configLink.onclick = () => toggleConfig(true);
-      container.appendChild(configLink);
-    }
-
-    function updateDepartures() {
-      const prefs = loadPreferences();
-      stops.forEach(stop => {
-        if (prefs[stop.id] === false) return;
-        if (!stop.isWeather) {
-          fetchDepartures(stop);
-        }
-        // vädret hanteras av weather.js
-      });
-    }
-
-    function reloadWeatherScript() {
-      const oldScript = document.querySelector('script[data-weather]');
-      if (oldScript) oldScript.remove();
-
-      const script = document.createElement('script');
-      script.src = 'weather.js';
-      script.defer = true;
-      script.setAttribute('data-weather', 'true');
-      document.body.appendChild(script);
-    }
-
-    function startAutoRefresh() {
-      renderMain();
-      updateDepartures();
-      reloadWeatherScript(); // ladda väder
-      setInterval(updateDepartures, 30000);
-    }
-
-    document.addEventListener("visibilitychange", function () {
-      if (!document.hidden) updateDepartures();
-    });
-
-    function toggleConfig(show) {
-      document.getElementById('main-view').classList.toggle('hidden', show);
-      document.getElementById('config-view').classList.toggle('hidden', !show);
-      if (show) {
-        renderConfig();
+      if (futureTrips.length === 0) {
+        ul.innerHTML = '<li>Inga avgångar hittades.</li>';
       } else {
-        renderMain();
-        updateDepartures();
-        reloadWeatherScript(); // uppdatera vädret
+        futureTrips.forEach((trip, index) => {
+          const diffMin = Math.round((trip.depDate - now) / 60000);
+          let depText = '';
+          if (diffMin < 1) depText = 'Nu';
+          else if (diffMin < 60) depText = `${diffMin} min`;
+          else depText = trip.departure;
+          const li = document.createElement('li');
+          if (index === 0) li.classList.add('big');
+          li.textContent = `${depText} ${trip.from} → ${trip.arrival} ${trip.to}`;
+          ul.appendChild(li);
+        });
       }
+
+      box.innerHTML = '<h2>Skolbåten</h2>';
+      box.appendChild(ul);
     }
 
-    function renderConfig() {
-      const prefs = loadPreferences();
-      const config = document.getElementById('config-view');
-      config.innerHTML = '<h2>Välj info som ska visas</h2>';
-      const form = document.createElement('form');
-      stops.forEach(stop => {
-        const label = document.createElement('label');
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.name = stop.id;
-        checkbox.checked = prefs[stop.id] !== false;
-        label.appendChild(checkbox);
-        label.append(` ${stop.title}`);
-        form.appendChild(label);
-        form.appendChild(document.createElement('br'));
-      });
-      const saveBtn = document.createElement('button');
-      saveBtn.textContent = 'Spara';
-      saveBtn.type = 'submit';
-      saveBtn.className = 'refresh-button';
-      form.appendChild(saveBtn);
-      form.onsubmit = e => {
-        e.preventDefault();
-        const newPrefs = {};
-        stops.forEach(stop => {
-          newPrefs[stop.id] = form.elements[stop.id].checked;
-        });
-        savePreferences(newPrefs);
-        toggleConfig(false);
-      };
-      config.appendChild(form);
-    }
+    renderSchoolFerry();
+    setInterval(renderSchoolFerry, 30000);
   </script>
 </body>
 </html>

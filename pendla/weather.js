@@ -6,8 +6,6 @@ function getCompassDirection(degrees) {
 }
 
 async function fetchWeather() {
-    //const lat = "59.3293";  // Stockholm latitud
-    //const lon = "18.0686";  // Stockholm longitud
     const lat = "59.3750";  // Tranholmen
     const lon = "18.0892";  // Tranholmen
     const url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${lat}&lon=${lon}`;
@@ -71,9 +69,6 @@ let windDirection = getCompassDirection(firstEntry.data.instant.details.wind_fro
 
 // Skapa kompakt sträng
 let wind = `${windSpeed} m/s ${windDirection}`;
-
-
-
 
 
     // Hantera om ingen symbol hittas
