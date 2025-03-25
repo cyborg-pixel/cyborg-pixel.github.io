@@ -124,7 +124,6 @@
     };
 
     const schoolFerryTrips = [
-      { from: "Tranholmen", departure: "12:55", to: "Stocksunds hamn", arrival: "07:30" },
       { from: "Tranholmen", departure: "07:20", to: "Stocksunds hamn", arrival: "07:30" },
       { from: "Tranholmen", departure: "07:45", to: "Lagman Linds väg", arrival: "07:50" },
       { from: "Lagman Linds väg", departure: "07:50", to: "Stocksunds hamn", arrival: "08:00" },
@@ -147,7 +146,7 @@
     const box = document.createElement('div');
     box.className = 'site-box schoolferry-box';
     box.id = 'schoolferry-box';
-    box.innerHTML = `<h2>Skolbåten</h2><ul id="schoolferry-list">Laddar avgångar...</ul>`;
+    box.innerHTML = `<h2>Skolbåten (22 april – 13 juni)</h2><ul id="schoolferry-list">Laddar avgångar...</ul>`;
     document.getElementById('main-view').appendChild(box);
   }
 
@@ -202,7 +201,7 @@ function updateSchoolFerryContent() {
 }
 
 
-    const stops = [
+    const widgets = [
       { id: 'weather', title: 'Vädret på Tranholmen', isWeather: true },
       { id: 'farja', title: 'Färja 80 Tranholmen', siteId: 961, mode: 'SHIP', line: '80', dir: 1, bg: 'departure-to-island', filter: 'Ropsten' },
       { id: 'buss', title: 'Buss 601 Svanholmsvägen', siteId: 2103, mode: 'BUS', line: '601', dir: 2, bg: 'departure-to-island' },
@@ -215,14 +214,14 @@ function updateSchoolFerryContent() {
     ];
 
     function loadPreferences() {
-      return JSON.parse(localStorage.getItem('visibleStops') || '{}');
+      return JSON.parse(localStorage.getItem('visibleWidgets') || '{}');
     }
 
     function savePreferences(prefs) {
-      localStorage.setItem('visibleStops', JSON.stringify(prefs));
+      localStorage.setItem('visibleWidgets', JSON.stringify(prefs));
     }
 
-    async function fetchDepartures({ siteId, mode, line, dir, id, filter }) {
+    async function updateSlWidgetData({ siteId, mode, line, dir, id, filter }) {
       const url = `https://transport.integration.sl.se/v1/sites/${siteId}/departures?forecast=360&direction=${dir}`;
       try {
         const res = await fetch(url);
@@ -251,25 +250,25 @@ function updateSchoolFerryContent() {
       }
     }
 
-    function renderMain() {
+    function renderAllWidgets() {
       const prefs = loadPreferences();
       const container = document.getElementById('main-view');
       container.innerHTML = '';
-    stops.forEach(stop => {
-  if (prefs[stop.id] === false) return;
+    widgets.forEach(widget => {
+  if (prefs[widget.id] === false) return;
 
-  if (stop.isWeather) {
+  if (widget.isWeather) {
     const box = document.createElement('div');
     box.className = 'site-box';
     box.style.backgroundColor = 'white';
-    box.innerHTML = `<h2>${stop.title}</h2><ul id="weather-summary">Laddar väderdata...</ul>`;
+    box.innerHTML = `<h2>${widget.title}</h2><ul id="weather-summary">Laddar väderdata...</ul>`;
     container.appendChild(box);
-  } else if (stop.isSchoolFerry) {
+  } else if (widget.isSchoolFerry) {
     renderSchoolFerryWidget(); // hanteras separat
   } else {
     const box = document.createElement('div');
-    box.className = `site-box ${stop.bg || ''}`;
-    box.innerHTML = `<h2>${stop.title}</h2><ul id="${stop.id}">Laddar hållplatsdata...</ul>`;
+    box.className = `site-box ${widget.bg || ''}`;
+    box.innerHTML = `<h2>${widget.title}</h2><ul id="${widget.id}">Laddar hållplatsdata...</ul>`;
     container.appendChild(box);
   }
 });
@@ -285,12 +284,12 @@ function updateSchoolFerryContent() {
 
 
 
-function updateDepartures() {
+function updateSlWidgets() {
   const prefs = loadPreferences();
-  stops.forEach(stop => {
-    if (prefs[stop.id] === false) return;
-    if (stop.isWeather || stop.isSchoolFerry) return; // hoppa över väder och skolbåt
-    fetchDepartures(stop);
+  widgets.forEach(widget => {
+    if (prefs[widget.id] === false) return;
+    if (widget.isWeather || widget.isSchoolFerry) return; // hoppa över väder och skolbåt
+    updateSlWidgetData(widget);
   });
 }
 
@@ -307,19 +306,19 @@ function updateDepartures() {
 
 
 function updateAllWidgets() {
-  updateDepartures();         // SL-data
+  updateSlWidgets();         // SL-data
   updateSchoolFerryContent();  // Skolbåten
 }
 
 function startAutoRefresh() {
-  renderMain();
+  renderAllWidgets();
   updateAllWidgets();                  // första uppdateringen
   reloadWeatherScript();              // väder
   setInterval(updateAllWidgets, 30000); // uppdatera allt var 30s
 }
 
     document.addEventListener("visibilitychange", function () {
-      if (!document.hidden) updateDepartures();
+      if (!document.hidden) updateSlWidgets();
     });
 
     function toggleConfig(show) {
@@ -328,7 +327,7 @@ function startAutoRefresh() {
       if (show) {
         renderConfig();
       } else {
-        renderMain();
+        renderAllWidgets();
         updateAllWidgets();
         reloadWeatherScript(); // uppdatera vädret
       }
@@ -339,14 +338,14 @@ function startAutoRefresh() {
       const config = document.getElementById('config-view');
       config.innerHTML = '<h2>Välj info som ska visas</h2>';
       const form = document.createElement('form');
-      stops.forEach(stop => {
+      widgets.forEach(widget => {
         const label = document.createElement('label');
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
-        checkbox.name = stop.id;
-        checkbox.checked = prefs[stop.id] !== false;
+        checkbox.name = widget.id;
+        checkbox.checked = prefs[widget.id] !== false;
         label.appendChild(checkbox);
-        label.append(` ${stop.title}`);
+        label.append(` ${widget.title}`);
         form.appendChild(label);
         form.appendChild(document.createElement('br'));
       });
@@ -358,8 +357,8 @@ function startAutoRefresh() {
       form.onsubmit = e => {
         e.preventDefault();
         const newPrefs = {};
-        stops.forEach(stop => {
-          newPrefs[stop.id] = form.elements[stop.id].checked;
+        widgets.forEach(widget => {
+          newPrefs[widget.id] = form.elements[widget.id].checked;
         });
         savePreferences(newPrefs);
         toggleConfig(false);
