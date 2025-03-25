@@ -3,34 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Skolbåten - Tranholmen</title>
+  <title>Nästa avgångar - Tranholmen</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      font-size: 0.9em;}
-    .site-box {
-      background-color: #e6ccff;
-      border-radius: 12px;
-      padding: 15px;
-      max-width: 400px;
+      font-size: 0.9em;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(90deg, #e3f2fd 0%, #90caf9 100%, #42a5f5 200%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-sizing: border-box;
+    }
+
+    #main-view {
       width: 100%;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      padding: 20px;
+      box-sizing: border-box;
     }
-    .site-box h2 {
-      margin-top: 0;
+
+    h2 {
+      font-size: 1.2em;
+      margin-top: 2px;
+      margin-bottom: 5px;
+      line-height: 1.0;
     }
-    .site-box ul {
+
+    ul {
       list-style-type: none;
       padding: 0;
-      color: #000;
+      margin: 0;
     }
-    .site-box ul li.big {
+
+    .site-box {
+      width: 100%;
+      border-radius: 15px;
+      padding: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+
+    .departure-to-city {
+      background-color: rgba(255, 200, 220, 0.8);
+    }
+
+    .departure-to-island {
+      background-color: rgba(200, 230, 200, 0.8);
+    }
+
+    .schoolferry-box {
+      background-color: #e6ccff;
+    }
+
+    .big {
       font-weight: bold;
+      font-size: 1.0em;
     }
   </style>
 </head>
-<body>
-  <div class="site-box" id="schoolferry-box"></div>
+<body onload="startAutoRefresh()">
+  <div id="main-view"></div>
 
   <script>
     const schoolFerryConfig = {
@@ -54,14 +89,14 @@
       return schoolFerryConfig.redDays.includes(iso);
     }
 
-    function renderSchoolFerry() {
+    function renderSchoolFerryWidget() {
       const now = new Date();
-      const weekday = now.getDay();
       const startDate = new Date(schoolFerryConfig.startDate);
       const endDate = new Date(schoolFerryConfig.endDate);
       const isActivePeriod = now >= startDate && now <= endDate;
       const textColor = isActivePeriod ? 'black' : '#aaa';
-      const box = document.getElementById('schoolferry-box');
+      const box = document.createElement('div');
+      box.className = 'site-box schoolferry-box';
       const ul = document.createElement('ul');
       ul.style.color = textColor;
 
@@ -77,7 +112,7 @@
         return diffMin >= 0 && diffMin <= 1440 &&
                weekday >= 1 && weekday <= 5 &&
                !isRedDay(trip.depDate);
-      }).sort((a, b) => a.depDate - b.depDate).slice(0, 4);
+      }).sort((a, b) => a.depDate - b.depDate).slice(0, 3);
 
       if (futureTrips.length === 0) {
         ul.innerHTML = '<li>Inga avgångar hittades.</li>';
@@ -97,10 +132,14 @@
 
       box.innerHTML = '<h2>Skolbåten</h2>';
       box.appendChild(ul);
+      document.getElementById('main-view').appendChild(box);
     }
 
-    renderSchoolFerry();
-    setInterval(renderSchoolFerry, 30000);
+    function startAutoRefresh() {
+      document.getElementById('main-view').innerHTML = '';
+      renderSchoolFerryWidget();
+      setInterval(renderSchoolFerryWidget, 30000);
+    }
   </script>
 </body>
 </html>
