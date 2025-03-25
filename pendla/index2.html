@@ -124,6 +124,7 @@
     };
 
     const schoolFerryTrips = [
+      { from: "Tranholmen", departure: "12:30", to: "Stocksunds hamn", arrival: "07:30" },
       { from: "Tranholmen", departure: "07:20", to: "Stocksunds hamn", arrival: "07:30" },
       { from: "Tranholmen", departure: "07:45", to: "Lagman Linds väg", arrival: "07:50" },
       { from: "Lagman Linds väg", departure: "07:50", to: "Stocksunds hamn", arrival: "08:00" },
@@ -138,59 +139,69 @@
       return schoolFerryConfig.redDays.includes(iso);
     }
 
-    function renderSchoolFerryWidget() {
-      const now = new Date();
-      const startDate = new Date(schoolFerryConfig.startDate);
-      const endDate = new Date(schoolFerryConfig.endDate);
-      const isActivePeriod = now >= startDate && now <= endDate;
-      const textColor = isActivePeriod ? 'black' : '#aaa';
+  function renderSchoolFerryWidget() {
+  const prefs = loadPreferences();
+  if (prefs.schoolferry === false) return;
 
-      let box = document.getElementById('schoolferry-box');
-      if (!box) {
-        box = document.createElement('div');
-        box.className = 'site-box schoolferry-box';
-        box.id = 'schoolferry-box';
-        document.getElementById('main-view').appendChild(box);
-      }
+  if (!document.getElementById('schoolferry-box')) {
+    const box = document.createElement('div');
+    box.className = 'site-box schoolferry-box';
+    box.id = 'schoolferry-box';
+    box.innerHTML = `<h2>Skolbåten</h2><ul id="schoolferry-list">Laddar avgångar...</ul>`;
+    document.getElementById('main-view').appendChild(box);
+  }
 
-      const ul = document.createElement('ul');
-      ul.style.color = textColor;
+  updateSchoolFerryContent(); // fyll i innehållet direkt första gången
+}
 
-      const futureTrips = schoolFerryTrips.map(trip => {
-        const [h, m] = trip.departure.split(":").map(Number);
-        const dep = new Date(now);
-        dep.setHours(h, m, 0, 0);
-        if (dep < now) dep.setDate(dep.getDate() + 1);
-        return { ...trip, depDate: dep };
-      }).filter(trip => {
-        const diffMin = (trip.depDate - now) / 60000;
-        const weekday = trip.depDate.getDay();
-        return diffMin >= 0 && diffMin <= 1440 &&
-               weekday >= 1 && weekday <= 5 &&
-               !isRedDay(trip.depDate);
-      }).sort((a, b) => a.depDate - b.depDate).slice(0, 4);
+function updateSchoolFerryContent() {
+  const prefs = loadPreferences();
+  if (prefs.schoolferry === false) return;
 
-      if (futureTrips.length === 0) {
-        ul.innerHTML = '<li>Inga avgångar hittades.</li>';
-      } else {
-        futureTrips.forEach((trip, index) => {
-          const diffMin = Math.round((trip.depDate - now) / 60000);
-          let depText = '';
-          if (diffMin < 1) depText = 'Nu';
-          else if (diffMin < 60) depText = `${diffMin} min`;
-          else depText = trip.departure;
-          const li = document.createElement('li');
-          if (index === 0) li.classList.add('big');
-          li.textContent = `${depText} ${trip.from} → ${trip.to}`;
-          ul.appendChild(li);
-        });
-      }
+  const now = new Date();
+  const startDate = new Date(schoolFerryConfig.startDate);
+  const endDate = new Date(schoolFerryConfig.endDate);
+  const isActivePeriod = now >= startDate && now <= endDate;
+  const textColor = isActivePeriod ? 'black' : '#aaa';
 
-      box.innerHTML = '<h2>Skolbåten</h2>';
-      box.appendChild(ul);
-    }
+  const ul = document.getElementById('schoolferry-list');
+  if (!ul) return; // inget att uppdatera om boxen inte finns
 
-    
+  ul.innerHTML = '';
+  ul.style.color = textColor;
+
+  const futureTrips = schoolFerryTrips.map(trip => {
+    const [h, m] = trip.departure.split(":").map(Number);
+    const dep = new Date(now);
+    dep.setHours(h, m, 0, 0);
+    if (dep < now) dep.setDate(dep.getDate() + 1);
+    return { ...trip, depDate: dep };
+  }).filter(trip => {
+    const diffMin = (trip.depDate - now) / 60000;
+    const weekday = trip.depDate.getDay();
+    return diffMin >= 0 && diffMin <= 1440 &&
+           weekday >= 1 && weekday <= 5 &&
+           !isRedDay(trip.depDate);
+  }).sort((a, b) => a.depDate - b.depDate).slice(0, 4);
+
+  if (futureTrips.length === 0) {
+    ul.innerHTML = '<li>Inga avgångar hittades.</li>';
+  } else {
+    futureTrips.forEach((trip, index) => {
+      const diffMin = Math.round((trip.depDate - now) / 60000);
+      let depText = '';
+      if (diffMin < 1) depText = 'Nu';
+      else if (diffMin < 60) depText = `${diffMin} min`;
+      else depText = trip.departure;
+      const li = document.createElement('li');
+      if (index === 0) li.classList.add('big');
+      li.textContent = `${depText} ${trip.from} → ${trip.to}`;
+      ul.appendChild(li);
+    });
+  }
+}
+
+
     const stops = [
       { id: 'weather', title: 'Vädret på Tranholmen', isWeather: true },
       { id: 'farja', title: 'Färja 80 Tranholmen', siteId: 961, mode: 'SHIP', line: '80', dir: 1, bg: 'departure-to-island', filter: 'Ropsten' },
@@ -199,6 +210,8 @@
       { id: 'ropsten', title: 'Färja 80 Ropsten', siteId: 9220, mode: 'SHIP', line: '80', dir: 1, bg: 'departure-to-city' },
       { id: 'ds', title: 'Buss 601 Danderyds sjukhus', siteId: 9201, mode: 'BUS', line: '601', dir: 1, bg: 'departure-to-city' },
       { id: 'odenplan', title: 'Buss 50 Odenplan', siteId: 9117, mode: 'BUS', line: '50', dir: 1, bg: 'departure-to-city' },
+      { id: 'schoolferry', title: 'Skolbåten', isSchoolFerry: true, bg: 'schoolferry-box' }
+
     ];
 
     function loadPreferences() {
@@ -242,20 +255,25 @@
       const prefs = loadPreferences();
       const container = document.getElementById('main-view');
       container.innerHTML = '';
-      stops.forEach(stop => {
-        if (prefs[stop.id] === false) return;
+    stops.forEach(stop => {
+  if (prefs[stop.id] === false) return;
 
-        const box = document.createElement('div');
-        box.className = `site-box ${stop.bg || ''}`;
-        if (stop.isWeather) {
-          box.style.backgroundColor = 'white';
-          box.innerHTML = `<h2>${stop.title}</h2><ul id="weather-summary">Laddar väderdata...</ul>`;
-        } else {
-          box.innerHTML = `<h2>${stop.title}</h2><ul id="${stop.id}">Laddar hållplatsdata...</ul>`;
-        }
+  if (stop.isWeather) {
+    const box = document.createElement('div');
+    box.className = 'site-box';
+    box.style.backgroundColor = 'white';
+    box.innerHTML = `<h2>${stop.title}</h2><ul id="weather-summary">Laddar väderdata...</ul>`;
+    container.appendChild(box);
+  } else if (stop.isSchoolFerry) {
+    renderSchoolFerryWidget(); // hanteras separat
+  } else {
+    const box = document.createElement('div');
+    box.className = `site-box ${stop.bg || ''}`;
+    box.innerHTML = `<h2>${stop.title}</h2><ul id="${stop.id}">Laddar hållplatsdata...</ul>`;
+    container.appendChild(box);
+  }
+});
 
-        container.appendChild(box);
-      });
 
       // Lägg till konfiglänken under allt
       const configLink = document.createElement('div');
@@ -265,16 +283,16 @@
       container.appendChild(configLink);
     }
 
-    function updateDepartures() {
-      const prefs = loadPreferences();
-      stops.forEach(stop => {
-        if (prefs[stop.id] === false) return;
-        if (!stop.isWeather) {
-          fetchDepartures(stop);
-        }
-        // vädret hanteras av weather.js
-      });
-    }
+
+
+function updateDepartures() {
+  const prefs = loadPreferences();
+  stops.forEach(stop => {
+    if (prefs[stop.id] === false) return;
+    if (stop.isWeather || stop.isSchoolFerry) return; // hoppa över väder och skolbåt
+    fetchDepartures(stop);
+  });
+}
 
     function reloadWeatherScript() {
       const oldScript = document.querySelector('script[data-weather]');
@@ -288,16 +306,17 @@
     }
 
 
+function updateAllWidgets() {
+  updateDepartures();         // SL-data
+  updateSchoolFerryContent();  // Skolbåten
+}
 
-
-    function startAutoRefresh() {
-      renderMain();
-      updateDepartures();
-      reloadWeatherScript(); // ladda väder
-      renderSchoolFerryWidget();
-      setInterval(updateDepartures, 30000);
-    }
-
+function startAutoRefresh() {
+  renderMain();
+  updateAllWidgets();                  // första uppdateringen
+  reloadWeatherScript();              // väder
+  setInterval(updateAllWidgets, 30000); // uppdatera allt var 30s
+}
 
     document.addEventListener("visibilitychange", function () {
       if (!document.hidden) updateDepartures();
@@ -310,7 +329,7 @@
         renderConfig();
       } else {
         renderMain();
-        updateDepartures();
+        updateAllWidgets();
         reloadWeatherScript(); // uppdatera vädret
       }
     }
