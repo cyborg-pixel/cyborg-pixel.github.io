@@ -107,6 +107,12 @@
       /* OBS: ingen fixed height – den anpassar sig efter innehållet */
     }
 
+  .strikethrough {
+  text-decoration: line-through;
+  color: black;
+  }
+
+
   </style>
 </head>
 <body onload="startAutoRefresh()">
@@ -161,13 +167,11 @@ function updateSchoolFerryContent() {
   const startDate = new Date(schoolFerryConfig.startDate);
   const endDate = new Date(schoolFerryConfig.endDate);
   const isActivePeriod = now >= startDate && now <= endDate;
-  const textColor = isActivePeriod ? 'black' : '#aaa';
 
   const ul = document.getElementById('schoolferry-list');
   if (!ul) return; // inget att uppdatera om boxen inte finns
 
   ul.innerHTML = '';
-  ul.style.color = textColor;
 
   const futureTrips = schoolFerryTrips.map(trip => {
     const [h, m] = trip.departure.split(":").map(Number);
@@ -194,6 +198,7 @@ function updateSchoolFerryContent() {
       else depText = trip.departure;
       const li = document.createElement('li');
       if (index === 0) li.classList.add('big');
+      if (!isActivePeriod) li.classList.add('strikethrough');
       li.textContent = `${depText} ${trip.from} → ${trip.to}`;
       ul.appendChild(li);
     });
