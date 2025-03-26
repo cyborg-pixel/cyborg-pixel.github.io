@@ -8,7 +8,7 @@ function getCompassDirection(degrees) {
 async function fetchWeather() {
     const lat = "59.3750";  // Tranholmen
     const lon = "18.0892";  // Tranholmen
-    const url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${lat}&lon=${lon}`;
+    const url = `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${lat}&lon=${lon}`;
 
     try {
         const response = await fetch(url, {
@@ -65,10 +65,11 @@ function displayWeather(data) {
 weatherSymbol = timeseries[0].data.next_1_hours.summary.symbol_code;
 let firstEntry = timeseries[0];
 let windSpeed = Math.round(firstEntry.data.instant.details.wind_speed);  // Avrundad vindstyrka
+let windSpeedGust = Math.round(firstEntry.data.instant.details.wind_speed_of_gust);  // Avrundad vindstyrka
 let windDirection = getCompassDirection(firstEntry.data.instant.details.wind_from_direction); // Kompassriktning
 
 // Skapa kompakt sträng
-let wind = `${windSpeed} m/s ${windDirection}`;
+let wind = `${windDirection} ${windSpeed} m/s (byar ${windSpeedGust})`;
 
 
     // Hantera om ingen symbol hittas
