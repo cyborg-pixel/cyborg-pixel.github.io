@@ -66,7 +66,8 @@ weatherSymbol = timeseries[0].data.next_1_hours.summary.symbol_code;
 let firstEntry = timeseries[0];
 let windSpeed = Math.round(firstEntry.data.instant.details.wind_speed);  // Avrundad vindstyrka
 let windSpeedGust = Math.round(firstEntry.data.instant.details.wind_speed_of_gust);  // Avrundad vindstyrka
-let windDirection = getCompassDirection(firstEntry.data.instant.details.wind_from_direction); // Kompassriktning
+let windDegrees = firstEntry.data.instant.details.wind_from_direction;
+let windDirection = getCompassDirection(windDegrees); // Kompassriktning
 
 // Skapa kompakt sträng
 let wind = `${windDirection} ${windSpeed} m/s (byar ${windSpeedGust})`;
