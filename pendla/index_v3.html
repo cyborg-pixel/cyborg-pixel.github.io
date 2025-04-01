@@ -50,28 +50,17 @@
       box-sizing: border-box;
     }
 
-
-
-    .weather-box {
-  background-color: #ffffff;
-}
-
-    .schoolferry-box {
-      background-color: rgba(241, 220, 252, 1);
+    .departure-to-city {
+      background-color: rgba(255, 200, 220, 0.8);
     }
 
-.ship-box {
-  background-color: rgba(230, 241, 224, 0.9);
-}
+    .departure-to-island {
+      background-color: rgba(200, 230, 200, 0.8);
+    }
 
-.bus-box {
-  background-color: rgba(252, 237, 213, 0.9);
-}
-
-.metro-box {
-  background-color: rgba(247, 207, 207, 0.9);
-}
-
+    .schoolferry-box {
+      background-color: #e6ccff;
+    }
 
     .big {
       font-weight: bold;
@@ -218,41 +207,22 @@ function updateSchoolFerryContent() {
 
 
     const widgets = [
-      { id: 'weather', title: 'Vädret på Tranholmen', isWeather: true , bg: 'weather-box'},
-      { id: 'farja', title: 'Färja 80 Tranholmen', siteId: 961, mode: 'SHIP', line: '80', dir: 1, bg: 'ship-box'},
-      { id: 'ropsten', title: 'Färja 80 Ropsten', siteId: 9220, mode: 'SHIP', line: '80', dir: 1, bg: 'ship-box' },
-      { id: 'ekudden', title: 'Färja 80 Ekudden', siteId: 962, mode: 'SHIP', line: '80', dir: 1, bg: 'ship-box'},
-      { id: 'buss', title: 'Buss 601 Svanholmsvägen', siteId: 2103, mode: 'BUS', line: '601', dir: 2, bg: 'bus-box' },
-       { id: 'ds', title: 'Buss 601 Danderyds sjukhus', siteId: 9201, mode: 'BUS', line: '601', dir: 1, bg: 'bus-box' },
-     { id: 'lektorsstigen', title: 'Buss 50 Lektorsstigen', siteId: 1180, mode: 'BUS', line: '50', dir: 2, bg: 'bus-box' },
-      { id: 'odenplan', title: 'Buss 50 Odenplan', siteId: 9117, mode: 'BUS', line: '50', dir: 1, bg: 'bus-box' },
-      { id: 'tropsten', title: 'T-bana 13 Ropsten', siteId: 9220, mode: 'METRO', line: '13', dir: 2, bg: 'metro-box' },
-      { id: 'tdanderyd', title: 'T-bana 14 Danderyds sjukhus', siteId: 9201, mode: 'METRO', line: '14', dir: 2, bg: 'metro-box' },
-      { id: 'schoolferry', title: 'Skolbåten', isSchoolFerry: true, bg: 'schoolferry-box' } 
+      { id: 'weather', title: 'Vädret på Tranholmen', isWeather: true },
+      { id: 'farja', title: 'Färja 80 Tranholmen', siteId: 961, mode: 'SHIP', line: '80', dir: 1, bg: 'departure-to-island'},
+      { id: 'buss', title: 'Buss 601 Svanholmsvägen', siteId: 2103, mode: 'BUS', line: '601', dir: 2, bg: 'departure-to-island' },
+      { id: 'lektorsstigen', title: 'Buss 50 Lektorsstigen', siteId: 1180, mode: 'BUS', line: '50', dir: 2, bg: 'departure-to-island' },
+      { id: 'ropsten', title: 'Färja 80 Ropsten', siteId: 9220, mode: 'SHIP', line: '80', dir: 1, bg: 'departure-to-city' },
+      { id: 'ekudden', title: 'Färja 80 Ekudden', siteId: 962, mode: 'SHIP', line: '80', dir: 1, bg: 'departure-to-city'},
+      { id: 'ds', title: 'Buss 601 Danderyds sjukhus', siteId: 9201, mode: 'BUS', line: '601', dir: 1, bg: 'departure-to-city' },
+      { id: 'odenplan', title: 'Buss 50 Odenplan', siteId: 9117, mode: 'BUS', line: '50', dir: 1, bg: 'departure-to-city' },
+      { id: 'schoolferry', title: 'Skolbåten', isSchoolFerry: true, bg: 'schoolferry-box' }
+
     ];
 
-    const defaultVisibleWidgets = [
-  'weather',
-  'farja',
-  'ropsten',
-  'buss',
-  'ds',
-  ''
-];
+    function loadPreferences() {
+      return JSON.parse(localStorage.getItem('visibleWidgets') || '{}');
+    }
 
-function loadPreferences() {
-  const stored = localStorage.getItem('visibleWidgets');
-  if (stored) {
-    return JSON.parse(stored);
-  }
-
-  // Skapa default-prefs om ingen data finns ännu
-  const prefs = {};
-  widgets.forEach(widget => {
-    prefs[widget.id] = defaultVisibleWidgets.includes(widget.id);
-  });
-  return prefs;
-}
     function savePreferences(prefs) {
       localStorage.setItem('visibleWidgets', JSON.stringify(prefs));
     }
@@ -406,7 +376,6 @@ function startAutoRefresh() {
   </script>
 </body>
 </html>
-
 
 
 
