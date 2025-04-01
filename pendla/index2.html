@@ -27,6 +27,14 @@
       box-sizing: border-box;
     }
 
+  #last-updated {
+  font-size: 0.75em;
+  color: #555;
+  text-align: center;
+  margin-top: -15px;
+}
+
+
     h2 {
       font-size: 1.2em;
       margin-top: 2px;
@@ -129,9 +137,7 @@
 <body onload="startAutoRefresh()">
 
   <div id="main-view"></div>
-
   <div id="config-view" class="hidden config-section"></div>
-
   <script>
 
     const schoolFerryConfig = {
@@ -316,6 +322,16 @@ function loadPreferences() {
       configLink.textContent = 'Inställningar';
       configLink.onclick = () => toggleConfig(true);
       container.appendChild(configLink);
+
+      // Lägg till/återskapa last-updated
+  const lastUpdated = document.createElement('div');
+  lastUpdated.id = 'last-updated';
+  //lastUpdated.style.fontSize = '0.75em';
+  //lastUpdated.style.color = '#555';
+  //lastUpdated.style.textAlign = 'center';
+  //lastUpdated.style.marginTop = '-10px';
+  lastUpdated.textContent = 'Senast uppdaterad: laddar...';
+  container.appendChild(lastUpdated);
     }
 
 
@@ -344,6 +360,13 @@ function updateSlWidgets() {
 function updateAllWidgets() {
   updateSlWidgets();         // SL-data
   updateSchoolFerryContent();  // Skolbåten
+
+    // Uppdatera "senast uppdaterad"-texten
+  const now = new Date();
+  const hh = now.getHours().toString().padStart(2, '0');
+  const mm = now.getMinutes().toString().padStart(2, '0');
+  document.getElementById('last-updated').textContent = `Senast uppdaterad: ${hh}:${mm}`;
+
 }
 
 function startAutoRefresh() {
