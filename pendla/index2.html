@@ -51,24 +51,25 @@
     }
 
 
-    .schoolferry-box {
-      background-color: #e6ccff;
-    }
 
     .weather-box {
   background-color: #ffffff;
 }
 
+    .schoolferry-box {
+      background-color: rgba(241, 220, 252, 1);
+    }
+
 .ship-box {
-  background-color: #d4ebd3;
+  background-color: rgba(230, 241, 224, 1);
 }
 
 .bus-box {
-  background-color: #fde4c3;
+  background-color: rgba(252, 237, 213, 1);
 }
 
 .metro-box {
-  background-color: #f7c9c9;
+  background-color: rgba(247, 207, 207, 1);
 }
 
 
@@ -219,14 +220,14 @@ function updateSchoolFerryContent() {
     const widgets = [
       { id: 'weather', title: 'Vädret på Tranholmen', isWeather: true , bg: 'weather-box'},
       { id: 'farja', title: 'Färja 80 Tranholmen', siteId: 961, mode: 'SHIP', line: '80', dir: 1, bg: 'ship-box'},
-      { id: 'buss', title: 'Buss 601 Svanholmsvägen', siteId: 2103, mode: 'BUS', line: '601', dir: 2, bg: 'bus-box' },
-      { id: 'lektorsstigen', title: 'Buss 50 Lektorsstigen', siteId: 1180, mode: 'BUS', line: '50', dir: 2, bg: 'bus-box' },
-      { id: 'tropsten', title: 'T-bana 13 Ropsten', siteId: 9220, mode: 'METRO', line: '13', dir: 2, bg: 'metro-box' },
-      { id: 'tdanderyd', title: 'T-bana 14 Danderyds sjukhus', siteId: 9201, mode: 'METRO', line: '14', dir: 2, bg: 'metro-box' },
       { id: 'ropsten', title: 'Färja 80 Ropsten', siteId: 9220, mode: 'SHIP', line: '80', dir: 1, bg: 'ship-box' },
       { id: 'ekudden', title: 'Färja 80 Ekudden', siteId: 962, mode: 'SHIP', line: '80', dir: 1, bg: 'ship-box'},
-      { id: 'ds', title: 'Buss 601 Danderyds sjukhus', siteId: 9201, mode: 'BUS', line: '601', dir: 1, bg: 'bus-box' },
+      { id: 'buss', title: 'Buss 601 Svanholmsvägen', siteId: 2103, mode: 'BUS', line: '601', dir: 2, bg: 'bus-box' },
+       { id: 'ds', title: 'Buss 601 Danderyds sjukhus', siteId: 9201, mode: 'BUS', line: '601', dir: 1, bg: 'bus-box' },
+     { id: 'lektorsstigen', title: 'Buss 50 Lektorsstigen', siteId: 1180, mode: 'BUS', line: '50', dir: 2, bg: 'bus-box' },
       { id: 'odenplan', title: 'Buss 50 Odenplan', siteId: 9117, mode: 'BUS', line: '50', dir: 1, bg: 'bus-box' },
+      { id: 'tropsten', title: 'T-bana 13 Ropsten', siteId: 9220, mode: 'METRO', line: '13', dir: 2, bg: 'metro-box' },
+      { id: 'tdanderyd', title: 'T-bana 14 Danderyds sjukhus', siteId: 9201, mode: 'METRO', line: '14', dir: 2, bg: 'metro-box' },
       { id: 'schoolferry', title: 'Skolbåten', isSchoolFerry: true, bg: 'schoolferry-box' } 
     ];
 
