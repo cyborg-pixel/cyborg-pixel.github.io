@@ -1,0 +1,1402 @@
+[
+    {
+        "title": "Fråga 1",
+        "text": "Vad är ljud?",
+        "type": "multiple",
+        "options": [
+            "Vibrationer i materia",
+            "Elektromagnetiska vågor",
+            "Ljuspartiklar",
+            "Tryck från solen",
+            "Energipulser i vakuum"
+        ],
+        "answer": "Vibrationer i materia",
+        "hint": "Ljud behöver ett medium att färdas i."
+    },
+    {
+        "title": "Fråga 2",
+        "text": "I vilket material går ljudet snabbast?",
+        "type": "multiple",
+        "options": [
+            "Stål",
+            "Luft",
+            "Vatten",
+            "Glas",
+            "Vakuum"
+        ],
+        "answer": "Stål",
+        "hint": "Ju tätare material, desto snabbare ljud."
+    },
+    {
+        "title": "Fråga 3",
+        "text": "Vad menas med förtätning och förtunning i en ljudvåg?",
+        "type": "multiple",
+        "options": [
+            "Tätare och glesare områden i luften",
+            "Ljusa och mörka områden",
+            "Höga och låga toner",
+            "Snabba och långsamma vågor",
+            "Tryck och mottryck"
+        ],
+        "answer": "Tätare och glesare områden i luften",
+        "hint": "Så sprids ljudvågor genom luften."
+    },
+    {
+        "title": "Fråga 4",
+        "text": "I vilket medium kan ljud inte spridas?",
+        "type": "multiple",
+        "options": [
+            "Vakuum",
+            "Vatten",
+            "Luft",
+            "Trä",
+            "Stål"
+        ],
+        "answer": "Vakuum",
+        "hint": "Ljud behöver partiklar att färdas mellan."
+    },
+    {
+        "title": "Fråga 5",
+        "text": "Vilken enhet används för frekvens?",
+        "type": "multiple",
+        "options": [
+            "Hertz",
+            "Decibel",
+            "Newton",
+            "Volt",
+            "Joule"
+        ],
+        "answer": "Hertz",
+        "hint": "Anger svängningar per sekund."
+    },
+    {
+        "title": "Fråga 6",
+        "text": "Vad menas med en hög ton?",
+        "type": "multiple",
+        "options": [
+            "En ton med hög frekvens",
+            "En ton med hög ljudstyrka",
+            "En lång våglängd",
+            "En mörk ton",
+            "En ton i basläge"
+        ],
+        "answer": "En ton med hög frekvens",
+        "hint": "Tonhöjd och frekvens hänger ihop."
+    },
+    {
+        "title": "Fråga 7",
+        "text": "Vad påverkar ljudets styrka?",
+        "type": "multiple",
+        "options": [
+            "Amplituden",
+            "Frekvensen",
+            "Wåglängden",
+            "Ljusmängden",
+            "Vakuumet"
+        ],
+        "answer": "Amplituden",
+        "hint": "Högre svängningar = starkare ljud."
+    },
+    {
+        "title": "Fråga 8",
+        "text": "Hur snabbt går ljud i luft vid 20 °C?",
+        "type": "multiple",
+        "options": [
+            "340 m/s",
+            "120 m/s",
+            "780 m/s",
+            "50 m/s",
+            "1000 m/s"
+        ],
+        "answer": "340 m/s",
+        "hint": "Ungefär som 1 km på 3 sekunder."
+    },
+    {
+        "title": "Fråga 9",
+        "text": "Vad är en våglängd?",
+        "type": "multiple",
+        "options": [
+            "Avståndet mellan två förtätningar",
+            "Antal vågor per sekund",
+            "Ljudstyrkan",
+            "Antal svängningar per minut",
+            "Trycket i vågen"
+        ],
+        "answer": "Avståndet mellan två förtätningar",
+        "hint": "Ju högre frekvens desto kortare våglängd."
+    },
+    {
+        "title": "Fråga 10",
+        "text": "Vad är ett eko?",
+        "type": "multiple",
+        "options": [
+            "Ljud som reflekteras tillbaka",
+            "Ljud som absorberas",
+            "En svag vibration",
+            "Ljusvåg",
+            "Ett ultraljud"
+        ],
+        "answer": "Ljud som reflekteras tillbaka",
+        "hint": "Kan höras i t.ex. berg eller stora salar."
+    },
+    {
+        "title": "Fråga 11",
+        "text": "Vad är infraljud?",
+        "type": "multiple",
+        "options": [
+            "Ljud under 20 Hz",
+            "Ljud över 20 000 Hz",
+            "Ljud mellan 20–20 000 Hz",
+            "Tyst ljud",
+            "Reflekterat ljud"
+        ],
+        "answer": "Ljud under 20 Hz",
+        "hint": "Människan kan inte höra det, men elefanter kan."
+    },
+    {
+        "title": "Fråga 12",
+        "text": "Vad är ultraljud?",
+        "type": "multiple",
+        "options": [
+            "Ljud över 20 000 Hz",
+            "Ljud under 20 Hz",
+            "Extra starkt ljud",
+            "Ett eko",
+            "Svagt ljud"
+        ],
+        "answer": "Ljud över 20 000 Hz",
+        "hint": "Används i medicin och av fladdermöss."
+    },
+    {
+        "title": "Fråga 13",
+        "text": "Vad är frekvens?",
+        "type": "multiple",
+        "options": [
+            "Antal svängningar per sekund",
+            "Styrkan i ljudet",
+            "Trycket i vågen",
+            "Volymen",
+            "Avståndet mellan vågor"
+        ],
+        "answer": "Antal svängningar per sekund",
+        "hint": "Enhet: Hertz (Hz)."
+    },
+    {
+        "title": "Fråga 14",
+        "text": "Vilket frekvensområde hör en människa normalt?",
+        "type": "multiple",
+        "options": [
+            "20 Hz – 20 000 Hz",
+            "100 Hz – 1000 Hz",
+            "0 Hz – 100 Hz",
+            "10 000 Hz – 100 000 Hz",
+            "50 Hz – 200 Hz"
+        ],
+        "answer": "20 Hz – 20 000 Hz",
+        "hint": "Kallas hörbart ljud."
+    },
+    {
+        "title": "Fråga 15",
+        "text": "Vad används ekolod till?",
+        "type": "multiple",
+        "options": [
+            "Mäta avstånd i vatten",
+            "Öka volym",
+            "Minska buller",
+            "Fiska",
+            "Filma under vatten"
+        ],
+        "answer": "Mäta avstånd i vatten",
+        "hint": "T.ex. för att hitta fisk eller botten."
+    },
+    {
+        "title": "Fråga 16",
+        "text": "Hur räknar man ut ljudets färdväg med eko?",
+        "type": "multiple",
+        "options": [
+            "Sträcka = hastighet × tid / 2",
+            "Sträcka = hastighet × tid",
+            "Sträcka = tid / hastighet",
+            "Sträcka = ljudstyrka × tid",
+            "Sträcka = våglängd × frekvens"
+        ],
+        "answer": "Sträcka = hastighet × tid / 2",
+        "hint": "Dela på två eftersom ljudet går fram och tillbaka."
+    },
+    {
+        "title": "Fråga 17",
+        "text": "Vad är amplitud i ljudsammanhang?",
+        "type": "multiple",
+        "options": [
+            "Svängningens storlek",
+            "Våglängden",
+            "Ljudets frekvens",
+            "Ljudets färdväg",
+            "Trycket i vågen"
+        ],
+        "answer": "Svängningens storlek",
+        "hint": "Avgör hur starkt ljudet är."
+    },
+    {
+        "title": "Fråga 18",
+        "text": "Vad betyder Hz (hertz)?",
+        "type": "multiple",
+        "options": [
+            "Svängningar per sekund",
+            "Ljudstyrka",
+            "Watt per meter",
+            "Ljusfrekvens",
+            "Volymen i decibel"
+        ],
+        "answer": "Svängningar per sekund",
+        "hint": "En frekvensenhet."
+    },
+    {
+        "title": "Fråga 19",
+        "text": "Vad menas med normalton inom musiken?",
+        "type": "multiple",
+        "options": [
+            "440 Hz",
+            "1000 Hz",
+            "50 Hz",
+            "20 Hz",
+            "880 Hz"
+        ],
+        "answer": "440 Hz",
+        "hint": "Används för att stämma instrument – tonen A."
+    },
+    {
+        "title": "Fråga 20",
+        "text": "Vad är resonans?",
+        "type": "multiple",
+        "options": [
+            "När ett föremål vibrerar i takt med ljud",
+            "När ljud dämpas",
+            "När ljudvågor slutar svänga",
+            "När ljud reflekteras",
+            "När luft sugs in i hålrum"
+        ],
+        "answer": "När ett föremål vibrerar i takt med ljud",
+        "hint": "Ger förstärkt ljud, t.ex. i gitarrlåda."
+    },
+    {
+        "title": "Fråga 21",
+        "text": "Vad är en oktav?",
+        "type": "multiple",
+        "options": [
+            "En fördubbling av frekvens",
+            "En halvering av våglängd",
+            "En decibelökning",
+            "En musikslinga",
+            "En lång ton"
+        ],
+        "answer": "En fördubbling av frekvens",
+        "hint": "T.ex. 440 Hz och 880 Hz."
+    },
+    {
+        "title": "Fråga 22",
+        "text": "Vad är skillnaden mellan stark och hög ton?",
+        "type": "multiple",
+        "options": [
+            "Stark = volym, Hög = frekvens",
+            "Stark = frekvens, Hög = volym",
+            "De är samma",
+            "Stark = lång ton",
+            "Hög = bred våg"
+        ],
+        "answer": "Stark = volym, Hög = frekvens",
+        "hint": "Det är olika aspekter av ljud."
+    },
+    {
+        "title": "Fråga 23",
+        "text": "Vad är ett exempel på ett akustiskt instrument?",
+        "type": "multiple",
+        "options": [
+            "Gitarr",
+            "Elgitarr",
+            "Synt",
+            "Högtalare",
+            "Mobiltelefon"
+        ],
+        "answer": "Gitarr",
+        "hint": "Ger ljud utan el."
+    },
+    {
+        "title": "Fråga 24",
+        "text": "Vad gör en resonanslåda?",
+        "type": "multiple",
+        "options": [
+            "Förstärker ljudet",
+            "Sänker tonen",
+            "Skapar ultraljud",
+            "Avbryter svängningar",
+            "Hindrar vibration"
+        ],
+        "answer": "Förstärker ljudet",
+        "hint": "Finns i många akustiska instrument."
+    },
+    {
+        "title": "Fråga 25",
+        "text": "Hur uppfattas en ton med låg frekvens?",
+        "type": "multiple",
+        "options": [
+            "Som mörk",
+            "Som ljus",
+            "Som hög",
+            "Som svag",
+            "Som skarp"
+        ],
+        "answer": "Som mörk",
+        "hint": "Ju färre svängningar per sekund, desto lägre ton."
+    },
+    {
+        "title": "Fråga 26",
+        "text": "Vilken enhet används för att mäta ljudnivå?",
+        "type": "multiple",
+        "options": [
+            "Decibel",
+            "Hertz",
+            "Joule",
+            "Volt",
+            "Ampere"
+        ],
+        "answer": "Decibel",
+        "hint": "Förkortas dB."
+    },
+    {
+        "title": "Fråga 27",
+        "text": "Vad är tinnitus?",
+        "type": "multiple",
+        "options": [
+            "Ett ständigt sus eller pip i öronen",
+            "Ett brutet trumhinna",
+            "En infektion i örat",
+            "En ljudreflektion",
+            "En ton på 1000 Hz"
+        ],
+        "answer": "Ett ständigt sus eller pip i öronen",
+        "hint": "Kan orsakas av för höga ljud."
+    },
+    {
+        "title": "Fråga 28",
+        "text": "Vad kan skydda hörseln vid höga ljudnivåer?",
+        "type": "multiple",
+        "options": [
+            "Hörselskydd",
+            "Bomull",
+            "Tunna mössor",
+            "Hörlurar med hög volym",
+            "Att hålla för ögonen"
+        ],
+        "answer": "Hörselskydd",
+        "hint": "Används t.ex. på byggarbetsplatser."
+    },
+    {
+        "title": "Fråga 29",
+        "text": "Vad är buller?",
+        "type": "multiple",
+        "options": [
+            "Oönskat ljud",
+            "Ultraljud",
+            "Tystnad",
+            "Eko",
+            "Vågljud"
+        ],
+        "answer": "Oönskat ljud",
+        "hint": "Kan påverka hälsan negativt."
+    },
+    {
+        "title": "Fråga 30",
+        "text": "Vad innebär ljudisolering?",
+        "type": "multiple",
+        "options": [
+            "Hindra ljud att passera",
+            "Förstärka ljud",
+            "Öka buller",
+            "Skapa eko",
+            "Göra ljud ljusare"
+        ],
+        "answer": "Hindra ljud att passera",
+        "hint": "Används t.ex. i väggar och hörselkåpor."
+    },
+    {
+        "title": "Fråga 31",
+        "text": "Vad används ultraljud till inom medicin?",
+        "type": "multiple",
+        "options": [
+            "Undersöka foster och organ",
+            "Mäta hörsel",
+            "Behandla förkylning",
+            "Förstärka tal",
+            "Göra eko i kroppen"
+        ],
+        "answer": "Undersöka foster och organ",
+        "hint": "En vanlig metod utan strålning."
+    },
+    {
+        "title": "Fråga 32",
+        "text": "Vad visar dopplereffekten med ljud?",
+        "type": "multiple",
+        "options": [
+            "Att ljudets frekvens förändras beroende på rörelse",
+            "Att ljud alltid går i samma hastighet",
+            "Att ljud blir starkare på natten",
+            "Att ljus påverkar ljud",
+            "Att ljud inte sprids i vatten"
+        ],
+        "answer": "Att ljudets frekvens förändras beroende på rörelse",
+        "hint": "Exempel: sirener från utryckningsfordon."
+    },
+    {
+        "title": "Fråga 33",
+        "text": "Vad är ljudnivån vid smärtgränsen för örat?",
+        "type": "multiple",
+        "options": [
+            "Ca 120–130 dB",
+            "Ca 60 dB",
+            "Ca 20 dB",
+            "Ca 200 dB",
+            "Ca 10 dB"
+        ],
+        "answer": "Ca 120–130 dB",
+        "hint": "Så starkt att det gör ont."
+    },
+    {
+        "title": "Fråga 34",
+        "text": "Vad är en ljudkälla?",
+        "type": "multiple",
+        "options": [
+            "Ett föremål som vibrerar och skapar ljud",
+            "En högtalare",
+            "Ett rum med eko",
+            "Luft som rör sig",
+            "Ett filter"
+        ],
+        "answer": "Ett föremål som vibrerar och skapar ljud",
+        "hint": "Exempel: stämband, gitarrsträng."
+    },
+    {
+        "title": "Fråga 35",
+        "text": "Vad händer med ljudet om avståndet till ljudkällan ökar?",
+        "type": "multiple",
+        "options": [
+            "Det blir svagare",
+            "Det blir starkare",
+            "Det blir mörkare",
+            "Det ökar i frekvens",
+            "Det studsar tillbaka"
+        ],
+        "answer": "Det blir svagare",
+        "hint": "Ljud sprids åt alla håll."
+    },
+    {
+        "title": "Fråga 36",
+        "text": "Vad händer med tonen om strängen på ett instrument blir kortare?",
+        "type": "multiple",
+        "options": [
+            "Den blir ljusare",
+            "Den blir mörkare",
+            "Den blir starkare",
+            "Den försvinner",
+            "Den får eko"
+        ],
+        "answer": "Den blir ljusare",
+        "hint": "Kortare strängar vibrerar snabbare."
+    },
+    {
+        "title": "Fråga 37",
+        "text": "Hur påverkar material ljudets hastighet?",
+        "type": "multiple",
+        "options": [
+            "Ju tätare material, desto snabbare ljud",
+            "Ju tätare material, desto långsammare ljud",
+            "Det påverkar inte",
+            "Ljud går snabbast i gaser",
+            "Ljud går långsammast i metaller"
+        ],
+        "answer": "Ju tätare material, desto snabbare ljud",
+        "hint": "Exempel: ljud går snabbare i stål än i luft."
+    },
+    {
+        "title": "Fråga 38",
+        "text": "Vad är en ljudvåg?",
+        "type": "multiple",
+        "options": [
+            "En tryckvåg i ett medium",
+            "En ljusreflektion",
+            "En vattenström",
+            "En elektromagnetisk våg",
+            "En visuell representation av ljud"
+        ],
+        "answer": "En tryckvåg i ett medium",
+        "hint": "Vågrörelse som sprider ljud i luft, vatten eller fast material."
+    },
+    {
+        "title": "Fråga 39",
+        "text": "Vad kallas det när ljud förstärks i ett rum utan ljudisolering?",
+        "type": "multiple",
+        "options": [
+            "Efterklang",
+            "Eko",
+            "Dämpning",
+            "Reflektion",
+            "Ultraljud"
+        ],
+        "answer": "Efterklang",
+        "hint": "Ett slags ljudförlängning som hörs inomhus."
+    },
+    {
+        "title": "Fråga 40",
+        "text": "Vad händer med ljud i vakuum?",
+        "type": "multiple",
+        "options": [
+            "Det kan inte spridas",
+            "Det förstärks",
+            "Det blir ultraljud",
+            "Det går snabbare",
+            "Det reflekteras"
+        ],
+        "answer": "Det kan inte spridas",
+        "hint": "Ljud behöver materia att färdas genom."
+    },
+    {
+        "title": "Fråga 41",
+        "text": "Vilken del av örat tar emot ljudvågor först?",
+        "type": "multiple",
+        "options": [
+            "Ytterörat",
+            "Innerörat",
+            "Hörselbenen",
+            "Hörselnerven",
+            "Snäckan"
+        ],
+        "answer": "Ytterörat",
+        "hint": "Fångar in ljudet och leder det vidare."
+    },
+    {
+        "title": "Fråga 42",
+        "text": "Vad gör trumhinnan?",
+        "type": "multiple",
+        "options": [
+            "Vibrerar när ljudvågor når den",
+            "Skickar signaler till hjärnan",
+            "Producerar öronvax",
+            "Skapar ljud",
+            "Filtrerar ljud"
+        ],
+        "answer": "Vibrerar när ljudvågor når den",
+        "hint": "Första stationen för mekaniska svängningar."
+    },
+    {
+        "title": "Fråga 43",
+        "text": "Vad gör hörselnerven?",
+        "type": "multiple",
+        "options": [
+            "Skickar ljudsignaler till hjärnan",
+            "Filtrerar ljud",
+            "Vibrerar med ljud",
+            "Producerar ljud",
+            "Stänger av ljud"
+        ],
+        "answer": "Skickar ljudsignaler till hjärnan",
+        "hint": "Omvandlar vibrationer till elektriska impulser."
+    },
+    {
+        "title": "Fråga 44",
+        "text": "Vilken frekvens används oftast i mobiltelefonsignaler?",
+        "type": "multiple",
+        "options": [
+            "Flera tusen MHz",
+            "20 Hz",
+            "440 Hz",
+            "60 dB",
+            "10 Hz"
+        ],
+        "answer": "Flera tusen MHz",
+        "hint": "Det är radiovågor, ej hörbart ljud."
+    },
+    {
+        "title": "Fråga 45",
+        "text": "Vad händer med ljudet om amplituden minskar?",
+        "type": "multiple",
+        "options": [
+            "Ljudet blir svagare",
+            "Ljudet blir mörkare",
+            "Ljudet blir högre",
+            "Frekvensen ökar",
+            "Det blir eko"
+        ],
+        "answer": "Ljudet blir svagare",
+        "hint": "Amplituden styr ljudstyrkan."
+    },
+    {
+        "title": "Fråga 46",
+        "text": "Vilken påverkan har buller på hälsan?",
+        "type": "multiple",
+        "options": [
+            "Stress, hörselskador, sömnsvårigheter",
+            "Bättre minne",
+            "Förbättrad hörsel",
+            "Starkare skelett",
+            "Bättre balans"
+        ],
+        "answer": "Stress, hörselskador, sömnsvårigheter",
+        "hint": "En arbetsmiljöfaktor."
+    },
+    {
+        "title": "Fråga 47",
+        "text": "Vad betyder det att ett ljud är harmoniskt?",
+        "type": "multiple",
+        "options": [
+            "Regelbunden svängning med klar ton",
+            "Starkt ljud",
+            "Lågt ljud",
+            "Buller",
+            "Flera ljud samtidigt"
+        ],
+        "answer": "Regelbunden svängning med klar ton",
+        "hint": "Typiskt för musik."
+    },
+    {
+        "title": "Fråga 48",
+        "text": "Vad är övertoner?",
+        "type": "multiple",
+        "options": [
+            "Högre frekvenser som ljuder samtidigt med grundtonen",
+            "Basljud",
+            "Tystare ljud",
+            "Ekoljud",
+            "Störande ljud"
+        ],
+        "answer": "Högre frekvenser som ljuder samtidigt med grundtonen",
+        "hint": "De påverkar klangfärgen."
+    },
+    {
+        "title": "Fråga 49",
+        "text": "Vad är en ljudabsorbent?",
+        "type": "multiple",
+        "options": [
+            "Material som dämpar ljud",
+            "Material som förstärker ljud",
+            "En högtalare",
+            "Ett instrument",
+            "En mikrofon"
+        ],
+        "answer": "Material som dämpar ljud",
+        "hint": "Finns t.ex. i ljudstudior."
+    },
+    {
+        "title": "Fråga 50",
+        "text": "Hur påverkas ljud av temperatur?",
+        "type": "multiple",
+        "options": [
+            "Högre temperatur = snabbare ljud",
+            "Lägre temperatur = snabbare ljud",
+            "Temperatur påverkar inte",
+            "Ljud stoppas vid kyla",
+            "Ljud förstärks i kyla"
+        ],
+        "answer": "Högre temperatur = snabbare ljud",
+        "hint": "Beror på molekylernas rörelse."
+    },
+    {
+        "title": "Fråga 51",
+        "text": "Vad upptäckte Alexander Graham Bell?",
+        "type": "multiple",
+        "options": [
+            "Telefonen",
+            "Ljudisolering",
+            "Ultraljud",
+            "Ekolod",
+            "Dopplereffekt"
+        ],
+        "answer": "Telefonen",
+        "hint": "En revolutionerande uppfinning för kommunikation."
+    },
+    {
+        "title": "Fråga 52",
+        "text": "Vilket svenskt företag utvecklade tidiga telefoner?",
+        "type": "multiple",
+        "options": [
+            "L. M. Ericsson",
+            "Volvo",
+            "ABB",
+            "IKEA",
+            "Skanska"
+        ],
+        "answer": "L. M. Ericsson",
+        "hint": "Startade på 1800-talet i Stockholm."
+    },
+    {
+        "title": "Fråga 53",
+        "text": "Hur kan man minska buller i klassrum?",
+        "type": "multiple",
+        "options": [
+            "Använda ljudabsorberande material",
+            "Öppna alla fönster",
+            "Prata högre",
+            "Ta bort möbler",
+            "Sänka temperaturen"
+        ],
+        "answer": "Använda ljudabsorberande material",
+        "hint": "T.ex. mattor, gardiner, akustikplattor."
+    },
+    {
+        "title": "Fråga 54",
+        "text": "Varför hörs en ambulanssiren annorlunda när den passerar?",
+        "type": "multiple",
+        "options": [
+            "På grund av dopplereffekten",
+            "För att sirenen byter ton",
+            "För att ljudet försvagas",
+            "För att luften är kall",
+            "För att bilen bromsar"
+        ],
+        "answer": "På grund av dopplereffekten",
+        "hint": "Frekvensen upplevs olika beroende på rörelseriktning."
+    },
+    {
+        "title": "Fråga 55",
+        "text": "Vilket hjälpmedel används för att analysera ljudets frekvenser i musikproduktion?",
+        "type": "multiple",
+        "options": [
+            "Spektrumanalysator",
+            "Ekolod",
+            "Doppler",
+            "Multimeter",
+            "Oscilloskop"
+        ],
+        "answer": "Spektrumanalysator",
+        "hint": "Den visar ljudets frekvenser grafiskt."
+    },
+    {
+        "title": "Fråga 56",
+        "text": "Vad är en mikrofon?",
+        "type": "multiple",
+        "options": [
+            "En apparat som omvandlar ljud till elektriska signaler",
+            "En högtalare",
+            "En ljuddämpare",
+            "Ett filter",
+            "Ett mätinstrument för tryck"
+        ],
+        "answer": "En apparat som omvandlar ljud till elektriska signaler",
+        "hint": "Används i inspelning och kommunikation."
+    },
+    {
+        "title": "Fråga 57",
+        "text": "Vilket ljud kan upplevas störande även vid låg ljudnivå?",
+        "type": "multiple",
+        "options": [
+            "Oregelbundet buller",
+            "Ultraljud",
+            "Ljus brus",
+            "Vitt brus",
+            "Toner i harmoni"
+        ],
+        "answer": "Oregelbundet buller",
+        "hint": "Det är mer störande än jämnt ljud."
+    },
+    {
+        "title": "Fråga 58",
+        "text": "Vilket djur använder ultraljud för att navigera?",
+        "type": "multiple",
+        "options": [
+            "Fladdermus",
+            "Häst",
+            "Ko",
+            "Människa",
+            "Fisk"
+        ],
+        "answer": "Fladdermus",
+        "hint": "De skickar ut och tolkar eko."
+    },
+    {
+        "title": "Fråga 59",
+        "text": "Vad gör ett ljud tydligare i en konsertsal?",
+        "type": "multiple",
+        "options": [
+            "God akustik",
+            "Släta betongväggar",
+            "Öppna fönster",
+            "Ljudisolering",
+            "Låg temperatur"
+        ],
+        "answer": "God akustik",
+        "hint": "Rummets utformning påverkar ljudet."
+    },
+    {
+        "title": "Fråga 60",
+        "text": "Vilket ljud är farligast för hörseln?",
+        "type": "multiple",
+        "options": [
+            "Starkt, långvarigt ljud",
+            "Kort ljud på låg volym",
+            "Ett eko",
+            "Ljud under 20 Hz",
+            "En viskning"
+        ],
+        "answer": "Starkt, långvarigt ljud",
+        "hint": "Kan orsaka permanent hörselskada."
+    },
+    {
+        "title": "Fråga 61",
+        "text": "Varför är det svårt att höra under vatten?",
+        "type": "multiple",
+        "options": [
+            "Ljud färdas annorlunda i vatten än i luft",
+            "Ljud stannar i örat",
+            "Vatten förstör hörseln",
+            "Öronen blir blöta",
+            "Tryck förändrar ljudvågorna"
+        ],
+        "answer": "Ljud färdas annorlunda i vatten än i luft",
+        "hint": "Ljud når trumhinnan sämre i vatten."
+    },
+    {
+        "title": "Fråga 62",
+        "text": "Vilken åtgärd minskar buller från trafik?",
+        "type": "multiple",
+        "options": [
+            "Bullervallar",
+            "Ökad hastighet",
+            "Hårdare däck",
+            "Högre fordon",
+            "Mer asfalt"
+        ],
+        "answer": "Bullervallar",
+        "hint": "De blockerar ljudets väg."
+    },
+    {
+        "title": "Fråga 63",
+        "text": "Hur påverkar elbilar ljudmiljön?",
+        "type": "multiple",
+        "options": [
+            "De är tystare och ger mindre buller",
+            "De bullrar mer",
+            "De skriker",
+            "De förstärker trafikljud",
+            "De producerar infraljud"
+        ],
+        "answer": "De är tystare och ger mindre buller",
+        "hint": "Därför läggs ibland konstgjorda ljud till."
+    },
+    {
+        "title": "Fråga 64",
+        "text": "Vad innebär det att ljud reflekteras?",
+        "type": "multiple",
+        "options": [
+            "Studsar tillbaka mot yta",
+            "Försvinner",
+            "Stärks",
+            "Förlängs",
+            "Dämpas"
+        ],
+        "answer": "Studsar tillbaka mot yta",
+        "hint": "Ett exempel är eko."
+    },
+    {
+        "title": "Fråga 65",
+        "text": "Vilken typ av ljud uppstår i ljudföroreningar?",
+        "type": "multiple",
+        "options": [
+            "Oönskade och störande ljud",
+            "Harmoniska ljud",
+            "Toner",
+            "Ultraljud",
+            "Infraljud"
+        ],
+        "answer": "Oönskade och störande ljud",
+        "hint": "Buller är en del av ljudföroreningar."
+    },
+    {
+        "title": "Fråga 66",
+        "text": "Vad innebär ljudets interferens?",
+        "type": "multiple",
+        "options": [
+            "Två ljudvågor påverkar varandra",
+            "Ett ljud förstärks automatiskt",
+            "Ljud byter riktning",
+            "Ljud försvinner vid reflektion",
+            "Ljud sprids i rymden"
+        ],
+        "answer": "Två ljudvågor påverkar varandra",
+        "hint": "De kan förstärkas eller ta ut varandra."
+    },
+    {
+        "title": "Fråga 67",
+        "text": "Hur fungerar brusreducerande hörlurar?",
+        "type": "multiple",
+        "options": [
+            "De skapar motljud som släcker bullret",
+            "De dämpar ljud mekaniskt",
+            "De förstärker ljud utifrån",
+            "De ökar basen",
+            "De spelar bara musik"
+        ],
+        "answer": "De skapar motljud som släcker bullret",
+        "hint": "Det kallas destruktiv interferens."
+    },
+    {
+        "title": "Fråga 68",
+        "text": "Vad är en klangfärg?",
+        "type": "multiple",
+        "options": [
+            "Ett ljuds unika tonkvalitet",
+            "Ljudets styrka",
+            "Våglängdens färg",
+            "Ett ljuds hastighet",
+            "Vibrationens form"
+        ],
+        "answer": "Ett ljuds unika tonkvalitet",
+        "hint": "Gör att vi kan skilja på röster eller instrument."
+    },
+    {
+        "title": "Fråga 69",
+        "text": "Vad är skillnaden mellan analogt och digitalt ljud?",
+        "type": "multiple",
+        "options": [
+            "Digitalt ljud omvandlas till ettor och nollor",
+            "Analogt ljud är i färg",
+            "Digitalt ljud hörs bättre",
+            "Analogt ljud är tystare",
+            "Digitalt ljud går långsamt"
+        ],
+        "answer": "Digitalt ljud omvandlas till ettor och nollor",
+        "hint": "Digitalt kan lagras i datorer."
+    },
+    {
+        "title": "Fråga 70",
+        "text": "Hur påverkar rumsstorlek ljudets efterklang?",
+        "type": "multiple",
+        "options": [
+            "Större rum ger längre efterklang",
+            "Större rum dämpar ljudet",
+            "Mindre rum ger mer buller",
+            "Liten yta förstärker bas",
+            "Ingen påverkan"
+        ],
+        "answer": "Större rum ger längre efterklang",
+        "hint": "Ljud studsar längre i stora utrymmen."
+    },
+    {
+        "title": "Fråga 71",
+        "text": "Vilken enhet mäter ljudets energi?",
+        "type": "multiple",
+        "options": [
+            "Joule",
+            "Hertz",
+            "Decibel",
+            "Watt",
+            "Celsius"
+        ],
+        "answer": "Joule",
+        "hint": "Samma som för annan energi."
+    },
+    {
+        "title": "Fråga 72",
+        "text": "Hur kan du skydda din hörsel i vardagen?",
+        "type": "multiple",
+        "options": [
+            "Sänka volymen i hörlurar",
+            "Stå nära högtalare",
+            "Öka basen",
+            "Sova med öronproppar varje natt",
+            "Använda metallskal"
+        ],
+        "answer": "Sänka volymen i hörlurar",
+        "hint": "Regel: max 60 % volym, max 60 min åt gången."
+    },
+    {
+        "title": "Fråga 73",
+        "text": "Vad är syftet med ljuddesign i film?",
+        "type": "multiple",
+        "options": [
+            "Skapa stämning och förtydliga handling",
+            "Sänka volymen",
+            "Göra publiken tyst",
+            "Blockera visuella effekter",
+            "Skapa ljus"
+        ],
+        "answer": "Skapa stämning och förtydliga handling",
+        "hint": "Musik, ljudeffekter och röster samverkar."
+    },
+    {
+        "title": "Fråga 74",
+        "text": "Hur många svängningar gör en 1000 Hz ton på 1 sekund?",
+        "type": "multiple",
+        "options": [
+            "1000 svängningar",
+            "100 svängningar",
+            "10 svängningar",
+            "500 svängningar",
+            "2000 svängningar"
+        ],
+        "answer": "1000 svängningar",
+        "hint": "Hertz = svängningar per sekund."
+    },
+    {
+        "title": "Fråga 75",
+        "text": "Hur lång sträcka hinner ljudet gå på 2 sekunder i luft (340 m/s)?",
+        "type": "multiple",
+        "options": [
+            "680 meter",
+            "340 meter",
+            "170 meter",
+            "1000 meter",
+            "400 meter"
+        ],
+        "answer": "680 meter",
+        "hint": "Sträcka = hastighet × tid."
+    },
+    {
+        "title": "Fråga 76",
+        "text": "Vad är samplingsfrekvens i digitalt ljud?",
+        "type": "multiple",
+        "options": [
+            "Hur ofta ljudet mäts per sekund",
+            "Ljudets frekvens i Hertz",
+            "Ljudets amplitud",
+            "Ljudets styrka",
+            "Filens längd"
+        ],
+        "answer": "Hur ofta ljudet mäts per sekund",
+        "hint": "Vanligt värde: 44 100 Hz (CD-kvalitet)."
+    },
+    {
+        "title": "Fråga 77",
+        "text": "Vilken formel beskriver ljudets hastighet?",
+        "type": "multiple",
+        "options": [
+            "hastighet = sträcka / tid",
+            "hastighet = kraft × massa",
+            "frekvens × våglängd",
+            "effekt = energi / tid",
+            "ljudstyrka = tryck × yta"
+        ],
+        "answer": "hastighet = sträcka / tid",
+        "hint": "Grundläggande rörelseformel."
+    },
+    {
+        "title": "Fråga 78",
+        "text": "Hur påverkar frekvensen ljudets tonhöjd?",
+        "type": "multiple",
+        "options": [
+            "Högre frekvens ger högre ton",
+            "Lägre frekvens ger högre ton",
+            "Det påverkar inte",
+            "Bara amplituden styr tonen",
+            "Tonhöjd beror på tryck"
+        ],
+        "answer": "Högre frekvens ger högre ton",
+        "hint": "Frekvens och tonhöjd hänger ihop."
+    },
+    {
+        "title": "Fråga 79",
+        "text": "Vad är ett exempel på destruktiv interferens?",
+        "type": "multiple",
+        "options": [
+            "Två ljud släcker ut varandra",
+            "Ljud studsar tillbaka",
+            "Frekvenser ökar",
+            "Volymen förstärks",
+            "Eko hörs"
+        ],
+        "answer": "Två ljud släcker ut varandra",
+        "hint": "Används i brusreducering."
+    },
+    {
+        "title": "Fråga 80",
+        "text": "Vad menas med ljudets spektrum?",
+        "type": "multiple",
+        "options": [
+            "De frekvenser ett ljud innehåller",
+            "Ljusets påverkan på ljud",
+            "Ljudets reflektion",
+            "Ljudvågens hastighet",
+            "Tonens längd"
+        ],
+        "answer": "De frekvenser ett ljud innehåller",
+        "hint": "Påverkar klang och kvalitet."
+    },
+    {
+        "title": "Fråga 81",
+        "text": "Hur kan man avgöra om ett ljud är ultraljud?",
+        "type": "multiple",
+        "options": [
+            "Det har frekvens över 20 000 Hz",
+            "Det låter som eko",
+            "Det är mycket svagt",
+            "Det syns på spektrum",
+            "Det hörs tydligt"
+        ],
+        "answer": "Det har frekvens över 20 000 Hz",
+        "hint": "Ligger utanför mänskligt hörselområde."
+    },
+    {
+        "title": "Fråga 82",
+        "text": "Vilken fysisk storhet mäts i decibel?",
+        "type": "multiple",
+        "options": [
+            "Ljudnivå",
+            "Frekvens",
+            "Tonhöjd",
+            "Amplitud",
+            "Tryck"
+        ],
+        "answer": "Ljudnivå",
+        "hint": "Logaritmisk enhet."
+    },
+    {
+        "title": "Fråga 83",
+        "text": "Hur kan man mäta ljudets hastighet i klassrummet?",
+        "type": "multiple",
+        "options": [
+            "Klapptest mot avstånd och tid",
+            "Använda våg och fjäder",
+            "Mäta med voltmeter",
+            "Ljusmätare",
+            "Stoppa ljudet och mäta kraften"
+        ],
+        "answer": "Klapptest mot avstånd och tid",
+        "hint": "Ljudet kan jämföras med reaktion."
+    },
+    {
+        "title": "Fråga 84",
+        "text": "Hur påverkas ljudet av en hård yta?",
+        "type": "multiple",
+        "options": [
+            "Reflekteras",
+            "Absorberas",
+            "Släcks ut",
+            "Förvrängs",
+            "Försvinner"
+        ],
+        "answer": "Reflekteras",
+        "hint": "Tänk på eko i badrum."
+    },
+    {
+        "title": "Fråga 85",
+        "text": "Vad är ljudets vågtyp?",
+        "type": "multiple",
+        "options": [
+            "Longitudinell våg",
+            "Transversell våg",
+            "Elektromagnetisk våg",
+            "Snedvåg",
+            "Partikelström"
+        ],
+        "answer": "Longitudinell våg",
+        "hint": "Vågen går i samma riktning som svängningen."
+    },
+    {
+        "title": "Fråga 86",
+        "text": "Hur kan man dämpa efterklang i en aula?",
+        "type": "multiple",
+        "options": [
+            "Använda ljudabsorberande material",
+            "Placera hårda väggar",
+            "Stänga av högtalare",
+            "Sänka taket",
+            "Minska våglängden"
+        ],
+        "answer": "Använda ljudabsorberande material",
+        "hint": "T.ex. gardiner, akustikpaneler."
+    },
+    {
+        "title": "Fråga 87",
+        "text": "Hur uppfattas en ton med både grundton och många övertoner?",
+        "type": "multiple",
+        "options": [
+            "Som rik och fyllig",
+            "Som bullrig",
+            "Som tyst",
+            "Som mörk",
+            "Som monoton"
+        ],
+        "answer": "Som rik och fyllig",
+        "hint": "Övertonerna ger klangfärg."
+    },
+    {
+        "title": "Fråga 88",
+        "text": "Vad påverkar att en persons röst känns unik?",
+        "type": "multiple",
+        "options": [
+            "Klangfärg och övertoner",
+            "Hörsel",
+            "Eko",
+            "Hastigheten",
+            "Antalet decibel"
+        ],
+        "answer": "Klangfärg och övertoner",
+        "hint": "Det är mer än bara frekvens."
+    },
+    {
+        "title": "Fråga 89",
+        "text": "Hur kan man visa att ljud är en vågrörelse?",
+        "type": "multiple",
+        "options": [
+            "Studera mönster i en högtalare eller oscilloskop",
+            "Mäta vikt",
+            "Mäta temperatur",
+            "Titta på färger",
+            "Titta genom glas"
+        ],
+        "answer": "Studera mönster i en högtalare eller oscilloskop",
+        "hint": "Visar svängningar grafiskt."
+    },
+    {
+        "title": "Fråga 90",
+        "text": "Vad är det viktigaste att förstå om ljud ur fysikens perspektiv?",
+        "type": "multiple",
+        "options": [
+            "Att det är en vågrörelse som kräver ett medium",
+            "Att det är farligt",
+            "Att det är samma som ljus",
+            "Att det syns",
+            "Att det är elektromagnetiskt"
+        ],
+        "answer": "Att det är en vågrörelse som kräver ett medium",
+        "hint": "Det särskiljer det från t.ex. ljus."
+    },
+    {
+        "title": "Fråga 91",
+        "text": "Vilken är ljudets hastighet i vatten, ungefär?",
+        "type": "multiple",
+        "options": [
+            "1500 m/s",
+            "340 m/s",
+            "100 m/s",
+            "5000 m/s",
+            "700 m/s"
+        ],
+        "answer": "1500 m/s",
+        "hint": "Snabbare än i luft."
+    },
+    {
+        "title": "Fråga 92",
+        "text": "Vad beskriver ljudstyrka bäst?",
+        "type": "multiple",
+        "options": [
+            "Amplitud",
+            "Frekvens",
+            "Wåglängd",
+            "Tonhöjd",
+            "Tidsenhet"
+        ],
+        "answer": "Amplitud",
+        "hint": "Större svängning = högre ljud."
+    },
+    {
+        "title": "Fråga 93",
+        "text": "Vad innebär att ljud har en riktning?",
+        "type": "multiple",
+        "options": [
+            "Det kommer från en viss plats",
+            "Det är alltid framåt",
+            "Det finns inte i rum",
+            "Det är ljusbaserat",
+            "Det hörs bara i örat"
+        ],
+        "answer": "Det kommer från en viss plats",
+        "hint": "Vi kan lokalisera ljud."
+    },
+    {
+        "title": "Fråga 94",
+        "text": "Vilken enhet beskriver våglängd?",
+        "type": "multiple",
+        "options": [
+            "Meter",
+            "Hertz",
+            "Joule",
+            "Watt",
+            "Decibel"
+        ],
+        "answer": "Meter",
+        "hint": "Det är en längd."
+    },
+    {
+        "title": "Fråga 95",
+        "text": "Vad händer med tonen om frekvensen sänks?",
+        "type": "multiple",
+        "options": [
+            "Den blir mörkare",
+            "Den blir ljusare",
+            "Den försvinner",
+            "Den blir starkare",
+            "Den ökar i amplitud"
+        ],
+        "answer": "Den blir mörkare",
+        "hint": "Lägre frekvens = lägre ton."
+    },
+    {
+        "title": "Fråga 96",
+        "text": "Hur kan ljud påverka känslor?",
+        "type": "multiple",
+        "options": [
+            "Genom att påverka hjärnan med frekvenser och rytm",
+            "Genom värme",
+            "Genom färg",
+            "Genom höjd",
+            "Genom vikt"
+        ],
+        "answer": "Genom att påverka hjärnan med frekvenser och rytm",
+        "hint": "Musik är ett bra exempel."
+    },
+    {
+        "title": "Fråga 97",
+        "text": "Vad används ultraljud till i industrin?",
+        "type": "multiple",
+        "options": [
+            "Kontrollera material, t.ex. svetsfogar",
+            "Mäta decibel",
+            "Bygga resonans",
+            "Skapa buller",
+            "Generera el"
+        ],
+        "answer": "Kontrollera material, t.ex. svetsfogar",
+        "hint": "Ett icke-förstörande test."
+    },
+    {
+        "title": "Fråga 98",
+        "text": "Vilken typ av energi har ljud?",
+        "type": "multiple",
+        "options": [
+            "Mekanisk energi",
+            "Elektrisk energi",
+            "Värmeenergi",
+            "Strålningsenergi",
+            "Kärnenergi"
+        ],
+        "answer": "Mekanisk energi",
+        "hint": "Ljud är vibrationer i materia."
+    },
+    {
+        "title": "Fråga 99",
+        "text": "Vad kan man lära sig av ekolod hos djur?",
+        "type": "multiple",
+        "options": [
+            "Biologisk användning av fysik",
+            "Lära djur prata",
+            "Djurs färgseende",
+            "Djurens elförbrukning",
+            "Hur de äter ljud"
+        ],
+        "answer": "Biologisk användning av fysik",
+        "hint": "T.ex. fladdermöss och valar."
+    },
+    {
+        "title": "Fråga 100",
+        "text": "Vad är syftet med att studera ljud i fysiken?",
+        "type": "multiple",
+        "options": [
+            "Förstå vågrörelser, energiöverföring och kommunikation",
+            "Mäta temperatur",
+            "Förstå färg",
+            "Lära sig räkna",
+            "Lära sig språk"
+        ],
+        "answer": "Förstå vågrörelser, energiöverföring och kommunikation",
+        "hint": "Ljud är en viktig del av fysiken."
+    }
+]
