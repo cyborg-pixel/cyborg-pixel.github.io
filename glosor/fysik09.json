@@ -1,0 +1,1262 @@
+[
+    {
+        "title": "Fråga 1",
+        "text": "Vad händer om man delar en stavmagnet på mitten?",
+        "type": "multiple",
+        "options": [
+            "Man får två nya magneter",
+            "Den förlorar sin magnetism",
+            "Polerna byter plats",
+            "Bara nordpolen finns kvar",
+            "Magnetfältet försvinner helt"
+        ],
+        "answer": "Man får två nya magneter",
+        "hint": "Varje bit får en nord- och sydpol"
+    },
+    {
+        "title": "Fråga 2",
+        "text": "Vad menas med att magnetism är ett fält?",
+        "type": "multiple",
+        "options": [
+            "Magnetisk kraft finns runt magneten i alla riktningar",
+            "Magneter har bara två riktningar",
+            "Magneter finns bara på jorden",
+            "Fält finns bara i luft",
+            "Magnetism fungerar bara i kontakt"
+        ],
+        "answer": "Magnetisk kraft finns runt magneten i alla riktningar",
+        "hint": "Fält kan ritas med linjer"
+    },
+    {
+        "title": "Fråga 3",
+        "text": "Vad är en fältlinje?",
+        "type": "multiple",
+        "options": [
+            "En tänkt linje som visar riktningen på magnetkraften",
+            "En koppartråd",
+            "En elektrisk krets",
+            "En linje i en kompass",
+            "En laddning"
+        ],
+        "answer": "En tänkt linje som visar riktningen på magnetkraften",
+        "hint": "Från nordpol till sydpol"
+    },
+    {
+        "title": "Fråga 4",
+        "text": "Vad händer när två nordpoler på två magneter förs nära varandra?",
+        "type": "multiple",
+        "options": [
+            "De stöter bort varandra",
+            "De dras till varandra",
+            "De neutraliseras",
+            "De blir varmare",
+            "De byter plats"
+        ],
+        "answer": "De stöter bort varandra",
+        "hint": "Lika poler repellerar"
+    },
+    {
+        "title": "Fråga 5",
+        "text": "Vad händer när en nordpol och en sydpol möts?",
+        "type": "multiple",
+        "options": [
+            "De dras till varandra",
+            "De stöter bort varandra",
+            "De tappar magnetism",
+            "De byter polaritet",
+            "De skapar ström"
+        ],
+        "answer": "De dras till varandra",
+        "hint": "Olika poler attraherar"
+    },
+    {
+        "title": "Fråga 6",
+        "text": "Vad menas med magnetisk influens?",
+        "type": "multiple",
+        "options": [
+            "När ett föremål blir tillfälligt magnetiskt",
+            "När magneter förlorar kraft",
+            "När magneter smälter",
+            "När magneter värms upp",
+            "När magneter vänds"
+        ],
+        "answer": "När ett föremål blir tillfälligt magnetiskt",
+        "hint": "Sker t.ex. med järnföremål nära en magnet"
+    },
+    {
+        "title": "Fråga 7",
+        "text": "Vilket material påverkas mest av magneter?",
+        "type": "multiple",
+        "options": [
+            "Järn",
+            "Plast",
+            "Koppar",
+            "Aluminium",
+            "Trä"
+        ],
+        "answer": "Järn",
+        "hint": "Vanligaste magnetiska metallen"
+    },
+    {
+        "title": "Fråga 8",
+        "text": "Vad visar en kompass?",
+        "type": "multiple",
+        "options": [
+            "Jordens magnetfält",
+            "Vindens riktning",
+            "Elektrisk ström",
+            "Stjärnornas läge",
+            "Temperatur"
+        ],
+        "answer": "Jordens magnetfält",
+        "hint": "Nålen pekar mot jordens magnetiska nordpol"
+    },
+    {
+        "title": "Fråga 9",
+        "text": "Vad menas med att jorden är som en stor magnet?",
+        "type": "multiple",
+        "options": [
+            "Jorden har ett eget magnetfält",
+            "Jorden består av järn",
+            "Jorden snurrar i magnetism",
+            "Jorden drar till sig magneter",
+            "Jorden kan laddas upp"
+        ],
+        "answer": "Jorden har ett eget magnetfält",
+        "hint": "Skapas i jordens kärna"
+    },
+    {
+        "title": "Fråga 10",
+        "text": "Vad är missvisning?",
+        "type": "multiple",
+        "options": [
+            "Skillnaden mellan geografisk och magnetisk nord",
+            "När en kompass snurrar för fort",
+            "När magnetfältet försvinner",
+            "När magnetism påverkas av elektricitet",
+            "När solen stör kompassen"
+        ],
+        "answer": "Skillnaden mellan geografisk och magnetisk nord",
+        "hint": "Kompassens riktning stämmer inte exakt med norr"
+    },
+    {
+        "title": "Fråga 11",
+        "text": "Varför är kompassnålen magnetisk?",
+        "type": "multiple",
+        "options": [
+            "För att kunna påverkas av jordens magnetfält",
+            "För att kunna skapa elektricitet",
+            "För att reflektera ljus",
+            "För att skydda mot strålning",
+            "För att alltid peka söderut"
+        ],
+        "answer": "För att kunna påverkas av jordens magnetfält",
+        "hint": "Kompassnålen är en liten magnet"
+    },
+    {
+        "title": "Fråga 12",
+        "text": "Vad är magnetfältets riktning i en stavmagnet?",
+        "type": "multiple",
+        "options": [
+            "Från nordpol till sydpol",
+            "Från mitt till kanter",
+            "Från vänster till höger",
+            "Från sydpol till nordpol",
+            "Inåt mot mitten"
+        ],
+        "answer": "Från nordpol till sydpol",
+        "hint": "Så ritas fältlinjer"
+    },
+    {
+        "title": "Fråga 13",
+        "text": "Vad är magnetiska fältlinjer?",
+        "type": "multiple",
+        "options": [
+            "Tänkta linjer som visar hur magnetkraften går",
+            "Osynliga trådar i magneten",
+            "Ljustrålar",
+            "Elektriska impulser",
+            "Statiska laddningar"
+        ],
+        "answer": "Tänkta linjer som visar hur magnetkraften går",
+        "hint": "De går från nordpol till sydpol"
+    },
+    {
+        "title": "Fråga 14",
+        "text": "Vilken del av jorden har starkast magnetfält?",
+        "type": "multiple",
+        "options": [
+            "Runt polerna",
+            "Vid ekvatorn",
+            "Mitt i haven",
+            "I atmosfären",
+            "I berggrunden"
+        ],
+        "answer": "Runt polerna",
+        "hint": "Där magnetlinjerna går in/ut ur jorden"
+    },
+    {
+        "title": "Fråga 15",
+        "text": "Vilken typ av karta kan visa magnetisk missvisning?",
+        "type": "multiple",
+        "options": [
+            "Magnetisk deklinationskarta",
+            "Topografisk karta",
+            "Klimatkarta",
+            "Jordbävningskarta",
+            "Väderkarta"
+        ],
+        "answer": "Magnetisk deklinationskarta",
+        "hint": "Används av navigatörer"
+    },
+    {
+        "title": "Fråga 16",
+        "text": "Vilket ämne i jordens kärna skapar magnetfältet?",
+        "type": "multiple",
+        "options": [
+            "Järn",
+            "Koppar",
+            "Kisel",
+            "Vatten",
+            "Nickel"
+        ],
+        "answer": "Järn",
+        "hint": "I smält form och i rörelse"
+    },
+    {
+        "title": "Fråga 17",
+        "text": "Vad händer med kompassnålen nära en stark magnet?",
+        "type": "multiple",
+        "options": [
+            "Den påverkas och visar fel",
+            "Den fungerar bättre",
+            "Den fryser",
+            "Den pekar mot sydpolen",
+            "Den skapar elektrisk ström"
+        ],
+        "answer": "Den påverkas och visar fel",
+        "hint": "Magneter kan störa kompassen"
+    },
+    {
+        "title": "Fråga 18",
+        "text": "Vilken riktning visar kompassens röda spets vanligtvis?",
+        "type": "multiple",
+        "options": [
+            "Mot magnetiska nordpolen",
+            "Mot solen",
+            "Mot geografiska söder",
+            "Mot ekvatorn",
+            "Mot centrum av jorden"
+        ],
+        "answer": "Mot magnetiska nordpolen",
+        "hint": "Ej exakt samma som geografiska norr"
+    },
+    {
+        "title": "Fråga 19",
+        "text": "Vad kan påverka en kompass negativt?",
+        "type": "multiple",
+        "options": [
+            "Starka magneter, strömförande ledningar",
+            "Träd och väder",
+            "Höga berg",
+            "Ljusnivåer",
+            "Kallt klimat"
+        ],
+        "answer": "Starka magneter, strömförande ledningar",
+        "hint": "Allt som skapar magnetfält"
+    },
+    {
+        "title": "Fråga 20",
+        "text": "Hur kan man visualisera ett magnetfält hemma?",
+        "type": "multiple",
+        "options": [
+            "Med järnfilspån och ett papper över magneten",
+            "Med voltmätare",
+            "Med vattendroppar",
+            "Med solljus",
+            "Med färgfilter"
+        ],
+        "answer": "Med järnfilspån och ett papper över magneten",
+        "hint": "Spånen lägger sig längs fältlinjerna"
+    },
+    {
+        "title": "Fråga 21",
+        "text": "Vad är en elektromagnet?",
+        "type": "multiple",
+        "options": [
+            "En spole med ström som blir magnetisk",
+            "En magnet som roterar",
+            "En laddad ledning",
+            "En magnet som inte påverkas av elektricitet",
+            "En permanent magnet"
+        ],
+        "answer": "En spole med ström som blir magnetisk",
+        "hint": "Kräver elektrisk ström"
+    },
+    {
+        "title": "Fråga 22",
+        "text": "Vad krävs för att bygga en elektromagnet?",
+        "type": "multiple",
+        "options": [
+            "Spole, järnkärna och ström",
+            "Koppartråd, lampa och batteri",
+            "Magnet och vatten",
+            "Spole och plastkärna",
+            "Permanent magnet och växelström"
+        ],
+        "answer": "Spole, järnkärna och ström",
+        "hint": "Ju fler varv och starkare ström, desto starkare magnet"
+    },
+    {
+        "title": "Fråga 23",
+        "text": "Vad gör järnkärnan i en elektromagnet?",
+        "type": "multiple",
+        "options": [
+            "Förstärker det magnetiska fältet",
+            "Minskar strömmen",
+            "Avleder värme",
+            "Förhindrar kortslutning",
+            "Skyddar spolen"
+        ],
+        "answer": "Förstärker det magnetiska fältet",
+        "hint": "Magnetiseras av spolen"
+    },
+    {
+        "title": "Fråga 24",
+        "text": "Vad beskriver högerhandsregeln?",
+        "type": "multiple",
+        "options": [
+            "Riktningen på magnetfältet runt en strömförande ledare",
+            "Riktningen på elektronerna",
+            "Hur laddningar rör sig i vakuum",
+            "Hur stark en magnet är",
+            "Hur snabbt strömmen går"
+        ],
+        "answer": "Riktningen på magnetfältet runt en strömförande ledare",
+        "hint": "Tum = ström, fingrar = fältets riktning"
+    },
+    {
+        "title": "Fråga 25",
+        "text": "Vad händer om du ändrar strömriktningen i en elektromagnet?",
+        "type": "multiple",
+        "options": [
+            "Magnetens poler byter plats",
+            "Magneten försvinner",
+            "Strömmen stoppas",
+            "Spolen snurrar",
+            "Järnkärnan smälter"
+        ],
+        "answer": "Magnetens poler byter plats",
+        "hint": "Fältet vänder håll"
+    },
+    {
+        "title": "Fråga 26",
+        "text": "Vad är en fördel med elektromagneter jämfört med vanliga magneter?",
+        "type": "multiple",
+        "options": [
+            "Man kan slå på och av dem",
+            "De är alltid starkare",
+            "De är billigare",
+            "De fungerar utan el",
+            "De påverkar inte järn"
+        ],
+        "answer": "Man kan slå på och av dem",
+        "hint": "Används t.ex. i skrothantering"
+    },
+    {
+        "title": "Fråga 27",
+        "text": "Vad är grunden i en elmotor?",
+        "type": "multiple",
+        "options": [
+            "Magnetism som får spolar att snurra",
+            "Kemisk energi",
+            "Värmeöverföring",
+            "Solenergi",
+            "Batteriladdning"
+        ],
+        "answer": "Magnetism som får spolar att snurra",
+        "hint": "Elektricitet → rörelse"
+    },
+    {
+        "title": "Fråga 28",
+        "text": "Vad omvandlar en elmotor?",
+        "type": "multiple",
+        "options": [
+            "Elektrisk energi till rörelseenergi",
+            "Rörelseenergi till värme",
+            "Ljus till el",
+            "Ljud till energi",
+            "Värme till magnetism"
+        ],
+        "answer": "Elektrisk energi till rörelseenergi",
+        "hint": "Ex: i fläktar och elbilar"
+    },
+    {
+        "title": "Fråga 29",
+        "text": "Vad omvandlar en generator?",
+        "type": "multiple",
+        "options": [
+            "Rörelseenergi till elektrisk energi",
+            "El till magnetism",
+            "Solenergi till värme",
+            "Elektricitet till ljud",
+            "Kemisk energi till ljus"
+        ],
+        "answer": "Rörelseenergi till elektrisk energi",
+        "hint": "Ex: i kraftverk"
+    },
+    {
+        "title": "Fråga 30",
+        "text": "Vad är induktion?",
+        "type": "multiple",
+        "options": [
+            "Att skapa elektrisk ström med magnetism",
+            "Att reflektera strålning",
+            "Att överföra värme",
+            "Att styra ljudvågor",
+            "Att mäta ström"
+        ],
+        "answer": "Att skapa elektrisk ström med magnetism",
+        "hint": "Magnet i rörelse nära spole"
+    },
+    {
+        "title": "Fråga 31",
+        "text": "Vad krävs för att skapa ström med induktion?",
+        "type": "multiple",
+        "options": [
+            "Rörelse mellan magnet och spole",
+            "En elektrisk lampa",
+            "Två magneter",
+            "En kompass",
+            "En batterikälla"
+        ],
+        "answer": "Rörelse mellan magnet och spole",
+        "hint": "Stillastående magnet ger ingen ström"
+    },
+    {
+        "title": "Fråga 32",
+        "text": "Vad bestämmer hur mycket ström som induceras?",
+        "type": "multiple",
+        "options": [
+            "Hur snabbt magnetfältet förändras",
+            "Hur varm spolen är",
+            "Spolens färg",
+            "Längden på koppartråden",
+            "Antal batterier"
+        ],
+        "answer": "Hur snabbt magnetfältet förändras",
+        "hint": "Snabb rörelse = starkare ström"
+    },
+    {
+        "title": "Fråga 33",
+        "text": "Vad är växelström?",
+        "type": "multiple",
+        "options": [
+            "Ström som byter riktning hela tiden",
+            "Ström som går en gång",
+            "Ström i endast en riktning",
+            "Ström som går genom batterier",
+            "En mycket svag ström"
+        ],
+        "answer": "Ström som byter riktning hela tiden",
+        "hint": "Används i elnätet"
+    },
+    {
+        "title": "Fråga 34",
+        "text": "Vad är likström?",
+        "type": "multiple",
+        "options": [
+            "Ström som alltid går i samma riktning",
+            "Ström som växlar",
+            "Ström som hoppar mellan ledare",
+            "Bara används i industri",
+            "Används i elnätet"
+        ],
+        "answer": "Ström som alltid går i samma riktning",
+        "hint": "Finns i batterier"
+    },
+    {
+        "title": "Fråga 35",
+        "text": "Vilken typ av ström finns i ett vanligt vägguttag?",
+        "type": "multiple",
+        "options": [
+            "Växelström",
+            "Likström",
+            "Jordström",
+            "Omvänd ström",
+            "Blandström"
+        ],
+        "answer": "Växelström",
+        "hint": "Fördelas över elnätet"
+    },
+    {
+        "title": "Fråga 36",
+        "text": "Vad kallas enheten för frekvens?",
+        "type": "multiple",
+        "options": [
+            "Hertz (Hz)",
+            "Volt",
+            "Ampere",
+            "Ohm",
+            "Watt"
+        ],
+        "answer": "Hertz (Hz)",
+        "hint": "Antal svängningar per sekund"
+    },
+    {
+        "title": "Fråga 37",
+        "text": "Vad är frekvensen på växelström i Sverige?",
+        "type": "multiple",
+        "options": [
+            "50 Hz",
+            "60 Hz",
+            "100 Hz",
+            "12 Hz",
+            "1 Hz"
+        ],
+        "answer": "50 Hz",
+        "hint": "Standard inom EU"
+    },
+    {
+        "title": "Fråga 38",
+        "text": "Vad är en rotor i en elmotor?",
+        "type": "multiple",
+        "options": [
+            "Den roterande delen",
+            "En stillastående magnet",
+            "En elektrisk ledning",
+            "Ett hjul utanför motorn",
+            "En typ av växel"
+        ],
+        "answer": "Den roterande delen",
+        "hint": "Får rörelse från magnetfält"
+    },
+    {
+        "title": "Fråga 39",
+        "text": "Vad är statorn i en motor?",
+        "type": "multiple",
+        "options": [
+            "Den stillastående delen",
+            "Den roterande delen",
+            "En laddare",
+            "En likriktare",
+            "En kylare"
+        ],
+        "answer": "Den stillastående delen",
+        "hint": "Innehåller ofta magnetfältet"
+    },
+    {
+        "title": "Fråga 40",
+        "text": "Vilken princip använder kraftverk för att skapa el?",
+        "type": "multiple",
+        "options": [
+            "Induktion – generator snurrar magnet nära spole",
+            "Fotosyntes",
+            "Kärnklyvning av järn",
+            "Reflektion av solstrålar",
+            "Spänning mellan poler"
+        ],
+        "answer": "Induktion – generator snurrar magnet nära spole",
+        "hint": "Vatten, vind eller ånga driver rörelse"
+    },
+    {
+        "title": "Fråga 41",
+        "text": "Vad är en transformator?",
+        "type": "multiple",
+        "options": [
+            "En apparat som ändrar spänningen",
+            "En sorts generator",
+            "En magnet som skapar ström",
+            "En elmotor",
+            "En koppling till jord"
+        ],
+        "answer": "En apparat som ändrar spänningen",
+        "hint": "Kan höja eller sänka spänning"
+    },
+    {
+        "title": "Fråga 42",
+        "text": "Hur fungerar en transformator?",
+        "type": "multiple",
+        "options": [
+            "Med två spolar och elektromagnetisk induktion",
+            "Med en elmotor",
+            "Med batterier och ledningar",
+            "Med direktström",
+            "Med UV-ljus"
+        ],
+        "answer": "Med två spolar och elektromagnetisk induktion",
+        "hint": "Primärspole och sekundärspole"
+    },
+    {
+        "title": "Fråga 43",
+        "text": "Vad gör en upptransformator?",
+        "type": "multiple",
+        "options": [
+            "Ökar spänningen",
+            "Minskar spänningen",
+            "Växlar strömmen",
+            "Lagrar energi",
+            "Omvandlar ljus till ström"
+        ],
+        "answer": "Ökar spänningen",
+        "hint": "Används t.ex. vid långväga elöverföring"
+    },
+    {
+        "title": "Fråga 44",
+        "text": "Vad gör en nedtransformator?",
+        "type": "multiple",
+        "options": [
+            "Sänker spänningen",
+            "Ökar spänningen",
+            "Byter strömriktning",
+            "Förbrukar ström",
+            "Laddar batterier"
+        ],
+        "answer": "Sänker spänningen",
+        "hint": "Används t.ex. i mobil-laddare"
+    },
+    {
+        "title": "Fråga 45",
+        "text": "Varför transporteras el med hög spänning i elnätet?",
+        "type": "multiple",
+        "options": [
+            "För att minska energiförlusten",
+            "För att det är billigare att tillverka",
+            "För att skydda fåglar",
+            "För att minska strömmen",
+            "För att undvika växelström"
+        ],
+        "answer": "För att minska energiförlusten",
+        "hint": "Hög spänning → mindre värmeförlust"
+    },
+    {
+        "title": "Fråga 46",
+        "text": "Vad är primärspolen i en transformator?",
+        "type": "multiple",
+        "options": [
+            "Den spole där växelström kopplas in",
+            "Den spole som tar ut strömmen",
+            "En spole i batterier",
+            "En magnetspole",
+            "En likströmskälla"
+        ],
+        "answer": "Den spole där växelström kopplas in",
+        "hint": "Första spolen i systemet"
+    },
+    {
+        "title": "Fråga 47",
+        "text": "Vad är sekundärspolen i en transformator?",
+        "type": "multiple",
+        "options": [
+            "Den spole där spänningen tas ut",
+            "Den spole där växelström kopplas in",
+            "En motorlindning",
+            "En kompassdel",
+            "En kylslinga"
+        ],
+        "answer": "Den spole där spänningen tas ut",
+        "hint": "Efter transformering"
+    },
+    {
+        "title": "Fråga 48",
+        "text": "Vad avgör om spänningen höjs eller sänks i en transformator?",
+        "type": "multiple",
+        "options": [
+            "Antalet varv i spolarna",
+            "Trådens färg",
+            "Kärnans temperatur",
+            "Fältets styrka",
+            "Strömmens riktning"
+        ],
+        "answer": "Antalet varv i spolarna",
+        "hint": "Fler varv i sekundär = högre spänning"
+    },
+    {
+        "title": "Fråga 49",
+        "text": "Vilken strömtyp krävs för att en transformator ska fungera?",
+        "type": "multiple",
+        "options": [
+            "Växelström",
+            "Likström",
+            "Starkström",
+            "Svagström",
+            "Ljusstrålning"
+        ],
+        "answer": "Växelström",
+        "hint": "Krävs för induktion mellan spolar"
+    },
+    {
+        "title": "Fråga 50",
+        "text": "Vilken spänning har ett vanligt eluttag i Sverige?",
+        "type": "multiple",
+        "options": [
+            "230 volt",
+            "12 volt",
+            "400 volt",
+            "110 volt",
+            "500 volt"
+        ],
+        "answer": "230 volt",
+        "hint": "Standard i Europa"
+    },
+    {
+        "title": "Fråga 51",
+        "text": "Vad betyder högspänningsledning?",
+        "type": "multiple",
+        "options": [
+            "En ledning som transporterar el med mycket hög spänning",
+            "En reservledning",
+            "En kabel för datatrafik",
+            "En del av elnätets jordning",
+            "En ledning som transporterar låg ström"
+        ],
+        "answer": "En ledning som transporterar el med mycket hög spänning",
+        "hint": "T.ex. 400 000 volt"
+    },
+    {
+        "title": "Fråga 52",
+        "text": "Vilket skydd har vi mot farlig spänning i hemmet?",
+        "type": "multiple",
+        "options": [
+            "Jordfelsbrytare",
+            "Transformator",
+            "Motstånd",
+            "Fjärrkontroll",
+            "Järnkärna"
+        ],
+        "answer": "Jordfelsbrytare",
+        "hint": "Bryter ström vid fel"
+    },
+    {
+        "title": "Fråga 53",
+        "text": "Vilken strömtyp används i mobiltelefoner?",
+        "type": "multiple",
+        "options": [
+            "Likström",
+            "Växelström",
+            "Växelljus",
+            "Kortslutningsström",
+            "Starkström"
+        ],
+        "answer": "Likström",
+        "hint": "Laddas via adapter"
+    },
+    {
+        "title": "Fråga 54",
+        "text": "Varför fungerar inte transformatorer med likström?",
+        "type": "multiple",
+        "options": [
+            "Det behövs ett varierande magnetfält",
+            "Strömmen blir för svag",
+            "Det skapas för mycket värme",
+            "Det blir kortslutning",
+            "Laddningen försvinner"
+        ],
+        "answer": "Det behövs ett varierande magnetfält",
+        "hint": "Växelström krävs för induktion"
+    },
+    {
+        "title": "Fråga 55",
+        "text": "Vilket påstående stämmer om elproduktion i vattenkraftverk?",
+        "type": "multiple",
+        "options": [
+            "Vatten får en turbin att snurra en generator",
+            "El skapas direkt i vattnet",
+            "Ström lagras i dammar",
+            "Vattnet värmer upp tråd",
+            "Solen laddar elnätet"
+        ],
+        "answer": "Vatten får en turbin att snurra en generator",
+        "hint": "Rörelseenergi → el"
+    },
+    {
+        "title": "Fråga 56",
+        "text": "Vilken energiform omvandlas till elektricitet i vindkraftverk?",
+        "type": "multiple",
+        "options": [
+            "Rörelseenergi",
+            "Ljusenergi",
+            "Värmeenergi",
+            "Strålningsenergi",
+            "Kärnenergi"
+        ],
+        "answer": "Rörelseenergi",
+        "hint": "Bladen snurrar generatorn"
+    },
+    {
+        "title": "Fråga 57",
+        "text": "Vilken typ av energi har ett batteri lagrat?",
+        "type": "multiple",
+        "options": [
+            "Kemisk energi",
+            "Elektrisk energi",
+            "Rörelseenergi",
+            "Magnetisk energi",
+            "Värmeenergi"
+        ],
+        "answer": "Kemisk energi",
+        "hint": "Omvandlas till el vid användning"
+    },
+    {
+        "title": "Fråga 58",
+        "text": "Vad är elnätet?",
+        "type": "multiple",
+        "options": [
+            "Systemet som distribuerar el från kraftverk till användare",
+            "Ett internet för el",
+            "Ett batterisystem",
+            "En slags transformator",
+            "En kompassfunktion"
+        ],
+        "answer": "Systemet som distribuerar el från kraftverk till användare",
+        "hint": "Inkluderar ledningar, transformatorer, centraler"
+    },
+    {
+        "title": "Fråga 59",
+        "text": "Vad betyder det att vi får 50 Hz växelström i hemmet?",
+        "type": "multiple",
+        "options": [
+            "Strömmen byter riktning 50 gånger per sekund",
+            "Det finns 50 ledningar",
+            "50 volt per sekund",
+            "Strömmen är konstant",
+            "Temperaturen varierar"
+        ],
+        "answer": "Strömmen byter riktning 50 gånger per sekund",
+        "hint": "Detta är frekvensen"
+    },
+    {
+        "title": "Fråga 60",
+        "text": "Vad är en vanlig tillämpning av transformatorer i hemmet?",
+        "type": "multiple",
+        "options": [
+            "Mobilladdare",
+            "Diskmaskin",
+            "Fjärrkontroll",
+            "Fönsterputsare",
+            "TV-fjärr"
+        ],
+        "answer": "Mobilladdare",
+        "hint": "Sänker spänningen till låg volt"
+    },
+    {
+        "title": "Fråga 61",
+        "text": "Vad är elöverkänslighet?",
+        "type": "multiple",
+        "options": [
+            "När en person upplever besvär av elektriska apparater",
+            "En allergi mot järn",
+            "Överdriven användning av el",
+            "När kroppen laddas med ström",
+            "När man får stötar ofta"
+        ],
+        "answer": "När en person upplever besvär av elektriska apparater",
+        "hint": "Kan vara huvudvärk, trötthet m.m."
+    },
+    {
+        "title": "Fråga 62",
+        "text": "Vilken typ av strålning används i mobiltelefoni?",
+        "type": "multiple",
+        "options": [
+            "Radiovågor",
+            "Röntgen",
+            "UV-strålning",
+            "IR-strålning",
+            "Gamma"
+        ],
+        "answer": "Radiovågor",
+        "hint": "Låg energi, lång våglängd"
+    },
+    {
+        "title": "Fråga 63",
+        "text": "Varför finns det oro kring mobilmaster och hälsa?",
+        "type": "multiple",
+        "options": [
+            "Vissa oroar sig för långvarig exponering av elektromagnetiska fält",
+            "De drar till sig mygg",
+            "De drar mycket el",
+            "De stör vädret",
+            "De kan orsaka blixtnedslag"
+        ],
+        "answer": "Vissa oroar sig för långvarig exponering av elektromagnetiska fält",
+        "hint": "Vetenskapliga bevis är oklara"
+    },
+    {
+        "title": "Fråga 64",
+        "text": "Vilket skydd finns mot elektromagnetisk strålning i kablar?",
+        "type": "multiple",
+        "options": [
+            "Skärmning med metallhölje",
+            "Extra plast",
+            "Vattenisolering",
+            "Färgmärkning",
+            "Statiskt filter"
+        ],
+        "answer": "Skärmning med metallhölje",
+        "hint": "Skyddar elektronik och människor"
+    },
+    {
+        "title": "Fråga 65",
+        "text": "Vad används elektromagneter till i vardagen?",
+        "type": "multiple",
+        "options": [
+            "Högtalare, lås, MRI, skrotkranar",
+            "Belysning",
+            "Hårfönar",
+            "Kylskåp",
+            "Speglar"
+        ],
+        "answer": "Högtalare, lås, MRI, skrotkranar",
+        "hint": "De kan styras av ström"
+    },
+    {
+        "title": "Fråga 66",
+        "text": "Vilken uppfinning bygger direkt på induktion?",
+        "type": "multiple",
+        "options": [
+            "Generatorn",
+            "Lampan",
+            "Solpanelen",
+            "Batteriet",
+            "Elektrisk spis"
+        ],
+        "answer": "Generatorn",
+        "hint": "Rörelse → el"
+    },
+    {
+        "title": "Fråga 67",
+        "text": "Vilken historisk person upptäckte elektromagnetismen?",
+        "type": "multiple",
+        "options": [
+            "Hans Christian Ørsted",
+            "Isaac Newton",
+            "Marie Curie",
+            "Galileo Galilei",
+            "Nikola Tesla"
+        ],
+        "answer": "Hans Christian Ørsted",
+        "hint": "Dansk fysiker 1800-talet"
+    },
+    {
+        "title": "Fråga 68",
+        "text": "Vilken vetenskapsman uppfann generatorn?",
+        "type": "multiple",
+        "options": [
+            "Michael Faraday",
+            "Albert Einstein",
+            "Marie Curie",
+            "André-Marie Ampère",
+            "Alessandro Volta"
+        ],
+        "answer": "Michael Faraday",
+        "hint": "Faradays lag"
+    },
+    {
+        "title": "Fråga 69",
+        "text": "Vad används högerhandsregeln till?",
+        "type": "multiple",
+        "options": [
+            "Visa riktningen på magnetfältet runt en strömledare",
+            "Räkna energi",
+            "Se åt vilket håll strömmen går",
+            "Identifiera batterier",
+            "Mäta volt"
+        ],
+        "answer": "Visa riktningen på magnetfältet runt en strömledare",
+        "hint": "Tum = ström, fingrar = fält"
+    },
+    {
+        "title": "Fråga 70",
+        "text": "Hur kan man skydda sig mot stark elektromagnetisk strålning?",
+        "type": "multiple",
+        "options": [
+            "Stå bakom metallnät eller i skärmning",
+            "Dricka vatten",
+            "Ha gummi på skorna",
+            "Undvika internet",
+            "Hålla metallföremål nära"
+        ],
+        "answer": "Stå bakom metallnät eller i skärmning",
+        "hint": "Fungerar som bur"
+    },
+    {
+        "title": "Fråga 71",
+        "text": "Var används transformatorer i samhället?",
+        "type": "multiple",
+        "options": [
+            "Elstationer, elektronik, laddare",
+            "Växthus",
+            "Vattenledningar",
+            "Städsystem",
+            "Kylskåp"
+        ],
+        "answer": "Elstationer, elektronik, laddare",
+        "hint": "Överallt där spänning anpassas"
+    },
+    {
+        "title": "Fråga 72",
+        "text": "Vad är en MRI-kamera beroende av?",
+        "type": "multiple",
+        "options": [
+            "Starka elektromagneter",
+            "Laserljus",
+            "Ultraljud",
+            "Värmekameror",
+            "UV-ljus"
+        ],
+        "answer": "Starka elektromagneter",
+        "hint": "Används i sjukvård"
+    },
+    {
+        "title": "Fråga 73",
+        "text": "Vilken kraft får elmotorer att snurra?",
+        "type": "multiple",
+        "options": [
+            "Magnetism från ström och spolar",
+            "Vind",
+            "Tryck från luft",
+            "Ljus",
+            "Värmeutvidgning"
+        ],
+        "answer": "Magnetism från ström och spolar",
+        "hint": "Interaktion mellan magnetfält"
+    },
+    {
+        "title": "Fråga 74",
+        "text": "Vilken typ av elektrisk apparat använder en generator för att skapa el?",
+        "type": "multiple",
+        "options": [
+            "Vindkraftverk",
+            "TV",
+            "Mobiltelefon",
+            "Transformator",
+            "Mikrovågsugn"
+        ],
+        "answer": "Vindkraftverk",
+        "hint": "Snurrar i vinden"
+    },
+    {
+        "title": "Fråga 75",
+        "text": "Vad är en spole?",
+        "type": "multiple",
+        "options": [
+            "En ledning virad i flera varv",
+            "En del av ett batteri",
+            "En komponent i ett relä",
+            "En jordningsanordning",
+            "En koppartråd som snurrar"
+        ],
+        "answer": "En ledning virad i flera varv",
+        "hint": "Bygger magnetfält"
+    },
+    {
+        "title": "Fråga 76",
+        "text": "Vilken enhet mäter elektrisk spänning?",
+        "type": "multiple",
+        "options": [
+            "Volt",
+            "Ampere",
+            "Watt",
+            "Ohm",
+            "Tesla"
+        ],
+        "answer": "Volt",
+        "hint": "Symbol: V"
+    },
+    {
+        "title": "Fråga 77",
+        "text": "Vilken enhet mäter elektrisk ström?",
+        "type": "multiple",
+        "options": [
+            "Ampere",
+            "Volt",
+            "Watt",
+            "Tesla",
+            "Hertz"
+        ],
+        "answer": "Ampere",
+        "hint": "Symbol: A"
+    },
+    {
+        "title": "Fråga 78",
+        "text": "Vad menas med att elström är farlig?",
+        "type": "multiple",
+        "options": [
+            "Den kan skada kroppen om den passerar genom hjärta eller hjärna",
+            "Den smakar illa",
+            "Den är radioaktiv",
+            "Den gör att man tappar håret",
+            "Den ger magsmärta"
+        ],
+        "answer": "Den kan skada kroppen om den passerar genom hjärta eller hjärna",
+        "hint": "Därför viktigt med isolering och skydd"
+    },
+    {
+        "title": "Fråga 79",
+        "text": "Vad är skillnaden mellan växelström och likström i praktiken?",
+        "type": "multiple",
+        "options": [
+            "Växelström kan transformeras, likström kan inte",
+            "Likström är alltid farligare",
+            "Växelström är långsammare",
+            "Likström används i kraftverk",
+            "Växelström lagras i batterier"
+        ],
+        "answer": "Växelström kan transformeras, likström kan inte",
+        "hint": "Därför används växelström i elnätet"
+    },
+    {
+        "title": "Fråga 80",
+        "text": "Vad är en smart elnätlösning?",
+        "type": "multiple",
+        "options": [
+            "Ett elnät som anpassar sig till produktion och förbrukning",
+            "En trådlös laddare",
+            "Ett elnät som aldrig går sönder",
+            "Ett batteri i varje hus",
+            "En lampa som känner av rörelse"
+        ],
+        "answer": "Ett elnät som anpassar sig till produktion och förbrukning",
+        "hint": "Digitalisering av elnät"
+    },
+    {
+        "title": "Fråga 81",
+        "text": "Vad innebär energieffektivisering?",
+        "type": "multiple",
+        "options": [
+            "Att använda mindre energi för samma nytta",
+            "Att skapa ny energi",
+            "Att lagra el",
+            "Att omvandla el till värme",
+            "Att minska användning av sol"
+        ],
+        "answer": "Att använda mindre energi för samma nytta",
+        "hint": "T.ex. LED-lampor"
+    },
+    {
+        "title": "Fråga 82",
+        "text": "Vad visar en voltmeter?",
+        "type": "multiple",
+        "options": [
+            "Elektrisk spänning",
+            "Strömstyrka",
+            "Motstånd",
+            "Frekvens",
+            "Effekt"
+        ],
+        "answer": "Elektrisk spänning",
+        "hint": "Mäter volt"
+    },
+    {
+        "title": "Fråga 83",
+        "text": "Vad visar en amperemeter?",
+        "type": "multiple",
+        "options": [
+            "Strömstyrka",
+            "Spänning",
+            "Effekt",
+            "Värme",
+            "Frekvens"
+        ],
+        "answer": "Strömstyrka",
+        "hint": "Mäter ampere"
+    },
+    {
+        "title": "Fråga 84",
+        "text": "Vad visar enheten watt?",
+        "type": "multiple",
+        "options": [
+            "Effekt (hur mycket energi per sekund)",
+            "Elektrisk spänning",
+            "Ljusets intensitet",
+            "Magnetism",
+            "Motstånd"
+        ],
+        "answer": "Effekt (hur mycket energi per sekund)",
+        "hint": "Watt = volt × ampere"
+    },
+    {
+        "title": "Fråga 85",
+        "text": "Vad är en likriktare?",
+        "type": "multiple",
+        "options": [
+            "En apparat som omvandlar växelström till likström",
+            "En transformator",
+            "En lampa",
+            "En elmotor",
+            "En magnetspole"
+        ],
+        "answer": "En apparat som omvandlar växelström till likström",
+        "hint": "Finns i många laddare"
+    },
+    {
+        "title": "Fråga 86",
+        "text": "Vad är en brytare i en krets?",
+        "type": "multiple",
+        "options": [
+            "En strömbrytare som öppnar eller stänger kretsen",
+            "En komponent som ökar spänningen",
+            "En mätare",
+            "En transformator",
+            "En likriktare"
+        ],
+        "answer": "En strömbrytare som öppnar eller stänger kretsen",
+        "hint": "T.ex. en vanlig strömbrytare"
+    },
+    {
+        "title": "Fråga 87",
+        "text": "Vad är en säkring?",
+        "type": "multiple",
+        "options": [
+            "En komponent som bryter ström vid överbelastning",
+            "En sladd",
+            "En förstärkare",
+            "En batterityp",
+            "En kompass"
+        ],
+        "answer": "En komponent som bryter ström vid överbelastning",
+        "hint": "Skyddar mot brand och skador"
+    },
+    {
+        "title": "Fråga 88",
+        "text": "Vilken typ av ström kräver batteridrivna apparater?",
+        "type": "multiple",
+        "options": [
+            "Likström",
+            "Växelström",
+            "Blandström",
+            "Pulserande växelström",
+            "Starkström"
+        ],
+        "answer": "Likström",
+        "hint": "Kommer direkt från batteriet"
+    },
+    {
+        "title": "Fråga 89",
+        "text": "Varför är ström farligare i våta miljöer?",
+        "type": "multiple",
+        "options": [
+            "Vatten leder ström bättre",
+            "Det blir kortslutning",
+            "Vattnet avleder spänning",
+            "Strömmen försvagas",
+            "Vatten reflekterar ström"
+        ],
+        "answer": "Vatten leder ström bättre",
+        "hint": "Därför: undvik el nära badkar!"
+    },
+    {
+        "title": "Fråga 90",
+        "text": "Hur kan vi minska elförbrukningen hemma?",
+        "type": "multiple",
+        "options": [
+            "Stänga av apparater, LED-lampor, energieffektiva maskiner",
+            "Använda fler apparater",
+            "Koppla in mer värme",
+            "Öka belysningen",
+            "Öppna fönster ofta"
+        ],
+        "answer": "Stänga av apparater, LED-lampor, energieffektiva maskiner",
+        "hint": "Spara pengar och miljö"
+    }
+]

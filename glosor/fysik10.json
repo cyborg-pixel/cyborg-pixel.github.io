@@ -1,0 +1,492 @@
+[
+    {
+        "title": "Fråga 1",
+        "text": "Vad menas med elektrisk spänning?",
+        "type": "multiple",
+        "options": [
+            "Skillnaden i laddning mellan två punkter",
+            "Hur snabbt elektroner rör sig",
+            "Mängden värme i en krets",
+            "Hur starkt ett batteri lyser",
+            "Motståndet i en krets"
+        ],
+        "answer": "Skillnaden i laddning mellan två punkter",
+        "hint": "Spänning driver ström"
+    },
+    {
+        "title": "Fråga 2",
+        "text": "Vilken enhet mäts elektrisk spänning i?",
+        "type": "multiple",
+        "options": [
+            "Volt",
+            "Ampere",
+            "Watt",
+            "Ohm",
+            "Joule"
+        ],
+        "answer": "Volt",
+        "hint": "Symbol: V"
+    },
+    {
+        "title": "Fråga 3",
+        "text": "Vad är en elektrisk ström?",
+        "type": "multiple",
+        "options": [
+            "En rörelse av elektroner",
+            "Skillnaden mellan plus och minus",
+            "Värmeutveckling i en ledare",
+            "Motståndet i en krets",
+            "Ett mått på ljusstyrka"
+        ],
+        "answer": "En rörelse av elektroner",
+        "hint": "Ström går från minus till plus"
+    },
+    {
+        "title": "Fråga 4",
+        "text": "Vilken enhet mäts ström i?",
+        "type": "multiple",
+        "options": [
+            "Ampere",
+            "Volt",
+            "Watt",
+            "Ohm",
+            "Lux"
+        ],
+        "answer": "Ampere",
+        "hint": "Symbol: A"
+    },
+    {
+        "title": "Fråga 5",
+        "text": "Vad är resistans?",
+        "type": "multiple",
+        "options": [
+            "Ett mått på hur mycket materialet bromsar strömmen",
+            "Hur starkt ljuset lyser",
+            "Temperaturen i kretsen",
+            "Spänningen i kretsen",
+            "En elektrisk krets"
+        ],
+        "answer": "Ett mått på hur mycket materialet bromsar strömmen",
+        "hint": "Hög resistans = mindre ström"
+    },
+    {
+        "title": "Fråga 6",
+        "text": "Vilken enhet används för resistans?",
+        "type": "multiple",
+        "options": [
+            "Ohm",
+            "Volt",
+            "Watt",
+            "Ampere",
+            "Newton"
+        ],
+        "answer": "Ohm",
+        "hint": "Symbol: Ω"
+    },
+    {
+        "title": "Fråga 7",
+        "text": "Vad händer med strömmen om resistansen ökar (vid konstant spänning)?",
+        "type": "multiple",
+        "options": [
+            "Strömmen minskar",
+            "Strömmen ökar",
+            "Strömmen är oförändrad",
+            "Strömmen blir oregelbunden",
+            "Kretsen bryts"
+        ],
+        "answer": "Strömmen minskar",
+        "hint": "Ohms lag: I = U / R"
+    },
+    {
+        "title": "Fråga 8",
+        "text": "Vad beskriver Ohms lag?",
+        "type": "multiple",
+        "options": [
+            "Sambandet mellan spänning, ström och resistans",
+            "Hur ljus sprids i vakuum",
+            "Hur batterier fungerar",
+            "Effekten i glödlampor",
+            "Temperaturens påverkan på kretsar"
+        ],
+        "answer": "Sambandet mellan spänning, ström och resistans",
+        "hint": "U = R · I"
+    },
+    {
+        "title": "Fråga 9",
+        "text": "Vilken formel är korrekt enligt Ohms lag?",
+        "type": "multiple",
+        "options": [
+            "U = R · I",
+            "P = U / I",
+            "R = U + I",
+            "I = U + R",
+            "U = P · I"
+        ],
+        "answer": "U = R · I",
+        "hint": "Samband mellan Volt, Ohm och Ampere"
+    },
+    {
+        "title": "Fråga 10",
+        "text": "Vad händer med strömmen om spänningen ökar (vid konstant resistans)?",
+        "type": "multiple",
+        "options": [
+            "Strömmen ökar",
+            "Strömmen minskar",
+            "Strömmen är oförändrad",
+            "Strömmen slutar helt",
+            "Resistansen ökar"
+        ],
+        "answer": "Strömmen ökar",
+        "hint": "Ohms lag: I = U / R"
+    },
+    {
+        "title": "Fråga 31",
+        "text": "Vad kännetecknar en seriekoppling?",
+        "type": "multiple",
+        "options": [
+            "Komponenterna sitter efter varandra i en slinga",
+            "Alla komponenter är kopplade till samma punkt",
+            "Den fungerar bara med batteri",
+            "Endast resistorer kan användas",
+            "Den används aldrig i verkligheten"
+        ],
+        "answer": "Komponenterna sitter efter varandra i en slinga",
+        "hint": "Om en del slutar fungera bryts hela kretsen"
+    },
+    {
+        "title": "Fråga 32",
+        "text": "Vad händer med spänningen i en seriekoppling av två lampor?",
+        "type": "multiple",
+        "options": [
+            "Spänningen fördelas mellan lamporna",
+            "Spänningen blir dubbelt så hög",
+            "Spänningen förblir oförändrad",
+            "Lamporna lyser starkare än var för sig",
+            "Spänningen kortsluts"
+        ],
+        "answer": "Spänningen fördelas mellan lamporna",
+        "hint": "Beroende på resistans"
+    },
+    {
+        "title": "Fråga 33",
+        "text": "Vad kännetecknar en parallellkoppling?",
+        "type": "multiple",
+        "options": [
+            "Komponenterna är kopplade över samma spänningskälla",
+            "Komponenterna sitter i serie",
+            "Strömmen är lika i varje gren",
+            "Spänningen delas upp",
+            "Alla komponenter måste ha samma resistans"
+        ],
+        "answer": "Komponenterna är kopplade över samma spänningskälla",
+        "hint": "Varje gren får samma spänning"
+    },
+    {
+        "title": "Fråga 34",
+        "text": "Vad händer om en lampa går sönder i en parallellkoppling?",
+        "type": "multiple",
+        "options": [
+            "De andra fortsätter lysa",
+            "Hela kretsen slutar fungera",
+            "Spänningen ökar",
+            "Alla lampor slocknar och kan inte tändas igen",
+            "Det blir kortslutning"
+        ],
+        "answer": "De andra fortsätter lysa",
+        "hint": "Varje gren är oberoende"
+    },
+    {
+        "title": "Fråga 35",
+        "text": "Vad är elektrisk effekt?",
+        "type": "multiple",
+        "options": [
+            "Hur mycket energi som används per sekund",
+            "Hur starkt ett batteri lyser",
+            "Antalet elektroner i kretsen",
+            "Strömmens riktning",
+            "Motståndet i en komponent"
+        ],
+        "answer": "Hur mycket energi som används per sekund",
+        "hint": "Mäts i watt"
+    },
+    {
+        "title": "Fråga 36",
+        "text": "Vilken enhet används för elektrisk effekt?",
+        "type": "multiple",
+        "options": [
+            "Watt",
+            "Volt",
+            "Ohm",
+            "Ampere",
+            "Joule"
+        ],
+        "answer": "Watt",
+        "hint": "Symbol: W"
+    },
+    {
+        "title": "Fråga 37",
+        "text": "Vilken formel beskriver effekt?",
+        "type": "multiple",
+        "options": [
+            "P = U · I",
+            "P = R / I",
+            "P = U / R",
+            "P = I / U",
+            "P = R · U"
+        ],
+        "answer": "P = U · I",
+        "hint": "Multiplicera spänning och ström"
+    },
+    {
+        "title": "Fråga 38",
+        "text": "Vad är en säkring till för?",
+        "type": "multiple",
+        "options": [
+            "Att bryta strömmen vid för hög belastning",
+            "Att öka effekten i en krets",
+            "Att lagra energi",
+            "Att öka resistansen",
+            "Att kyla ner en krets"
+        ],
+        "answer": "Att bryta strömmen vid för hög belastning",
+        "hint": "Skyddar mot brand och skador"
+    },
+    {
+        "title": "Fråga 39",
+        "text": "Vad är en kortslutning?",
+        "type": "multiple",
+        "options": [
+            "När strömmen går en väg med nästan ingen resistans",
+            "När en säkring går sönder",
+            "När strömmen stängs av med en strömbrytare",
+            "När batteriet laddas ur",
+            "När strömmen byter riktning"
+        ],
+        "answer": "När strömmen går en väg med nästan ingen resistans",
+        "hint": "Kan orsaka mycket värme och brand"
+    },
+    {
+        "title": "Fråga 40",
+        "text": "Vad är en strömbrytare?",
+        "type": "multiple",
+        "options": [
+            "En komponent som öppnar eller stänger en krets",
+            "Ett slags batteri",
+            "En typ av resistor",
+            "En indikatorlampa",
+            "En spänningskälla"
+        ],
+        "answer": "En komponent som öppnar eller stänger en krets",
+        "hint": "T.ex. en vanlig ljusknapp"
+    },
+    {
+        "title": "Fråga 61",
+        "text": "Vad symboliserar detta tecken i ett kopplingsschema: ⎓ ?",
+        "type": "multiple",
+        "options": [
+            "Likström",
+            "Växelström",
+            "Säkring",
+            "Jordning",
+            "Glödlampa"
+        ],
+        "answer": "Likström",
+        "hint": "Finns i batterier"
+    },
+    {
+        "title": "Fråga 62",
+        "text": "Vilken symbol används för en glödlampa i ett kopplingsschema?",
+        "type": "multiple",
+        "options": [
+            "En cirkel med ett kryss",
+            "Ett L",
+            "Ett S",
+            "En triangel",
+            "En fyrkant"
+        ],
+        "answer": "En cirkel med ett kryss",
+        "hint": "Symboliserar ljus"
+    },
+    {
+        "title": "Fråga 63",
+        "text": "Vad visar ett kopplingsschema?",
+        "type": "multiple",
+        "options": [
+            "Hur komponenterna i en elektrisk krets är kopplade",
+            "Hur stark strömmen är i kretsen",
+            "Hur mycket energi som används",
+            "Vilka ämnen som leder ström",
+            "Var alla komponenter köps"
+        ],
+        "answer": "Hur komponenterna i en elektrisk krets är kopplade",
+        "hint": "Används för att planera och förstå kretsar"
+    },
+    {
+        "title": "Fråga 64",
+        "text": "Vilken enhet används för elektrisk energi i hushåll?",
+        "type": "multiple",
+        "options": [
+            "Kilowattimmar (kWh)",
+            "Volt",
+            "Ohm",
+            "Ampere",
+            "Joule per sekund"
+        ],
+        "answer": "Kilowattimmar (kWh)",
+        "hint": "Står på elräkningen"
+    },
+    {
+        "title": "Fråga 65",
+        "text": "Vad betyder 1 kWh?",
+        "type": "multiple",
+        "options": [
+            "1 000 watt under 1 timme",
+            "1 watt under 1 minut",
+            "1 ohm under 1 timme",
+            "1 volt under 1 sekund",
+            "1 ampere i 10 timmar"
+        ],
+        "answer": "1 000 watt under 1 timme",
+        "hint": "Energi = effekt × tid"
+    },
+    {
+        "title": "Fråga 66",
+        "text": "Vad påverkar hur mycket energi en apparat förbrukar?",
+        "type": "multiple",
+        "options": [
+            "Effekten och hur länge den används",
+            "Endast spänningen",
+            "Antal sladdar",
+            "Temperaturen",
+            "Resistansen i vägguttaget"
+        ],
+        "answer": "Effekten och hur länge den används",
+        "hint": "Tänk P × t"
+    },
+    {
+        "title": "Fråga 67",
+        "text": "Hur mäter man energiförbrukningen i en glödlampa?",
+        "type": "multiple",
+        "options": [
+            "Multiplicera effekt (W) med antal timmar",
+            "Räkna antalet glödtrådar",
+            "Mäta temperaturen",
+            "Mäta volymen",
+            "Mäta resistansen"
+        ],
+        "answer": "Multiplicera effekt (W) med antal timmar",
+        "hint": "Energi = effekt × tid"
+    },
+    {
+        "title": "Fråga 68",
+        "text": "Vad är syftet med jordning i ett elsystem?",
+        "type": "multiple",
+        "options": [
+            "Skydda människor från elstötar",
+            "Öka strömmen",
+            "Minska ljuset",
+            "Skapa spänning",
+            "Stabilisera temperaturen"
+        ],
+        "answer": "Skydda människor från elstötar",
+        "hint": "Ger en säker väg för ström"
+    },
+    {
+        "title": "Fråga 69",
+        "text": "Vilken komponent används för att minska strömmen i en krets?",
+        "type": "multiple",
+        "options": [
+            "Resistor",
+            "Säkring",
+            "Lampa",
+            "Strömbrytare",
+            "Jordledning"
+        ],
+        "answer": "Resistor",
+        "hint": "Ger motstånd"
+    },
+    {
+        "title": "Fråga 70",
+        "text": "Vilken faktor påverkar resistansen hos en ledning mest?",
+        "type": "multiple",
+        "options": [
+            "Materialet, längden och tjockleken",
+            "Färgen på isoleringen",
+            "Strömbrytaren",
+            "Antal batterier",
+            "Tid på dygnet"
+        ],
+        "answer": "Materialet, längden och tjockleken",
+        "hint": "T.ex. koppar leder bättre än järn"
+    },
+    {
+        "title": "Fråga 71",
+        "text": "Vad används en voltmeter till?",
+        "type": "multiple",
+        "options": [
+            "Att mäta spänning",
+            "Att mäta ström",
+            "Att mäta energi",
+            "Att mäta motstånd",
+            "Att mäta frekvens"
+        ],
+        "answer": "Att mäta spänning",
+        "hint": "Kopplas parallellt"
+    },
+    {
+        "title": "Fråga 72",
+        "text": "Vad används en amperemeter till?",
+        "type": "multiple",
+        "options": [
+            "Att mäta ström",
+            "Att mäta spänning",
+            "Att mäta temperatur",
+            "Att mäta ljusstyrka",
+            "Att mäta tid"
+        ],
+        "answer": "Att mäta ström",
+        "hint": "Kopplas i serie"
+    },
+    {
+        "title": "Fråga 73",
+        "text": "Hur fungerar en dimmer?",
+        "type": "multiple",
+        "options": [
+            "Den ändrar strömmen till lampan",
+            "Den byter strömriktning",
+            "Den ökar resistansen konstant",
+            "Den stänger av kretsen",
+            "Den byter ut batteriet"
+        ],
+        "answer": "Den ändrar strömmen till lampan",
+        "hint": "Därmed ändras ljusstyrkan"
+    },
+    {
+        "title": "Fråga 74",
+        "text": "Vad är en elektrisk ledare?",
+        "type": "multiple",
+        "options": [
+            "Ett ämne som leder ström bra",
+            "En person som hanterar el",
+            "Ett ämne som inte leder ström",
+            "En elektronisk apparat",
+            "En typ av spänning"
+        ],
+        "answer": "Ett ämne som leder ström bra",
+        "hint": "Koppar, aluminium etc."
+    },
+    {
+        "title": "Fråga 75",
+        "text": "Vad är en isolator?",
+        "type": "multiple",
+        "options": [
+            "Ett material som inte leder ström",
+            "Ett starkt batteri",
+            "En sorts resistor",
+            "En apparat som mäter volt",
+            "En magnetspole"
+        ],
+        "answer": "Ett material som inte leder ström",
+        "hint": "Plast, glas, gummi"
+    }
+]

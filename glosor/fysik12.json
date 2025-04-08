@@ -1,0 +1,562 @@
+[
+    {
+        "title": "Fråga 1",
+        "text": "Vad är energi?",
+        "type": "multiple",
+        "options": [
+            "Förmågan att utföra arbete eller orsaka förändring",
+            "Ett mått på vikt",
+            "Ett ämne i batterier",
+            "En typ av atom",
+            "Ett grundämne"
+        ],
+        "answer": "Förmågan att utföra arbete eller orsaka förändring",
+        "hint": "Energi krävs för att sätta något i rörelse eller förändra det"
+    },
+    {
+        "title": "Fråga 2",
+        "text": "Vilken enhet används för att mäta energi?",
+        "type": "multiple",
+        "options": [
+            "Joule",
+            "Watt",
+            "Ampere",
+            "Newton",
+            "Volt"
+        ],
+        "answer": "Joule",
+        "hint": "Förkortas J"
+    },
+    {
+        "title": "Fråga 3",
+        "text": "Vad är elektrisk energi?",
+        "type": "multiple",
+        "options": [
+            "Energi som överförs med elektroner i rörelse",
+            "Energi i form av värme",
+            "Energi lagrad i atomer",
+            "Energi från solljus",
+            "Energi som bara finns i batterier"
+        ],
+        "answer": "Energi som överförs med elektroner i rörelse",
+        "hint": "Finns i ledningar och batterier"
+    },
+    {
+        "title": "Fråga 4",
+        "text": "Vad är kemisk energi?",
+        "type": "multiple",
+        "options": [
+            "Energi lagrad i bindningar mellan atomer",
+            "Energi från solen",
+            "Värmeenergi i vatten",
+            "Energi från ljudvågor",
+            "Mekanisk rörelse"
+        ],
+        "answer": "Energi lagrad i bindningar mellan atomer",
+        "hint": "Finns i mat, bränslen och batterier"
+    },
+    {
+        "title": "Fråga 5",
+        "text": "Vad är kärnenergi?",
+        "type": "multiple",
+        "options": [
+            "Energi som frigörs när atomkärnor klyvs eller slås samman",
+            "Energi som finns i elektroner",
+            "Energi från värme",
+            "Energi som uppstår vid friktion",
+            "Energi som bara finns i solen"
+        ],
+        "answer": "Energi som frigörs när atomkärnor klyvs eller slås samman",
+        "hint": "Finns i kärnkraftverk och solen"
+    },
+    {
+        "title": "Fråga 6",
+        "text": "Vad menas med strålningsenergi?",
+        "type": "multiple",
+        "options": [
+            "Energi som sprids med elektromagnetiska vågor",
+            "Energi från friktion",
+            "Energi som lagras i batterier",
+            "Energi från vind",
+            "Ljudenergi från högtalare"
+        ],
+        "answer": "Energi som sprids med elektromagnetiska vågor",
+        "hint": "T.ex. solljus, mikrovågor, röntgen"
+    },
+    {
+        "title": "Fråga 7",
+        "text": "Vad är värmeenergi?",
+        "type": "multiple",
+        "options": [
+            "Energi som uppstår när molekyler rör sig",
+            "Energi som kommer från ljud",
+            "Energi i kemiska reaktioner",
+            "Energi från elektricitet",
+            "Energi som kommer från ljus"
+        ],
+        "answer": "Energi som uppstår när molekyler rör sig",
+        "hint": "Ju mer de rör sig, desto varmare"
+    },
+    {
+        "title": "Fråga 8",
+        "text": "Vad är mekanisk energi?",
+        "type": "multiple",
+        "options": [
+            "Energi hos föremål i rörelse eller i läge att röra sig",
+            "Energi i kärnreaktioner",
+            "Energi från värme",
+            "Elektrisk energi i maskiner",
+            "Ljudvågor som slår i metall"
+        ],
+        "answer": "Energi hos föremål i rörelse eller i läge att röra sig",
+        "hint": "Kan delas upp i lägesenergi och rörelseenergi"
+    },
+    {
+        "title": "Fråga 9",
+        "text": "Vad säger energiprincipen?",
+        "type": "multiple",
+        "options": [
+            "Energi kan inte förstöras eller skapas, bara omvandlas",
+            "Energi kan skapas ur tomma intet",
+            "Energi kan bara användas en gång",
+            "All energi blir till rörelseenergi",
+            "Energi finns bara i solen"
+        ],
+        "answer": "Energi kan inte förstöras eller skapas, bara omvandlas",
+        "hint": "Totala mängden energi är konstant"
+    },
+    {
+        "title": "Fråga 10",
+        "text": "Vad menas med verkningsgrad?",
+        "type": "multiple",
+        "options": [
+            "Hur stor andel av energin som omvandlas till nyttig energi",
+            "Hur snabbt något går sönder",
+            "Hur mycket energi som går åt vid tillverkning",
+            "Energiförlust i elektriska apparater",
+            "Hur mycket energi som används per timme"
+        ],
+        "answer": "Hur stor andel av energin som omvandlas till nyttig energi",
+        "hint": "Uttrycks ofta i procent"
+    },
+    {
+        "title": "Fråga 31",
+        "text": "Vilken av följande är en förnybar energikälla?",
+        "type": "multiple",
+        "options": [
+            "Solenergi",
+            "Naturgas",
+            "Kol",
+            "Uran",
+            "Olja"
+        ],
+        "answer": "Solenergi",
+        "hint": "Kommer från solen och tar inte slut"
+    },
+    {
+        "title": "Fråga 32",
+        "text": "Vilken energikälla klassas som icke-förnybar?",
+        "type": "multiple",
+        "options": [
+            "Olja",
+            "Vind",
+            "Sol",
+            "Vattenkraft",
+            "Biobränsle"
+        ],
+        "answer": "Olja",
+        "hint": "Tar miljoner år att bildas"
+    },
+    {
+        "title": "Fråga 33",
+        "text": "Vad är biobränsle?",
+        "type": "multiple",
+        "options": [
+            "Bränsle från växter och organiskt material",
+            "Ett ämne från kärnkraft",
+            "Konstgjord olja",
+            "En blandning av plast och diesel",
+            "Gas från kolgruvor"
+        ],
+        "answer": "Bränsle från växter och organiskt material",
+        "hint": "Exempel: ved, rapsolja, etanol"
+    },
+    {
+        "title": "Fråga 34",
+        "text": "Vad är en nackdel med vattenkraft?",
+        "type": "multiple",
+        "options": [
+            "Påverkar ekosystem i älvar och sjöar",
+            "Släpper ut mycket koldioxid",
+            "Kräver uran",
+            "Producerar mycket avfall",
+            "Ger farlig strålning"
+        ],
+        "answer": "Påverkar ekosystem i älvar och sjöar",
+        "hint": "Kan påverka fiskvandring och vattenflöden"
+    },
+    {
+        "title": "Fråga 35",
+        "text": "Vilken energiomvandling sker i ett vindkraftverk?",
+        "type": "multiple",
+        "options": [
+            "Rörelseenergi → elektrisk energi",
+            "Kemisk energi → värme",
+            "Värmeenergi → rörelseenergi",
+            "Kärnenergi → ljudenergi",
+            "Strålningsenergi → rörelseenergi"
+        ],
+        "answer": "Rörelseenergi → elektrisk energi",
+        "hint": "Roterande blad driver generator"
+    },
+    {
+        "title": "Fråga 36",
+        "text": "Vad är ett solcellspanels syfte?",
+        "type": "multiple",
+        "options": [
+            "Omvandla solljus till elektricitet",
+            "Samla värme till matlagning",
+            "Skapa skugga på tak",
+            "Producera kemisk energi",
+            "Lagra energi i batterier"
+        ],
+        "answer": "Omvandla solljus till elektricitet",
+        "hint": "Ger ström till hus och nät"
+    },
+    {
+        "title": "Fråga 37",
+        "text": "Vilken fördel har solenergi?",
+        "type": "multiple",
+        "options": [
+            "Släpper inte ut växthusgaser",
+            "Producerar elektricitet på natten",
+            "Fungerar bäst i kalla klimat",
+            "Ger konstant energi oavsett väder",
+            "Är beroende av olja"
+        ],
+        "answer": "Släpper inte ut växthusgaser",
+        "hint": "Bra för klimatet"
+    },
+    {
+        "title": "Fråga 38",
+        "text": "Vad är ett problem med solenergi?",
+        "type": "multiple",
+        "options": [
+            "Ger mindre el när det är molnigt eller mörkt",
+            "Orsakar radioaktivt avfall",
+            "Förbrukar stora mängder vatten",
+            "Måste förbrännas för att ge el",
+            "Avger ljud som stör människor"
+        ],
+        "answer": "Ger mindre el när det är molnigt eller mörkt",
+        "hint": "Beror på vädret och dygnets tid"
+    },
+    {
+        "title": "Fråga 39",
+        "text": "Vad menas med klimatneutral energiproduktion?",
+        "type": "multiple",
+        "options": [
+            "Att energiproduktionen inte påverkar klimatet negativt",
+            "Att den är 100% effektiv",
+            "Att den inte kostar något",
+            "Att energin bara används på vintern",
+            "Att den måste produceras nära användaren"
+        ],
+        "answer": "Att energiproduktionen inte påverkar klimatet negativt",
+        "hint": "Inga nettoutsläpp av växthusgaser"
+    },
+    {
+        "title": "Fråga 40",
+        "text": "Vilken energikälla bidrar mest till växthuseffekten globalt?",
+        "type": "multiple",
+        "options": [
+            "Olja",
+            "Solenergi",
+            "Vindkraft",
+            "Vattenkraft",
+            "Kärnkraft"
+        ],
+        "answer": "Olja",
+        "hint": "Ett fossilt bränsle"
+    },
+    {
+        "title": "Fråga 61",
+        "text": "Vad hände vid kärnkraftsolyckan i Tjernobyl 1986?",
+        "type": "multiple",
+        "options": [
+            "En reaktor exploderade och spred radioaktivitet över stora områden",
+            "En damm brast och orsakade översvämning",
+            "Ett kolkraftverk brann upp",
+            "Ett vindkraftverk välte",
+            "En solpanel exploderade"
+        ],
+        "answer": "En reaktor exploderade och spred radioaktivitet över stora områden",
+        "hint": "Olyckan inträffade i dåvarande Sovjetunionen"
+    },
+    {
+        "title": "Fråga 62",
+        "text": "Vilket land drabbades av kärnkraftsolyckan i Fukushima 2011?",
+        "type": "multiple",
+        "options": [
+            "Japan",
+            "USA",
+            "Ryssland",
+            "Tyskland",
+            "Sverige"
+        ],
+        "answer": "Japan",
+        "hint": "Orsaken var en tsunami"
+    },
+    {
+        "title": "Fråga 63",
+        "text": "Vad kan vara ett argument MOT kärnkraft?",
+        "type": "multiple",
+        "options": [
+            "Radioaktivt avfall är farligt och svårt att lagra",
+            "Den släpper ut mycket växthusgaser",
+            "Det krävs fossila bränslen",
+            "Elproduktionen varierar med vädret",
+            "Det är svårt att hitta uran i naturen"
+        ],
+        "answer": "Radioaktivt avfall är farligt och svårt att lagra",
+        "hint": "Slutförvar krävs i tusentals år"
+    },
+    {
+        "title": "Fråga 64",
+        "text": "Vad innebär Parisavtalet?",
+        "type": "multiple",
+        "options": [
+            "Ett globalt avtal för att minska utsläppen av växthusgaser",
+            "Ett avtal om kärnkraftssamarbete",
+            "En energiplan för Europa",
+            "Ett klimatavtal för fordonstillverkning",
+            "Ett handelsavtal för olja"
+        ],
+        "answer": "Ett globalt avtal för att minska utsläppen av växthusgaser",
+        "hint": "Syftet är att bromsa klimatförändringen"
+    },
+    {
+        "title": "Fråga 65",
+        "text": "Vilket är Sveriges klimatmål till år 2045?",
+        "type": "multiple",
+        "options": [
+            "Att inte ha några nettoutsläpp av växthusgaser",
+            "Att använda enbart kärnkraft",
+            "Att stänga alla kolkraftverk",
+            "Att införa flygförbud",
+            "Att halvera elförbrukningen"
+        ],
+        "answer": "Att inte ha några nettoutsläpp av växthusgaser",
+        "hint": "Kallas klimatneutralitet"
+    },
+    {
+        "title": "Fråga 66",
+        "text": "Vad menas med energieffektivisering?",
+        "type": "multiple",
+        "options": [
+            "Att använda mindre energi för att uppnå samma resultat",
+            "Att använda bara förnybara energikällor",
+            "Att bygga nya kraftverk",
+            "Att byta elbolag",
+            "Att använda el under natten"
+        ],
+        "answer": "Att använda mindre energi för att uppnå samma resultat",
+        "hint": "T.ex. LED-lampor och bättre isolering"
+    },
+    {
+        "title": "Fråga 67",
+        "text": "Hur kan energianvändningen i ett hushåll minskas?",
+        "type": "multiple",
+        "options": [
+            "Genom bättre isolering och effektiva apparater",
+            "Genom att stänga av all belysning dygnet runt",
+            "Genom att bygga större hus",
+            "Genom att ha många elektriska element",
+            "Genom att använda glödlampor"
+        ],
+        "answer": "Genom bättre isolering och effektiva apparater",
+        "hint": "Energisnålt byggande"
+    },
+    {
+        "title": "Fråga 68",
+        "text": "Vilken roll spelar återvinning i energisystemet?",
+        "type": "multiple",
+        "options": [
+            "Sparar energi jämfört med att utvinna nytt material",
+            "Ökar behovet av kol",
+            "Skapar mer avfall",
+            "Kräver kärnkraft",
+            "Används bara för plast"
+        ],
+        "answer": "Sparar energi jämfört med att utvinna nytt material",
+        "hint": "T.ex. återvunnet aluminium kräver 95% mindre energi"
+    },
+    {
+        "title": "Fråga 69",
+        "text": "Vilket fordon är mest energieffektivt?",
+        "type": "multiple",
+        "options": [
+            "Tåg",
+            "Bil med förbränningsmotor",
+            "Flygplan",
+            "Motorcykel",
+            "Buss med diesel"
+        ],
+        "answer": "Tåg",
+        "hint": "Lågt rullmotstånd och eldrift"
+    },
+    {
+        "title": "Fråga 70",
+        "text": "Vilken energiform är minst lämpad för lagring?",
+        "type": "multiple",
+        "options": [
+            "Strålningsenergi",
+            "Kemisk energi",
+            "Elektrisk energi i batteri",
+            "Lägesenergi i vattenmagasin",
+            "Kärnenergi i bränslestavar"
+        ],
+        "answer": "Strålningsenergi",
+        "hint": "Svår att fånga och spara"
+    },
+    {
+        "title": "Fråga 71",
+        "text": "Vad är skillnaden mellan lägesenergi och rörelseenergi?",
+        "type": "multiple",
+        "options": [
+            "Lägesenergi är lagrad energi, rörelseenergi är energi i rörelse",
+            "Lägesenergi är ljud, rörelseenergi är värme",
+            "Lägesenergi används bara i bilar",
+            "Rörelseenergi är lagrad i batterier",
+            "De är exakt samma sak"
+        ],
+        "answer": "Lägesenergi är lagrad energi, rörelseenergi är energi i rörelse",
+        "hint": "Tänk på ett föremål högt upp vs ett som faller"
+    },
+    {
+        "title": "Fråga 72",
+        "text": "Vad är fossila bränslen?",
+        "type": "multiple",
+        "options": [
+            "Bränslen som bildats av organiskt material under miljoner år",
+            "Energi som kommer från solen",
+            "Återvunnet bränsle",
+            "Bränsle från kärnkraft",
+            "Biobränsle från växter"
+        ],
+        "answer": "Bränslen som bildats av organiskt material under miljoner år",
+        "hint": "Exempel: kol, olja, naturgas"
+    },
+    {
+        "title": "Fråga 73",
+        "text": "Vilken energiform används i en vattenkokare?",
+        "type": "multiple",
+        "options": [
+            "Elektrisk energi omvandlas till värmeenergi",
+            "Strålningsenergi till rörelseenergi",
+            "Kemisk energi till kärnenergi",
+            "Ljusenergi till ljudenergi",
+            "Rörelseenergi till kemisk energi"
+        ],
+        "answer": "Elektrisk energi omvandlas till värmeenergi",
+        "hint": "Sker genom ett värmeelement"
+    },
+    {
+        "title": "Fråga 74",
+        "text": "Vilket påstående stämmer om elproduktion från biobränsle?",
+        "type": "multiple",
+        "options": [
+            "Det är förnybart eftersom nya växter kan odlas",
+            "Det är helt utsläppsfritt",
+            "Det ger alltid mer energi än fossila bränslen",
+            "Det kräver kärnreaktorer",
+            "Det används bara i privatbilar"
+        ],
+        "answer": "Det är förnybart eftersom nya växter kan odlas",
+        "hint": "Biologiskt material växer upp igen"
+    },
+    {
+        "title": "Fråga 75",
+        "text": "Vad är jordvärme?",
+        "type": "multiple",
+        "options": [
+            "Värme lagrad i marken från solen",
+            "Värme från kärnreaktioner i jordens inre",
+            "Värme från kolkraftverk",
+            "Värme från fossiler",
+            "Värme från berggrunden via kärnkraft"
+        ],
+        "answer": "Värme lagrad i marken från solen",
+        "hint": "Används via värmepumpar"
+    },
+    {
+        "title": "Fråga 76",
+        "text": "Vad är bergvärme?",
+        "type": "multiple",
+        "options": [
+            "Värme hämtad djupt ner i berggrunden",
+            "Värme från varma stenar på sommaren",
+            "Värme från solceller på tak",
+            "Värme från bergarter som smälter",
+            "En form av elektrisk energi"
+        ],
+        "answer": "Värme hämtad djupt ner i berggrunden",
+        "hint": "Liknar jordvärme men med djupare borrhål"
+    },
+    {
+        "title": "Fråga 77",
+        "text": "Vad är en hybridbil?",
+        "type": "multiple",
+        "options": [
+            "En bil som drivs av både el och bensin",
+            "En bil som går på vatten",
+            "En bil med två förarplatser",
+            "En bil som aldrig släpper ut något",
+            "En bil som enbart går på biobränsle"
+        ],
+        "answer": "En bil som drivs av både el och bensin",
+        "hint": "Kan ladda batteri och tanka"
+    },
+    {
+        "title": "Fråga 78",
+        "text": "Vad innebär det att en energiomvandling är 'förlustfri'?",
+        "type": "multiple",
+        "options": [
+            "All energi omvandlas till önskad form utan spill",
+            "Energin förstörs helt",
+            "Det krävs ingen verkningsgrad",
+            "Ingen energi omvandlas alls",
+            "Endast värme skapas"
+        ],
+        "answer": "All energi omvandlas till önskad form utan spill",
+        "hint": "Finns sällan i verkligheten"
+    },
+    {
+        "title": "Fråga 79",
+        "text": "Vad innebär det att ett land är 'beroende av importerad energi'?",
+        "type": "multiple",
+        "options": [
+            "Att det köper en stor del av sin energi från andra länder",
+            "Att det har många vattenkraftverk",
+            "Att det producerar all energi själv",
+            "Att det inte använder fossila bränslen",
+            "Att det exporterar mycket el"
+        ],
+        "answer": "Att det köper en stor del av sin energi från andra länder",
+        "hint": "Gör landet sårbart vid kriser"
+    },
+    {
+        "title": "Fråga 80",
+        "text": "Vad är en smart elnätlösning?",
+        "type": "multiple",
+        "options": [
+            "Ett elnät som anpassar sig efter efterfrågan och produktion i realtid",
+            "En gammal elledning",
+            "Ett kraftverk som alltid är igång",
+            "En lösning där alla hushåll får samma mängd el",
+            "Ett nät som stängs av nattetid"
+        ],
+        "answer": "Ett elnät som anpassar sig efter efterfrågan och produktion i realtid",
+        "hint": "Använder digital teknik"
+    }
+]

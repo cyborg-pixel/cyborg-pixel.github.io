@@ -1,0 +1,1052 @@
+[
+    {
+        "title": "Fråga 1",
+        "text": "Vad består en atom av?",
+        "type": "multiple",
+        "options": [
+            "Protoner, neutroner och elektroner",
+            "Molekyler och joner",
+            "Endast elektroner",
+            "Kärnor och skalor",
+            "Kväve och syre"
+        ],
+        "answer": "Protoner, neutroner och elektroner",
+        "hint": "Tre grundläggande partiklar"
+    },
+    {
+        "title": "Fråga 2",
+        "text": "Var i atomen finns protonerna?",
+        "type": "multiple",
+        "options": [
+            "I atomkärnan",
+            "I elektronskalen",
+            "Utanför atomen",
+            "I neutronerna",
+            "I fotonerna"
+        ],
+        "answer": "I atomkärnan",
+        "hint": "Tillsammans med neutronerna"
+    },
+    {
+        "title": "Fråga 3",
+        "text": "Vad är en elektron?",
+        "type": "multiple",
+        "options": [
+            "En negativt laddad partikel",
+            "En partikel utan laddning",
+            "En ljuspartikel",
+            "En typ av neutron",
+            "En stråle"
+        ],
+        "answer": "En negativt laddad partikel",
+        "hint": "Finns i elektronskalen"
+    },
+    {
+        "title": "Fråga 4",
+        "text": "Vad menas med atomnummer?",
+        "type": "multiple",
+        "options": [
+            "Antal protoner i kärnan",
+            "Antal neutroner i kärnan",
+            "Antal elektroner i skalen",
+            "Summan av protoner och neutroner",
+            "Atomens vikt"
+        ],
+        "answer": "Antal protoner i kärnan",
+        "hint": "Unikt för varje grundämne"
+    },
+    {
+        "title": "Fråga 5",
+        "text": "Vad är ett masstal?",
+        "type": "multiple",
+        "options": [
+            "Summan av protoner och neutroner",
+            "Antal elektroner",
+            "Atomens laddning",
+            "Antal neutroner",
+            "Antal fotoner"
+        ],
+        "answer": "Summan av protoner och neutroner",
+        "hint": "Anger ungefär atomens massa"
+    },
+    {
+        "title": "Fråga 6",
+        "text": "Vad är en isotop?",
+        "type": "multiple",
+        "options": [
+            "Atomer med samma antal protoner men olika antal neutroner",
+            "En molekyl med två kärnor",
+            "En laddad atom",
+            "En partikelstråle",
+            "En atom med fler elektroner än protoner"
+        ],
+        "answer": "Atomer med samma antal protoner men olika antal neutroner",
+        "hint": "Isotoper av samma ämne har olika masstal"
+    },
+    {
+        "title": "Fråga 7",
+        "text": "Vem föreslog idén om atomer redan i antikens Grekland?",
+        "type": "multiple",
+        "options": [
+            "Demokritos",
+            "Aristoteles",
+            "Newton",
+            "Bohr",
+            "Einstein"
+        ],
+        "answer": "Demokritos",
+        "hint": "Han trodde att all materia var uppbyggd av odelbara delar"
+    },
+    {
+        "title": "Fråga 8",
+        "text": "Vem utvecklade en atommodell med elektronskal?",
+        "type": "multiple",
+        "options": [
+            "Niels Bohr",
+            "Marie Curie",
+            "Albert Einstein",
+            "Dmitrij Mendelejev",
+            "James Chadwick"
+        ],
+        "answer": "Niels Bohr",
+        "hint": "Modellen visar elektroner i olika energinivåer"
+    },
+    {
+        "title": "Fråga 9",
+        "text": "Vad visade Rutherfords guldfolie-experiment?",
+        "type": "multiple",
+        "options": [
+            "Att atomer har en liten, tät kärna",
+            "Att elektroner är vågor",
+            "Att ljus kan böjas",
+            "Att neutroner har massa",
+            "Att isotoper har olika vikt"
+        ],
+        "answer": "Att atomer har en liten, tät kärna",
+        "hint": "Alpha-partiklar studsade tillbaka"
+    },
+    {
+        "title": "Fråga 10",
+        "text": "Vad är ett elektronskal?",
+        "type": "multiple",
+        "options": [
+            "Ett energinivåområde där elektroner kretsar runt kärnan",
+            "En skyddande hinna",
+            "Ett magnetfält runt atomen",
+            "En uppsättning neutroner",
+            "En elektrisk våg"
+        ],
+        "answer": "Ett energinivåområde där elektroner kretsar runt kärnan",
+        "hint": "K, L, M... är exempel"
+    },
+    {
+        "title": "Fråga 31",
+        "text": "Vad är alfastrålning?",
+        "type": "multiple",
+        "options": [
+            "En strålning som består av heliumkärnor",
+            "En strålning med endast elektroner",
+            "En osynlig vågrörelse",
+            "En typ av fotonstrålning",
+            "En magnetisk våg"
+        ],
+        "answer": "En strålning som består av heliumkärnor",
+        "hint": "Två protoner + två neutroner"
+    },
+    {
+        "title": "Fråga 32",
+        "text": "Vad är betastrålning?",
+        "type": "multiple",
+        "options": [
+            "En strålning som består av elektroner",
+            "En strålning som består av heliumkärnor",
+            "En slags UV-strålning",
+            "En typ av gammastrålning",
+            "En radioaktiv våg"
+        ],
+        "answer": "En strålning som består av elektroner",
+        "hint": "Utsänds när en neutron omvandlas"
+    },
+    {
+        "title": "Fråga 33",
+        "text": "Vad är gammastrålning?",
+        "type": "multiple",
+        "options": [
+            "Elektromagnetisk strålning med hög energi",
+            "Strålning av neutroner",
+            "Ett slags betastrålning",
+            "Synligt ljus",
+            "Röntgenstrålning"
+        ],
+        "answer": "Elektromagnetisk strålning med hög energi",
+        "hint": "Har inga partiklar – bara energi"
+    },
+    {
+        "title": "Fråga 34",
+        "text": "Vilken strålning har störst räckvidd?",
+        "type": "multiple",
+        "options": [
+            "Gammastrålning",
+            "Betastrålning",
+            "Alfastrålning",
+            "Röntgenstrålning",
+            "UV-strålning"
+        ],
+        "answer": "Gammastrålning",
+        "hint": "Tränger igenom både kropp och betong"
+    },
+    {
+        "title": "Fråga 35",
+        "text": "Vad innebär halveringstid?",
+        "type": "multiple",
+        "options": [
+            "Tiden det tar för hälften av ett radioaktivt ämne att sönderfalla",
+            "Tiden tills ett ämne är helt borta",
+            "Tiden det tar att mäta strålning",
+            "Tiden mellan två strålningspulser",
+            "Tiden tills strålning upphör"
+        ],
+        "answer": "Tiden det tar för hälften av ett radioaktivt ämne att sönderfalla",
+        "hint": "Mäter hur snabbt radioaktivitet minskar"
+    },
+    {
+        "title": "Fråga 36",
+        "text": "Vilken enhet används för att mäta radioaktivitet?",
+        "type": "multiple",
+        "options": [
+            "Becquerel (Bq)",
+            "Sievert (Sv)",
+            "Gray (Gy)",
+            "Joule (J)",
+            "Curie"
+        ],
+        "answer": "Becquerel (Bq)",
+        "hint": "1 Bq = 1 sönderfall per sekund"
+    },
+    {
+        "title": "Fråga 37",
+        "text": "Vad är en isotop av kol som används vid datering?",
+        "type": "multiple",
+        "options": [
+            "Kol-14",
+            "Kol-12",
+            "Kol-13",
+            "Kol-16",
+            "Kol-11"
+        ],
+        "answer": "Kol-14",
+        "hint": "Radioaktiv och finns i organiskt material"
+    },
+    {
+        "title": "Fråga 38",
+        "text": "Hur länge räcker kol-14 för datering?",
+        "type": "multiple",
+        "options": [
+            "Upp till cirka 50 000 år",
+            "Några månader",
+            "Ett år",
+            "En miljard år",
+            "Endast i nutiden"
+        ],
+        "answer": "Upp till cirka 50 000 år",
+        "hint": "Används på arkeologiska fynd"
+    },
+    {
+        "title": "Fråga 39",
+        "text": "Vad används en Geigermätare till?",
+        "type": "multiple",
+        "options": [
+            "Att mäta radioaktiv strålning",
+            "Att skapa strålning",
+            "Att visa ljusstyrka",
+            "Att filtrera strålning",
+            "Att mäta spänning"
+        ],
+        "answer": "Att mäta radioaktiv strålning",
+        "hint": "Klickar vid sönderfall"
+    },
+    {
+        "title": "Fråga 40",
+        "text": "Vad är bakgrundsstrålning?",
+        "type": "multiple",
+        "options": [
+            "Strålning vi ständigt utsätts för från omgivningen",
+            "Strålning från rymden endast på natten",
+            "Strålning från röntgenapparater",
+            "Strålning i laboratorium",
+            "Gammastrålning från mikrovågor"
+        ],
+        "answer": "Strålning vi ständigt utsätts för från omgivningen",
+        "hint": "Kommer från rymden, marken, kroppen"
+    },
+    {
+        "title": "Fråga 41",
+        "text": "Vad används dosimeter till?",
+        "type": "multiple",
+        "options": [
+            "Att mäta hur mycket strålning en person fått",
+            "Att skapa gammastrålning",
+            "Att kyla radioaktiva ämnen",
+            "Att lagra isotoper",
+            "Att skydda mot alfastrålning"
+        ],
+        "answer": "Att mäta hur mycket strålning en person fått",
+        "hint": "Vanlig bland sjukvårdspersonal"
+    },
+    {
+        "title": "Fråga 42",
+        "text": "Vad är enheten Sievert (Sv) till för?",
+        "type": "multiple",
+        "options": [
+            "Att mäta strålningsdosen kroppen tar upp",
+            "Antal sönderfall per sekund",
+            "Massan på isotoper",
+            "Halveringstiden på ämnen",
+            "Antalet neutroner"
+        ],
+        "answer": "Att mäta strålningsdosen kroppen tar upp",
+        "hint": "Mängden absorberad skadlig strålning"
+    },
+    {
+        "title": "Fråga 43",
+        "text": "Vad är en PET-kamera?",
+        "type": "multiple",
+        "options": [
+            "Ett instrument som visar radioaktivt märkta ämnen i kroppen",
+            "En kamera som tar bilder i mörker",
+            "En satellitkamera",
+            "En kamera för infrarött ljus",
+            "En geigermätare med skärm"
+        ],
+        "answer": "Ett instrument som visar radioaktivt märkta ämnen i kroppen",
+        "hint": "Används inom medicin"
+    },
+    {
+        "title": "Fråga 44",
+        "text": "Vad används gammastrålning till inom sjukvården?",
+        "type": "multiple",
+        "options": [
+            "Behandling av cancer",
+            "Att ta blodprov",
+            "Att kyla patienten",
+            "Att mäta socker",
+            "Att skapa isotoper"
+        ],
+        "answer": "Behandling av cancer",
+        "hint": "Strålningen dödar cancerceller"
+    },
+    {
+        "title": "Fråga 45",
+        "text": "Vad är viktigt vid hantering av radioaktiva ämnen?",
+        "type": "multiple",
+        "options": [
+            "Skyddsutrustning och avstånd",
+            "Uppvärmning",
+            "Kontakt med vatten",
+            "Belysning",
+            "Kylning med gas"
+        ],
+        "answer": "Skyddsutrustning och avstånd",
+        "hint": "Tid – avstånd – avskärmning"
+    },
+    {
+        "title": "Fråga 46",
+        "text": "Vad används bly till vid strålskydd?",
+        "type": "multiple",
+        "options": [
+            "För att stoppa strålning, särskilt gammastrålning",
+            "För att förstärka strålning",
+            "Som elektrisk ledare",
+            "För att kyla isotoper",
+            "Som reflektor"
+        ],
+        "answer": "För att stoppa strålning, särskilt gammastrålning",
+        "hint": "Tungt och effektivt material"
+    },
+    {
+        "title": "Fråga 47",
+        "text": "Vilket ämne används i brandvarnare?",
+        "type": "multiple",
+        "options": [
+            "Americium-241",
+            "Kol-14",
+            "Uran-238",
+            "Radon",
+            "Cesium-137"
+        ],
+        "answer": "Americium-241",
+        "hint": "Avger alfastrålning"
+    },
+    {
+        "title": "Fråga 48",
+        "text": "Vad kan hända om man utsätts för hög dos strålning?",
+        "type": "multiple",
+        "options": [
+            "Skador på celler och DNA",
+            "Högre kroppstemperatur",
+            "Ökad intelligens",
+            "Ljusreflektion",
+            "Ökad muskelmassa"
+        ],
+        "answer": "Skador på celler och DNA",
+        "hint": "Kan leda till cancer"
+    },
+    {
+        "title": "Fråga 49",
+        "text": "Vad gör Strålsäkerhetsmyndigheten?",
+        "type": "multiple",
+        "options": [
+            "Säkerställer att strålning hanteras säkert i Sverige",
+            "Tillverkar isotoper",
+            "Laddar reaktorer",
+            "Producerar strålskyddskläder",
+            "Forskning om ljusvågor"
+        ],
+        "answer": "Säkerställer att strålning hanteras säkert i Sverige",
+        "hint": "Kontrollerar kärnkraft, sjukvård m.m."
+    },
+    {
+        "title": "Fråga 50",
+        "text": "Vilket är ett naturligt radioaktivt ämne i svenska hus?",
+        "type": "multiple",
+        "options": [
+            "Radon",
+            "Fluor",
+            "Kalcium",
+            "Väte",
+            "Kväve"
+        ],
+        "answer": "Radon",
+        "hint": "Kommer från berggrund"
+    },
+    {
+        "title": "Fråga 61",
+        "text": "Vad är kärnklyvning (fission)?",
+        "type": "multiple",
+        "options": [
+            "En tung atomkärna klyvs i två mindre",
+            "Två lätta atomkärnor slås samman",
+            "En elektron lämnar atomen",
+            "En neutron bildas spontant",
+            "En foton absorberas av en kärna"
+        ],
+        "answer": "En tung atomkärna klyvs i två mindre",
+        "hint": "Används i kärnkraftverk"
+    },
+    {
+        "title": "Fråga 62",
+        "text": "Vilket grundämne används oftast i kärnkraftverk?",
+        "type": "multiple",
+        "options": [
+            "Uran-235",
+            "Kol-14",
+            "Plutonium-238",
+            "Radon",
+            "Klor"
+        ],
+        "answer": "Uran-235",
+        "hint": "Klyvs lätt vid neutronbestrålning"
+    },
+    {
+        "title": "Fråga 63",
+        "text": "Vad är en kedjereaktion?",
+        "type": "multiple",
+        "options": [
+            "När klyvningen av en kärna orsakar nya klyvningar",
+            "När elektroner studsar mellan atomer",
+            "När gammastrålning reflekteras",
+            "När neutroner blir protoner",
+            "När två elektroner kolliderar"
+        ],
+        "answer": "När klyvningen av en kärna orsakar nya klyvningar",
+        "hint": "Grunden för atombomb och kärnkraft"
+    },
+    {
+        "title": "Fråga 64",
+        "text": "Vad gör styrstavarna i ett kärnkraftverk?",
+        "type": "multiple",
+        "options": [
+            "Fångar upp neutroner för att kontrollera kedjereaktionen",
+            "Släpper ut ånga",
+            "Skapar elektricitet",
+            "Ökar temperaturen",
+            "Hindrar gammastrålning"
+        ],
+        "answer": "Fångar upp neutroner för att kontrollera kedjereaktionen",
+        "hint": "Reglerar reaktorns effekt"
+    },
+    {
+        "title": "Fråga 65",
+        "text": "Vad används moderatorn till i ett kärnkraftverk?",
+        "type": "multiple",
+        "options": [
+            "Bromsa neutronerna så att de kan orsaka nya klyvningar",
+            "Skydda mot strålning",
+            "Öka effekten",
+            "Minska spänningen",
+            "Kyler styrstavarna"
+        ],
+        "answer": "Bromsa neutronerna så att de kan orsaka nya klyvningar",
+        "hint": "Oftast vatten"
+    },
+    {
+        "title": "Fråga 66",
+        "text": "Vad är en härdsmälta?",
+        "type": "multiple",
+        "options": [
+            "När reaktorkärnan överhettas och smälter",
+            "När neutroner kolliderar",
+            "När bränslestavar fryser",
+            "När vatten kokar till is",
+            "När strålning försvinner"
+        ],
+        "answer": "När reaktorkärnan överhettas och smälter",
+        "hint": "Allvarligt säkerhetsproblem"
+    },
+    {
+        "title": "Fråga 67",
+        "text": "Vad är kärnfusion?",
+        "type": "multiple",
+        "options": [
+            "När två lätta atomkärnor slås samman",
+            "När en atom splittras",
+            "När en elektron hoppar",
+            "När ljus omvandlas till värme",
+            "När neutroner avges"
+        ],
+        "answer": "När två lätta atomkärnor slås samman",
+        "hint": "Sker i solen"
+    },
+    {
+        "title": "Fråga 68",
+        "text": "Vad krävs för att få fusion att ske?",
+        "type": "multiple",
+        "options": [
+            "Extremt hög temperatur och tryck",
+            "Stark kyla",
+            "Vakuum",
+            "Magnetfält i låga temperaturer",
+            "Mycket vatten"
+        ],
+        "answer": "Extremt hög temperatur och tryck",
+        "hint": "Finns naturligt i stjärnor"
+    },
+    {
+        "title": "Fråga 69",
+        "text": "Vilken fördel har fusion jämfört med fission?",
+        "type": "multiple",
+        "options": [
+            "Inget radioaktivt avfall",
+            "Kräver inga neutroner",
+            "Producerar alfastrålning",
+            "Fungerar i rumstemperatur",
+            "Kan drivas med luft"
+        ],
+        "answer": "Inget radioaktivt avfall",
+        "hint": "Mer hållbart långsiktigt"
+    },
+    {
+        "title": "Fråga 70",
+        "text": "Vad symboliserar E=mc²?",
+        "type": "multiple",
+        "options": [
+            "Energi kan omvandlas från massa",
+            "Elektricitet = magnetism × ljus",
+            "Elektroner = materia × konstant",
+            "Enhet = materia × kraft",
+            "Energi = molekyler × acceleration"
+        ],
+        "answer": "Energi kan omvandlas från massa",
+        "hint": "Albert Einstein"
+    },
+    {
+        "title": "Fråga 71",
+        "text": "Vilken reaktion sker i solen?",
+        "type": "multiple",
+        "options": [
+            "Fusion – väteatomer slås samman till helium",
+            "Fission – uran splittras",
+            "Sönderfall av kol",
+            "Fotonemission från neutroner",
+            "Alfastrålning från helium"
+        ],
+        "answer": "Fusion – väteatomer slås samman till helium",
+        "hint": "Ger solens energi"
+    },
+    {
+        "title": "Fråga 72",
+        "text": "Vilket projekt försöker utveckla fungerande fusionskraft på jorden?",
+        "type": "multiple",
+        "options": [
+            "ITER",
+            "CERN",
+            "NASA",
+            "ESA",
+            "WHO"
+        ],
+        "answer": "ITER",
+        "hint": "Byggs i Frankrike"
+    },
+    {
+        "title": "Fråga 73",
+        "text": "Vad är en tokamak?",
+        "type": "multiple",
+        "options": [
+            "En typ av fusionsreaktor",
+            "En partikelaccelerator",
+            "Ett mätsystem för neutroner",
+            "En enhet för strålning",
+            "En skyddsutrustning"
+        ],
+        "answer": "En typ av fusionsreaktor",
+        "hint": "Använder magnetfält"
+    },
+    {
+        "title": "Fråga 74",
+        "text": "Vad är en neutronbomb?",
+        "type": "multiple",
+        "options": [
+            "En kärnvapenbomb som främst skadar med strålning, inte tryck",
+            "En bomb som sprider neutroner för medicinskt bruk",
+            "En bomb som kyler omgivningen",
+            "En bomb som används för att rensa radioaktivitet",
+            "En typ av PET-kamera"
+        ],
+        "answer": "En kärnvapenbomb som främst skadar med strålning, inte tryck",
+        "hint": "Dödar men bevarar byggnader"
+    },
+    {
+        "title": "Fråga 75",
+        "text": "Vad är ett slutförvar?",
+        "type": "multiple",
+        "options": [
+            "En plats där radioaktivt avfall förvaras säkert",
+            "Ett rum för säkerhetstester",
+            "En avstängd kärnreaktor",
+            "Ett skyddsrum mot strålning",
+            "En plats för nedgrävning av batterier"
+        ],
+        "answer": "En plats där radioaktivt avfall förvaras säkert",
+        "hint": "Djup berglagring"
+    },
+    {
+        "title": "Fråga 76",
+        "text": "Vad är det största problemet med kärnkraft ur ett långsiktigt perspektiv?",
+        "type": "multiple",
+        "options": [
+            "Radioaktivt avfall och slutförvaring",
+            "Att det kostar mycket",
+            "Att man måste använda mycket vatten",
+            "Att elen inte räcker till",
+            "Att neutroner är dyra"
+        ],
+        "answer": "Radioaktivt avfall och slutförvaring",
+        "hint": "Kan vara farligt i tusentals år"
+    },
+    {
+        "title": "Fråga 77",
+        "text": "Vilken internationell organisation övervakar kärnvapenspridning?",
+        "type": "multiple",
+        "options": [
+            "FN",
+            "NATO",
+            "EU",
+            "WHO",
+            "UNICEF"
+        ],
+        "answer": "FN",
+        "hint": "Via IAEA"
+    },
+    {
+        "title": "Fråga 78",
+        "text": "Vad innebär kärnkraftens 'fördel' i klimatsammanhang?",
+        "type": "multiple",
+        "options": [
+            "Den släpper inte ut koldioxid",
+            "Den värmer upp haven",
+            "Den ökar ozonskiktet",
+            "Den använder växthusgaser",
+            "Den bidrar till sura regn"
+        ],
+        "answer": "Den släpper inte ut koldioxid",
+        "hint": "Inte fossilt bränsle"
+    },
+    {
+        "title": "Fråga 79",
+        "text": "Vad är en atombomb baserad på?",
+        "type": "multiple",
+        "options": [
+            "Okontrollerad kärnklyvning",
+            "Strålning från solen",
+            "Petroleum",
+            "Fusion i låga temperaturer",
+            "Statiskt tryck"
+        ],
+        "answer": "Okontrollerad kärnklyvning",
+        "hint": "Explosiv kedjereaktion"
+    },
+    {
+        "title": "Fråga 80",
+        "text": "Vilken roll spelar neutroner i kärnklyvning?",
+        "type": "multiple",
+        "options": [
+            "De startar och sprider kedjereaktionen",
+            "De kyler ner reaktorn",
+            "De absorberar strålning",
+            "De blir till protoner",
+            "De används för att skapa gammastrålning"
+        ],
+        "answer": "De startar och sprider kedjereaktionen",
+        "hint": "Kärnan klyvs av en träffande neutron"
+    },
+    {
+        "title": "Fråga 81",
+        "text": "Vad är dosgränsen för strålning i Sverige för en vanlig person per år?",
+        "type": "multiple",
+        "options": [
+            "1 millisievert (mSv)",
+            "10 millisievert (mSv)",
+            "100 millisievert (mSv)",
+            "5 sievert (Sv)",
+            "50 microgray (μGy)"
+        ],
+        "answer": "1 millisievert (mSv)",
+        "hint": "Gäller allmänheten, inte yrkesverksamma"
+    },
+    {
+        "title": "Fråga 82",
+        "text": "Vilken strålning stoppas enklast av ett papper?",
+        "type": "multiple",
+        "options": [
+            "Alfastrålning",
+            "Betastrålning",
+            "Gammastrålning",
+            "Röntgen",
+            "Neutronstrålning"
+        ],
+        "answer": "Alfastrålning",
+        "hint": "Mycket tung men kort räckvidd"
+    },
+    {
+        "title": "Fråga 83",
+        "text": "Vad består en neutron av?",
+        "type": "multiple",
+        "options": [
+            "En oladdad partikel i atomkärnan",
+            "En positiv partikel",
+            "En elektriskt laddad atom",
+            "En gammafoton",
+            "En vätejon"
+        ],
+        "answer": "En oladdad partikel i atomkärnan",
+        "hint": "Finns tillsammans med protoner"
+    },
+    {
+        "title": "Fråga 84",
+        "text": "Vad sker med ett ämnes atomnummer vid alfapartikel-sönderfall?",
+        "type": "multiple",
+        "options": [
+            "Det minskar med 2",
+            "Det ökar med 1",
+            "Det blir oförändrat",
+            "Det minskar med 1",
+            "Det ökar med 2"
+        ],
+        "answer": "Det minskar med 2",
+        "hint": "Två protoner försvinner"
+    },
+    {
+        "title": "Fråga 85",
+        "text": "Vad innebär joniserande strålning?",
+        "type": "multiple",
+        "options": [
+            "Strålning som kan slå bort elektroner från atomer",
+            "Strålning som endast värmer upp material",
+            "Strålning med låg energi",
+            "En typ av UV-strålning",
+            "Strålning som skapar nya neutroner"
+        ],
+        "answer": "Strålning som kan slå bort elektroner från atomer",
+        "hint": "Skapar joner och kan skada celler"
+    },
+    {
+        "title": "Fråga 86",
+        "text": "Hur kan man skydda sig mot gammastrålning?",
+        "type": "multiple",
+        "options": [
+            "Tjocka blyväggar eller betong",
+            "Papper",
+            "Tunt glas",
+            "Trä",
+            "Aluminiumfolie"
+        ],
+        "answer": "Tjocka blyväggar eller betong",
+        "hint": "Gammastrålning är mycket genomträngande"
+    },
+    {
+        "title": "Fråga 87",
+        "text": "Vilket samband visar E = mc²?",
+        "type": "multiple",
+        "options": [
+            "Att massa kan omvandlas till energi",
+            "Att ljus har oändlig hastighet",
+            "Att laddning är konstant",
+            "Att neutroner väger mer än protoner",
+            "Att elektroner har energi"
+        ],
+        "answer": "Att massa kan omvandlas till energi",
+        "hint": "Einsteins formel"
+    },
+    {
+        "title": "Fråga 88",
+        "text": "Vilken upptäckt gjorde Marie Curie?",
+        "type": "multiple",
+        "options": [
+            "Upptäckte radioaktivitet i polonium och radium",
+            "Formulerade atommodellen",
+            "Byggde första kärnreaktorn",
+            "Upptäckte elektronen",
+            "Visade att strålning inte är farlig"
+        ],
+        "answer": "Upptäckte radioaktivitet i polonium och radium",
+        "hint": "Fick Nobelpris"
+    },
+    {
+        "title": "Fråga 89",
+        "text": "Vad är radon?",
+        "type": "multiple",
+        "options": [
+            "En radioaktiv gas som kan finnas i hus",
+            "Ett farligt tungmetallämne",
+            "En typ av neutronstrålning",
+            "Ett mätinstrument",
+            "En skyddsgas"
+        ],
+        "answer": "En radioaktiv gas som kan finnas i hus",
+        "hint": "Kommer från uran i berggrunden"
+    },
+    {
+        "title": "Fråga 90",
+        "text": "Hur kan man minska radon i ett hus?",
+        "type": "multiple",
+        "options": [
+            "Ventilation och tätning",
+            "Tjockare väggar",
+            "Kyla ner huset",
+            "Använda magnetfält",
+            "Sätta upp speglar"
+        ],
+        "answer": "Ventilation och tätning",
+        "hint": "Luftväxling hjälper"
+    },
+    {
+        "title": "Fråga 91",
+        "text": "Vad är syftet med IAEA?",
+        "type": "multiple",
+        "options": [
+            "Att främja säker och fredlig användning av kärnenergi",
+            "Att kontrollera globalt CO2-utsläpp",
+            "Att övervaka kärnvapen i USA",
+            "Att utveckla PET-teknik",
+            "Att tillverka reaktorer"
+        ],
+        "answer": "Att främja säker och fredlig användning av kärnenergi",
+        "hint": "Del av FN"
+    },
+    {
+        "title": "Fråga 92",
+        "text": "Vad visar ett sönderfallsschema?",
+        "type": "multiple",
+        "options": [
+            "Hur ett radioaktivt ämne förändras över tid",
+            "Hur en atom ser ut",
+            "Hur snabbt partiklar rör sig",
+            "Hur många neutroner som frigörs",
+            "Hur lång en halveringstid är"
+        ],
+        "answer": "Hur ett radioaktivt ämne förändras över tid",
+        "hint": "Visar strålningstyp och dotterkärna"
+    },
+    {
+        "title": "Fråga 93",
+        "text": "Vad är en radioaktiv kedja?",
+        "type": "multiple",
+        "options": [
+            "En serie av sönderfall från ett ämne till ett stabilt ämne",
+            "En serie neutroner",
+            "En ström av alfapartiklar",
+            "En typ av gammastrålning",
+            "En biologisk reaktion"
+        ],
+        "answer": "En serie av sönderfall från ett ämne till ett stabilt ämne",
+        "hint": "Flera steg i sönderfall"
+    },
+    {
+        "title": "Fråga 94",
+        "text": "Vilket påstående om betastrålning är korrekt?",
+        "type": "multiple",
+        "options": [
+            "Består av elektroner som skjuts ut från kärnan",
+            "Har samma egenskaper som alfastrålning",
+            "Tränger sämre än alfastrålning",
+            "Består av protoner",
+            "Är tyngre än alfapartiklar"
+        ],
+        "answer": "Består av elektroner som skjuts ut från kärnan",
+        "hint": "En neutron blir till en proton + elektron"
+    },
+    {
+        "title": "Fråga 95",
+        "text": "Vad betyder 'instabil atomkärna'?",
+        "type": "multiple",
+        "options": [
+            "Att den kommer att sönderfalla och sända ut strålning",
+            "Att den inte har elektroner",
+            "Att den är negativt laddad",
+            "Att den är lätt att splittra",
+            "Att den är varm"
+        ],
+        "answer": "Att den kommer att sönderfalla och sända ut strålning",
+        "hint": "Typiskt för radioaktiva ämnen"
+    },
+    {
+        "title": "Fråga 96",
+        "text": "Vad är skillnaden mellan naturlig och konstgjord radioaktivitet?",
+        "type": "multiple",
+        "options": [
+            "Naturlig finns i naturen, konstgjord skapas i reaktorer",
+            "Naturlig är ofarlig",
+            "Konstgjord är alltid farligare",
+            "Konstgjord strålar längre",
+            "Naturlig är alltid gammastrålning"
+        ],
+        "answer": "Naturlig finns i naturen, konstgjord skapas i reaktorer",
+        "hint": "T.ex. kol-14 vs. teknetium"
+    },
+    {
+        "title": "Fråga 97",
+        "text": "Vad används kol-14 till?",
+        "type": "multiple",
+        "options": [
+            "Datera gamla organiska material",
+            "Behandla cancer",
+            "Mäta strömstyrka",
+            "Driva kärnkraft",
+            "Bota sjukdomar"
+        ],
+        "answer": "Datera gamla organiska material",
+        "hint": "T.ex. gamla ben eller trä"
+    },
+    {
+        "title": "Fråga 98",
+        "text": "Vilket ämne i kroppen är naturligt radioaktivt?",
+        "type": "multiple",
+        "options": [
+            "Kalium-40",
+            "Kol-12",
+            "Syre-16",
+            "Väte-1",
+            "Järn-56"
+        ],
+        "answer": "Kalium-40",
+        "hint": "Finns i muskler"
+    },
+    {
+        "title": "Fråga 99",
+        "text": "Vilken är den största källan till bakgrundsstrålning i Sverige?",
+        "type": "multiple",
+        "options": [
+            "Radon",
+            "Solstrålning",
+            "Röntgenundersökningar",
+            "Mobiltelefoner",
+            "Mat"
+        ],
+        "answer": "Radon",
+        "hint": "Från mark och berggrund"
+    },
+    {
+        "title": "Fråga 100",
+        "text": "Vad menas med enheten Gray (Gy)?",
+        "type": "multiple",
+        "options": [
+            "Energi absorberad per kg materia",
+            "Antal sönderfall per sekund",
+            "Antal watt per sekund",
+            "Mängden fotoner",
+            "En typ av skyddsmaterial"
+        ],
+        "answer": "Energi absorberad per kg materia",
+        "hint": "Fysisk dos, ej biologisk"
+    },
+    {
+        "title": "Fråga 101",
+        "text": "Vad innebär dos i Sievert?",
+        "type": "multiple",
+        "options": [
+            "Biologisk effekt av absorberad strålning",
+            "Total strålning i naturen",
+            "Mängd partiklar i luften",
+            "Energimängd per kvadratmeter",
+            "Tryck av gammastrålning"
+        ],
+        "answer": "Biologisk effekt av absorberad strålning",
+        "hint": "Viktad med typ av strålning"
+    },
+    {
+        "title": "Fråga 102",
+        "text": "Vad är syftet med kärnenergi i samhället?",
+        "type": "multiple",
+        "options": [
+            "Att producera el",
+            "Att skapa strålning",
+            "Att öka radioaktivitet",
+            "Att förstöra kol",
+            "Att lagra neutroner"
+        ],
+        "answer": "Att producera el",
+        "hint": "Kärnkraftverk används till detta"
+    },
+    {
+        "title": "Fråga 103",
+        "text": "Vilket land var först att använda kärnvapen?",
+        "type": "multiple",
+        "options": [
+            "USA",
+            "Japan",
+            "Tyskland",
+            "Sovjetunionen",
+            "Storbritannien"
+        ],
+        "answer": "USA",
+        "hint": "Hiroshima och Nagasaki"
+    },
+    {
+        "title": "Fråga 104",
+        "text": "Vad menas med 'kritisk massa' i kärnfysik?",
+        "type": "multiple",
+        "options": [
+            "Minsta mängd fissilt material som krävs för att upprätthålla en kedjereaktion",
+            "Maximala neutronflödet",
+            "Högsta dosen strålning man får",
+            "Antal neutroner i en kärna",
+            "Volymen på ett kärnkraftverk"
+        ],
+        "answer": "Minsta mängd fissilt material som krävs för att upprätthålla en kedjereaktion",
+        "hint": "Behövs för att reaktionen inte ska dö ut"
+    },
+    {
+        "title": "Fråga 105",
+        "text": "Vad är ITER-projektets mål?",
+        "type": "multiple",
+        "options": [
+            "Att skapa hållbar fusionsenergi",
+            "Att bygga fler kärnvapen",
+            "Att minska CO2 genom kolkraft",
+            "Att mäta bakgrundsstrålning globalt",
+            "Att sprida kärnreaktorer"
+        ],
+        "answer": "Att skapa hållbar fusionsenergi",
+        "hint": "Testreaktor i Frankrike"
+    }
+]
