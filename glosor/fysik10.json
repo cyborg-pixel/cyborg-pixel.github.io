@@ -281,273 +281,273 @@
     },
     {
         "title": "Fråga 21",
-        "text": "Vad händer om du kopplar ett batteri och en lampa i serie?",
+        "text": "Vad händer med strömmen om resistansen i en krets ökar?",
         "type": "multiple",
         "options": [
-            "Lampa och batteri får samma ström",
-            "Lampan lyser inte",
-            "Lampa får större ström",
-            "Batteriet töms snabbare",
-            "Lampa får mindre ström"
+            "Strömmen minskar",
+            "Strömmen ökar",
+            "Strömmen förblir densamma",
+            "Resistansen försvinner",
+            "Effekten ökar"
         ],
-        "answer": "Lampa får mindre ström",
-        "hint": "Spänningen fördelas i serie"
+        "answer": "Strömmen minskar",
+        "hint": "Enligt Ohms lag"
     },
     {
         "title": "Fråga 22",
-        "text": "Vad innebär att koppla komponenter parallellt?",
+        "text": "Vad innebär det att en krets är i serie?",
         "type": "multiple",
         "options": [
-            "Komponenter delar på spänningen",
-            "Komponenter får samma spänning men olika ström",
-            "Komponenterna får samma ström",
-            "Resistansen ökar",
-            "Resistansen minskar"
+            "Alla komponenter är kopplade i rad",
+            "Komponenterna är parallellt kopplade",
+            "Strömmen delas upp i varje komponent",
+            "Komponenterna har samma resistans",
+            "Spänningen delas upp lika"
         ],
-        "answer": "Komponenter får samma spänning men olika ström",
-        "hint": "Spänningen är densamma i alla grenar"
+        "answer": "Alla komponenter är kopplade i rad",
+        "hint": "Strömmen går genom varje komponent"
     },
     {
         "title": "Fråga 23",
-        "text": "Vad händer med den totala resistansen när du kopplar två resistorer parallellt?",
+        "text": "Vad innebär det att en krets är parallellkopplad?",
+        "type": "multiple",
+        "options": [
+            "Spänningen är lika över alla komponenter",
+            "Strömmen går genom varje komponent",
+            "Strömmen delas upp mellan varje komponent",
+            "Resistansen adderas",
+            "Kretsen går i en slinga"
+        ],
+        "answer": "Strömmen delas upp mellan varje komponent",
+        "hint": "Spänning är lika över alla komponenter"
+    },
+    {
+        "title": "Fråga 24",
+        "text": "Vad händer med den totala resistansen om man lägger till fler resistorer i parallellkoppling?",
         "type": "multiple",
         "options": [
             "Den totala resistansen minskar",
             "Den totala resistansen ökar",
-            "Den totala resistansen är oförändrad",
-            "Den totala resistansen är summan av de två resistorerna",
-            "Den totala resistansen blir noll"
+            "Den totala resistansen förblir densamma",
+            "Resistansen blir noll",
+            "Spänningen ökar"
         ],
         "answer": "Den totala resistansen minskar",
-        "hint": "Resistansen blir mindre än den minsta av de två resistorerna"
-    },
-    {
-        "title": "Fråga 24",
-        "text": "Vad kallas det när flera komponenter är kopplade efter varandra i en elektrisk krets?",
-        "type": "multiple",
-        "options": [
-            "Seriekoppling",
-            "Parallellkoppling",
-            "Kortslutning",
-            "Jordning",
-            "Motstånd"
-        ],
-        "answer": "Seriekoppling",
-        "hint": "Komponenterna är i rad"
+        "hint": "Ju fler parallella vägar desto lägre resistans"
     },
     {
         "title": "Fråga 25",
-        "text": "Vad gör en diod?",
+        "text": "Vad innebär kortslutning i en elektrisk krets?",
         "type": "multiple",
         "options": [
-            "Låter ström flöda i en riktning",
-            "Ökar spänningen",
-            "Fördelar strömmen mellan olika komponenter",
-            "Omvandlar ström till ljus",
-            "Mäter motstånd"
+            "Strömmen går genom en mycket låg resistansväg",
+            "Spänningen minskar i kretsen",
+            "Resistansen ökar kraftigt",
+            "Kretsen är öppnad",
+            "Strömmen flödar konstant"
         ],
-        "answer": "Låter ström flöda i en riktning",
-        "hint": "Används i likriktare"
+        "answer": "Strömmen går genom en mycket låg resistansväg",
+        "hint": "Kan orsaka farliga överhettningar"
     },
     {
         "title": "Fråga 26",
-        "text": "Vad är en transistor?",
-        "type": "multiple",
-        "options": [
-            "En komponent som förstärker elektriska signaler",
-            "En strömbrytare",
-            "En elektrisk ledare",
-            "En värmekälla",
-            "En resistor"
-        ],
-        "answer": "En komponent som förstärker elektriska signaler",
-        "hint": "Grundläggande för elektroniska enheter"
-    },
-    {
-        "title": "Fråga 27",
-        "text": "Vad är en kondensator?",
+        "text": "Vad är en kondensator i en elektrisk krets?",
         "type": "multiple",
         "options": [
             "En komponent som lagrar elektrisk energi",
-            "En komponent som ökar strömmen",
-            "En komponent som omvandlar energi",
-            "En komponent som blockerar ström",
-            "En komponent som minskar spänning"
+            "En strömbrytare",
+            "En spole",
+            "En typ av batteri",
+            "En komponent som minskar strömmen"
         ],
         "answer": "En komponent som lagrar elektrisk energi",
-        "hint": "Laddas och urladdas snabbt"
+        "hint": "Används för att jämna ut strömförsörjningen"
+    },
+    {
+        "title": "Fråga 27",
+        "text": "Vad är skillnaden mellan växelström och likström?",
+        "type": "multiple",
+        "options": [
+            "Växelström ändrar riktning, medan likström går i en riktning",
+            "Växelström är snabbare än likström",
+            "Likström används i elnätet, medan växelström inte gör det",
+            "Växelström är farligare än likström",
+            "Likström är mer effektiv för långa avstånd"
+        ],
+        "answer": "Växelström ändrar riktning, medan likström går i en riktning",
+        "hint": "Växelström används i elnätet"
     },
     {
         "title": "Fråga 28",
-        "text": "Vad är en resistor?",
+        "text": "Vad är den vanligaste användningen för likström?",
         "type": "multiple",
         "options": [
-            "En komponent som begränsar strömmen i en krets",
-            "En komponent som ökar spänningen",
-            "En komponent som omvandlar energi till ljus",
-            "En komponent som lagrar energi",
-            "En komponent som omvandlar ström till rörelse"
+            "Batteridrivna apparater",
+            "Elektriska kraftverk",
+            "Högspänningsledning",
+            "Fjärrkontroller",
+            "Belysning"
         ],
-        "answer": "En komponent som begränsar strömmen i en krets",
-        "hint": "Minskar strömflödet"
+        "answer": "Batteridrivna apparater",
+        "hint": "Batterier ger likström"
     },
     {
         "title": "Fråga 29",
-        "text": "Vad är kortslutning?",
+        "text": "Vad är effekten i en elektrisk krets?",
         "type": "multiple",
         "options": [
-            "När strömmen flödar utan resistans",
-            "När strömmen flödar genom en resistor",
-            "När strömmen blockeras",
-            "När strömmen flödar genom kondensator",
-            "När spänningen är för låg"
+            "Energianvändningen per tidsenhet",
+            "Spänningen i kretsen",
+            "Strömstyrkan",
+            "Resistansen",
+            "Motståndet i kretsen"
         ],
-        "answer": "När strömmen flödar utan resistans",
-        "hint": "Kan orsaka skador och brand"
+        "answer": "Energianvändningen per tidsenhet",
+        "hint": "Effekt mäts i watt"
     },
     {
         "title": "Fråga 30",
-        "text": "Vad är en elektrisk krets?",
+        "text": "Vad är formeln för effekt?",
         "type": "multiple",
         "options": [
-            "En sluten bana för elektrisk ström",
-            "En öppen väg för ström",
-            "En energikälla",
-            "En resistans i en komponent",
-            "En elektrisk laddning"
+            "P = U · I",
+            "P = R · I",
+            "P = I² · R",
+            "P = U² / R",
+            "P = I · R"
         ],
-        "answer": "En sluten bana för elektrisk ström",
-        "hint": "För att strömmen ska flöda måste kretsen vara sluten"
+        "answer": "P = U · I",
+        "hint": "Effekt = Spänning × Ström"
     },
     {
-        "title": "Fråga 61",
-        "text": "Vad är en glödtråd?",
+        "title": "Fråga 41",
+        "text": "Vad händer med strömmen om resistansen i en krets ökar?",
         "type": "multiple",
         "options": [
-            "En tråd som blir glödande av elektricitet och ger ljus",
-            "En tråd som leder ström",
-            "En tråd som minskar strömmen",
-            "En tråd som isolerar ström",
-            "En tråd som gör el säkrare"
+            "Strömmen minskar",
+            "Strömmen ökar",
+            "Strömmen förblir densamma",
+            "Resistansen försvinner",
+            "Effekten ökar"
         ],
-        "answer": "En tråd som blir glödande av elektricitet och ger ljus",
-        "hint": "Används i glödlampor"
+        "answer": "Strömmen minskar",
+        "hint": "Enligt Ohms lag"
     },
     {
-        "title": "Fråga 62",
-        "text": "Vad är en elektrisk krets som kopplas till ett batteri?",
+        "title": "Fråga 42",
+        "text": "Vad innebär det att en krets är i serie?",
         "type": "multiple",
         "options": [
-            "En sluten krets",
-            "En öppen krets",
-            "En parallellkoppling",
-            "En kortslutning",
-            "En seriekoppling"
+            "Alla komponenter är kopplade i rad",
+            "Komponenterna är parallellt kopplade",
+            "Strömmen delas upp i varje komponent",
+            "Komponenterna har samma resistans",
+            "Spänningen delas upp lika"
         ],
-        "answer": "En sluten krets",
-        "hint": "En fungerande krets som tillåter strömflöde"
+        "answer": "Alla komponenter är kopplade i rad",
+        "hint": "Strömmen går genom varje komponent"
     },
     {
-        "title": "Fråga 63",
-        "text": "Vad händer när ett motstånd kopplas i en serie med en lampa?",
+        "title": "Fråga 43",
+        "text": "Vad innebär det att en krets är parallellkopplad?",
         "type": "multiple",
         "options": [
-            "Strömmen minskar i hela kretsen",
-            "Strömmen ökar i hela kretsen",
-            "Strömmen minskar bara i lampan",
-            "Spänningen minskar i motståndet",
-            "Strömmen försvinner"
+            "Spänningen är lika över alla komponenter",
+            "Strömmen går genom varje komponent",
+            "Strömmen delas upp mellan varje komponent",
+            "Resistansen adderas",
+            "Kretsen går i en slinga"
         ],
-        "answer": "Strömmen minskar i hela kretsen",
-        "hint": "Ökat motstånd i serie minskar flödet"
+        "answer": "Strömmen delas upp mellan varje komponent",
+        "hint": "Spänning är lika över alla komponenter"
     },
     {
-        "title": "Fråga 64",
-        "text": "Vad menas med att en krets är öppen?",
+        "title": "Fråga 44",
+        "text": "Vad händer med den totala resistansen om man lägger till fler resistorer i parallellkoppling?",
         "type": "multiple",
         "options": [
-            "Strömmen kan inte flöda",
-            "Strömmen flödar fritt",
-            "Alla komponenter är avstängda",
-            "Kretsen är osynlig",
-            "Strömmen är mycket stark"
+            "Den totala resistansen minskar",
+            "Den totala resistansen ökar",
+            "Den totala resistansen förblir densamma",
+            "Resistansen blir noll",
+            "Spänningen ökar"
         ],
-        "answer": "Strömmen kan inte flöda",
-        "hint": "En brytare kan öppna en krets"
+        "answer": "Den totala resistansen minskar",
+        "hint": "Ju fler parallella vägar desto lägre resistans"
     },
     {
-        "title": "Fråga 65",
-        "text": "Vad används en resistor till i en elektrisk krets?",
+        "title": "Fråga 45",
+        "text": "Vad är en kondensator i en elektrisk krets?",
         "type": "multiple",
         "options": [
-            "För att minska strömmen",
-            "För att öka strömmen",
-            "För att mäta effekt",
-            "För att mäta spänning",
-            "För att öka spänningen"
+            "En komponent som lagrar elektrisk energi",
+            "En strömbrytare",
+            "En spole",
+            "En typ av batteri",
+            "En komponent som minskar strömmen"
         ],
-        "answer": "För att minska strömmen",
-        "hint": "Resistans sänker flödet"
+        "answer": "En komponent som lagrar elektrisk energi",
+        "hint": "Används för att jämna ut strömförsörjningen"
     },
     {
-        "title": "Fråga 66",
-        "text": "Vad menas med energibesparing?",
+        "title": "Fråga 46",
+        "text": "Vad är skillnaden mellan växelström och likström?",
         "type": "multiple",
         "options": [
-            "Att använda mindre energi för att göra samma arbete",
-            "Att förbruka mer energi för samma arbete",
-            "Att släcka alla lampor",
-            "Att använda mer energi",
-            "Att undvika att använda el"
+            "Växelström ändrar riktning, medan likström går i en riktning",
+            "Växelström är snabbare än likström",
+            "Likström används i elnätet, medan växelström inte gör det",
+            "Växelström är farligare",
+            "Likström är mer effektiv för långa avstånd"
         ],
-        "answer": "Att använda mindre energi för att göra samma arbete",
-        "hint": "Använd effektivare apparater"
+        "answer": "Växelström ändrar riktning, medan likström går i en riktning",
+        "hint": "Växelström används i elnätet"
     },
     {
-        "title": "Fråga 67",
-        "text": "Vad innebär det att en elektrisk komponent har låg resistans?",
+        "title": "Fråga 47",
+        "text": "Vad är den vanligaste användningen för likström?",
         "type": "multiple",
         "options": [
-            "Strömmen flödar lättare genom den",
-            "Strömmen blockeras helt",
-            "Spänningen ökar",
-            "Strömmen stannar",
-            "Ingen ström kan flöda"
+            "Batteridrivna apparater",
+            "Elektriska kraftverk",
+            "Högspänningsledning",
+            "Fjärrkontroller",
+            "Belysning"
         ],
-        "answer": "Strömmen flödar lättare genom den",
-        "hint": "Ju lägre resistans, desto mer ström"
+        "answer": "Batteridrivna apparater",
+        "hint": "Batterier ger likström"
     },
     {
-        "title": "Fråga 68",
-        "text": "Vad betyder det att en komponent är isolerad?",
+        "title": "Fråga 48",
+        "text": "Vad är effekten i en elektrisk krets?",
         "type": "multiple",
         "options": [
-            "Den är täckt med ett material som hindrar strömflöde",
-            "Den har mycket hög resistans",
-            "Den används för att förstärka ström",
-            "Den kan bara användas för växelström",
-            "Den är alltid avstängd"
+            "Energianvändningen per tidsenhet",
+            "Spänningen i kretsen",
+            "Strömstyrkan",
+            "Resistansen",
+            "Motståndet i kretsen"
         ],
-        "answer": "Den är täckt med ett material som hindrar strömflöde",
-        "hint": "Exempel på isolatorer är plast och gummi"
+        "answer": "Energianvändningen per tidsenhet",
+        "hint": "Effekt mäts i watt"
     },
     {
-        "title": "Fråga 69",
-        "text": "Vad är fördelen med att använda lågspänningssystem för belysning?",
+        "title": "Fråga 49",
+        "text": "Vad är formeln för att beräkna effekt i en elektrisk krets?",
         "type": "multiple",
         "options": [
-            "Mindre risk för elektriska stötar",
-            "Högre effekt",
-            "Bättre ljusstyrka",
-            "Billigare att installera",
-            "Större strömmar"
+            "P = U × I",
+            "P = R × I",
+            "P = I² × R",
+            "P = U² / R",
+            "P = I × R"
         ],
-        "answer": "Mindre risk för elektriska stötar",
-        "hint": "Lågspänning är säkrare att hantera"
+        "answer": "P = U × I",
+        "hint": "Effekt = Spänning × Ström"
     },
     {
-        "title": "Fråga 70",
-        "text": "Vilken är den vanligaste enheten för att mäta elektrisk effekt?",
+        "title": "Fråga 50",
+        "text": "Vilken enhet mäts effekt i?",
         "type": "multiple",
         "options": [
             "Watt",
@@ -557,147 +557,147 @@
             "Tesla"
         ],
         "answer": "Watt",
-        "hint": "Effekt mäts i watt"
+        "hint": "Enheten för effekt"
     },
     {
-        "title": "Fråga 71",
-        "text": "Vad gör en transformator?",
+        "title": "Fråga 51",
+        "text": "Vad gör en spole i en elektrisk krets?",
         "type": "multiple",
         "options": [
-            "Omvandlar spänning och ström",
-            "Omvandlar energi till värme",
-            "Ökar motståndet",
-            "Ger elektrisk energi",
-            "Förändrar ljusenergi"
+            "Den lagrar energi i ett magnetfält",
+            "Den omvandlar elektricitet till ljus",
+            "Den minskar strömstyrkan",
+            "Den ökar resistansen",
+            "Den omvandlar elektricitet till rörelse"
         ],
-        "answer": "Omvandlar spänning och ström",
-        "hint": "Kan höja eller sänka spänningen"
+        "answer": "Den lagrar energi i ett magnetfält",
+        "hint": "Spolen används t.ex. i elektromagneter och transformatorer"
     },
     {
-        "title": "Fråga 72",
-        "text": "Vilken komponent i en elektrisk krets skyddar mot för hög ström?",
+        "title": "Fråga 52",
+        "text": "Vad används kondensatorer till i elektriska apparater?",
         "type": "multiple",
         "options": [
-            "Säkring",
-            "Glödlampa",
-            "Resistor",
-            "Kompressor",
-            "Generator"
+            "De lagrar och släpper ut elektrisk energi",
+            "De mäter ström",
+            "De förstärker strömmen",
+            "De styr temperatur",
+            "De reglerar spänning"
         ],
-        "answer": "Säkring",
-        "hint": "Bryter strömmen vid kortslutning eller överbelastning"
+        "answer": "De lagrar och släpper ut elektrisk energi",
+        "hint": "Kondensatorer används för att jämna ut ström i en krets"
     },
     {
-        "title": "Fråga 73",
-        "text": "Vad händer med den totala effekten i en krets med flera komponenter i serie?",
+        "title": "Fråga 53",
+        "text": "Vad är en elektrisk motor?",
         "type": "multiple",
         "options": [
-            "Effekten adderas för alla komponenter",
-            "Effekten blir noll",
-            "Effekten minskar",
-            "Effekten förblir konstant",
-            "Strömmen ökar"
+            "En maskin som omvandlar elektrisk energi till mekanisk energi",
+            "En batteriladdare",
+            "En elektrisk generator",
+            "En elektrisk ledare",
+            "En komponent som omvandlar mekanisk energi till elektricitet"
         ],
-        "answer": "Effekten adderas för alla komponenter",
-        "hint": "Totala effekten beror på alla komponenter"
+        "answer": "En maskin som omvandlar elektrisk energi till mekanisk energi",
+        "hint": "Exempel: fläktar, elbilar, elektriska verktyg"
     },
     {
-        "title": "Fråga 74",
-        "text": "Vilken effekt har hög resistans på strömflödet?",
+        "title": "Fråga 54",
+        "text": "Vad är en generator?",
         "type": "multiple",
         "options": [
-            "Strömmen minskar",
-            "Strömmen ökar",
-            "Resistansen ökar",
-            "Effekten ökar",
-            "Spänningen ökar"
+            "En maskin som omvandlar rörelseenergi till elektrisk energi",
+            "En batteriladdare",
+            "En elektrisk motor",
+            "En elektrisk spole",
+            "En komponent som mäter energi"
         ],
-        "answer": "Strömmen minskar",
-        "hint": "Hög resistans hindrar flödet"
+        "answer": "En maskin som omvandlar rörelseenergi till elektrisk energi",
+        "hint": "Används i kraftverk och vindkraftverk"
     },
     {
-        "title": "Fråga 75",
-        "text": "Vad innebär det att en elektrisk komponent är kapacitiv?",
+        "title": "Fråga 55",
+        "text": "Vad gör en likriktare?",
         "type": "multiple",
         "options": [
-            "Den lagrar elektrisk energi i ett elektriskt fält",
-            "Den förstärker strömmen",
-            "Den sänker strömmen",
-            "Den omvandlar elektrisk energi till värme",
-            "Den blockeras av resistans"
+            "Omvandlar växelström till likström",
+            "Omvandlar likström till växelström",
+            "Omvandlar spänning",
+            "Omvandlar strömstyrka",
+            "Mäter elektrisk ström"
         ],
-        "answer": "Den lagrar elektrisk energi i ett elektriskt fält",
-        "hint": "Exempel på kapacitiva komponenter är kondensatorer"
+        "answer": "Omvandlar växelström till likström",
+        "hint": "Används i många apparater för att ladda batterier"
     },
     {
-        "title": "Fråga 76",
-        "text": "Vad menas med elektrisk potential?",
+        "title": "Fråga 56",
+        "text": "Vad innebär kortslutning i en elektrisk krets?",
         "type": "multiple",
         "options": [
-            "Mängden energi per laddning",
-            "Mängden ström i en krets",
-            "Mängden energi som förloras som värme",
-            "Strömstyrkan i en ledare",
-            "Laddningens rörelsehastighet"
+            "När strömmen går genom en väldigt låg resistansväg",
+            "När strömmen inte kan flöda",
+            "När spänningen ökar",
+            "När en krets öppnas",
+            "När effekten minskar"
         ],
-        "answer": "Mängden energi per laddning",
-        "hint": "Mäter energi per laddning i volt"
+        "answer": "När strömmen går genom en väldigt låg resistansväg",
+        "hint": "Kan orsaka skador eller brand"
     },
     {
-        "title": "Fråga 77",
-        "text": "Vad innebär det att en krets är jordad?",
+        "title": "Fråga 57",
+        "text": "Vad är ett batteri?",
         "type": "multiple",
         "options": [
-            "Att elektrisk ström leds bort till marken för att undvika stötar",
-            "Att strömmen fördelas jämnt",
-            "Att komponenterna är isolerade från varandra",
-            "Att kretsen är öppen",
-            "Att alla komponenter är avstängda"
+            "En komponent som lagrar och omvandlar kemisk energi till elektrisk energi",
+            "En elektrisk motor",
+            "En spole",
+            "En kondensator",
+            "En transformator"
         ],
-        "answer": "Att elektrisk ström leds bort till marken för att undvika stötar",
-        "hint": "Används för att förhindra elektriska olyckor"
+        "answer": "En komponent som lagrar och omvandlar kemisk energi till elektrisk energi",
+        "hint": "Finns i många apparater som mobiltelefoner"
     },
     {
-        "title": "Fråga 78",
-        "text": "Vad är en solcell?",
+        "title": "Fråga 58",
+        "text": "Vad är skillnaden mellan en elektrisk krets och en elektrisk ström?",
         "type": "multiple",
         "options": [
-            "En enhet som omvandlar solenergi till elektricitet",
-            "En enhet som lagrar energi",
-            "En enhet som omvandlar elektricitet till värme",
-            "En enhet som mäter solens strålning",
-            "En enhet som alstrar elektricitet med hjälp av vädervindar"
+            "En elektrisk krets är den väg som strömmen flödar genom",
+            "En elektrisk ström är vägen, och en krets är det elektriska flödet",
+            "Kretsen är farligare än strömmen",
+            "Strömmen kan vara stilla, medan kretsen alltid är rörlig",
+            "Kretsen används för att mäta strömmen"
         ],
-        "answer": "En enhet som omvandlar solenergi till elektricitet",
-        "hint": "Förnybar energikälla"
+        "answer": "En elektrisk krets är den väg som strömmen flödar genom",
+        "hint": "Kretsen ska vara sluten för att strömmen ska flöda"
     },
     {
-        "title": "Fråga 79",
-        "text": "Vad betyder det att ett material är en ledare?",
+        "title": "Fråga 59",
+        "text": "Vad gör en elektrisk motor?",
         "type": "multiple",
         "options": [
-            "Det leder elektrisk ström bra",
-            "Det blockerar elektrisk ström",
-            "Det lagrar elektrisk energi",
-            "Det omvandlar elektrisk energi till ljus",
-            "Det förstärker strömmen"
+            "Omvandlar elektrisk energi till mekanisk energi",
+            "Omvandlar mekanisk energi till elektrisk energi",
+            "Lagrar energi",
+            "Mäter ström",
+            "Omvandlar ljus till elektricitet"
         ],
-        "answer": "Det leder elektrisk ström bra",
-        "hint": "Exempel på ledare: koppar, aluminium"
+        "answer": "Omvandlar elektrisk energi till mekanisk energi",
+        "hint": "Exempel: fläktar, elbilar, elektriska verktyg"
     },
     {
-        "title": "Fråga 80",
-        "text": "Vilken komponent skyddar en krets från överbelastning?",
+        "title": "Fråga 60",
+        "text": "Vad är en generator?",
         "type": "multiple",
         "options": [
-            "Säkring",
-            "Resistor",
-            "Diod",
-            "Kondensator",
-            "Transistor"
+            "En maskin som omvandlar rörelseenergi till elektrisk energi",
+            "En batteriladdare",
+            "En elektrisk motor",
+            "En elektrisk spole",
+            "En komponent som mäter energi"
         ],
-        "answer": "Säkring",
-        "hint": "Bryter strömmen om den blir för hög"
+        "answer": "En maskin som omvandlar rörelseenergi till elektrisk energi",
+        "hint": "Används i kraftverk och vindkraftverk"
     },
     {
         "title": "Fråga 81",
@@ -838,5 +838,145 @@
         ],
         "answer": "Strömmen minskar",
         "hint": "Enligt Ohms lag, ström = spänning / resistans"
+    },
+    {
+        "title": "Fråga 81",
+        "text": "Vad händer om man kopplar två batterier i parallellkoppling?",
+        "type": "multiple",
+        "options": [
+            "Strömmen adderas, spänningen förblir densamma",
+            "Spänningen adderas",
+            "Strömmen förblir densamma",
+            "Resistansen minskar",
+            "Spänningen minskar"
+        ],
+        "answer": "Strömmen adderas, spänningen förblir densamma",
+        "hint": "Parallellkopplade batterier delar på spänningen men adderar strömmen"
+    },
+    {
+        "title": "Fråga 82",
+        "text": "Vilken enhet mäts resistans i?",
+        "type": "multiple",
+        "options": [
+            "Ohm",
+            "Volt",
+            "Ampere",
+            "Watt",
+            "Joule"
+        ],
+        "answer": "Ohm",
+        "hint": "Resistans mäts i enheten Ohm"
+    },
+    {
+        "title": "Fråga 83",
+        "text": "Vad är en spole i en elektrisk krets?",
+        "type": "multiple",
+        "options": [
+            "En ledning som är lindad i flera varv",
+            "En komponent som omvandlar energi",
+            "En komponent som mäter ström",
+            "En elektrisk motor",
+            "En kondensator"
+        ],
+        "answer": "En ledning som är lindad i flera varv",
+        "hint": "Spolar används i transformatorer och elektromagneter"
+    },
+    {
+        "title": "Fråga 84",
+        "text": "Vad är skillnaden mellan en krets i serie och parallell?",
+        "type": "multiple",
+        "options": [
+            "I serie adderas resistansen, i parallell minskar den",
+            "I parallell adderas resistansen, i serie minskar den",
+            "I serie ökar strömmen, i parallell minskar den",
+            "I serie delas strömmen upp, i parallell går den genom alla komponenter",
+            "I parallell är strömmen densamma för varje komponent"
+        ],
+        "answer": "I serie adderas resistansen, i parallell minskar den",
+        "hint": "Serie koppling: resistans adderas. Parallellkoppling: resistans minskar"
+    },
+    {
+        "title": "Fråga 85",
+        "text": "Vad är effekt i en elektrisk krets?",
+        "type": "multiple",
+        "options": [
+            "Hur mycket energi som används per tidsenhet",
+            "Hur mycket ström som flödar",
+            "Den elektriska motståndet",
+            "Den totala strömmen i kretsen",
+            "Enhetsmåttet för spänning"
+        ],
+        "answer": "Hur mycket energi som används per tidsenhet",
+        "hint": "Effekt mäts i watt (W)"
+    },
+    {
+        "title": "Fråga 86",
+        "text": "Vad mäts med en voltmeter?",
+        "type": "multiple",
+        "options": [
+            "Spänning",
+            "Strömstyrka",
+            "Motstånd",
+            "Effekt",
+            "Frekvens"
+        ],
+        "answer": "Spänning",
+        "hint": "Voltmeter mäter skillnaden i elektrisk potential"
+    },
+    {
+        "title": "Fråga 87",
+        "text": "Vad händer om man sätter resistorer i serie?",
+        "type": "multiple",
+        "options": [
+            "Resistansen adderas",
+            "Resistansen minskar",
+            "Strömmen förblir konstant",
+            "Spänningen förblir densamma",
+            "Resistansen förblir densamma"
+        ],
+        "answer": "Resistansen adderas",
+        "hint": "Seriekopplade resistorer adderar sina värden"
+    },
+    {
+        "title": "Fråga 88",
+        "text": "Vilken komponent används för att lagra energi i ett elektriskt fält?",
+        "type": "multiple",
+        "options": [
+            "Kondensator",
+            "Resistor",
+            "Spole",
+            "Batteri",
+            "Motstånd"
+        ],
+        "answer": "Kondensator",
+        "hint": "Kondensatorer lagrar energi tillfälligt"
+    },
+    {
+        "title": "Fråga 89",
+        "text": "Vad händer om man sätter resistorer i parallellkoppling?",
+        "type": "multiple",
+        "options": [
+            "Den totala resistansen minskar",
+            "Strömmen förblir densamma",
+            "Spänningen ökar",
+            "Den totala resistansen ökar",
+            "Resistansen förblir densamma"
+        ],
+        "answer": "Den totala resistansen minskar",
+        "hint": "Parallellkopplade resistorer ger lägre resistans"
+    },
+    {
+        "title": "Fråga 90",
+        "text": "Vad är en elektrisk krets?",
+        "type": "multiple",
+        "options": [
+            "En väg för elektrisk ström att flöda genom",
+            "En komponent som lagrar energi",
+            "En strömbrytare",
+            "En transformator",
+            "En elektrisk motor"
+        ],
+        "answer": "En väg för elektrisk ström att flöda genom",
+        "hint": "En sluten krets krävs för att ström ska flöda"
     }
 ]
