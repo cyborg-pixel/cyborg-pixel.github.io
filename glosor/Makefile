@@ -1,5 +1,5 @@
 # Variabler
-FILES = Makefile logo.png questions_2.json setup.json icon-192.png manifest.webmanifest questions_3.json icon-512.png questions_1.json questions_ebba_youtube.json index.html questions_1_misc.json questions_test2.json
+FILES = fysik01.json Makefile logo.png questions_2.json setup.json icon-192.png manifest.webmanifest questions_3.json icon-512.png questions_1.json questions_ebba_youtube.json index.html questions_1_misc.json questions_test2.json
 COMMIT_MSG ?= "Uppdateringar"
 
 # Standardmål - Visar tillgängliga kommandon

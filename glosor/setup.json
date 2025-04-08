@@ -1,6 +1,16 @@
 {
     "quizzes": [
         {
+            "title": "Fysik Kapitel 1",
+            "jsonFile": "fysik01.json",
+            "submenu": "Harrys Fysik"
+        },
+        {
+            "title": "Fysik Kapitel 2",
+            "jsonFile": "fysik02.json",
+            "submenu": "Harrys Fysik"
+        },
+        {
             "title": "Testfrågor",
             "jsonFile": "questions_test2.json"
         },
