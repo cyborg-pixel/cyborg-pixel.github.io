@@ -1,422 +1,1402 @@
 [
     {
         "title": "Fråga 1",
-        "text": "Vad består solsystemet av?",
-        "type": "multiple",
-        "options": [
-            "Solen, planeter, månar, asteroider, kometer och annat rymdmaterial",
-            "Bara solen och jorden",
-            "Endast stjärnor",
-            "Endast gasmoln och galaxer",
-            "Solen och stjärnor från andra galaxer"
-        ],
-        "answer": "Solen, planeter, månar, asteroider, kometer och annat rymdmaterial",
-        "hint": "Tänk på vad som kretsar runt solen"
-    },
-    {
-        "title": "Fråga 2",
-        "text": "Vilken himlakropp är störst i vårt solsystem?",
-        "type": "multiple",
-        "options": [
-            "Solen",
-            "Jupiter",
-            "Saturnus",
-            "Neptunus",
-            "Jorden"
-        ],
-        "answer": "Solen",
-        "hint": "Innehåller över 99% av solsystemets massa"
-    },
-    {
-        "title": "Fråga 3",
-        "text": "Vad är en planet enligt definitionen från 2006?",
-        "type": "multiple",
-        "options": [
-            "En himlakropp som kretsar kring en stjärna, är rund och har rensat sin omloppsbana",
-            "En kropp med atmosfär",
-            "En himlakropp som lyser av egen kraft",
-            "En måne med vatten",
-            "En klippa som roterar"
-        ],
-        "answer": "En himlakropp som kretsar kring en stjärna, är rund och har rensat sin omloppsbana",
-        "hint": "Detta gjorde Pluto till dvärgplanet"
-    },
-    {
-        "title": "Fråga 4",
-        "text": "Vad är en dvärgplanet?",
-        "type": "multiple",
-        "options": [
-            "En himlakropp som är rund och kretsar kring solen men inte har rensat sin bana",
-            "En mycket liten måne",
-            "En satellit till gasjättar",
-            "En stjärna med låg ljusstyrka",
-            "En mindre version av jorden"
-        ],
-        "answer": "En himlakropp som är rund och kretsar kring solen men inte har rensat sin bana",
-        "hint": "Exempel: Pluto, Ceres"
-    },
-    {
-        "title": "Fråga 5",
-        "text": "Vilken planet ligger närmast solen?",
+        "text": "Vilken är den minsta planeten i vårt solsystem?",
         "type": "multiple",
         "options": [
             "Merkurius",
-            "Venus",
-            "Jorden",
             "Mars",
-            "Jupiter"
+            "Jorden",
+            "Venus",
+            "Pluto"
         ],
         "answer": "Merkurius",
-        "hint": "Den har inga månar och är mycket het"
+        "hint": "Den ligger närmast solen"
+    },
+    {
+        "title": "Fråga 2",
+        "text": "Vilken planet kallas ofta för 'den röda planeten'?",
+        "type": "multiple",
+        "options": [
+            "Mars",
+            "Venus",
+            "Jupiter",
+            "Saturnus",
+            "Uranus"
+        ],
+        "answer": "Mars",
+        "hint": "Har mycket järnoxid i marken"
+    },
+    {
+        "title": "Fråga 3",
+        "text": "Vilken himlakropp är inte längre klassad som planet enligt IAU?",
+        "type": "multiple",
+        "options": [
+            "Pluto",
+            "Merkurius",
+            "Neptunus",
+            "Saturnus",
+            "Jorden"
+        ],
+        "answer": "Pluto",
+        "hint": "Numera en dvärgplanet"
+    },
+    {
+        "title": "Fråga 4",
+        "text": "Vad är ett ljusår?",
+        "type": "multiple",
+        "options": [
+            "Sträckan ljuset färdas på ett år",
+            "Tiden det tar för ljuset att nå solen",
+            "Avståndet mellan solen och jorden",
+            "Ett mått på ljusstyrka",
+            "Ett år på månen"
+        ],
+        "answer": "Sträckan ljuset färdas på ett år",
+        "hint": "Ca 9,46 biljoner km"
+    },
+    {
+        "title": "Fråga 5",
+        "text": "Vad är en asteroid?",
+        "type": "multiple",
+        "options": [
+            "En liten stenig kropp som kretsar kring solen",
+            "En komet med svans",
+            "En förlorad måne",
+            "En exploderande stjärna",
+            "En planet utan atmosfär"
+        ],
+        "answer": "En liten stenig kropp som kretsar kring solen",
+        "hint": "Finns ofta i ett bälte mellan Mars och Jupiter"
     },
     {
         "title": "Fråga 6",
-        "text": "Vilken planet har flest månar?",
+        "text": "Vad består en komet huvudsakligen av?",
+        "type": "multiple",
+        "options": [
+            "Is, sten och damm",
+            "Järn och nickel",
+            "Väte och helium",
+            "Lava",
+            "Koldioxid"
+        ],
+        "answer": "Is, sten och damm",
+        "hint": "När den närmar sig solen bildas en svans"
+    },
+    {
+        "title": "Fråga 7",
+        "text": "Vad är en meteorit?",
+        "type": "multiple",
+        "options": [
+            "En meteoroid som träffar jordens yta",
+            "En liten planet",
+            "En måne",
+            "En brinnande stjärna",
+            "En del av en galax"
+        ],
+        "answer": "En meteoroid som träffar jordens yta",
+        "hint": "Meteor → Meteorit vid nedslag"
+    },
+    {
+        "title": "Fråga 8",
+        "text": "Vilken planet har en stor storm som kallas 'den stora röda fläcken'?",
         "type": "multiple",
         "options": [
             "Jupiter",
             "Saturnus",
-            "Mars",
-            "Jorden",
-            "Venus"
+            "Uranus",
+            "Neptunus",
+            "Mars"
         ],
         "answer": "Jupiter",
-        "hint": "Gasjätten med över 90 upptäckta månar"
-    },
-    {
-        "title": "Fråga 7",
-        "text": "Vad kallas den bana som en planet följer runt solen?",
-        "type": "multiple",
-        "options": [
-            "Omloppsbana",
-            "Rymdlinje",
-            "Rotation",
-            "Ellipsväg",
-            "Gravitationsväg"
-        ],
-        "answer": "Omloppsbana",
-        "hint": "Bestäms av gravitation och rörelse"
-    },
-    {
-        "title": "Fråga 8",
-        "text": "Vad är det som gör att planeter hålls kvar i sina banor runt solen?",
-        "type": "multiple",
-        "options": [
-            "Gravitation",
-            "Ljus",
-            "Magnetism",
-            "Rotation",
-            "Luftmotstånd"
-        ],
-        "answer": "Gravitation",
-        "hint": "En kraft mellan massor"
+        "hint": "Är solsystemets största planet"
     },
     {
         "title": "Fråga 9",
-        "text": "Hur lång tid tar det för jorden att gå ett varv runt solen?",
+        "text": "Vilken planet är känd för sina ringar?",
         "type": "multiple",
         "options": [
-            "365 dagar",
-            "30 dagar",
-            "24 timmar",
-            "12 månader",
-            "360 dagar"
+            "Saturnus",
+            "Mars",
+            "Venus",
+            "Jorden",
+            "Neptunus"
         ],
-        "answer": "365 dagar",
-        "hint": "Ger upphov till år"
+        "answer": "Saturnus",
+        "hint": "Ringarna består av is och sten"
     },
     {
         "title": "Fråga 10",
-        "text": "Vad är det som orsakar dag och natt på jorden?",
+        "text": "Vad är en stjärnas färg kopplad till?",
         "type": "multiple",
         "options": [
-            "Jordens rotation kring sin egen axel",
-            "Jordens bana runt solen",
-            "Solens rörelse",
-            "Månens omlopp",
-            "Atmosfärens densitet"
+            "Temperaturen",
+            "Avståndet till jorden",
+            "Gravitationen",
+            "Stjärnans storlek",
+            "Kärnreaktionens hastighet"
         ],
-        "answer": "Jordens rotation kring sin egen axel",
-        "hint": "Ett varv tar 24 timmar"
+        "answer": "Temperaturen",
+        "hint": "Blå = varm, röd = kallare"
     },
     {
-        "title": "Fråga 31",
-        "text": "Vad är en stjärna?",
+        "title": "Fråga 11",
+        "text": "Vad är en galax?",
         "type": "multiple",
         "options": [
-            "En glödande gaskropp som producerar energi genom fusion",
-            "En planet med mycket ljus",
-            "En måne med reflekterat ljus",
-            "En kall gasmoln",
-            "En satellit"
-        ],
-        "answer": "En glödande gaskropp som producerar energi genom fusion",
-        "hint": "Solen är ett exempel"
-    },
-    {
-        "title": "Fråga 32",
-        "text": "Vad är fusion i en stjärna?",
-        "type": "multiple",
-        "options": [
-            "När väteatomer slås samman till helium och frigör energi",
-            "När en stjärna kollapsar",
-            "När gaser kyls ner",
-            "När materia försvinner",
-            "När ljus reflekteras"
-        ],
-        "answer": "När väteatomer slås samman till helium och frigör energi",
-        "hint": "Ger stjärnan dess energi"
-    },
-    {
-        "title": "Fråga 33",
-        "text": "Vad är ett ljusår?",
-        "type": "multiple",
-        "options": [
-            "Den sträcka ljus färdas på ett år",
-            "En tid som ljuset syns",
-            "Tiden det tar för månen att kretsa runt jorden",
-            "Avståndet mellan solen och jorden",
-            "En typ av energienhet"
-        ],
-        "answer": "Den sträcka ljus färdas på ett år",
-        "hint": "Ungefär 9,46 biljoner kilometer"
-    },
-    {
-        "title": "Fråga 34",
-        "text": "Vad avgör färgen på en stjärna?",
-        "type": "multiple",
-        "options": [
-            "Dess temperatur",
-            "Dess avstånd till jorden",
-            "Dess storlek",
-            "Hur gammal den är",
-            "Antalet planeter runt den"
-        ],
-        "answer": "Dess temperatur",
-        "hint": "Blå är hetare än röd"
-    },
-    {
-        "title": "Fråga 35",
-        "text": "Vad är en supernova?",
-        "type": "multiple",
-        "options": [
-            "En exploderande massiv stjärna",
-            "En ny stjärna som tänds",
-            "En himlakropp mellan planeterna",
-            "En särskilt ljus planet",
-            "En asteroidkollision"
-        ],
-        "answer": "En exploderande massiv stjärna",
-        "hint": "Kan bli svart hål eller neutronstjärna"
-    },
-    {
-        "title": "Fråga 36",
-        "text": "Vad är ett svart hål?",
-        "type": "multiple",
-        "options": [
-            "Ett område med så stark gravitation att inte ens ljus kan lämna det",
-            "Ett mörkt område mellan planeter",
+            "En samling av miljarder stjärnor, gas och mörk materia",
+            "En grupp av planeter",
             "En typ av stjärna",
-            "En galax utan ljus",
-            "En plats i rymden där ljuset samlas"
+            "En annan benämning på nebulosa",
+            "Ett svart hål"
         ],
-        "answer": "Ett område med så stark gravitation att inte ens ljus kan lämna det",
-        "hint": "Bildas vid vissa supernovor"
+        "answer": "En samling av miljarder stjärnor, gas och mörk materia",
+        "hint": "Vintergatan är en galax"
     },
     {
-        "title": "Fråga 37",
+        "title": "Fråga 12",
         "text": "Vad kallas vår galax?",
         "type": "multiple",
         "options": [
             "Vintergatan",
             "Andromeda",
-            "Stjärnsystemet",
+            "Magellanska molnet",
             "Orion",
-            "Solsystemet"
+            "Mikroskopium"
         ],
         "answer": "Vintergatan",
-        "hint": "Innehåller miljarder stjärnor, inklusive solen"
+        "hint": "Innehåller vårt solsystem"
     },
     {
-        "title": "Fråga 38",
-        "text": "Vad är en galax?",
+        "title": "Fråga 13",
+        "text": "Vad är en nebulosa?",
         "type": "multiple",
         "options": [
-            "En enorm samling av stjärnor, gas, stoft och mörk materia",
-            "En ensam stjärna",
-            "En samling planeter",
-            "En nebulosa",
-            "En satellit runt en planet"
+            "Ett gas- och stoftmoln där nya stjärnor föds",
+            "En typ av dvärgplanet",
+            "En planet med atmosfär",
+            "Ett svart hål",
+            "En exploderande stjärna"
         ],
-        "answer": "En enorm samling av stjärnor, gas, stoft och mörk materia",
-        "hint": "Finns spiral-, elliptiska och oregelbundna typer"
+        "answer": "Ett gas- och stoftmoln där nya stjärnor föds",
+        "hint": "Kan ses som färggranna fält i rymdfoton"
     },
     {
-        "title": "Fråga 39",
-        "text": "Vad är Big Bang?",
+        "title": "Fråga 14",
+        "text": "Vad är en supernova?",
         "type": "multiple",
         "options": [
-            "Teorin om universums uppkomst från en mycket tät och het punkt",
-            "En explosion på en stjärna",
-            "En sammanslagning av galaxer",
-            "En kollision mellan planeter",
-            "När ljuset började färdas"
+            "En explosion av en massiv stjärna i slutet av dess liv",
+            "En nybildad stjärna",
+            "En komet med stark svans",
+            "En särskilt het planet",
+            "En typ av galax"
         ],
-        "answer": "Teorin om universums uppkomst från en mycket tät och het punkt",
-        "hint": "Ska ha skett för cirka 13,8 miljarder år sedan"
+        "answer": "En explosion av en massiv stjärna i slutet av dess liv",
+        "hint": "Kan bilda neutronstjärnor eller svarta hål"
     },
     {
-        "title": "Fråga 40",
-        "text": "Vad innebär den kosmiska bakgrundsstrålningen?",
+        "title": "Fråga 15",
+        "text": "Vilken stjärna är närmast jorden?",
         "type": "multiple",
         "options": [
-            "Den svaga mikrovågsstrålning som finns kvar från Big Bang",
-            "Strålning från vår sol",
-            "Ljus från avlägsna galaxer",
-            "Reflekterat ljus från månen",
-            "Gammastrålning från stjärnor"
+            "Solen",
+            "Proxima Centauri",
+            "Betelgeuse",
+            "Sirius",
+            "Vega"
         ],
-        "answer": "Den svaga mikrovågsstrålning som finns kvar från Big Bang",
-        "hint": "Stödjer Big Bang-teorin"
+        "answer": "Solen",
+        "hint": "Ger oss ljus och värme"
     },
     {
-        "title": "Fråga 61",
+        "title": "Fråga 16",
         "text": "Vad är en exoplanet?",
         "type": "multiple",
         "options": [
             "En planet som kretsar kring en annan stjärna än solen",
-            "En planet som är utanför vår galax",
-            "En planet som inte är rund",
-            "En måne med vatten",
-            "En asteroid utanför solsystemet"
+            "En planet som ligger utanför Vintergatan",
+            "En dvärgplanet",
+            "En gammal stjärna",
+            "En konstgjord himlakropp"
         ],
         "answer": "En planet som kretsar kring en annan stjärna än solen",
-        "hint": "Tusentals har hittats med teleskop"
+        "hint": "Upptäcks ofta med teleskop som mäter ljusvariation"
     },
     {
-        "title": "Fråga 62",
-        "text": "Vad är SETI-projektet?",
+        "title": "Fråga 17",
+        "text": "Vad menas med 'den beboeliga zonen'?",
         "type": "multiple",
         "options": [
-            "Ett projekt som söker efter intelligent liv i universum",
-            "En rymdstation i omloppsbana",
-            "Ett teleskop för väderobservation",
-            "En satellit som mäter solljus",
-            "En resa till Mars"
+            "Avståndet från en stjärna där flytande vatten kan finnas",
+            "En plats där människor har bott",
+            "En del av solen",
+            "Ett område i rymden med syre",
+            "Zon i atmosfären där man kan andas"
         ],
-        "answer": "Ett projekt som söker efter intelligent liv i universum",
-        "hint": "Lyssnar efter radiosignaler från rymden"
+        "answer": "Avståndet från en stjärna där flytande vatten kan finnas",
+        "hint": "Viktig för liv"
     },
     {
-        "title": "Fråga 63",
-        "text": "Vad är den geocentriska världsbilden?",
+        "title": "Fråga 18",
+        "text": "Vad använder astronomer för att mäta avstånd till stjärnor nära jorden?",
         "type": "multiple",
         "options": [
-            "En världsbild där jorden står i centrum",
-            "En världsbild där solen står i centrum",
-            "En karta över galaxer",
-            "En teori om Big Bang",
-            "En stjärnbild på jorden"
+            "Triangelmetoden",
+            "Gravitationsmetoden",
+            "Magnetisk avläsning",
+            "Ljudmätning",
+            "GPS"
         ],
-        "answer": "En världsbild där jorden står i centrum",
-        "hint": "Dominerade under antiken och medeltiden"
+        "answer": "Triangelmetoden",
+        "hint": "Använder vinklar och parallax"
     },
     {
-        "title": "Fråga 64",
-        "text": "Vem föreslog den heliocentriska världsbilden?",
-        "type": "multiple",
-        "options": [
-            "Nicolaus Copernicus",
-            "Galileo Galilei",
-            "Kepler",
-            "Newton",
-            "Einstein"
-        ],
-        "answer": "Nicolaus Copernicus",
-        "hint": "Solen i centrum, planeter rör sig i banor runt den"
-    },
-    {
-        "title": "Fråga 65",
-        "text": "Hur bevisade Galileo Galilei att solen står i centrum?",
-        "type": "multiple",
-        "options": [
-            "Genom att observera Jupiters månar i rörelse runt planeten",
-            "Genom att se solen snurra runt jorden",
-            "Genom att mäta jordens temperatur",
-            "Genom att studera månens yta",
-            "Genom att bygga en rymdraket"
-        ],
-        "answer": "Genom att observera Jupiters månar i rörelse runt planeten",
-        "hint": "Visade att inte allt kretsade runt jorden"
-    },
-    {
-        "title": "Fråga 66",
-        "text": "Hur mäts avstånd till närliggande stjärnor?",
-        "type": "multiple",
-        "options": [
-            "Med triangelmetoden (parallax)",
-            "Med teleskop som ser rakt",
-            "Med ljusårsmätare",
-            "Med Big Bang-teleskop",
-            "Med jordsnurr"
-        ],
-        "answer": "Med triangelmetoden (parallax)",
-        "hint": "Man jämför stjärnans läge från olika tidpunkter"
-    },
-    {
-        "title": "Fråga 67",
-        "text": "Vad är en nebulosa?",
-        "type": "multiple",
-        "options": [
-            "Ett gas- och stoftmoln där stjärnor kan bildas",
-            "En liten planet",
-            "En förstörd stjärna",
-            "En rymdstation",
-            "En reflektionsyta i rymden"
-        ],
-        "answer": "Ett gas- och stoftmoln där stjärnor kan bildas",
-        "hint": "Finns kvar efter supernovor eller som födelserum för stjärnor"
-    },
-    {
-        "title": "Fråga 68",
-        "text": "Vilket instrument används för att observera avlägsna objekt i rymden?",
-        "type": "multiple",
-        "options": [
-            "Teleskop",
-            "Mikroskop",
-            "Termometer",
-            "Våg",
-            "Radar"
-        ],
-        "answer": "Teleskop",
-        "hint": "Kan vara optiska eller radioteleskop"
-    },
-    {
-        "title": "Fråga 69",
+        "title": "Fråga 19",
         "text": "Vad är en stjärnbild?",
         "type": "multiple",
         "options": [
-            "En grupp stjärnor som ser ut att höra ihop från jorden",
-            "En stjärna med flera färger",
-            "En bild av en galax",
-            "En planet och dess månar",
-            "En explosion av en stjärna"
+            "En grupp stjärnor som bildar ett mönster på himlen",
+            "En bild från ett teleskop",
+            "En typ av nebulosa",
+            "En planet",
+            "En galax"
         ],
-        "answer": "En grupp stjärnor som ser ut att höra ihop från jorden",
-        "hint": "Exempel: Orion, Karlavagnen"
+        "answer": "En grupp stjärnor som bildar ett mönster på himlen",
+        "hint": "T.ex. Orion"
+    },
+    {
+        "title": "Fråga 20",
+        "text": "Vilken planet har de flesta månar?",
+        "type": "multiple",
+        "options": [
+            "Jupiter",
+            "Saturnus",
+            "Neptunus",
+            "Uranus",
+            "Mars"
+        ],
+        "answer": "Jupiter",
+        "hint": "Över 90 kända månar"
+    },
+    {
+        "title": "Fråga 21",
+        "text": "Vilken typ av stjärna bildas efter en supernova om massan är liten?",
+        "type": "multiple",
+        "options": [
+            "Neutronstjärna",
+            "Vit dvärg",
+            "Röd jätte",
+            "Svart hål",
+            "Blå stjärna"
+        ],
+        "answer": "Neutronstjärna",
+        "hint": "Mycket tät och kompakt"
+    },
+    {
+        "title": "Fråga 22",
+        "text": "Vad kan en mycket tung stjärna bilda efter att den dör?",
+        "type": "multiple",
+        "options": [
+            "Svart hål",
+            "Röd dvärg",
+            "Planet",
+            "Jätteasteroid",
+            "Superkomet"
+        ],
+        "answer": "Svart hål",
+        "hint": "Gravitationen blir så stark att inte ens ljus kan ta sig ut"
+    },
+    {
+        "title": "Fråga 23",
+        "text": "Vad är den första fasen i en stjärnas liv?",
+        "type": "multiple",
+        "options": [
+            "Nebulosa",
+            "Vit dvärg",
+            "Supernova",
+            "Röd jätte",
+            "Neutronstjärna"
+        ],
+        "answer": "Nebulosa",
+        "hint": "Moln av gas och stoft där nya stjärnor föds"
+    },
+    {
+        "title": "Fråga 24",
+        "text": "Vad händer när en stjärna som solen blir gammal?",
+        "type": "multiple",
+        "options": [
+            "Den blir en röd jätte och sedan en vit dvärg",
+            "Den exploderar som supernova",
+            "Den blir ett svart hål",
+            "Den blir en blå jätte",
+            "Den förvandlas till en galax"
+        ],
+        "answer": "Den blir en röd jätte och sedan en vit dvärg",
+        "hint": "Ingen supernova eftersom den är för liten"
+    },
+    {
+        "title": "Fråga 25",
+        "text": "Vad används ett optiskt teleskop till?",
+        "type": "multiple",
+        "options": [
+            "Att observera ljus från stjärnor och planeter",
+            "Att lyssna på radiosignaler från rymden",
+            "Att mäta gravitation",
+            "Att se mikroskopiska partiklar",
+            "Att fotografera jorden från rymden"
+        ],
+        "answer": "Att observera ljus från stjärnor och planeter",
+        "hint": "Vanliga teleskop vi ser med"
+    },
+    {
+        "title": "Fråga 26",
+        "text": "Vad är ett radioteleskop?",
+        "type": "multiple",
+        "options": [
+            "En anläggning som fångar radiovågor från rymden",
+            "En kamera som använder ljud",
+            "En apparat för satelliter",
+            "En radiosändare",
+            "Ett teleskop som används i rymdfärjor"
+        ],
+        "answer": "En anläggning som fångar radiovågor från rymden",
+        "hint": "Används för att upptäcka signaler från t.ex. pulsarer"
+    },
+    {
+        "title": "Fråga 27",
+        "text": "Vilken är den galax som ligger närmast Vintergatan?",
+        "type": "multiple",
+        "options": [
+            "Andromedagalaxen",
+            "Oriongatan",
+            "Centaurus A",
+            "Lilla Magellanska molnet",
+            "Triangelgalaxen"
+        ],
+        "answer": "Andromedagalaxen",
+        "hint": "Kan kollidera med vår galax om flera miljarder år"
+    },
+    {
+        "title": "Fråga 28",
+        "text": "Vad är Big Bang?",
+        "type": "multiple",
+        "options": [
+            "Universums ursprung i en enorm expansion",
+            "En enorm kometkollision",
+            "En stor stjärnas död",
+            "En ny galaxs födelse",
+            "Ett svart håls födelse"
+        ],
+        "answer": "Universums ursprung i en enorm expansion",
+        "hint": "Teorin för hur universum började för cirka 13,8 miljarder år sedan"
+    },
+    {
+        "title": "Fråga 29",
+        "text": "Vad är kosmisk bakgrundsstrålning ett bevis för?",
+        "type": "multiple",
+        "options": [
+            "Att universum en gång var mycket varmt och tätt",
+            "Att jorden är platt",
+            "Att stjärnor är eviga",
+            "Att planeter rör sig i perfekta cirklar",
+            "Att svarta hål lyser"
+        ],
+        "answer": "Att universum en gång var mycket varmt och tätt",
+        "hint": "En rest från Big Bang"
+    },
+    {
+        "title": "Fråga 30",
+        "text": "Vad är en dvärggalax?",
+        "type": "multiple",
+        "options": [
+            "En galax med färre stjärnor än en normal galax",
+            "En galax som krympt",
+            "En galax med endast planeter",
+            "En galax i Vintergatan",
+            "En galax som rör sig långsamt"
+        ],
+        "answer": "En galax med färre stjärnor än en normal galax",
+        "hint": "Exempel: Lilla Magellanska molnet"
+    },
+    {
+        "title": "Fråga 31",
+        "text": "Vad är mörk materia?",
+        "type": "multiple",
+        "options": [
+            "En osynlig form av materia som påverkar gravitationen",
+            "En typ av stjärna",
+            "Ett svart hål",
+            "En nebulosa",
+            "En okänd typ av planet"
+        ],
+        "answer": "En osynlig form av materia som påverkar gravitationen",
+        "hint": "Kan inte ses direkt men påverkar galaxernas rörelser"
+    },
+    {
+        "title": "Fråga 32",
+        "text": "Vad är mörk energi?",
+        "type": "multiple",
+        "options": [
+            "En kraft som tros få universums expansion att accelerera",
+            "Energi från svarta hål",
+            "Ljus från avlägsna galaxer",
+            "Värme i stjärnor",
+            "Energi från gravitation"
+        ],
+        "answer": "En kraft som tros få universums expansion att accelerera",
+        "hint": "Upptäcktes på 1990-talet"
+    },
+    {
+        "title": "Fråga 33",
+        "text": "Vad är en geocentrisk världsbild?",
+        "type": "multiple",
+        "options": [
+            "Föreställningen att jorden är i centrum av universum",
+            "Föreställningen att solen är centrum",
+            "Att solen kretsar kring jorden och månen",
+            "Att galaxerna är centrum",
+            "En bild från jordens inre"
+        ],
+        "answer": "Föreställningen att jorden är i centrum av universum",
+        "hint": "Dominerade i tusentals år"
+    },
+    {
+        "title": "Fråga 34",
+        "text": "Vad är en heliocentrisk världsbild?",
+        "type": "multiple",
+        "options": [
+            "Föreställningen att solen är i centrum av solsystemet",
+            "Att jorden är centrum",
+            "Att månen styr alla planeter",
+            "Att stjärnorna inte rör sig",
+            "Att universum är oändligt"
+        ],
+        "answer": "Föreställningen att solen är i centrum av solsystemet",
+        "hint": "Förklarades av Kopernikus"
+    },
+    {
+        "title": "Fråga 35",
+        "text": "Vem föreslog den heliocentriska världsbilden?",
+        "type": "multiple",
+        "options": [
+            "Nikolaus Kopernikus",
+            "Aristoteles",
+            "Galileo Galilei",
+            "Kepler",
+            "Einstein"
+        ],
+        "answer": "Nikolaus Kopernikus",
+        "hint": "Polsk astronom på 1500-talet"
+    },
+    {
+        "title": "Fråga 36",
+        "text": "Vad gjorde Galileo Galilei för att stödja den heliocentriska världsbilden?",
+        "type": "multiple",
+        "options": [
+            "Använde teleskop för att observera Jupiters månar",
+            "Ritade kartor över stjärnor",
+            "Byggde första radioteleskopet",
+            "Bevisade mörk materia",
+            "Mätte ljusets hastighet"
+        ],
+        "answer": "Använde teleskop för att observera Jupiters månar",
+        "hint": "Månarna kretsade inte kring jorden!"
+    },
+    {
+        "title": "Fråga 37",
+        "text": "Vad innebär begreppet 'kosmiskt kretslopp'?",
+        "type": "multiple",
+        "options": [
+            "Materiens omlopp mellan stjärnor, nebulosor och planeter",
+            "Jordens omloppsbana",
+            "Stjärnors rotation",
+            "Ljusets kretslopp",
+            "Teleskopens uppbyggnad"
+        ],
+        "answer": "Materiens omlopp mellan stjärnor, nebulosor och planeter",
+        "hint": "Stjärnor dör → nya stjärnor föds"
+    },
+    {
+        "title": "Fråga 38",
+        "text": "Vad är ett spektroskop?",
+        "type": "multiple",
+        "options": [
+            "Ett instrument som delar upp ljus i färger för att analysera stjärnor",
+            "En typ av teleskop för infrarött ljus",
+            "En kamera för galaxer",
+            "En enhet för att fånga ljud från rymden",
+            "En apparat för att mäta planetrörelser"
+        ],
+        "answer": "Ett instrument som delar upp ljus i färger för att analysera stjärnor",
+        "hint": "Ger spektrum för att analysera stjärnors sammansättning"
+    },
+    {
+        "title": "Fråga 39",
+        "text": "Vad är ett svart hål?",
+        "type": "multiple",
+        "options": [
+            "En punkt i rymden med så stark gravitation att inte ens ljus kan undkomma",
+            "En mörk stjärna",
+            "En galax utan ljus",
+            "En explosion",
+            "En typ av dvärgplanet"
+        ],
+        "answer": "En punkt i rymden med så stark gravitation att inte ens ljus kan undkomma",
+        "hint": "Bildas efter vissa supernovor"
+    },
+    {
+        "title": "Fråga 40",
+        "text": "Vad menas med röd förskjutning?",
+        "type": "multiple",
+        "options": [
+            "Att ljus från avlägsna galaxer blir rödare när de rör sig bort från oss",
+            "Att stjärnor blir varmare",
+            "Att stjärnor går mot supernova",
+            "Att galaxer krymper",
+            "Att planeter byter färg"
+        ],
+        "answer": "Att ljus från avlägsna galaxer blir rödare när de rör sig bort från oss",
+        "hint": "Bevis för universums expansion"
+    },
+    {
+        "title": "Fråga 41",
+        "text": "Vad är ett parsec?",
+        "type": "multiple",
+        "options": [
+            "En enhet för att mäta stora avstånd i rymden",
+            "En typ av galax",
+            "En metod för att analysera ljus",
+            "En partikel från solen",
+            "Ett instrument för rymdfärder"
+        ],
+        "answer": "En enhet för att mäta stora avstånd i rymden",
+        "hint": "1 parsec ≈ 3,26 ljusår"
+    },
+    {
+        "title": "Fråga 42",
+        "text": "Hur många planeter finns i vårt solsystem?",
+        "type": "multiple",
+        "options": [
+            "8",
+            "9",
+            "10",
+            "7",
+            "11"
+        ],
+        "answer": "8",
+        "hint": "Pluto räknas inte längre som planet"
+    },
+    {
+        "title": "Fråga 43",
+        "text": "Vad är ett spektroskopiskt binärt stjärnsystem?",
+        "type": "multiple",
+        "options": [
+            "Två stjärnor som kretsar kring varandra och upptäcks genom ljusets spektrum",
+            "En stjärna och en planet",
+            "Två stjärnor i samma galax",
+            "Två planeter som krockar",
+            "Ett svart hål och en stjärna"
+        ],
+        "answer": "Två stjärnor som kretsar kring varandra och upptäcks genom ljusets spektrum",
+        "hint": "Ljuset avslöjar rörelsen"
+    },
+    {
+        "title": "Fråga 44",
+        "text": "Vad menas med absolut ljusstyrka?",
+        "type": "multiple",
+        "options": [
+            "Hur mycket ljus en stjärna verkligen avger",
+            "Hur stjärnan ser ut från jorden",
+            "Stjärnans temperatur",
+            "Avståndet till stjärnan",
+            "Stjärnans spektrum"
+        ],
+        "answer": "Hur mycket ljus en stjärna verkligen avger",
+        "hint": "Mätt oberoende av avstånd"
+    },
+    {
+        "title": "Fråga 45",
+        "text": "Vad är en transitmetod vid exoplanetupptäckt?",
+        "type": "multiple",
+        "options": [
+            "Att mäta ljusstyrkan när planeten passerar framför sin stjärna",
+            "Att lyssna på radiosignaler",
+            "Att se planeten direkt i teleskop",
+            "Att skicka sonder till andra stjärnor",
+            "Att använda laserstrålar"
+        ],
+        "answer": "Att mäta ljusstyrkan när planeten passerar framför sin stjärna",
+        "hint": "Liten dipp i ljuset tyder på planet"
+    },
+    {
+        "title": "Fråga 46",
+        "text": "Vad är Keplers lagar?",
+        "type": "multiple",
+        "options": [
+            "Regler för planeternas rörelse i ellipser",
+            "Lagar om ljusets spridning",
+            "Beskrivningar av supernovor",
+            "Regler om galaxernas hastighet",
+            "Jordens rotation"
+        ],
+        "answer": "Regler för planeternas rörelse i ellipser",
+        "hint": "Beskriver banornas form och hastighet"
+    },
+    {
+        "title": "Fråga 47",
+        "text": "Vilket teleskop placerades i rymden 1990 och revolutionerade astronomin?",
+        "type": "multiple",
+        "options": [
+            "Hubbleteleskopet",
+            "James Webb",
+            "Kepler",
+            "ALMA",
+            "Gaia"
+        ],
+        "answer": "Hubbleteleskopet",
+        "hint": "Kretsar kring jorden"
+    },
+    {
+        "title": "Fråga 48",
+        "text": "Vad är syftet med James Webb-teleskopet?",
+        "type": "multiple",
+        "options": [
+            "Studera tidiga galaxer och stjärnbildning",
+            "Analysera vulkaner på jorden",
+            "Mäta jordbävningar",
+            "Kommunicera med satelliter",
+            "Studera klimatförändringar"
+        ],
+        "answer": "Studera tidiga galaxer och stjärnbildning",
+        "hint": "Infrarött ljus gör det möjligt"
+    },
+    {
+        "title": "Fråga 49",
+        "text": "Vad är en pulsar?",
+        "type": "multiple",
+        "options": [
+            "En snabbt roterande neutronstjärna som sänder ut radiovågor",
+            "En typ av exoplanet",
+            "En energiutbrott från solen",
+            "En komet med dubbel svans",
+            "En galax med ovanlig form"
+        ],
+        "answer": "En snabbt roterande neutronstjärna som sänder ut radiovågor",
+        "hint": "Upptäcktes först med radioteleskop"
+    },
+    {
+        "title": "Fråga 50",
+        "text": "Vilken metod används för att upptäcka rörelse hos stjärnor pga exoplaneter?",
+        "type": "multiple",
+        "options": [
+            "Dopplereffekt",
+            "Radar",
+            "Spektroskopi",
+            "Gravitationslinser",
+            "Parallax"
+        ],
+        "answer": "Dopplereffekt",
+        "hint": "Ljusets våglängd skiftar när stjärnan 'vobblar'"
+    },
+    {
+        "title": "Fråga 51",
+        "text": "Vad innebär parallaxmetoden?",
+        "type": "multiple",
+        "options": [
+            "Att mäta avstånd genom att observera från olika positioner",
+            "Att mäta stjärnans rotation",
+            "Att följa månar runt planeter",
+            "Att använda två teleskop samtidigt",
+            "Att lyssna på rymdljud"
+        ],
+        "answer": "Att mäta avstånd genom att observera från olika positioner",
+        "hint": "Vinkelmätning från olika delar av jordens bana"
+    },
+    {
+        "title": "Fråga 52",
+        "text": "Vad är solvinden?",
+        "type": "multiple",
+        "options": [
+            "Ström av laddade partiklar från solen",
+            "Luft från solen",
+            "Gravitationsvågor från solen",
+            "Solen som roterar",
+            "Ljuset från solen"
+        ],
+        "answer": "Ström av laddade partiklar från solen",
+        "hint": "Orsakar norrsken på jorden"
+    },
+    {
+        "title": "Fråga 53",
+        "text": "Vad är ett gravitationsfält?",
+        "type": "multiple",
+        "options": [
+            "Område där en massa påverkar andra med gravitation",
+            "Ljusets böjning",
+            "Stjärnans temperatur",
+            "Mörk energi",
+            "Ett magnetfält"
+        ],
+        "answer": "Område där en massa påverkar andra med gravitation",
+        "hint": "Jordens fält håller oss kvar"
+    },
+    {
+        "title": "Fråga 54",
+        "text": "Vad kallas teorin om universums platta struktur?",
+        "type": "multiple",
+        "options": [
+            "Inflationsteorin",
+            "Mörk materia-teorin",
+            "Geocentriska modellen",
+            "Ellipslagarna",
+            "Galaktisk rotation"
+        ],
+        "answer": "Inflationsteorin",
+        "hint": "Snabb expansion efter Big Bang"
+    },
+    {
+        "title": "Fråga 55",
+        "text": "Vilken kraft håller planeterna kvar i bana runt solen?",
+        "type": "multiple",
+        "options": [
+            "Gravitation",
+            "Magnetism",
+            "Rotation",
+            "Tryck",
+            "Ljusstyrka"
+        ],
+        "answer": "Gravitation",
+        "hint": "Samma kraft som får äpplen att falla"
+    },
+    {
+        "title": "Fråga 56",
+        "text": "Vad kallas det när en stjärna ökar kraftigt i ljusstyrka under kort tid?",
+        "type": "multiple",
+        "options": [
+            "Nova",
+            "Svart hål",
+            "Dvärgstjärna",
+            "Asteroid",
+            "Magnetar"
+        ],
+        "answer": "Nova",
+        "hint": "Inte samma som supernova"
+    },
+    {
+        "title": "Fråga 57",
+        "text": "Vad är en magnetar?",
+        "type": "multiple",
+        "options": [
+            "En neutronstjärna med extremt starkt magnetfält",
+            "En typ av galax",
+            "Ett teleskop",
+            "En planet med många månar",
+            "En asteroid med järnkärna"
+        ],
+        "answer": "En neutronstjärna med extremt starkt magnetfält",
+        "hint": "Starkare än någon annan känd magnet"
+    },
+    {
+        "title": "Fråga 58",
+        "text": "Vad är ett spektrum?",
+        "type": "multiple",
+        "options": [
+            "Uppdelningen av ljus i olika våglängder",
+            "En rymdbild",
+            "Ett teleskops lins",
+            "Stjärnans yttemperatur",
+            "Gravitationens svängning"
+        ],
+        "answer": "Uppdelningen av ljus i olika våglängder",
+        "hint": "Används för att analysera stjärnor"
+    },
+    {
+        "title": "Fråga 59",
+        "text": "Vad är en zon i solen som ligger mellan kärnan och ytan?",
+        "type": "multiple",
+        "options": [
+            "Strålningszonen",
+            "Fotonzonen",
+            "Neutronzonen",
+            "Ringskiktet",
+            "Kromosfären"
+        ],
+        "answer": "Strålningszonen",
+        "hint": "Transporterar energi från kärnan"
+    },
+    {
+        "title": "Fråga 60",
+        "text": "Vad är syftet med SETI-projektet?",
+        "type": "multiple",
+        "options": [
+            "Att söka efter intelligent liv i universum",
+            "Att skapa nya teleskop",
+            "Att bygga bemannade månbaser",
+            "Att forska om klimatet",
+            "Att mäta planeternas rotation"
+        ],
+        "answer": "Att söka efter intelligent liv i universum",
+        "hint": "Analyserar radiosignaler från rymden"
+    },
+    {
+        "title": "Fråga 61",
+        "text": "Vad kallas planetens bana runt solen?",
+        "type": "multiple",
+        "options": [
+            "Ellips",
+            "Cirkel",
+            "Spiral",
+            "Parabel",
+            "Halvcirkel"
+        ],
+        "answer": "Ellips",
+        "hint": "Inte en perfekt cirkel"
+    },
+    {
+        "title": "Fråga 62",
+        "text": "Vilken planet är känd för sin lutning som ger extrema årstider?",
+        "type": "multiple",
+        "options": [
+            "Uranus",
+            "Jorden",
+            "Mars",
+            "Venus",
+            "Saturnus"
+        ],
+        "answer": "Uranus",
+        "hint": "Nästan liggande axel"
+    },
+    {
+        "title": "Fråga 63",
+        "text": "Vilken planet har den högsta yttemperaturen i solsystemet?",
+        "type": "multiple",
+        "options": [
+            "Venus",
+            "Merkurius",
+            "Jorden",
+            "Mars",
+            "Jupiter"
+        ],
+        "answer": "Venus",
+        "hint": "Tjock atmosfär med växthuseffekt"
+    },
+    {
+        "title": "Fråga 64",
+        "text": "Vilken planet har de mest framträdande ringarna?",
+        "type": "multiple",
+        "options": [
+            "Saturnus",
+            "Uranus",
+            "Jupiter",
+            "Neptunus",
+            "Mars"
+        ],
+        "answer": "Saturnus",
+        "hint": "Synliga även med små teleskop"
+    },
+    {
+        "title": "Fråga 65",
+        "text": "Vad är en rymdsond?",
+        "type": "multiple",
+        "options": [
+            "Ett obemannat rymdfarkost som skickas för att utforska rymden",
+            "En typ av satellit för TV-sändningar",
+            "En kapsel med astronauter",
+            "En komet som studeras",
+            "En infraröd teleskopkamera"
+        ],
+        "answer": "Ett obemannat rymdfarkost som skickas för att utforska rymden",
+        "hint": "Exempel: Voyager, New Horizons"
+    },
+    {
+        "title": "Fråga 66",
+        "text": "Vad är syftet med rymdteleskop som Hubble och James Webb?",
+        "type": "multiple",
+        "options": [
+            "Att observera universum utan atmosfärens störningar",
+            "Att sända signaler till andra planeter",
+            "Att mäta väder i rymden",
+            "Att spåra satelliter",
+            "Att skjuta upp månar"
+        ],
+        "answer": "Att observera universum utan atmosfärens störningar",
+        "hint": "Placeras ovanför jordens atmosfär"
+    },
+    {
+        "title": "Fråga 67",
+        "text": "Vad är en skillnad mellan en stjärna och en planet?",
+        "type": "multiple",
+        "options": [
+            "Stjärnor lyser av egen energi, planeter reflekterar ljus",
+            "Planeter har ringar, stjärnor inte",
+            "Stjärnor är mindre",
+            "Planeter rör sig inte",
+            "Stjärnor har atmosfär, planeter inte"
+        ],
+        "answer": "Stjärnor lyser av egen energi, planeter reflekterar ljus",
+        "hint": "Fusion sker i stjärnor"
+    },
+    {
+        "title": "Fråga 68",
+        "text": "Vad kallas de små kropparna som kretsar runt planeter?",
+        "type": "multiple",
+        "options": [
+            "Månar",
+            "Kometer",
+            "Stenar",
+            "Solfläckar",
+            "Nebulosor"
+        ],
+        "answer": "Månar",
+        "hint": "Jordens kallas 'månen'"
+    },
+    {
+        "title": "Fråga 69",
+        "text": "Vad händer med solen i slutet av sitt liv?",
+        "type": "multiple",
+        "options": [
+            "Den blir en röd jätte och sedan en vit dvärg",
+            "Den exploderar som supernova",
+            "Den blir en svart hål",
+            "Den försvinner helt",
+            "Den blir till mörk materia"
+        ],
+        "answer": "Den blir en röd jätte och sedan en vit dvärg",
+        "hint": "För liten för supernova"
     },
     {
         "title": "Fråga 70",
-        "text": "Varför är det kallt i rymden trots att solen lyser?",
+        "text": "Vad kan en neutronstjärna bli om den är tillräckligt tung?",
         "type": "multiple",
         "options": [
-            "För att det saknas materia som kan hålla värmen",
-            "För att solen inte lyser överallt",
-            "För att månarna reflekterar bort värmen",
-            "För att rymden är för mörk",
-            "För att jorden blockerar värmen"
+            "Svart hål",
+            "Vit dvärg",
+            "Planet",
+            "Asteroid",
+            "Galax"
         ],
-        "answer": "För att det saknas materia som kan hålla värmen",
-        "hint": "Rymden är vakuum"
+        "answer": "Svart hål",
+        "hint": "Kollapsar under egen gravitation"
+    },
+    {
+        "title": "Fråga 71",
+        "text": "Vad är ett kännetecken för en vit dvärg?",
+        "type": "multiple",
+        "options": [
+            "Mycket tät och varm stjärnrest utan fusion",
+            "En stjärna som ännu inte fötts",
+            "En planet utan atmosfär",
+            "En del av ett svart hål",
+            "En kall nebulosa"
+        ],
+        "answer": "Mycket tät och varm stjärnrest utan fusion",
+        "hint": "Slutet för sol-liknande stjärnor"
+    },
+    {
+        "title": "Fråga 72",
+        "text": "Vad är ett kännetecken för en spiralgalax?",
+        "type": "multiple",
+        "options": [
+            "Har armar som snurrar ut från mitten",
+            "Saknar struktur helt",
+            "Är alltid blå till färgen",
+            "Har bara gamla stjärnor",
+            "Har ingen rörelse"
+        ],
+        "answer": "Har armar som snurrar ut från mitten",
+        "hint": "Vintergatan är ett exempel"
+    },
+    {
+        "title": "Fråga 73",
+        "text": "Vad betyder ordet 'kosmos'?",
+        "type": "multiple",
+        "options": [
+            "Universum som helhet",
+            "En viss galax",
+            "En grupp av månar",
+            "En stjärna",
+            "En planet"
+        ],
+        "answer": "Universum som helhet",
+        "hint": "Allt som finns"
+    },
+    {
+        "title": "Fråga 74",
+        "text": "Vilken är den kallaste planeten i solsystemet?",
+        "type": "multiple",
+        "options": [
+            "Uranus",
+            "Neptunus",
+            "Saturnus",
+            "Mars",
+            "Jorden"
+        ],
+        "answer": "Uranus",
+        "hint": "Längst från solen är inte alltid kallast!"
+    },
+    {
+        "title": "Fråga 75",
+        "text": "Vad är syftet med ESA och NASA?",
+        "type": "multiple",
+        "options": [
+            "Att utforska rymden och utveckla rymdteknologi",
+            "Att övervaka klimatet på jorden",
+            "Att mäta stjärnors färger",
+            "Att uppfinna elbilar",
+            "Att bygga kärnkraftverk"
+        ],
+        "answer": "Att utforska rymden och utveckla rymdteknologi",
+        "hint": "Internationella rymdorganisationer"
+    },
+    {
+        "title": "Fråga 76",
+        "text": "Vad är syftet med Internationella rymdstationen (ISS)?",
+        "type": "multiple",
+        "options": [
+            "Forskning i mikrogravitation och samarbete i rymden",
+            "Att fungera som ett hotell i rymden",
+            "Att kontrollera satelliter",
+            "Att skicka signaler till Mars",
+            "Att upptäcka nya galaxer"
+        ],
+        "answer": "Forskning i mikrogravitation och samarbete i rymden",
+        "hint": "Bemannad av astronauter från olika länder"
+    },
+    {
+        "title": "Fråga 77",
+        "text": "Vad kan man studera med infraröda teleskop?",
+        "type": "multiple",
+        "options": [
+            "Kalla objekt som inte syns i vanligt ljus",
+            "Endast heta stjärnor",
+            "Bara planeter",
+            "Ljuset från månen",
+            "Gravitation"
+        ],
+        "answer": "Kalla objekt som inte syns i vanligt ljus",
+        "hint": "Exempel: James Webb"
+    },
+    {
+        "title": "Fråga 78",
+        "text": "Vad är 'astronomi'?",
+        "type": "multiple",
+        "options": [
+            "Vetenskapen om rymden, stjärnor, planeter och universum",
+            "En gren av astrologi",
+            "Studien av vatten",
+            "Vetenskap om växter",
+            "Studiet av tid"
+        ],
+        "answer": "Vetenskapen om rymden, stjärnor, planeter och universum",
+        "hint": "Skilj från astrologi!"
+    },
+    {
+        "title": "Fråga 79",
+        "text": "Vad är 'astrologi'?",
+        "type": "multiple",
+        "options": [
+            "Tron att stjärnornas position påverkar våra liv",
+            "Vetenskap om galaxer",
+            "Studien av magnetfält",
+            "En sorts astronomisk karta",
+            "Vetenskap om kvantfysik"
+        ],
+        "answer": "Tron att stjärnornas position påverkar våra liv",
+        "hint": "Ej vetenskaplig metod"
+    },
+    {
+        "title": "Fråga 80",
+        "text": "Vad skiljer vetenskap från pseudovetenskap?",
+        "type": "multiple",
+        "options": [
+            "Vetenskap bygger på testbara hypoteser och observationer",
+            "Pseudovetenskap har fler fakta",
+            "Vetenskap handlar om åsikter",
+            "Pseudovetenskap är alltid korrekt",
+            "Vetenskap kan inte motbevisas"
+        ],
+        "answer": "Vetenskap bygger på testbara hypoteser och observationer",
+        "hint": "Tänk på skillnaden mellan astronomi och astrologi"
+    },
+    {
+        "title": "Fråga 81",
+        "text": "Vad är en solfläck?",
+        "type": "multiple",
+        "options": [
+            "Ett svalare område på solens yta",
+            "En lysande fläck i rymden",
+            "En skugga av en planet",
+            "En förmörkelse",
+            "En typ av teleskopfel"
+        ],
+        "answer": "Ett svalare område på solens yta",
+        "hint": "Ser mörkare ut på grund av lägre temperatur"
+    },
+    {
+        "title": "Fråga 82",
+        "text": "Vilket grundämne omvandlas till helium i solens kärna?",
+        "type": "multiple",
+        "options": [
+            "Väte",
+            "Syre",
+            "Kol",
+            "Kväve",
+            "Neon"
+        ],
+        "answer": "Väte",
+        "hint": "Fusionens bränsle"
+    },
+    {
+        "title": "Fråga 83",
+        "text": "Hur påverkar solvinden jorden?",
+        "type": "multiple",
+        "options": [
+            "Den kan skapa norrsken",
+            "Den får jorden att rotera",
+            "Den ökar temperaturen på jorden",
+            "Den förstör ozonlagret",
+            "Den får planeter att förflytta sig"
+        ],
+        "answer": "Den kan skapa norrsken",
+        "hint": "Partiklar från solen kolliderar med atmosfären"
+    },
+    {
+        "title": "Fråga 84",
+        "text": "Vad är en spektroskopisk analys användbar för?",
+        "type": "multiple",
+        "options": [
+            "Att avgöra vilka grundämnen som finns i en stjärna",
+            "Att se planeter direkt",
+            "Att räkna månar",
+            "Att skapa nya stjärnor",
+            "Att mäta rymdens temperatur"
+        ],
+        "answer": "Att avgöra vilka grundämnen som finns i en stjärna",
+        "hint": "Ljuset avslöjar mycket"
+    },
+    {
+        "title": "Fråga 85",
+        "text": "Vad gör en gravitationslins?",
+        "type": "multiple",
+        "options": [
+            "Böjer ljuset från avlägsna objekt med hjälp av gravitation",
+            "Förstärker ljudvågor i rymden",
+            "Skapar konstgjord tyngdkraft",
+            "Filtrerar bort mörk materia",
+            "Fångar planeter"
+        ],
+        "answer": "Böjer ljuset från avlägsna objekt med hjälp av gravitation",
+        "hint": "Förekommer runt massiva objekt som galaxer"
+    },
+    {
+        "title": "Fråga 86",
+        "text": "Vilket år landade människan för första gången på månen?",
+        "type": "multiple",
+        "options": [
+            "1969",
+            "1959",
+            "1975",
+            "1961",
+            "1980"
+        ],
+        "answer": "1969",
+        "hint": "Apollo 11"
+    },
+    {
+        "title": "Fråga 87",
+        "text": "Vem var den första människan i rymden?",
+        "type": "multiple",
+        "options": [
+            "Jurij Gagarin",
+            "Neil Armstrong",
+            "Buzz Aldrin",
+            "Valentina Teresjkova",
+            "Alan Shepard"
+        ],
+        "answer": "Jurij Gagarin",
+        "hint": "Sovjetunionen, 1961"
+    },
+    {
+        "title": "Fråga 88",
+        "text": "Vilken kraft motverkar gravitationen i en omloppsbana?",
+        "type": "multiple",
+        "options": [
+            "Centrifugalkraft",
+            "Ljusets hastighet",
+            "Elektricitet",
+            "Tryckkraft",
+            "Fusionskraft"
+        ],
+        "answer": "Centrifugalkraft",
+        "hint": "Rörelse framåt balanserar fallet"
+    },
+    {
+        "title": "Fråga 89",
+        "text": "Vad är en rymdkapsel?",
+        "type": "multiple",
+        "options": [
+            "En liten farkost för att transportera astronauter",
+            "En sond som sänder radiosignaler",
+            "En satellit som roterar snabbt",
+            "Ett observatorium",
+            "Ett uppsamlingsrör"
+        ],
+        "answer": "En liten farkost för att transportera astronauter",
+        "hint": "Exempel: Apollo, Dragon"
+    },
+    {
+        "title": "Fråga 90",
+        "text": "Vad visar månens faser oss?",
+        "type": "multiple",
+        "options": [
+            "Hur solen lyser på månen från jorden",
+            "Att månen ändrar form",
+            "Att jorden snurrar långsammare",
+            "Att månen lyser av sig själv",
+            "Att solen kretsar kring jorden"
+        ],
+        "answer": "Hur solen lyser på månen från jorden",
+        "hint": "Nymåne, halvmåne, fullmåne osv."
+    },
+    {
+        "title": "Fråga 91",
+        "text": "Vad är en meteor?",
+        "type": "multiple",
+        "options": [
+            "En meteoroid som brinner i atmosfären",
+            "En exploderande stjärna",
+            "En del av månen",
+            "En dvärgplanet",
+            "En exoplanet"
+        ],
+        "answer": "En meteoroid som brinner i atmosfären",
+        "hint": "Kallas även 'stjärnfall'"
+    },
+    {
+        "title": "Fråga 92",
+        "text": "Hur bidrar astronomi till teknisk utveckling på jorden?",
+        "type": "multiple",
+        "options": [
+            "Genom nya material och metoder från rymdforskning",
+            "Genom att förutsäga väder",
+            "Genom att odla rymdväxter",
+            "Genom att skapa elektricitet",
+            "Genom att flytta kontinenter"
+        ],
+        "answer": "Genom nya material och metoder från rymdforskning",
+        "hint": "Exempel: GPS, kamerateknik"
+    },
+    {
+        "title": "Fråga 93",
+        "text": "Varför är det svårt att resa till andra stjärnor?",
+        "type": "multiple",
+        "options": [
+            "Avstånden är enorma",
+            "De rör sig för snabbt",
+            "De syns inte",
+            "Det finns för mycket vatten",
+            "Stjärnljuset är bländande"
+        ],
+        "answer": "Avstånden är enorma",
+        "hint": "Ljusår = 9,46 biljoner km"
+    },
+    {
+        "title": "Fråga 94",
+        "text": "Vilket fenomen bevisar att universum expanderar?",
+        "type": "multiple",
+        "options": [
+            "Röd förskjutning",
+            "Vit dvärg",
+            "Fusion",
+            "Kosmiska strålar",
+            "Supernovor"
+        ],
+        "answer": "Röd förskjutning",
+        "hint": "Galaxers ljus blir rödare ju längre bort de är"
+    },
+    {
+        "title": "Fråga 95",
+        "text": "Vilken typ av energi driver stjärnors ljus och värme?",
+        "type": "multiple",
+        "options": [
+            "Kärnfusion",
+            "Kemisk energi",
+            "Elektrisk energi",
+            "Gravitationsenergi",
+            "Strålningsenergi"
+        ],
+        "answer": "Kärnfusion",
+        "hint": "Väte omvandlas till helium"
+    },
+    {
+        "title": "Fråga 96",
+        "text": "Vilken astronom upptäckte månar runt Jupiter?",
+        "type": "multiple",
+        "options": [
+            "Galileo Galilei",
+            "Kepler",
+            "Newton",
+            "Einstein",
+            "Kopernikus"
+        ],
+        "answer": "Galileo Galilei",
+        "hint": "Stödde den heliocentriska världsbilden"
+    },
+    {
+        "title": "Fråga 97",
+        "text": "Vad är en galaxhop?",
+        "type": "multiple",
+        "options": [
+            "En samling av flera galaxer som hålls samman av gravitation",
+            "En spiralgalax",
+            "Ett stjärnmoln",
+            "En galax med månar",
+            "En neutronstjärna och en galax"
+        ],
+        "answer": "En samling av flera galaxer som hålls samman av gravitation",
+        "hint": "Vintergatan ingår i en sådan"
+    },
+    {
+        "title": "Fråga 98",
+        "text": "Vad menas med att en stjärna 'föds'?",
+        "type": "multiple",
+        "options": [
+            "Att gas i en nebulosa drar ihop sig och börjar fusion",
+            "Att den träffas av en komet",
+            "Att den blir röd",
+            "Att den träder in i en galax",
+            "Att en planet bildas"
+        ],
+        "answer": "Att gas i en nebulosa drar ihop sig och börjar fusion",
+        "hint": "Sker i stjärnbarnkammare"
+    },
+    {
+        "title": "Fråga 99",
+        "text": "Vad är den största strukturen i universum som vi känner till?",
+        "type": "multiple",
+        "options": [
+            "Galaxhopar",
+            "Stjärnsystem",
+            "Planetsystem",
+            "Svarta hål",
+            "Nebulosor"
+        ],
+        "answer": "Galaxhopar",
+        "hint": "Innehåller tusentals galaxer"
+    },
+    {
+        "title": "Fråga 100",
+        "text": "Hur vet vi vad stjärnor är gjorda av?",
+        "type": "multiple",
+        "options": [
+            "Genom att analysera deras ljusspektrum",
+            "Genom att landa på dem",
+            "Genom att lyssna på deras ljud",
+            "Genom att ta prover",
+            "Genom att jämföra med månar"
+        ],
+        "answer": "Genom att analysera deras ljusspektrum",
+        "hint": "Unika färgstreck för olika ämnen"
     }
 ]
