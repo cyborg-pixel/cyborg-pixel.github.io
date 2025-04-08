@@ -1,982 +1,1178 @@
 [
     {
         "title": "Fråga 1",
-        "text": "Vad är spänning i en elektrisk krets?",
+        "text": "Vad betyder energi i fysik?",
         "type": "multiple",
         "options": [
-            "Skillnaden i elektrisk potential mellan två punkter",
-            "Antalet elektroner i kretsen",
-            "Rörelsen av elektroner i ledaren",
-            "Motståndet i kretsen",
-            "Effekten av strömmen"
+            "Förmågan att göra arbete",
+            "En form av rörelse",
+            "En typ av strålning",
+            "En mätning av temperatur",
+            "En form av ljus"
         ],
-        "answer": "Skillnaden i elektrisk potential mellan två punkter",
-        "hint": "Spänning mäts i volt (V)"
+        "answer": "Förmågan att göra arbete",
+        "hint": "Energi är det som krävs för att utföra arbete."
     },
     {
         "title": "Fråga 2",
-        "text": "Vad mäter en voltmeter?",
+        "text": "Vad är arbete i fysik?",
         "type": "multiple",
         "options": [
-            "Spänning",
-            "Strömstyrka",
-            "Motstånd",
-            "Energi",
-            "Effekt"
+            "En kraft som verkar över en sträcka",
+            "Ett mått på energi som inte rör sig",
+            "En hastighet på ett föremål",
+            "En typ av elektrisk laddning",
+            "En kemisk reaktion"
         ],
-        "answer": "Spänning",
-        "hint": "Volt är enheten för spänning"
+        "answer": "En kraft som verkar över en sträcka",
+        "hint": "Arbete utförs när en kraft flyttar ett föremål."
     },
     {
         "title": "Fråga 3",
-        "text": "Vad är ström i en elektrisk krets?",
+        "text": "Vilken formel används för att beräkna arbete?",
         "type": "multiple",
         "options": [
-            "Flödet av elektroner",
-            "Motståndet i en ledare",
-            "Skillnaden i elektrisk potential",
-            "Effekten av kretsen",
-            "Hastigheten på elektronerna"
+            "W = F × v",
+            "W = F × t",
+            "W = F × S",
+            "W = m × g",
+            "W = m × a"
         ],
-        "answer": "Flödet av elektroner",
-        "hint": "Ström mäts i ampere (A)"
+        "answer": "W = F × S",
+        "hint": "Formeln beskriver arbete som en kraft gånger en sträcka."
     },
     {
         "title": "Fråga 4",
-        "text": "Vad mäter en ampermeter?",
+        "text": "Vad är enheten för arbete?",
         "type": "multiple",
         "options": [
-            "Strömstyrka",
-            "Spänning",
-            "Motstånd",
-            "Frekvens",
-            "Hastighet"
+            "Joule (J)",
+            "Newton (N)",
+            "Watt (W)",
+            "Meter (m)",
+            "Sekund (s)"
         ],
-        "answer": "Strömstyrka",
-        "hint": "Ampere (A) är enheten för strömstyrka"
+        "answer": "Joule (J)",
+        "hint": "Joule är enheten för energi och arbete."
     },
     {
         "title": "Fråga 5",
-        "text": "Vad är resistans?",
+        "text": "Vad är mekanisk energi?",
         "type": "multiple",
         "options": [
-            "Motståndet som hindrar elektroner från att flöda",
-            "Den elektriska potentialen i en krets",
-            "Flödet av elektroner i ledaren",
-            "Enhet för strömstyrka",
-            "Energiförbrukningen i en ledare"
+            "Den energi som finns i en elektrisk ström",
+            "Energimängden i en rörlig kropp eller föremål",
+            "Energimängden i en kemisk reaktion",
+            "Energimängden i ett magnetfält",
+            "Energimängden i ljusstrålar"
         ],
-        "answer": "Motståndet som hindrar elektroner från att flöda",
-        "hint": "Resistans mäts i ohm (Ω)"
+        "answer": "Energimängden i en rörlig kropp eller föremål",
+        "hint": "Mekanisk energi kan vara antingen lägesenergi eller rörelsenergi."
     },
     {
         "title": "Fråga 6",
-        "text": "Vad beskriver Ohms lag?",
+        "text": "Vad kallas den energi som ett föremål har på grund av sin rörelse?",
         "type": "multiple",
         "options": [
-            "Förhållandet mellan spänning, ström och resistans",
-            "Förhållandet mellan energi och effekt",
-            "Förhållandet mellan spänning och effekt",
-            "Förhållandet mellan resistans och energi",
-            "Förhållandet mellan ström och effekt"
+            "Lägesenergi",
+            "Termisk energi",
+            "Rörelseenergi",
+            "Elektrisk energi",
+            "Kärnenergi"
         ],
-        "answer": "Förhållandet mellan spänning, ström och resistans",
-        "hint": "Ohms lag: U = R · I"
+        "answer": "Rörelseenergi",
+        "hint": "Rörelseenergi beror på både hastighet och massa."
     },
     {
         "title": "Fråga 7",
-        "text": "Vad är enheten för resistans?",
+        "text": "Vilken formel används för att beräkna rörelseenergi?",
         "type": "multiple",
         "options": [
-            "Ohm",
-            "Volt",
-            "Ampere",
-            "Joule",
-            "Watt"
+            "E = m × v",
+            "E = m × g × h",
+            "E = ½ × m × v²",
+            "E = ½ × m × g × h",
+            "E = F × S"
         ],
-        "answer": "Ohm",
-        "hint": "Symbolen för resistans är Ω"
+        "answer": "E = ½ × m × v²",
+        "hint": "Formeln för rörelseenergi beror på massan och kvadraten på hastigheten."
     },
     {
         "title": "Fråga 8",
-        "text": "Hur räknar man ut resistansen i en krets med hjälp av Ohms lag?",
+        "text": "Vad är lägesenergi?",
         "type": "multiple",
         "options": [
-            "Resistans = Spänning / Ström",
-            "Resistans = Ström / Spänning",
-            "Resistans = Effekt / Ström",
-            "Resistans = Ström / Effekt",
-            "Resistans = Spänning / Effekt"
+            "Energimängden i ett föremål som rör sig",
+            "Energimängden i ett föremål på grund av dess läge i ett fält",
+            "Energimängden som avges av elektriska kretsar",
+            "Energimängden som beror på temperaturen i ett objekt",
+            "Energimängden i ljusstrålar"
         ],
-        "answer": "Resistans = Spänning / Ström",
-        "hint": "Formeln är R = U / I"
+        "answer": "Energimängden i ett föremål på grund av dess läge i ett fält",
+        "hint": "Lägesenergi beror på höjd över marken och gravitationens påverkan."
     },
     {
         "title": "Fråga 9",
-        "text": "Vad händer om du kopplar flera resistorer i serie?",
+        "text": "Vilken formel används för att beräkna lägesenergi?",
         "type": "multiple",
         "options": [
-            "Resistansen ökar",
-            "Resistansen minskar",
-            "Strömmen ökar",
-            "Strömmen minskar",
-            "Effekten ökar"
+            "E = m × v",
+            "E = m × g × h",
+            "E = F × S",
+            "E = ½ × m × v²",
+            "E = P × t"
         ],
-        "answer": "Resistansen ökar",
-        "hint": "Resistansen adderas i serie"
+        "answer": "E = m × g × h",
+        "hint": "Lägesenergi beror på massan, gravitationen och höjden."
     },
     {
         "title": "Fråga 10",
-        "text": "Vad händer om du kopplar flera resistorer parallellt?",
+        "text": "Vad betyder effektivitet?",
         "type": "multiple",
         "options": [
-            "Resistansen minskar",
-            "Resistansen ökar",
-            "Strömmen ökar",
-            "Spänningen ökar",
-            "Effekten minskar"
+            "Hur mycket energi som omvandlas från en form till en annan",
+            "Hur snabbt ett arbete utförs",
+            "Hur mycket energi som förloras",
+            "Hur mycket energi som lagras",
+            "Hur mycket energi som produceras"
         ],
-        "answer": "Resistansen minskar",
-        "hint": "För varje ny parallell resistor minskar den totala resistansen"
+        "answer": "Hur mycket energi som omvandlas från en form till en annan",
+        "hint": "Effektiviteten mäts som förhållandet mellan användbar energi och total energi."
     },
     {
         "title": "Fråga 11",
-        "text": "Vad kallas en elektrisk krets där strömmen kan flöda fritt?",
+        "text": "Vilken enhet används för att mäta effekt?",
         "type": "multiple",
         "options": [
-            "En sluten krets",
-            "En öppen krets",
-            "En halvledare",
-            "En induktionskrets",
-            "En kapacitiv krets"
+            "Joule (J)",
+            "Watt (W)",
+            "Kilogram (kg)",
+            "Newton (N)",
+            "Volt (V)"
         ],
-        "answer": "En sluten krets",
-        "hint": "För att strömmen ska flöda måste kretsen vara slut"
+        "answer": "Watt (W)",
+        "hint": "Watt är enheten för effekt och beskriver energi per tidsenhet."
     },
     {
         "title": "Fråga 12",
-        "text": "Vad är en kortslutning?",
+        "text": "Vad är formeln för effekt?",
         "type": "multiple",
         "options": [
-            "När strömmen flödar genom en mycket låg resistansväg",
-            "När strömmen inte kan flöda",
-            "När en resistor brinner ut",
-            "När en krets är öppen",
-            "När strömmen är för svag"
+            "P = F × v",
+            "P = W × t",
+            "P = W / t",
+            "P = m × g × h",
+            "P = m × a"
         ],
-        "answer": "När strömmen flödar genom en mycket låg resistansväg",
-        "hint": "Kan orsaka brand eller skador"
+        "answer": "P = W / t",
+        "hint": "Effekt är arbete delat med tiden."
     },
     {
         "title": "Fråga 13",
-        "text": "Vad innebär det att en krets är öppen?",
+        "text": "Hur beräknas energi i ett elektriskt system?",
         "type": "multiple",
         "options": [
-            "Strömmen kan inte flöda",
-            "Strömmen flödar utan motstånd",
-            "Strömmen är oavbruten",
-            "Resistansen är noll",
-            "Spänningen är konstant"
+            "E = P × t",
+            "E = I × V",
+            "E = I × R",
+            "E = V × t",
+            "E = P / t"
         ],
-        "answer": "Strömmen kan inte flöda",
-        "hint": "En brytare kan öppna en krets"
+        "answer": "E = P × t",
+        "hint": "Energi i ett elektriskt system beror på effekt och tid."
     },
     {
         "title": "Fråga 14",
-        "text": "Vad är skillnaden mellan växelström och likström?",
+        "text": "Vad är ett exempel på en energikälla?",
         "type": "multiple",
         "options": [
-            "Växelström byter riktning, likström flödar i en riktning",
-            "Växelström är alltid svagare",
-            "Likström kan inte användas i hushåll",
-            "Växelström är farligare",
-            "Likström används inte i elektriska apparater"
+            "Solen",
+            "Fysik",
+            "Kemi",
+            "Gravitation",
+            "Elektricitet"
         ],
-        "answer": "Växelström byter riktning, likström flödar i en riktning",
-        "hint": "Växelström används i elnätet"
+        "answer": "Solen",
+        "hint": "Solen är en naturlig energikälla som ger energi genom solstrålning."
     },
     {
         "title": "Fråga 15",
-        "text": "Vad är effekten i en elektrisk krets?",
+        "text": "Vad är enhet för energi i elektriska system?",
         "type": "multiple",
         "options": [
-            "Energianvändningen per tidsenhet",
-            "Spänningen i kretsen",
-            "Motståndet i kretsen",
-            "Strömstyrkan",
-            "Antalet elektroner"
+            "Volt (V)",
+            "Ampere (A)",
+            "Joule (J)",
+            "Watt (W)",
+            "Kilowatt-timme (kWh)"
         ],
-        "answer": "Energianvändningen per tidsenhet",
-        "hint": "Effekt mäts i watt (W)"
+        "answer": "Joule (J)",
+        "hint": "Joule är den grundläggande enheten för energi."
     },
     {
         "title": "Fråga 16",
-        "text": "Vad är formeln för effekt?",
+        "text": "Vad innebär att en maskin har hög effektivitet?",
         "type": "multiple",
         "options": [
-            "P = U · I",
-            "P = R · I",
-            "P = U / I",
-            "P = I / R",
-            "P = I · V"
+            "Den omvandlar mer energi till användbar form",
+            "Den använder mer energi",
+            "Den förlorar mindre energi som värme",
+            "Den arbetar snabbare",
+            "Den använder mindre energi"
         ],
-        "answer": "P = U · I",
-        "hint": "Effekt = Spänning × Ström"
+        "answer": "Den omvandlar mer energi till användbar form",
+        "hint": "Effektiviteten mäter hur bra en maskin omvandlar energi utan förluster."
     },
     {
         "title": "Fråga 17",
-        "text": "Vilken enhet mäter effekt?",
+        "text": "Vad händer med ett föremåls rörelseenergi när det bromsas?",
         "type": "multiple",
         "options": [
-            "Watt",
-            "Volt",
-            "Ampere",
-            "Ohm",
-            "Tesla"
+            "Den ökar",
+            "Den minskar",
+            "Den förloras som värme",
+            "Den omvandlas till lägesenergi",
+            "Den försvinner helt"
         ],
-        "answer": "Watt",
-        "hint": "Enheten för effekt"
+        "answer": "Den minskar",
+        "hint": "Bromsning minskar föremålets hastighet och därmed rörelseenergin."
     },
     {
         "title": "Fråga 18",
-        "text": "Vad är en glödlampa?",
+        "text": "Vad innebär termisk energi?",
         "type": "multiple",
         "options": [
-            "En elektrisk komponent som omvandlar elektrisk energi till ljus och värme",
-            "En elektrisk motor",
-            "En elektrisk ledare",
-            "En spole i en krets",
-            "En strömbrytare"
+            "Energi i form av rörelse",
+            "Energi i form av värme",
+            "Energi som produceras av elektrisk ström",
+            "Energi i samband med arbete",
+            "Energi i rörelse av ljus"
         ],
-        "answer": "En elektrisk komponent som omvandlar elektrisk energi till ljus och värme",
-        "hint": "Vanlig i belysning"
+        "answer": "Energi i form av värme",
+        "hint": "Termisk energi är den energi som överförs genom temperaturskillnader."
     },
     {
         "title": "Fråga 19",
-        "text": "Vad gör en strömbrytare?",
+        "text": "Vilken enhet används för att mäta effekt i elektriska system?",
         "type": "multiple",
         "options": [
-            "Stänger av eller slår på en elektrisk krets",
-            "Mäter spänning",
-            "Skapar elektricitet",
-            "Omvandlar energi",
-            "Minskar strömmen"
+            "Joule (J)",
+            "Watt (W)",
+            "Volt (V)",
+            "Ampere (A)",
+            "Newton (N)"
         ],
-        "answer": "Stänger av eller slår på en elektrisk krets",
-        "hint": "Används för att kontrollera kretsar"
+        "answer": "Watt (W)",
+        "hint": "Watt är enheten för effekt."
     },
     {
         "title": "Fråga 20",
-        "text": "Vad är en elektrisk säkring?",
+        "text": "Vad betyder energiöverföring?",
         "type": "multiple",
         "options": [
-            "En komponent som bryter strömmen vid överbelastning",
-            "En strömbrytare",
-            "En transformator",
-            "En elektrisk ledare",
-            "En batteri"
+            "Att energi går från en plats till en annan",
+            "Att energi minskar",
+            "Att energi inte kan skapas",
+            "Att energi omvandlas till ljus",
+            "Att energi lagras för framtiden"
         ],
-        "answer": "En komponent som bryter strömmen vid överbelastning",
-        "hint": "Skyddar mot skador"
+        "answer": "Att energi går från en plats till en annan",
+        "hint": "Energiöverföring sker i många olika former, som elektrisk, mekanisk och termisk."
     },
     {
         "title": "Fråga 21",
-        "text": "Vad händer med strömmen om resistansen i en krets ökar?",
+        "text": "Vad är ett exempel på en energikälla som inte är förnybar?",
         "type": "multiple",
         "options": [
-            "Strömmen minskar",
-            "Strömmen ökar",
-            "Strömmen förblir densamma",
-            "Resistansen försvinner",
-            "Effekten ökar"
+            "Solen",
+            "Vind",
+            "Kärnkraft",
+            "Vattenkraft",
+            "Geotermisk energi"
         ],
-        "answer": "Strömmen minskar",
-        "hint": "Enligt Ohms lag"
+        "answer": "Kärnkraft",
+        "hint": "Kärnkraft är inte förnybar eftersom den kräver uran som är en begränsad resurs."
     },
     {
         "title": "Fråga 22",
-        "text": "Vad innebär det att en krets är i serie?",
+        "text": "Vad är ett exempel på en mekanisk energiomvandling?",
         "type": "multiple",
         "options": [
-            "Alla komponenter är kopplade i rad",
-            "Komponenterna är parallellt kopplade",
-            "Strömmen delas upp i varje komponent",
-            "Komponenterna har samma resistans",
-            "Spänningen delas upp lika"
+            "Från elektrisk energi till rörelse",
+            "Från värme till ljus",
+            "Från ljus till kemisk energi",
+            "Från elektrisk till värme",
+            "Från rörelse till värme"
         ],
-        "answer": "Alla komponenter är kopplade i rad",
-        "hint": "Strömmen går genom varje komponent"
+        "answer": "Från rörelse till värme",
+        "hint": "Ett exempel är friktion, som omvandlar rörelseenergi till värme."
     },
     {
         "title": "Fråga 23",
-        "text": "Vad innebär det att en krets är parallellkopplad?",
+        "text": "Vilket av följande är en enhet för elektrisk effekt?",
         "type": "multiple",
         "options": [
-            "Spänningen är lika över alla komponenter",
-            "Strömmen går genom varje komponent",
-            "Strömmen delas upp mellan varje komponent",
-            "Resistansen adderas",
-            "Kretsen går i en slinga"
+            "Joule",
+            "Watt",
+            "Newton",
+            "Volt",
+            "Ampere"
         ],
-        "answer": "Strömmen delas upp mellan varje komponent",
-        "hint": "Spänning är lika över alla komponenter"
+        "answer": "Watt",
+        "hint": "Effekt mäts i Watt och är ett mått på energi per tidsenhet."
     },
     {
         "title": "Fråga 24",
-        "text": "Vad händer med den totala resistansen om man lägger till fler resistorer i parallellkoppling?",
+        "text": "Hur beräknas elektrisk effekt?",
         "type": "multiple",
         "options": [
-            "Den totala resistansen minskar",
-            "Den totala resistansen ökar",
-            "Den totala resistansen förblir densamma",
-            "Resistansen blir noll",
-            "Spänningen ökar"
+            "P = I × R",
+            "P = V × I",
+            "P = V × R",
+            "P = I × t",
+            "P = U × I × t"
         ],
-        "answer": "Den totala resistansen minskar",
-        "hint": "Ju fler parallella vägar desto lägre resistans"
+        "answer": "P = V × I",
+        "hint": "Effekt beräknas som spänning multiplicerat med ström."
     },
     {
         "title": "Fråga 25",
-        "text": "Vad innebär kortslutning i en elektrisk krets?",
+        "text": "Vad är formeln för att beräkna den energi som förbrukas av en elektrisk apparat?",
         "type": "multiple",
         "options": [
-            "Strömmen går genom en mycket låg resistansväg",
-            "Spänningen minskar i kretsen",
-            "Resistansen ökar kraftigt",
-            "Kretsen är öppnad",
-            "Strömmen flödar konstant"
+            "E = P × t",
+            "E = V × I",
+            "E = P × R",
+            "E = I × t",
+            "E = V × R"
         ],
-        "answer": "Strömmen går genom en mycket låg resistansväg",
-        "hint": "Kan orsaka farliga överhettningar"
+        "answer": "E = P × t",
+        "hint": "Energi är lika med effekt multiplicerat med tid."
     },
     {
         "title": "Fråga 26",
-        "text": "Vad är en kondensator i en elektrisk krets?",
+        "text": "Vad händer med den totala energin i ett isolerat system?",
         "type": "multiple",
         "options": [
-            "En komponent som lagrar elektrisk energi",
-            "En strömbrytare",
-            "En spole",
-            "En typ av batteri",
-            "En komponent som minskar strömmen"
+            "Den minskar",
+            "Den förblir konstant",
+            "Den ökar",
+            "Den kan inte mätas",
+            "Den omvandlas till ljus"
         ],
-        "answer": "En komponent som lagrar elektrisk energi",
-        "hint": "Används för att jämna ut strömförsörjningen"
+        "answer": "Den förblir konstant",
+        "hint": "Enligt energiprincipen är energi bevarad i ett isolerat system."
     },
     {
         "title": "Fråga 27",
-        "text": "Vad är skillnaden mellan växelström och likström?",
+        "text": "Vad kallas energiöverföring i form av värme mellan objekt med olika temperatur?",
         "type": "multiple",
         "options": [
-            "Växelström ändrar riktning, medan likström går i en riktning",
-            "Växelström är snabbare än likström",
-            "Likström används i elnätet, medan växelström inte gör det",
-            "Växelström är farligare än likström",
-            "Likström är mer effektiv för långa avstånd"
+            "Konduktion",
+            "Konvektion",
+            "Strålning",
+            "Diffusion",
+            "Vibration"
         ],
-        "answer": "Växelström ändrar riktning, medan likström går i en riktning",
-        "hint": "Växelström används i elnätet"
+        "answer": "Konduktion",
+        "hint": "Konduktion är energiöverföring genom ett fast material."
     },
     {
         "title": "Fråga 28",
-        "text": "Vad är den vanligaste användningen för likström?",
+        "text": "Vad betyder begreppet 'energiomvandling'?",
         "type": "multiple",
         "options": [
-            "Batteridrivna apparater",
-            "Elektriska kraftverk",
-            "Högspänningsledning",
-            "Fjärrkontroller",
-            "Belysning"
+            "Att energi skapas",
+            "Att energi förloras",
+            "Att energi byts mellan olika former",
+            "Att energi lagras",
+            "Att energi omvandlas till ljus"
         ],
-        "answer": "Batteridrivna apparater",
-        "hint": "Batterier ger likström"
+        "answer": "Att energi byts mellan olika former",
+        "hint": "Exempel: Elektrisk energi omvandlas till rörelseenergi i en motor."
     },
     {
         "title": "Fråga 29",
-        "text": "Vad är effekten i en elektrisk krets?",
+        "text": "Vilken formel används för att beräkna effekt i ett elektriskt system?",
         "type": "multiple",
         "options": [
-            "Energianvändningen per tidsenhet",
-            "Spänningen i kretsen",
-            "Strömstyrkan",
-            "Resistansen",
-            "Motståndet i kretsen"
+            "P = V × I",
+            "P = I × t",
+            "P = V × R",
+            "P = V / R",
+            "P = I² × R"
         ],
-        "answer": "Energianvändningen per tidsenhet",
-        "hint": "Effekt mäts i watt"
+        "answer": "P = V × I",
+        "hint": "Effekten beräknas genom att multiplicera spänning med ström."
     },
     {
         "title": "Fråga 30",
-        "text": "Vad är formeln för effekt?",
+        "text": "Vad är det största problemet med fossila bränslen?",
         "type": "multiple",
         "options": [
-            "P = U · I",
-            "P = R · I",
-            "P = I² · R",
-            "P = U² / R",
-            "P = I · R"
+            "De är dyrbara",
+            "De producerar mycket koldioxid och förorenar miljön",
+            "De omvandlar för lite energi",
+            "De kan inte användas i alla motorer",
+            "De kan inte lagras"
         ],
-        "answer": "P = U · I",
-        "hint": "Effekt = Spänning × Ström"
+        "answer": "De producerar mycket koldioxid och förorenar miljön",
+        "hint": "Fossila bränslen är en av de största källorna till växthusgasutsläpp."
+    },
+    {
+        "title": "Fråga 31",
+        "text": "Vilken enhet används för att mäta elektrisk energi?",
+        "type": "multiple",
+        "options": [
+            "Joule (J)",
+            "Volt (V)",
+            "Ampere (A)",
+            "Watt (W)",
+            "Kilowatt-timme (kWh)"
+        ],
+        "answer": "Kilowatt-timme (kWh)",
+        "hint": "Kilowatt-timme används för att mäta energi som används i elektriska apparater."
+    },
+    {
+        "title": "Fråga 32",
+        "text": "Vad innebär begreppet förnybar energi?",
+        "type": "multiple",
+        "options": [
+            "Energi som kommer från solen",
+            "Energi som inte kan användas mer än en gång",
+            "Energi som kan användas om och om igen",
+            "Energi som används i alla motorer",
+            "Energi som inte påverkar klimatet"
+        ],
+        "answer": "Energi som kan användas om och om igen",
+        "hint": "Exempel på förnybar energi är vind-, sol- och vattenkraft."
+    },
+    {
+        "title": "Fråga 33",
+        "text": "Vad är solens roll i energiomvandling?",
+        "type": "multiple",
+        "options": [
+            "Solenergi omvandlas till värme och ljus",
+            "Solenergi omvandlas till mekanisk energi",
+            "Solenergi omvandlas till kemisk energi",
+            "Solenergi omvandlas till elektrisk energi",
+            "Alla ovanstående"
+        ],
+        "answer": "Alla ovanstående",
+        "hint": "Solenergi omvandlas till flera olika energiformer beroende på tillämpning."
+    },
+    {
+        "title": "Fråga 34",
+        "text": "Vad är termisk konvektion?",
+        "type": "multiple",
+        "options": [
+            "Energiöverföring genom ett fast ämne",
+            "Energiöverföring genom vätskor och gaser",
+            "Energiöverföring genom ljus",
+            "Energiöverföring genom elektromagnetiska vågor",
+            "Energiöverföring genom friktion"
+        ],
+        "answer": "Energiöverföring genom vätskor och gaser",
+        "hint": "Konvektion sker när varma partiklar stiger och kalla sjunker."
+    },
+    {
+        "title": "Fråga 35",
+        "text": "Vilken typ av energi används i en elektrisk lampa?",
+        "type": "multiple",
+        "options": [
+            "Ljusenergi",
+            "Kärnenergi",
+            "Elektrisk energi",
+            "Termisk energi",
+            "Mekanisk energi"
+        ],
+        "answer": "Elektrisk energi",
+        "hint": "Elektrisk energi omvandlas till ljus och värme."
+    },
+    {
+        "title": "Fråga 36",
+        "text": "Vad är verkningsgrad?",
+        "type": "multiple",
+        "options": [
+            "Förhållandet mellan in- och utgående energi",
+            "En formel för att beräkna energi",
+            "Ett mått på hur snabbt en motor kan starta",
+            "Hur mycket energi som omvandlas till värme",
+            "Hur mycket energi som förloras vid en process"
+        ],
+        "answer": "Förhållandet mellan in- och utgående energi",
+        "hint": "Verkningsgrad används för att mäta effektiviteten i en process."
+    },
+    {
+        "title": "Fråga 37",
+        "text": "Vilket av följande är inte en energiform?",
+        "type": "multiple",
+        "options": [
+            "Elektrisk energi",
+            "Mekanisk energi",
+            "Värmeenergi",
+            "Kärnenergi",
+            "Vattenenergi"
+        ],
+        "answer": "Vattenenergi",
+        "hint": "Vattenenergi är inte en egen energiform utan är relaterad till hydraulisk energi."
+    },
+    {
+        "title": "Fråga 38",
+        "text": "Vad menas med att energi är bevarad?",
+        "type": "multiple",
+        "options": [
+            "Energi kan skapas och förloras",
+            "Energi kan omvandlas mellan olika former men inte försvinna",
+            "Energi försvinner vid friktion",
+            "Energi produceras från intet",
+            "Energi går alltid till värme"
+        ],
+        "answer": "Energi kan omvandlas mellan olika former men inte försvinna",
+        "hint": "Detta är en grundläggande princip inom fysiken."
+    },
+    {
+        "title": "Fråga 39",
+        "text": "Vad händer med temperaturen om ett objekt absorberar värme?",
+        "type": "multiple",
+        "options": [
+            "Temperaturen minskar",
+            "Temperaturen ökar",
+            "Temperaturen förblir konstant",
+            "Temperaturen ökar till en viss punkt",
+            "Temperaturen går ned först"
+        ],
+        "answer": "Temperaturen ökar",
+        "hint": "Värme ökar ett föremåls kinetiska energi, vilket resulterar i en temperaturhöjning."
+    },
+    {
+        "title": "Fråga 40",
+        "text": "Vilket av följande är en form av lagrad energi?",
+        "type": "multiple",
+        "options": [
+            "Rörelseenergi",
+            "Lägesenergi",
+            "Värmeenergi",
+            "Kärnenergi",
+            "Elektromagnetisk energi"
+        ],
+        "answer": "Lägesenergi",
+        "hint": "Lägesenergi är lagrad i ett föremål på grund av dess höjd."
     },
     {
         "title": "Fråga 41",
-        "text": "Vad händer med strömmen om resistansen i en krets ökar?",
+        "text": "Vad händer med den mekaniska energin i ett system där friktion är närvarande?",
         "type": "multiple",
         "options": [
-            "Strömmen minskar",
-            "Strömmen ökar",
-            "Strömmen förblir densamma",
-            "Resistansen försvinner",
-            "Effekten ökar"
+            "Den ökar",
+            "Den förblir konstant",
+            "Den omvandlas till värmeenergi",
+            "Den förloras helt",
+            "Den omvandlas till ljus"
         ],
-        "answer": "Strömmen minskar",
-        "hint": "Enligt Ohms lag"
+        "answer": "Den omvandlas till värmeenergi",
+        "hint": "Friktion omvandlar mekanisk energi till värme."
     },
     {
         "title": "Fråga 42",
-        "text": "Vad innebär det att en krets är i serie?",
+        "text": "Vilken enhet används för att mäta elektrisk effekt?",
         "type": "multiple",
         "options": [
-            "Alla komponenter är kopplade i rad",
-            "Komponenterna är parallellt kopplade",
-            "Strömmen delas upp i varje komponent",
-            "Komponenterna har samma resistans",
-            "Spänningen delas upp lika"
+            "Watt (W)",
+            "Joule (J)",
+            "Volt (V)",
+            "Ampere (A)",
+            "Newton (N)"
         ],
-        "answer": "Alla komponenter är kopplade i rad",
-        "hint": "Strömmen går genom varje komponent"
+        "answer": "Watt (W)",
+        "hint": "Effekt är energi per tidsenhet och mäts i Watt."
     },
     {
         "title": "Fråga 43",
-        "text": "Vad innebär det att en krets är parallellkopplad?",
+        "text": "Vad betyder 'verkningsgrad'?",
         "type": "multiple",
         "options": [
-            "Spänningen är lika över alla komponenter",
-            "Strömmen går genom varje komponent",
-            "Strömmen delas upp mellan varje komponent",
-            "Resistansen adderas",
-            "Kretsen går i en slinga"
+            "Förhållandet mellan nyttig energi och total energi",
+            "Förhållandet mellan massa och volym",
+            "Förhållandet mellan hastighet och energi",
+            "Förhållandet mellan ljus och värme",
+            "Förhållandet mellan hastighet och effekt"
         ],
-        "answer": "Strömmen delas upp mellan varje komponent",
-        "hint": "Spänning är lika över alla komponenter"
+        "answer": "Förhållandet mellan nyttig energi och total energi",
+        "hint": "Verkningsgrad mäter hur mycket av den tillförda energin som används effektivt."
     },
     {
         "title": "Fråga 44",
-        "text": "Vad händer med den totala resistansen om man lägger till fler resistorer i parallellkoppling?",
+        "text": "Vad innebär begreppet 'energiomvandling'?",
         "type": "multiple",
         "options": [
-            "Den totala resistansen minskar",
-            "Den totala resistansen ökar",
-            "Den totala resistansen förblir densamma",
-            "Resistansen blir noll",
-            "Spänningen ökar"
+            "När energi försvinner",
+            "När energi omvandlas från en form till en annan",
+            "När energi lagras",
+            "När energi ökar i mängd",
+            "När energi skapas från inget"
         ],
-        "answer": "Den totala resistansen minskar",
-        "hint": "Ju fler parallella vägar desto lägre resistans"
+        "answer": "När energi omvandlas från en form till en annan",
+        "hint": "Energi kan omvandlas mellan olika former som mekanisk energi, elektrisk energi och värme."
     },
     {
         "title": "Fråga 45",
-        "text": "Vad är en kondensator i en elektrisk krets?",
+        "text": "Vad är enhet för elektrisk energi?",
         "type": "multiple",
         "options": [
-            "En komponent som lagrar elektrisk energi",
-            "En strömbrytare",
-            "En spole",
-            "En typ av batteri",
-            "En komponent som minskar strömmen"
+            "Watt (W)",
+            "Joule (J)",
+            "Kilowatt-timme (kWh)",
+            "Volt (V)",
+            "Ampere (A)"
         ],
-        "answer": "En komponent som lagrar elektrisk energi",
-        "hint": "Används för att jämna ut strömförsörjningen"
+        "answer": "Kilowatt-timme (kWh)",
+        "hint": "Elektrisk energi mäts i kWh när det handlar om konsumtion i hushåll."
     },
     {
         "title": "Fråga 46",
-        "text": "Vad är skillnaden mellan växelström och likström?",
+        "text": "Vad är en solpanel ett exempel på?",
         "type": "multiple",
         "options": [
-            "Växelström ändrar riktning, medan likström går i en riktning",
-            "Växelström är snabbare än likström",
-            "Likström används i elnätet, medan växelström inte gör det",
-            "Växelström är farligare",
-            "Likström är mer effektiv för långa avstånd"
+            "Termisk energi",
+            "Förnybar energi",
+            "Icke-förnybar energi",
+            "Kärnenergi",
+            "Fossil energi"
         ],
-        "answer": "Växelström ändrar riktning, medan likström går i en riktning",
-        "hint": "Växelström används i elnätet"
+        "answer": "Förnybar energi",
+        "hint": "Solpaneler använder solens energi för att skapa elektricitet."
     },
     {
         "title": "Fråga 47",
-        "text": "Vad är den vanligaste användningen för likström?",
+        "text": "Vad betyder effektivitet i sammanhanget energiomvandling?",
         "type": "multiple",
         "options": [
-            "Batteridrivna apparater",
-            "Elektriska kraftverk",
-            "Högspänningsledning",
-            "Fjärrkontroller",
-            "Belysning"
+            "Den mängd energi som förloras i processen",
+            "Den mängd energi som produceras",
+            "Hur mycket energi som går förlorad som värme",
+            "Förhållandet mellan användbar energi och den totala energi som tillförs",
+            "Hur snabbt energi omvandlas"
         ],
-        "answer": "Batteridrivna apparater",
-        "hint": "Batterier ger likström"
+        "answer": "Förhållandet mellan användbar energi och den totala energi som tillförs",
+        "hint": "Effektivitet anger hur väl en process omvandlar energi utan förluster."
     },
     {
         "title": "Fråga 48",
-        "text": "Vad är effekten i en elektrisk krets?",
+        "text": "Vad händer med ett föremåls lägesenergi om det höjs från marken?",
         "type": "multiple",
         "options": [
-            "Energianvändningen per tidsenhet",
-            "Spänningen i kretsen",
-            "Strömstyrkan",
-            "Resistansen",
-            "Motståndet i kretsen"
+            "Den ökar",
+            "Den minskar",
+            "Den förblir konstant",
+            "Den omvandlas till rörelseenergi",
+            "Den försvinner"
         ],
-        "answer": "Energianvändningen per tidsenhet",
-        "hint": "Effekt mäts i watt"
+        "answer": "Den ökar",
+        "hint": "Lägesenergi beror på höjd över marken."
     },
     {
         "title": "Fråga 49",
-        "text": "Vad är formeln för att beräkna effekt i en elektrisk krets?",
+        "text": "Vad kallas den energi som lagras i ett föremål på grund av dess rörelse?",
         "type": "multiple",
         "options": [
-            "P = U × I",
-            "P = R × I",
-            "P = I² × R",
-            "P = U² / R",
-            "P = I × R"
+            "Rörelseenergi",
+            "Lägesenergi",
+            "Kärnenergi",
+            "Termisk energi",
+            "Kemisk energi"
         ],
-        "answer": "P = U × I",
-        "hint": "Effekt = Spänning × Ström"
+        "answer": "Rörelseenergi",
+        "hint": "Ett föremål som rör sig har rörelseenergi."
     },
     {
         "title": "Fråga 50",
-        "text": "Vilken enhet mäts effekt i?",
+        "text": "Vad innebär att ett föremål har hög termisk energi?",
         "type": "multiple",
         "options": [
-            "Watt",
-            "Volt",
-            "Ampere",
-            "Ohm",
-            "Tesla"
+            "Det är varmt",
+            "Det har mycket rörelse",
+            "Det har låg massa",
+            "Det har hög hastighet",
+            "Det är i rörelse"
         ],
-        "answer": "Watt",
-        "hint": "Enheten för effekt"
+        "answer": "Det är varmt",
+        "hint": "Termisk energi handlar om hur mycket värmeenergi ett föremål innehåller."
     },
     {
         "title": "Fråga 51",
-        "text": "Vad gör en spole i en elektrisk krets?",
+        "text": "Vilken enhet används för att mäta temperatur?",
         "type": "multiple",
         "options": [
-            "Den lagrar energi i ett magnetfält",
-            "Den omvandlar elektricitet till ljus",
-            "Den minskar strömstyrkan",
-            "Den ökar resistansen",
-            "Den omvandlar elektricitet till rörelse"
+            "Joule (J)",
+            "Kelvin (K)",
+            "Celsius (°C)",
+            "Watt (W)",
+            "Ampere (A)"
         ],
-        "answer": "Den lagrar energi i ett magnetfält",
-        "hint": "Spolen används t.ex. i elektromagneter och transformatorer"
+        "answer": "Kelvin (K)",
+        "hint": "Kelvin är den internationella enheten för temperatur."
     },
     {
         "title": "Fråga 52",
-        "text": "Vad används kondensatorer till i elektriska apparater?",
-        "type": "multiple",
-        "options": [
-            "De lagrar och släpper ut elektrisk energi",
-            "De mäter ström",
-            "De förstärker strömmen",
-            "De styr temperatur",
-            "De reglerar spänning"
-        ],
-        "answer": "De lagrar och släpper ut elektrisk energi",
-        "hint": "Kondensatorer används för att jämna ut ström i en krets"
-    },
-    {
-        "title": "Fråga 53",
         "text": "Vad är en elektrisk motor?",
         "type": "multiple",
         "options": [
-            "En maskin som omvandlar elektrisk energi till mekanisk energi",
-            "En batteriladdare",
-            "En elektrisk generator",
-            "En elektrisk ledare",
-            "En komponent som omvandlar mekanisk energi till elektricitet"
+            "En maskin som omvandlar rörelse till elektrisk energi",
+            "En maskin som omvandlar elektrisk energi till rörelse",
+            "En generator",
+            "En form av batteri",
+            "En typ av elektrisk krets"
         ],
-        "answer": "En maskin som omvandlar elektrisk energi till mekanisk energi",
-        "hint": "Exempel: fläktar, elbilar, elektriska verktyg"
+        "answer": "En maskin som omvandlar elektrisk energi till rörelse",
+        "hint": "En elektrisk motor använder elektricitet för att skapa rörelse."
+    },
+    {
+        "title": "Fråga 53",
+        "text": "Vad menas med begreppet 'värmeledning'?",
+        "type": "multiple",
+        "options": [
+            "Överföring av värme genom strålning",
+            "Överföring av värme genom vätskor",
+            "Överföring av värme genom fasta material",
+            "Överföring av värme genom gaser",
+            "Förlust av värme från ett objekt"
+        ],
+        "answer": "Överföring av värme genom fasta material",
+        "hint": "Värmeledning sker när värme överförs genom direkt kontakt mellan atomer eller molekyler."
     },
     {
         "title": "Fråga 54",
-        "text": "Vad är en generator?",
+        "text": "Vad är ett exempel på mekanisk energiomvandling?",
         "type": "multiple",
         "options": [
-            "En maskin som omvandlar rörelseenergi till elektrisk energi",
-            "En batteriladdare",
-            "En elektrisk motor",
-            "En elektrisk spole",
-            "En komponent som mäter energi"
+            "Från värme till ljud",
+            "Från elektrisk energi till rörelse",
+            "Från rörelse till ljud",
+            "Från rörelse till värme",
+            "Från ljus till elektricitet"
         ],
-        "answer": "En maskin som omvandlar rörelseenergi till elektrisk energi",
-        "hint": "Används i kraftverk och vindkraftverk"
+        "answer": "Från rörelse till värme",
+        "hint": "Friktion är ett exempel där rörelse omvandlas till värme."
     },
     {
         "title": "Fråga 55",
-        "text": "Vad gör en likriktare?",
+        "text": "Vilket av följande är ett exempel på förnybar energi?",
         "type": "multiple",
         "options": [
-            "Omvandlar växelström till likström",
-            "Omvandlar likström till växelström",
-            "Omvandlar spänning",
-            "Omvandlar strömstyrka",
-            "Mäter elektrisk ström"
+            "Solenergi",
+            "Kärnkraft",
+            "Olja",
+            "Kol",
+            "Gas"
         ],
-        "answer": "Omvandlar växelström till likström",
-        "hint": "Används i många apparater för att ladda batterier"
+        "answer": "Solenergi",
+        "hint": "Förnybar energi kan användas om och om igen, som solens strålning."
     },
     {
         "title": "Fråga 56",
-        "text": "Vad innebär kortslutning i en elektrisk krets?",
+        "text": "Vad är effektivitet ett mått på?",
         "type": "multiple",
         "options": [
-            "När strömmen går genom en väldigt låg resistansväg",
-            "När strömmen inte kan flöda",
-            "När spänningen ökar",
-            "När en krets öppnas",
-            "När effekten minskar"
+            "Hur mycket energi som går förlorad",
+            "Hur snabbt energi omvandlas",
+            "Förhållandet mellan in- och utgående energi",
+            "Hur mycket energi som produceras",
+            "Hur lång tid en energiomvandling tar"
         ],
-        "answer": "När strömmen går genom en väldigt låg resistansväg",
-        "hint": "Kan orsaka skador eller brand"
+        "answer": "Förhållandet mellan in- och utgående energi",
+        "hint": "Effektiviteten visar hur mycket energi som omvandlas till nyttig form."
     },
     {
         "title": "Fråga 57",
-        "text": "Vad är ett batteri?",
+        "text": "Vad menas med att energi bevaras?",
         "type": "multiple",
         "options": [
-            "En komponent som lagrar och omvandlar kemisk energi till elektrisk energi",
-            "En elektrisk motor",
-            "En spole",
-            "En kondensator",
-            "En transformator"
+            "Energi kan försvinna",
+            "Energi kan omvandlas men inte skapas eller förloras",
+            "Energi kan skapas från ingenting",
+            "Energi kan förloras som värme",
+            "Energi kan lagras som elektrisk energi"
         ],
-        "answer": "En komponent som lagrar och omvandlar kemisk energi till elektrisk energi",
-        "hint": "Finns i många apparater som mobiltelefoner"
+        "answer": "Energi kan omvandlas men inte skapas eller förloras",
+        "hint": "Enligt energiprincipen kan energi omvandlas mellan olika former men den försvinner inte."
     },
     {
         "title": "Fråga 58",
-        "text": "Vad är skillnaden mellan en elektrisk krets och en elektrisk ström?",
+        "text": "Vad kallas den energi som lagras i ett objekt på grund av dess rörelse?",
         "type": "multiple",
         "options": [
-            "En elektrisk krets är den väg som strömmen flödar genom",
-            "En elektrisk ström är vägen, och en krets är det elektriska flödet",
-            "Kretsen är farligare än strömmen",
-            "Strömmen kan vara stilla, medan kretsen alltid är rörlig",
-            "Kretsen används för att mäta strömmen"
+            "Termisk energi",
+            "Elektrisk energi",
+            "Rörelseenergi",
+            "Lägesenergi",
+            "Kemisk energi"
         ],
-        "answer": "En elektrisk krets är den väg som strömmen flödar genom",
-        "hint": "Kretsen ska vara sluten för att strömmen ska flöda"
+        "answer": "Rörelseenergi",
+        "hint": "Ju snabbare ett objekt rör sig, desto mer rörelseenergi har det."
     },
     {
         "title": "Fråga 59",
-        "text": "Vad gör en elektrisk motor?",
+        "text": "Vad är ett exempel på användning av mekanisk energi?",
         "type": "multiple",
         "options": [
-            "Omvandlar elektrisk energi till mekanisk energi",
-            "Omvandlar mekanisk energi till elektrisk energi",
-            "Lagrar energi",
-            "Mäter ström",
-            "Omvandlar ljus till elektricitet"
+            "I en solpanel",
+            "I en elektrisk motor",
+            "I ett bilbatteri",
+            "I en cykelhjul",
+            "I en radio"
         ],
-        "answer": "Omvandlar elektrisk energi till mekanisk energi",
-        "hint": "Exempel: fläktar, elbilar, elektriska verktyg"
+        "answer": "I ett bilbatteri",
+        "hint": "En bil använder mekanisk energi för att röra sig."
     },
     {
         "title": "Fråga 60",
-        "text": "Vad är en generator?",
+        "text": "Vad betyder att ett föremål har hög mekanisk energi?",
         "type": "multiple",
         "options": [
-            "En maskin som omvandlar rörelseenergi till elektrisk energi",
-            "En batteriladdare",
-            "En elektrisk motor",
-            "En elektrisk spole",
-            "En komponent som mäter energi"
+            "Det har hög hastighet",
+            "Det är stort",
+            "Det har hög temperatur",
+            "Det är tungt",
+            "Det har mycket rörelse eller höjd"
         ],
-        "answer": "En maskin som omvandlar rörelseenergi till elektrisk energi",
-        "hint": "Används i kraftverk och vindkraftverk"
+        "answer": "Det har mycket rörelse eller höjd",
+        "hint": "Mekanisk energi är summan av lägesenergi och rörelseenergi."
+    },
+    {
+        "title": "Fråga 77",
+        "text": "Vad betyder att energi bevaras i ett system?",
+        "type": "multiple",
+        "options": [
+            "Energi kan skapas",
+            "Energi kan omvandlas men inte förloras",
+            "Energi kan förloras",
+            "Energi kan omvandlas till ljus",
+            "Energi går förlorad vid friktion"
+        ],
+        "answer": "Energi kan omvandlas men inte förloras",
+        "hint": "Enligt energiomvandlingsprincipen bevaras energi alltid, men kan byta form."
+    },
+    {
+        "title": "Fråga 78",
+        "text": "Vad är en fördel med förnybar energi?",
+        "type": "multiple",
+        "options": [
+            "Den är oändlig och skadar inte miljön",
+            "Den kräver inga investeringar",
+            "Den producerar inget avfall",
+            "Den är billigare än fossila bränslen",
+            "Den är inte beroende av väderförhållanden"
+        ],
+        "answer": "Den är oändlig och skadar inte miljön",
+        "hint": "Förnybara energikällor är hållbara och producerar lite eller inget avfall."
+    },
+    {
+        "title": "Fråga 79",
+        "text": "Vad är mekanisk energi?",
+        "type": "multiple",
+        "options": [
+            "Energi från elektriska system",
+            "Energi från termiska processer",
+            "Energimängden i ett föremål beroende på dess rörelse och läge",
+            "Energi från solens strålning",
+            "Energi från växthuseffekten"
+        ],
+        "answer": "Energimängden i ett föremål beroende på dess rörelse och läge",
+        "hint": "Mekanisk energi kan vara rörelseenergi eller lägesenergi."
+    },
+    {
+        "title": "Fråga 80",
+        "text": "Vilken energiomvandling sker i en bilmotor?",
+        "type": "multiple",
+        "options": [
+            "Från elektrisk till värme",
+            "Från kemisk till mekanisk energi",
+            "Från mekanisk till elektrisk energi",
+            "Från värme till elektrisk energi",
+            "Från ljus till värme"
+        ],
+        "answer": "Från kemisk till mekanisk energi",
+        "hint": "En bilmotor omvandlar den kemiska energin i bränslet till rörelseenergi."
     },
     {
         "title": "Fråga 81",
-        "text": "Vad är en induktionsspole?",
+        "text": "Vad är den största fördelen med vindkraft?",
         "type": "multiple",
         "options": [
-            "En spole som skapar ett magnetfält när ström går igenom",
-            "En spole som lagrar elektrisk energi",
-            "En spole som omvandlar värme till elektricitet",
-            "En spole som mäter ström",
-            "En spole som förhindrar kortslutning"
+            "Den är förnybar",
+            "Den är billigare än alla andra energikällor",
+            "Den producerar mycket koldioxid",
+            "Den skapar stabil energi",
+            "Den är enkel att installera överallt"
         ],
-        "answer": "En spole som skapar ett magnetfält när ström går igenom",
-        "hint": "Används ofta i induktionsvärmare och transformatorer"
+        "answer": "Den är förnybar",
+        "hint": "Vindkraft använder vinden för att generera energi och är en hållbar energikälla."
     },
     {
         "title": "Fråga 82",
-        "text": "Vad menas med att ström är likriktad?",
+        "text": "Vad händer med energi i ett system där inget arbete görs?",
         "type": "multiple",
         "options": [
-            "Strömmen flödar i en riktning",
-            "Strömmen byter riktning konstant",
-            "Strömmen är mycket svag",
-            "Strömmen skapas från magnetfält",
-            "Strömmen flödar genom en spole"
+            "Den försvinner",
+            "Den omvandlas till värme",
+            "Den lagras",
+            "Den förblir konstant",
+            "Den ökar"
         ],
-        "answer": "Strömmen flödar i en riktning",
-        "hint": "Exempel: ström från batteri"
+        "answer": "Den förblir konstant",
+        "hint": "Enligt principen om energins bevarande kan energi inte skapas eller försvinna, utan bara omvandlas."
     },
     {
         "title": "Fråga 83",
-        "text": "Vad menas med elektrisk ström?",
+        "text": "Vilken energiform är en bilmotor mest beroende av?",
         "type": "multiple",
         "options": [
-            "Rörelsen av elektroner genom en ledare",
-            "En elektrisk fältstyrka",
-            "En laddning i ett elektriskt fält",
-            "Spänningen i en krets",
-            "Energin som lagras i batterier"
+            "Kärnenergi",
+            "Elektrisk energi",
+            "Kemisk energi",
+            "Mekanisk energi",
+            "Termisk energi"
         ],
-        "answer": "Rörelsen av elektroner genom en ledare",
-        "hint": "Mäter i ampere (A)"
+        "answer": "Kemisk energi",
+        "hint": "Bilmotorn omvandlar den kemiska energin i bränslet till rörelseenergi."
     },
     {
         "title": "Fråga 84",
-        "text": "Vad händer när du ökar resistansen i en elektrisk krets?",
+        "text": "Vad betyder att ett system är i termodynamisk jämvikt?",
         "type": "multiple",
         "options": [
-            "Strömmen minskar",
-            "Strömmen ökar",
-            "Spänningen ökar",
-            "Effekten ökar",
-            "Motståndet försvinner"
+            "Temperaturen är konstant",
+            "Ingen energi omvandlas",
+            "Alla energikällor har förlorat sin energi",
+            "Alla energiformer är lika",
+            "Energiflöden är i balans"
         ],
-        "answer": "Strömmen minskar",
-        "hint": "Enligt Ohms lag, R = U / I"
+        "answer": "Energiflöden är i balans",
+        "hint": "I termodynamisk jämvikt sker ingen nettoenergiöverföring mellan systemets delar."
     },
     {
         "title": "Fråga 85",
-        "text": "Vad är ett elektriskt fält?",
+        "text": "Vad kallas den energi som lagras i ett föremål på grund av dess position?",
         "type": "multiple",
         "options": [
-            "Ett område där elektriska krafter påverkar föremål med laddning",
-            "En ström i en ledare",
-            "En mekanisk kraft som påverkar magnetiska objekt",
-            "En elektrisk energi",
-            "En hög spänning"
+            "Kinetisk energi",
+            "Lägesenergi",
+            "Termisk energi",
+            "Elektrisk energi",
+            "Kemisk energi"
         ],
-        "answer": "Ett område där elektriska krafter påverkar föremål med laddning",
-        "hint": "Fältet är närvarande mellan två laddningar"
+        "answer": "Lägesenergi",
+        "hint": "Lägesenergi beror på ett föremåls höjd över marken och den gravitationella kraften."
     },
     {
         "title": "Fråga 86",
-        "text": "Vad är en elektrisk krets?",
+        "text": "Vad innebär det att en energiomvandling är ineffektiv?",
         "type": "multiple",
         "options": [
-            "En väg för ström att flöda",
-            "En apparat som lagrar energi",
-            "En process för att generera el",
-            "En enhet som omvandlar energi",
-            "En komponent som bryter strömmen"
+            "Det produceras mycket avfall",
+            "Det finns inga förluster",
+            "Energi förloras som värme",
+            "Energiproduktionen är snabbare",
+            "Den producerar mer användbar energi"
         ],
-        "answer": "En väg för ström att flöda",
-        "hint": "Måste vara sluten för att strömmen ska flöda"
+        "answer": "Energi förloras som värme",
+        "hint": "I ineffektiva energiomvandlingar förloras mycket energi som värme, vilket inte används för det avsedda syftet."
     },
     {
         "title": "Fråga 87",
-        "text": "Vad är ett kretskort?",
+        "text": "Vilken enhet används för att mäta effekt?",
         "type": "multiple",
         "options": [
-            "En platta som bär elektriska komponenter och leder ström",
-            "En apparat för att lagra ström",
-            "En enhet som bryter ström",
-            "En komponent som mäter resistans",
-            "En strömkälla"
+            "Watt (W)",
+            "Joule (J)",
+            "Ampere (A)",
+            "Volt (V)",
+            "Newton (N)"
         ],
-        "answer": "En platta som bär elektriska komponenter och leder ström",
-        "hint": "Finns i nästan alla elektriska enheter"
+        "answer": "Watt (W)",
+        "hint": "Effekt mäts i watt och anger hur snabbt energi omvandlas."
     },
     {
         "title": "Fråga 88",
-        "text": "Vad gör en kondensator i en krets?",
+        "text": "Vilken typ av energi används i en termometer?",
         "type": "multiple",
         "options": [
-            "Lagrar och släpper ut elektrisk energi",
-            "Ökar strömmen",
-            "Ökar spänningen",
-            "Minskar strömmen",
-            "Skapar ett magnetfält"
+            "Mekanisk energi",
+            "Elektrisk energi",
+            "Termisk energi",
+            "Kärnenergi",
+            "Rörelseenergi"
         ],
-        "answer": "Lagrar och släpper ut elektrisk energi",
-        "hint": "Används ofta för att jämna ut strömflödet"
+        "answer": "Termisk energi",
+        "hint": "En termometer använder temperaturförändringar för att mäta värmeenergi."
     },
     {
         "title": "Fråga 89",
-        "text": "Vad gör en termistor?",
+        "text": "Vad menas med begreppet 'värmeledningsförmåga'?",
         "type": "multiple",
         "options": [
-            "Ändrar sitt motstånd med temperaturen",
-            "Förstärker signaler",
-            "Lagrar elektrisk energi",
-            "Omvandlar ström till ljus",
-            "Skapar magnetism"
+            "Hur bra ett material leder elektrisk ström",
+            "Hur bra ett material leder värme",
+            "Hur bra ett material leder ljud",
+            "Hur mycket värme som produceras",
+            "Hur snabbt värme omvandlas till elektrisk energi"
         ],
-        "answer": "Ändrar sitt motstånd med temperaturen",
-        "hint": "Används ofta i termiska mätningar"
+        "answer": "Hur bra ett material leder värme",
+        "hint": "Material som leder värme bra, som metall, har hög värmeledningsförmåga."
     },
     {
         "title": "Fråga 90",
-        "text": "Vad händer med strömmen i en krets om du sänker spänningen?",
+        "text": "Vad är skillnaden mellan potentiell energi och kinetisk energi?",
         "type": "multiple",
         "options": [
-            "Strömmen minskar",
-            "Strömmen ökar",
-            "Strömmen förblir konstant",
-            "Spänningen ökar i andra delar av kretsen",
-            "Strömmen går till noll"
+            "Potentiell energi är rörelseenergi, kinetisk är lägesenergi",
+            "Kinetisk energi är beroende av hastighet, potentiell energi på höjd",
+            "Potentiell energi förloras snabbt, medan kinetisk energi lagras",
+            "Potentiell energi kan omvandlas till mekanisk energi",
+            "Kinetisk energi är konstant, potentiell energi varierar"
         ],
-        "answer": "Strömmen minskar",
-        "hint": "Enligt Ohms lag, ström = spänning / resistans"
+        "answer": "Kinetisk energi är beroende av hastighet, potentiell energi på höjd",
+        "hint": "Kinetisk energi beror på ett föremåls rörelse, medan potentiell energi är lagrad i objektets position."
     },
     {
-        "title": "Fråga 81",
-        "text": "Vad händer om man kopplar två batterier i parallellkoppling?",
+        "title": "Fråga 91",
+        "text": "Vad innebär det att ett föremål har hög mekanisk energi?",
         "type": "multiple",
         "options": [
-            "Strömmen adderas, spänningen förblir densamma",
-            "Spänningen adderas",
-            "Strömmen förblir densamma",
-            "Resistansen minskar",
-            "Spänningen minskar"
+            "Det har hög hastighet",
+            "Det har hög temperatur",
+            "Det har hög hastighet eller höjd",
+            "Det har låg massa",
+            "Det är i vila"
         ],
-        "answer": "Strömmen adderas, spänningen förblir densamma",
-        "hint": "Parallellkopplade batterier delar på spänningen men adderar strömmen"
+        "answer": "Det har hög hastighet eller höjd",
+        "hint": "Mekanisk energi är summan av lägesenergi och rörelseenergi."
     },
     {
-        "title": "Fråga 82",
-        "text": "Vilken enhet mäts resistans i?",
+        "title": "Fråga 92",
+        "text": "Vad menas med att en energikälla är icke-förnybar?",
         "type": "multiple",
         "options": [
-            "Ohm",
-            "Volt",
-            "Ampere",
-            "Watt",
-            "Joule"
+            "Den kan användas om och om igen",
+            "Den tar slut efter en viss användning",
+            "Den producerar inga avfall",
+            "Den omvandlas till värme",
+            "Den är inte beroende av väderförhållanden"
         ],
-        "answer": "Ohm",
-        "hint": "Resistans mäts i enheten Ohm"
+        "answer": "Den tar slut efter en viss användning",
+        "hint": "Exempel på icke-förnybara energikällor är fossila bränslen och kärnkraft."
     },
     {
-        "title": "Fråga 83",
-        "text": "Vad är en spole i en elektrisk krets?",
+        "title": "Fråga 93",
+        "text": "Vad händer med ett föremåls rörelseenergi när hastigheten halveras?",
         "type": "multiple",
         "options": [
-            "En ledning som är lindad i flera varv",
-            "En komponent som omvandlar energi",
-            "En komponent som mäter ström",
-            "En elektrisk motor",
-            "En kondensator"
+            "Den minskar med en fjärdedel",
+            "Den minskar med en halv",
+            "Den fördubblas",
+            "Den förblir konstant",
+            "Den ökar med en fjärdedel"
         ],
-        "answer": "En ledning som är lindad i flera varv",
-        "hint": "Spolar används i transformatorer och elektromagneter"
+        "answer": "Den minskar med en fjärdedel",
+        "hint": "Rörelseenergi beror på kvadraten på hastigheten, så om hastigheten halveras minskar energi med en fjärdedel."
     },
     {
-        "title": "Fråga 84",
-        "text": "Vad är skillnaden mellan en krets i serie och parallell?",
+        "title": "Fråga 94",
+        "text": "Vad innebär det att energi är bevarad i ett system?",
         "type": "multiple",
         "options": [
-            "I serie adderas resistansen, i parallell minskar den",
-            "I parallell adderas resistansen, i serie minskar den",
-            "I serie ökar strömmen, i parallell minskar den",
-            "I serie delas strömmen upp, i parallell går den genom alla komponenter",
-            "I parallell är strömmen densamma för varje komponent"
+            "Energi kan omvandlas men inte förloras",
+            "Energi kan försvinna",
+            "Energi kan skapas från inget",
+            "Energi minskar över tid",
+            "Energi lagras utan att omvandlas"
         ],
-        "answer": "I serie adderas resistansen, i parallell minskar den",
-        "hint": "Serie koppling: resistans adderas. Parallellkoppling: resistans minskar"
+        "answer": "Energi kan omvandlas men inte förloras",
+        "hint": "Energiprincipen säger att energi inte kan skapas eller förstöras, utan bara omvandlas."
     },
     {
-        "title": "Fråga 85",
-        "text": "Vad är effekt i en elektrisk krets?",
+        "title": "Fråga 95",
+        "text": "Vad innebär begreppet verkningsgrad?",
         "type": "multiple",
         "options": [
-            "Hur mycket energi som används per tidsenhet",
-            "Hur mycket ström som flödar",
-            "Den elektriska motståndet",
-            "Den totala strömmen i kretsen",
-            "Enhetsmåttet för spänning"
+            "Hur mycket energi som går förlorad i en process",
+            "Hur mycket energi som omvandlas till nyttig energi",
+            "Hur snabbt energi omvandlas",
+            "Hur mycket energi som lagras",
+            "Hur mycket energi som minskar"
         ],
-        "answer": "Hur mycket energi som används per tidsenhet",
-        "hint": "Effekt mäts i watt (W)"
+        "answer": "Hur mycket energi som omvandlas till nyttig energi",
+        "hint": "Verkningsgrad mäts som förhållandet mellan nyttig energi och total energi som tillförs."
     },
     {
-        "title": "Fråga 86",
-        "text": "Vad mäts med en voltmeter?",
+        "title": "Fråga 96",
+        "text": "Vad betyder begreppet 'rörelseenergi'?",
         "type": "multiple",
         "options": [
-            "Spänning",
-            "Strömstyrka",
-            "Motstånd",
-            "Effekt",
-            "Frekvens"
+            "Energi från rörelse",
+            "Energi som inte kan omvandlas",
+            "Energi från kemiska processer",
+            "Energi från värme",
+            "Energi från ljus"
         ],
-        "answer": "Spänning",
-        "hint": "Voltmeter mäter skillnaden i elektrisk potential"
+        "answer": "Energi från rörelse",
+        "hint": "Rörelseenergi beror på hastighet och massa av ett föremål."
     },
     {
-        "title": "Fråga 87",
-        "text": "Vad händer om man sätter resistorer i serie?",
+        "title": "Fråga 97",
+        "text": "Vilken formel används för att beräkna effekt?",
         "type": "multiple",
         "options": [
-            "Resistansen adderas",
-            "Resistansen minskar",
-            "Strömmen förblir konstant",
-            "Spänningen förblir densamma",
-            "Resistansen förblir densamma"
+            "P = V × I",
+            "P = F × v",
+            "P = W / t",
+            "P = V × R",
+            "P = m × g × h"
         ],
-        "answer": "Resistansen adderas",
-        "hint": "Seriekopplade resistorer adderar sina värden"
+        "answer": "P = W / t",
+        "hint": "Effekt beräknas som arbete (W) delat med tid (t)."
     },
     {
-        "title": "Fråga 88",
-        "text": "Vilken komponent används för att lagra energi i ett elektriskt fält?",
+        "title": "Fråga 98",
+        "text": "Vad är enhet för effekt?",
         "type": "multiple",
         "options": [
-            "Kondensator",
-            "Resistor",
-            "Spole",
-            "Batteri",
-            "Motstånd"
+            "Watt (W)",
+            "Joule (J)",
+            "Ampere (A)",
+            "Volt (V)",
+            "Newton (N)"
         ],
-        "answer": "Kondensator",
-        "hint": "Kondensatorer lagrar energi tillfälligt"
+        "answer": "Watt (W)",
+        "hint": "Effekt mäts i Watt, som representerar energi per tidsenhet."
     },
     {
-        "title": "Fråga 89",
-        "text": "Vad händer om man sätter resistorer i parallellkoppling?",
+        "title": "Fråga 99",
+        "text": "Vad händer när en bil bromsas?",
         "type": "multiple",
         "options": [
-            "Den totala resistansen minskar",
-            "Strömmen förblir densamma",
-            "Spänningen ökar",
-            "Den totala resistansen ökar",
-            "Resistansen förblir densamma"
+            "Den rörelseenergi omvandlas till värme",
+            "Den förlorar sin massa",
+            "Den minskar hastigheten utan att förlora energi",
+            "Den producerar elektrisk energi",
+            "Den producerar ljus"
         ],
-        "answer": "Den totala resistansen minskar",
-        "hint": "Parallellkopplade resistorer ger lägre resistans"
+        "answer": "Den rörelseenergi omvandlas till värme",
+        "hint": "Bromsning omvandlar rörelseenergi till värme genom friktion."
     },
     {
-        "title": "Fråga 90",
-        "text": "Vad är en elektrisk krets?",
+        "title": "Fråga 100",
+        "text": "Vilket av följande beskriver energiöverföring?",
         "type": "multiple",
         "options": [
-            "En väg för elektrisk ström att flöda genom",
-            "En komponent som lagrar energi",
-            "En strömbrytare",
-            "En transformator",
-            "En elektrisk motor"
+            "Energikällor skapar energi",
+            "Energi rör sig från ett system till ett annat",
+            "Energi kan förloras som ljus",
+            "Energi förloras vid rörelse",
+            "Energi skapas från ingenting"
         ],
-        "answer": "En väg för elektrisk ström att flöda genom",
-        "hint": "En sluten krets krävs för att ström ska flöda"
+        "answer": "Energi rör sig från ett system till ett annat",
+        "hint": "Energiöverföring sker mellan system via olika processer, t.ex. värmeöverföring."
     }
 ]
