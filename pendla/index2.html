@@ -4,59 +4,66 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nästa avgångar - Tranholmen</title>
+  <meta name="theme-color" content="#cfe8ff" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon.png" />
   <style>
+    html, body {
+      height: 100%;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
     body {
       font-family: Arial, sans-serif;
       font-size: 0.9em;
       margin: 0;
-      padding: 20px;
+      padding: 0;
       background: linear-gradient(90deg, #e3f2fd 0%, #90caf9 100%, #42a5f5 200%);
       display: flex;
       flex-direction: column;
       align-items: center;
+      box-sizing: border-box;
     }
-
+    #main-view {
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    #last-updated {
+      font-size: 0.75em;
+      color: #888;
+      text-align: center;
+      margin-top: -15px;
+    }
+    h2 {
+      font-size: 1.2em;
+      margin-top: 2px;
+      margin-bottom: 5px;
+      line-height: 1;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
     .site-box {
       width: 100%;
-      max-width: 400px;
       background-color: rgba(255, 255, 255, 0.9);
       border-radius: 15px;
       padding: 10px;
-      margin-bottom: 15px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
+      box-sizing: border-box;
     }
+    .weather-box { background-color: #ffffff; }
+    .schoolferry-box { background-color: rgba(241, 220, 252, 1); }
+    .ship-box { background-color: rgba(230, 241, 224, 0.9); }
+    .bus-box { background-color: rgba(252, 237, 213, 0.9); }
+    .metro-box { background-color: rgba(247, 207, 207, 0.9); }
+    .poolboat-box { background-color: rgba(214, 243, 255, 0.95); }
 
-    .poolboat-box {
-      background-color: rgba(214, 243, 255, 0.95);
-    }
-
-    .stars, .small-stars {
-      display: flex;
-      flex-direction: row-reverse;
-      justify-content: flex-start;
-      margin: 5px 0;
-    }
-
-    .stars input, .small-stars input {
-      display: none;
-    }
-
-    .stars label, .small-stars label {
-      font-size: 1.3em;
-      color: lightgray;
-      cursor: pointer;
-      transition: color 0.2s;
-      padding: 0 2px;
-    }
-
-    .stars input:checked ~ label,
-    .stars label:hover,
-    .stars label:hover ~ label,
-    .small-stars input:checked ~ label,
-    .small-stars label:hover,
-    .small-stars label:hover ~ label {
-      color: gold;
-    }
+    .big { font-weight: bold; font-size: 1em; }
 
     .refresh-button {
       margin-top: 20px;
@@ -68,11 +75,9 @@
       border-radius: 5px;
       cursor: pointer;
     }
-
     .refresh-button:hover {
       background-color: #0056b3;
     }
-
     .config-link {
       font-size: 0.8em;
       cursor: pointer;
@@ -81,29 +86,90 @@
       text-align: center;
       margin: 20px 0;
     }
-
     .hidden { display: none; }
+    .config-section {
+      width: 100%;
+      max-width: 800px;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      margin: 20px;
+    }
+    .strikethrough {
+      text-decoration: line-through;
+      color: black;
+    }
+    .small-stars {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-start;
+      margin: 5px 0;
+    }
+    .small-stars input { display: none; }
+    .small-stars label {
+      font-size: 1.3em;
+      color: lightgray;
+      cursor: pointer;
+      transition: color 0.2s;
+      padding: 0 2px;
+    }
+    .small-stars input:checked ~ label,
+    .small-stars label:hover,
+    .small-stars label:hover ~ label {
+      color: gold;
+    }
   </style>
 </head>
 <body onload="startAutoRefresh()">
   <div id="main-view"></div>
-  <div id="config-view" class="hidden site-box"></div>
+  <div id="config-view" class="hidden config-section"></div>
 
   <script>
-    const widgets = [
-      {
-        id: "poolboat",
-        title: "Poolbåtarna",
-        isPoolboat: true,
-        bg: "poolboat-box"
-      }
+    const schoolFerryConfig = {
+      startDate: "2025-04-22",
+      endDate: "2025-06-13T23:59:59",
+      redDays: ["2025-05-01", "2025-05-29", "2025-05-30", "2025-06-06", "2025-06-09"],
+    };
+
+    const schoolFerryTrips = [
+      { from: "Tranholmen", departure: "07:20", to: "Stocksunds hamn" },
+      { from: "Tranholmen", departure: "07:45", to: "Lagman Linds väg" },
+      { from: "Lagman Linds väg", departure: "07:50", to: "Stocksunds hamn" },
+      { from: "Stocksunds hamn", departure: "15:15", to: "Lagman Linds väg" },
+      { from: "Lagman Linds väg", departure: "15:25", to: "Tranholmen" },
+      { from: "Stocksunds hamn", departure: "16:25", to: "Lagman Linds väg" },
+      { from: "Lagman Linds väg", departure: "16:35", to: "Tranholmen" },
     ];
+
+    function isRedDay(date) {
+      const iso = date.toISOString().split("T")[0];
+      return schoolFerryConfig.redDays.includes(iso);
+    }
+
+    const widgets = [
+      { id: "weather", title: "Vädret på Tranholmen", isWeather: true, bg: "weather-box" },
+      { id: "farja", title: "Färja 80 Tranholmen", siteId: 961, mode: "SHIP", line: "80", dir: 1, bg: "ship-box" },
+      { id: "ropsten", title: "Färja 80 Ropsten", siteId: 9220, mode: "SHIP", line: "80", dir: 1, bg: "ship-box" },
+      { id: "ekudden", title: "Färja 80 Ekudden", siteId: 962, mode: "SHIP", line: "80", dir: 1, bg: "ship-box" },
+      { id: "buss", title: "Buss 601 Svanholmsvägen", siteId: 2103, mode: "BUS", line: "601", dir: 2, bg: "bus-box" },
+      { id: "ds", title: "Buss 601 Danderyds sjukhus", siteId: 9201, mode: "BUS", line: "601", dir: 1, bg: "bus-box" },
+      { id: "lektorsstigen", title: "Buss 50 Lektorsstigen", siteId: 1180, mode: "BUS", line: "50", dir: 2, bg: "bus-box" },
+      { id: "odenplan", title: "Buss 50 Odenplan", siteId: 9117, mode: "BUS", line: "50", dir: 1, bg: "bus-box" },
+      { id: "tropsten", title: "T-bana 13 Ropsten", siteId: 9220, mode: "METRO", line: "13", dir: 2, bg: "metro-box" },
+      { id: "tdanderyd", title: "T-bana 14 Danderyds sjukhus", siteId: 9201, mode: "METRO", line: "14", dir: 2, bg: "metro-box" },
+      { id: "schoolferry", title: "Skolbåten", isSchoolFerry: true, bg: "schoolferry-box" },
+      { id: "poolboat", title: "Poolbåtarna", isPoolboat: true, bg: "poolboat-box" }
+    ];
+
+    const defaultVisibleWidgets = widgets.map(w => w.id);
 
     function loadPreferences() {
       const stored = localStorage.getItem("visibleWidgets");
       if (stored) return JSON.parse(stored);
       const prefs = {};
-      widgets.forEach(w => prefs[w.id] = true);
+      widgets.forEach(w => prefs[w.id] = defaultVisibleWidgets.includes(w.id));
       return prefs;
     }
 
@@ -111,10 +177,44 @@
       localStorage.setItem("visibleWidgets", JSON.stringify(prefs));
     }
 
-    function renderPoolboatWidget() {
-      const prefs = loadPreferences();
-      if (prefs.poolboat === false) return;
+    function renderSchoolFerryWidget() {
+      if (!document.getElementById("schoolferry-box")) {
+        const box = document.createElement("div");
+        box.className = "site-box schoolferry-box";
+        box.id = "schoolferry-box";
+        box.innerHTML = `<h2>Skolbåten (22 april – 13 juni)</h2><ul id="schoolferry-list">Laddar avgångar...</ul>`;
+        document.getElementById("main-view").appendChild(box);
+      }
+      updateSchoolFerryContent();
+    }
 
+    function updateSchoolFerryContent() {
+      const ul = document.getElementById("schoolferry-list");
+      if (!ul) return;
+      ul.innerHTML = "";
+      const now = new Date();
+      const futureTrips = schoolFerryTrips.map(trip => {
+        const [h, m] = trip.departure.split(":").map(Number);
+        const dep = new Date(now);
+        dep.setHours(h, m, 0, 0);
+        if (dep < now) dep.setDate(dep.getDate() + 1);
+        return { ...trip, depDate: dep };
+      }).filter(trip => {
+        const diffMin = (trip.depDate - now) / 60000;
+        const weekday = trip.depDate.getDay();
+        return diffMin >= 0 && diffMin <= 1440 && weekday >= 1 && weekday <= 5 && !isRedDay(trip.depDate);
+      }).sort((a, b) => a.depDate - b.depDate).slice(0, 4);
+      futureTrips.forEach((trip, i) => {
+        const li = document.createElement("li");
+        const diffMin = Math.round((trip.depDate - now) / 60000);
+        const depText = diffMin < 1 ? "Nu" : (diffMin < 60 ? `${diffMin} min` : trip.departure);
+        if (i === 0) li.classList.add("big");
+        li.textContent = `${depText} ${trip.from} → ${trip.to}`;
+        ul.appendChild(li);
+      });
+    }
+
+    function renderPoolboatWidget() {
       const container = document.getElementById("main-view");
       const box = document.createElement("div");
       box.className = "site-box poolboat-box";
@@ -150,20 +250,37 @@
       container.innerHTML = "";
       widgets.forEach(widget => {
         if (prefs[widget.id] === false) return;
-        if (widget.isPoolboat) renderPoolboatWidget();
+        if (widget.isWeather) {
+          const box = document.createElement("div");
+          box.className = "site-box weather-box";
+          box.innerHTML = `<h2>${widget.title}</h2><ul id="weather-summary">Laddar väderdata...</ul>`;
+          container.appendChild(box);
+        } else if (widget.isSchoolFerry) {
+          renderSchoolFerryWidget();
+        } else if (widget.isPoolboat) {
+          renderPoolboatWidget();
+        } else {
+          const box = document.createElement("div");
+          box.className = `site-box ${widget.bg}`;
+          box.innerHTML = `<h2>${widget.title}</h2><ul id="${widget.id}">Laddar hållplatsdata...</ul>`;
+          container.appendChild(box);
+        }
       });
-
       const configLink = document.createElement("div");
       configLink.className = "config-link";
       configLink.textContent = "Inställningar";
       configLink.onclick = () => toggleConfig(true);
       container.appendChild(configLink);
+      const lastUpdated = document.createElement("div");
+      lastUpdated.id = "last-updated";
+      lastUpdated.textContent = "Senast uppdaterad: laddar...";
+      container.appendChild(lastUpdated);
     }
 
     function toggleConfig(show) {
       document.getElementById("main-view").classList.toggle("hidden", show);
       document.getElementById("config-view").classList.toggle("hidden", !show);
-      if (show) renderConfig(); else renderAllWidgets();
+      if (show) renderConfig(); else { renderAllWidgets(); }
     }
 
     function renderConfig() {
@@ -171,7 +288,6 @@
       const config = document.getElementById("config-view");
       config.innerHTML = "<h2>Välj vad som ska visas</h2>";
       const form = document.createElement("form");
-
       widgets.forEach(widget => {
         const label = document.createElement("label");
         const checkbox = document.createElement("input");
@@ -179,17 +295,15 @@
         checkbox.name = widget.id;
         checkbox.checked = prefs[widget.id] !== false;
         label.appendChild(checkbox);
-        label.append(` ${widget.title}`);
+        label.append(" " + widget.title);
         form.appendChild(label);
         form.appendChild(document.createElement("br"));
       });
-
       const saveBtn = document.createElement("button");
       saveBtn.textContent = "Spara";
       saveBtn.type = "submit";
       saveBtn.className = "refresh-button";
       form.appendChild(saveBtn);
-
       form.onsubmit = (e) => {
         e.preventDefault();
         const newPrefs = {};
@@ -199,7 +313,6 @@
         savePreferences(newPrefs);
         toggleConfig(false);
       };
-
       config.appendChild(form);
     }
 
