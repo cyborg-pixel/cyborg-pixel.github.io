@@ -251,11 +251,27 @@ function updateDummyWidget() {
   const ul = document.getElementById("dummy-content");
   if (!ul) return;
 
-  const now = new Date();
-  const time = now.toLocaleTimeString("sv-SE", { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  const tips = [
+    "🛶 Ta ur årorna, lägg i båten",
+    "🔒 Lås båten efter dig",
+    "🦺 Använd flytväst",
+    "💨 Se upp för stark vind",
+    "🤝 Ta en båt på släp vid obalans",
+    "🌟 Lämna båten i fint skick"
+  ];
 
-  ul.innerHTML = `<li>Klockan är nu ${time}</li>`;
+  // Blanda tipsen och ta tre slumpmässiga
+  const shuffled = tips.sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, 3);
+
+  ul.innerHTML = "";
+  selected.forEach(tip => {
+    const li = document.createElement("li");
+    li.textContent = tip;
+    ul.appendChild(li);
+  });
 }
+
 
 
 
