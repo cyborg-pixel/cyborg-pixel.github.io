@@ -88,6 +88,10 @@
         background-color: rgba(247, 207, 207, 0.9);
       }
 
+      .dummy-box {
+      background-color: rgba(202, 255, 229, 0.9);
+      }
+
       .big {
         font-weight: bold;
         font-size: 1em;
@@ -216,9 +220,81 @@
           box.innerHTML = `<h2>Skolbåten (22 april – 13 juni)</h2><ul id="schoolferry-list">Laddar avgångar...</ul>`;
           document.getElementById("main-view").appendChild(box);
         }
-
         updateSchoolFerryContent(); // fyll i innehållet direkt första gången
       }
+
+      
+
+function renderDummyWidget() {
+  const prefs = loadPreferences();
+  if (prefs.dummy === false) return;
+
+  if (!document.getElementById("dummy-box")) {
+    const box = document.createElement("div");
+    box.className = "site-box dummy-box";
+    box.id = "dummy-box";
+    box.innerHTML = `
+      <h2>Poolbåtarna</h2>
+      <ul id="dummy-content"><li>Laddar...</li></ul>
+    `;
+    document.getElementById("main-view").appendChild(box);
+  }
+
+  updateDummyWidget(); // Ladda första gången
+}
+
+
+function updateDummyWidget() {
+  const prefs = loadPreferences();
+  if (prefs.dummy === false) return;
+
+  const ul = document.getElementById("dummy-content");
+  if (!ul) return;
+
+ const tips = [
+  "🛶 Ta ur årorna och lägg dem i båten efteråt",
+  "🔒 Lås båten i låsstationen efter rodd",
+  "🦺 Använd flytväst – alltid!",
+  "💨 Se upp för stark vind",
+  "🤝 Ta en båt på släp vid obalans",
+  "🌟 Lämna båten i fint skick",
+  "🚫 Endast transport – ingen nöjesrodd",
+  "👨‍👩‍👧‍👦 Endast medlemmar och deras gäster",
+  "🔑 Ge aldrig ut koden till kompisar",
+  "📬 Ingen kod? Du får ny via mail",
+  "🧭 Följ sjöfartsreglerna",
+  "🌙 Ror du i mörker? Ta med eget ljus!",
+  "🔁 Röd båt ska bogseras tillbaka direkt",
+  "❗ Röd båt = backup – endast vid behov",
+  "❗ Max en röd båt per strand",
+  "👀 Vuxna ansvarar för barns båtanvändning",
+  "🚫 Kompisar får inte ro utan dig",
+  "🚫 Ingen lek – bara ro till/från ön",
+  "🧒 Endast familjens barn får använda båten", 
+  "🧽 Hjälp till att hålla båtarna i gott skick",
+  "🧰 Vi ansvarar gemensamt för underhåll av båtarna",
+  "🧑‍🔧 Även hantverkare och gäster får låna – via dig",
+  "📋 Alla som lånar via dig måste följa reglerna",
+  "🪪 Ge aldrig koden till någon du inte ansvarar för",
+  "💥 Du ansvarar för skador när du använder båten",
+  "🚫 Om du bryter mot reglerna kan du stängas av",
+  "📱 Regler finns på vår Facebookgrupp (86:tran...)"
+];
+
+  // Blanda tipsen och ta tre slumpmässiga
+  const shuffled = tips.sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, 3);
+
+  ul.innerHTML = "";
+  selected.forEach(tip => {
+    const li = document.createElement("li");
+    li.textContent = tip;
+    ul.appendChild(li);
+  });
+}
+
+
+
 
       function updateSchoolFerryContent() {
         const prefs = loadPreferences();
@@ -368,6 +444,12 @@
           isSchoolFerry: true,
           bg: "schoolferry-box",
         },
+        {
+          id: "dummy",
+          title: "Poolbåtarna",
+          isDummy: true,
+          bg: "dummy-box",
+        }
       ];
 
       const defaultVisibleWidgets = [
@@ -451,9 +533,14 @@
             box.style.backgroundColor = "white";
             box.innerHTML = `<h2>${widget.title}</h2><ul id="weather-summary">Laddar väderdata...</ul>`;
             container.appendChild(box);
-          } else if (widget.isSchoolFerry) {
-            renderSchoolFerryWidget(); // hanteras separat
-          } else {
+            } 
+            else if (widget.isSchoolFerry) {
+              renderSchoolFerryWidget(); // hanteras separat
+            }
+            else if (widget.isDummy) {
+              renderDummyWidget();
+            }
+           else {
             const box = document.createElement("div");
             box.className = `site-box ${widget.bg || ""}`;
             box.innerHTML = `<h2>${widget.title}</h2><ul id="${widget.id}">Laddar hållplatsdata...</ul>`;
@@ -502,6 +589,8 @@
       function updateAllWidgets() {
         updateSlWidgets(); // SL-data
         updateSchoolFerryContent(); // Skolbåten
+        updateDummyWidget();          // 👈 Lägg till denna rad
+
 
         // Uppdatera "senast uppdaterad"-texten
         const now = new Date();
