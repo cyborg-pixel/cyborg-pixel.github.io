@@ -251,28 +251,28 @@ function updateDummyWidget() {
   const ul = document.getElementById("dummy-content");
   if (!ul) return;
 
-  const tips = [
-  "🛶 När du är klar, ta ur årorna, lägg i båten",
-  "🔒 Lås båten i låsstationen när du är klar",
+ const tips = [
+  "🛶 Ta ur årorna och lägg dem i båten efteråt",
+  "🔒 Lås båten i låsstationen efter rodd",
   "🦺 Använd flytväst – alltid!",
   "💨 Se upp för stark vind",
-  "🤝 Ta en båt på släp vid obalans i poolen",
+  "🤝 Ta en båt på släp vid obalans",
   "🌟 Lämna båten i fint skick",
-  "🚫 Bara transport – inga nöjesrundor",
-  "👨‍👩‍👧‍👦 Endast för medlemmar och gäster",
-  "🔑 Ge aldrig koden till kompisar",
-  "📬 Be om kod via mejl",
+  "🚫 Endast transport – ingen nöjesrodd",
+  "👨‍👩‍👧‍👦 Endast medlemmar och deras gäster",
+  "🔑 Ge aldrig ut koden till kompisar",
+  "📬 Hämta kod via mejl före rodd",
   "🧭 Följ sjöfartsreglerna",
-  "🌙 Ror du i mörker? Då måste du ha ljus!",
-  "🔁 Röda båten ska bogseras tillbaka direkt",
-  "❗ Röd båt = backup – använd bara om alla gröna är borta",
-  "❗ Två röd båtar får inte lämnas på samma strand",
-  "📍 Fäst båten i låsstationen",
-  "👀 Vuxna ansvarar för barn som använder båtarna",
-  "🚫 Kompisar får inte ro själva – du måste följa med",
+  "🌙 Ror du i mörker? Ta med eget ljus!",
+  "🔁 Röd båt ska bogseras tillbaka direkt",
+  "❗ Röd båt = backup – endast vid behov",
+  "❗ Max en röd båt per strand får ligga kvar",
+  "📍 Fäst båten i rätt låsstation",
+  "👀 Vuxna ansvarar för barns båtanvändning",
+  "🚫 Kompisar får inte ro utan dig",
   "🚫 Ingen lek – bara ro till/från ön",
-  "🧒 Minderåriga utanför familjen får inte använda båten"
-  ];
+  "🧒 Endast familjens barn får använda båten"
+];
 
   // Blanda tipsen och ta tre slumpmässiga
   const shuffled = tips.sort(() => 0.5 - Math.random());
