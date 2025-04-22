@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="sv">
   <head>
+    <script src="https://unpkg.com/suncalc@1.9.0/suncalc.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nästa avgångar - Tranholmen</title>
@@ -147,6 +148,83 @@
     <div id="main-view"></div>
     <div id="config-view" class="hidden config-section"></div>
     <script>
+
+  function renderOceanWidget() {
+    const prefs = loadPreferences();
+    if (prefs.ocean === false) return;
+
+    if (!document.getElementById("ocean-box")) {
+      const box = document.createElement("div");
+      box.className = "site-box";
+      box.style.backgroundColor = "#d9f0ff";
+      box.id = "ocean-box";
+      box.innerHTML = `
+        <h2>Havet kring Tranholmen</h2>
+        <div id="ocean-summary">🔄 Laddar...</div>
+      `;
+      document.getElementById("main-view").appendChild(box);
+    }
+    fetchOcean();
+  }
+
+  function getWeekNumber(date) {
+    const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    const dayNum = d.getUTCDay() || 7;
+    d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+    const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+    return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
+  }
+
+  function getBarnacleRisk(week) {
+    const ranges = [
+ { from: 1, to: 22, level: "låg" },
+{ from: 23, to: 26, level: "🟨 medel" },
+{ from: 27, to: 35, level: "🔥 hög" },
+{ from: 36, to: 38, level: "🟨 medel" },
+{ from: 39, to: 52, level: "låg" }
+   ];
+    const r = ranges.find(r => week >= r.from && week <= r.to);
+    return r ? r.level : "❓";
+  }
+
+  async function fetchWaterLevel() {
+    const url = "https://opendata-download-ocobs.smhi.se/api/version/1.0/parameter/6/station/2069/period/latest-day/data.json";
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      const val = data.value.at(-1);
+      return `${Math.round(val.value)} cm`;
+    } catch {
+      return "ej tillgängligt";
+    }
+  }
+
+  async function displayOcean(data) {
+    const ts = data.properties.timeseries[0];
+    const d = ts.data.instant.details;
+
+    const temp = d.sea_water_temperature ?? "?";
+    const wave = d.sea_surface_wave_height != null ? Math.round(d.sea_surface_wave_height * 100) + " cm" : "?";
+    const level = await fetchWaterLevel();
+    const week = getWeekNumber(new Date());
+    const tulpan = getBarnacleRisk(week);
+
+    document.getElementById("ocean-summary").textContent = `${temp}°C, 🌊: ${wave}, 📏: ${level}, 🐚 risk: ${tulpan}`;
+  }
+
+  async function fetchOcean() {
+    const url = "https://api.met.no/weatherapi/oceanforecast/2.0/complete?lat=59.37884&lon=18.08343";
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      displayOcean(data);
+    } catch {
+      document.getElementById("ocean-summary").textContent = "⚠️ Havsdata ej tillgänglig.";
+    }
+  }
+
+
+
       const schoolFerryConfig = {
         startDate: "2025-04-22",
         endDate: "2025-06-13T23:59:59",
@@ -358,6 +436,12 @@ function updateDummyWidget() {
           bg: "weather-box",
         },
         {
+          id: "ocean",
+          title: "Havet kring Tranholmen",
+          isOcean: true,
+          bg: "",
+        },
+        {
           id: "farja",
           title: "Färja 80 Tranholmen",
           siteId: 961,
@@ -539,6 +623,9 @@ function updateDummyWidget() {
             else if (widget.isDummy) {
               renderDummyWidget();
             }
+            else if (widget.isOcean) {
+              renderOceanWidget();
+            }
            else {
             const box = document.createElement("div");
             box.className = `site-box ${widget.bg || ""}`;
@@ -585,10 +672,13 @@ function updateDummyWidget() {
         document.body.appendChild(script);
       }
 
+
+
       function updateAllWidgets() {
         updateSlWidgets(); // SL-data
         updateSchoolFerryContent(); // Skolbåten
         updateDummyWidget();          // 👈 Lägg till denna rad
+        fetchOcean(); // 👈 Uppdatera havsdata varje refresh
 
 
         // Uppdatera "senast uppdaterad"-texten

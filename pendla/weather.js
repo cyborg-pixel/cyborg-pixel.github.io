@@ -39,8 +39,6 @@ function displayWeather(data) {
 
     // Hämta aktuell temperatur
     const currentTemp = Math.round(timeseries[0].data.instant.details.air_temperature);
-    const currentWind = Math.round(timeseries[0].data.instant.details.air_temperature);
-    const currentWindDir = timeseries[0].data.instant.details.air_temperature;
     
     // Hämta dagens min/max temperatur
     const today = new Date().toISOString().split("T")[0];
@@ -156,11 +154,32 @@ const weatherTranslations = {
     "unknown": "okänt väder ❓🤷‍♂️"
 };
 
+
+    const lat = "59.3750";  // Tranholmen
+    const lon = "18.0892";  // Tranholmen
+
     const weatherDescription = weatherTranslations[weatherSymbol] || "okänt väder";
 
+    const now = new Date();
+    const times = SunCalc.getTimes(now, parseFloat(lat), parseFloat(lon));
+    const sunrise = times.sunrise;
+    const sunset = times.sunset;
+
+    let sunInfo = "";
+
+    if (now < sunrise) {
+        sunInfo = `🌅 ${sunrise.toLocaleTimeString("sv-SE", { hour: '2-digit', minute: '2-digit' })}`;
+    } else if (now > sunset) {
+        sunInfo = `🌅 ${SunCalc.getTimes(new Date(now.getTime() + 86400000), parseFloat(lat), parseFloat(lon)).sunrise.toLocaleTimeString("sv-SE", { hour: '2-digit', minute: '2-digit' })}`;
+    } else {
+        sunInfo = `🌇 ${sunset.toLocaleTimeString("sv-SE", { hour: '2-digit', minute: '2-digit' })}`;
+    }
+
+
     // Uppdatera vädertexten
-    document.getElementById("weather-summary").innerHTML =
-        `<li>${currentTemp}°C, ${wind}, ${weatherDescription}</li>`; 
+document.getElementById("weather-summary").innerHTML =
+    `<li>${currentTemp}°C, ${wind}, ${weatherDescription}, ${sunInfo}</li>`;
+
 }
 
 
