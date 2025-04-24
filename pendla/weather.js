@@ -84,9 +84,9 @@ const weatherTranslations = {
     "clearsky_polartwilight": "klart 🌌",
 
     // Lätt molnighet
-    "fair_day": "mestadels soligt 🌤️😊",
-    "fair_night": "mestadels klart 🌙🌤️",
-    "fair_polartwilight": "mestadels klart 🌥️🌌",
+    "fair_day": "mest soligt 🌤️😊",
+    "fair_night": "mest klart 🌙🌤️",
+    "fair_polartwilight": "mest klart 🌥️🌌",
 
     // Delvis molnigt
     "partlycloudy_day": "delvis molnigt ⛅🙂",
