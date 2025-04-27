@@ -177,39 +177,74 @@
 
   function getBarnacleRisk(week) {
     const ranges = [
- { from: 1, to: 22, level: "låg" },
-{ from: 23, to: 26, level: "medel" },
-{ from: 27, to: 35, level: "hög 🔥" },
-{ from: 36, to: 38, level: "medel" },
-{ from: 39, to: 52, level: "låg" }
+    { from: 1, to: 22, level: "<span style='color:black'>låg</span>" },
+    { from: 23, to: 26, level: "<span style='color:orange'>medel</span>" },
+    { from: 27, to: 35, level: "<span style='color:red'>hög 🔥</span>" },
+    { from: 36, to: 38, level: "<span style='color:orange'>medel</span>" },
+    { from: 39, to: 52, level: "<span style='color:black'>låg</span>" }
    ];
     const r = ranges.find(r => week >= r.from && week <= r.to);
     return r ? r.level : "❓";
   }
 
+  // 1) Konfiguration för percentil­gränser och färger
+  const waterLevelConfig = {
+    thresholds: [-6.8, 5.4, 21.3, 34.5], 
+    // => 5 intervaller: ≤-6.8, ≤5.4, ≤21.3, ≤34.5, >34.5
+    colors: ['red', 'orange', 'black', 'orange', 'red']
+    // => mycket låg, låg, normal, hög, mycket hög
+  };
+
+  // 2) Hjälpfunktion som väljer färg baserat på value
+  function getWaterLevelColor(value) {
+    for (let i = 0; i < waterLevelConfig.thresholds.length; i++) {
+      if (value <= waterLevelConfig.thresholds[i]) {
+        return waterLevelConfig.colors[i];
+      }
+    }
+    // Om värdet är större än sista gränsen:
+    return waterLevelConfig.colors[ waterLevelConfig.colors.length - 1 ];
+  }
+
+  // 3) Gör om fetchWaterLevel så att den returnerar ett nummer (cm)
   async function fetchWaterLevel() {
     const url = "https://opendata-download-ocobs.smhi.se/api/version/1.0/parameter/6/station/2069/period/latest-day/data.json";
     try {
       const res = await fetch(url);
       const data = await res.json();
       const val = data.value.at(-1);
-      return `${Math.round(val.value)} cm`;
+      return val.value;      // returnerar t.ex. 23.4
     } catch {
-      return "ej tillgängligt";
+      return null;           // hantera ej tillgängligt som null
     }
   }
 
+  // 4) Anpassa displayOcean för färgad vattennivå
   async function displayOcean(data) {
     const ts = data.properties.timeseries[0];
     const d = ts.data.instant.details;
 
     const temp = d.sea_water_temperature ?? "?";
-    const wave = d.sea_surface_wave_height != null ? Math.round(d.sea_surface_wave_height * 100) + " cm" : "?";
-    const level = await fetchWaterLevel();
+    const wave = d.sea_surface_wave_height != null
+      ? Math.round(d.sea_surface_wave_height * 100) + " cm"
+      : "?";
+
+    const levelValue = await fetchWaterLevel();
+    let levelHTML;
+    if (levelValue === null) {
+      levelHTML = `📏: ej tillgängligt`;
+    } else {
+      const rounded = Math.round(levelValue) + " cm";
+      const color = getWaterLevelColor(levelValue);
+      levelHTML = `<span style="color:${color}">📏: ${rounded}</span>`;
+    }
+
     const week = getWeekNumber(new Date());
     const tulpan = getBarnacleRisk(week);
 
-    document.getElementById("ocean-summary").textContent = `${temp}°C, 🌊: ${wave}, 📏: ${level}, 🐚 risk: ${tulpan}`;
+    // OBS: använder innerHTML istället för textContent
+    document.getElementById("ocean-summary").innerHTML =
+      `${temp}°C, 🌊: ${wave}, ${levelHTML}, 🐚 risk: ${tulpan}`;
   }
 
   async function fetchOcean() {
