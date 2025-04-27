@@ -188,6 +188,8 @@
   }
 
   // 1) Konfiguration för percentil­gränser och färger
+  // Dessa gränser grundar sig i en analys av percentilerna för våghöjder för 2020-04-01 till 2025-04-01
+  // De aktuella percentilerna har gränser vid 10%, 30%, 70%, 90% i histogrammet över historiskt vattenstånd
   const waterLevelConfig = {
     thresholds: [-6.8, 5.4, 21.3, 34.5], 
     // => 5 intervaller: ≤-6.8, ≤5.4, ≤21.3, ≤34.5, >34.5
