@@ -397,27 +397,33 @@ function renderPoolBoatWidget() {
 
   const container = document.getElementById("main-view");
   if (!document.getElementById("poolboat-box")) {
-    // 1) Hämta sparad kod (eller tom sträng)
     const code = localStorage.getItem("poolboatCode") || "";
-
-    // 2) Bygg headern beroende på om det finns en kod
     const hasCode = code.length > 0;
-    const dots = "•".repeat(code.length);
+    const dots    = "•".repeat(code.length);
 
+    // Skapa boxen
     const box = document.createElement("div");
     box.className = "site-box poolboat-box";
     box.id = "poolboat-box";
+
+    // Bygg upp headern
+    let headerHTML = "Poolbåtarna";
+    if (hasCode) {
+      headerHTML += `, kod: 
+        <span id="poolboat-code-dots"
+              style="
+                margin-left: 6px;
+                cursor: pointer;
+                font-size: inherit;
+                user-select: none;
+              ">
+          ${dots}
+        </span>`;
+    }
+
     box.innerHTML = `
       <div>
-        <h2 style="margin: 0; display: inline-flex; align-items: center;">
-          ${hasCode
-            ? `Poolbåtarna, kod: 
-               <span id="poolboat-code-dots"
-                     style="margin-left: 6px; cursor: pointer; font-size: inherit; user-select: none;">
-                 ${dots}
-               </span>`
-            : `Poolbåtarna`}
-        </h2>
+        <h2 style="margin: 0;">${headerHTML}</h2>
       </div>
       <ul id="poolboat-content">
         <li>Laddar...</li>
@@ -425,29 +431,27 @@ function renderPoolBoatWidget() {
     `;
     container.appendChild(box);
 
-    // 3) Fäst toggling om vi har en kod
+    // Toggle-logik
     if (hasCode) {
-      const span = box.querySelector("#poolboat-code-dots");
-      let timeoutId = null;
+      const span       = box.querySelector("#poolboat-code-dots");
+      let   timeoutId  = null;
+
       span.addEventListener("click", () => {
-        // om vi redan visar koden, dölj direkt
-        if (span.textContent !== dots) {
+        // Om vi redan visar koden → göm
+        if (span.textContent === code) {
           clearTimeout(timeoutId);
           span.textContent = dots;
         } else {
-          // visa koden
+          // Annars visa koden
           span.textContent = code;
-          // efter 15 sek dölj igen
           timeoutId = setTimeout(() => {
             span.textContent = dots;
-            timeoutId = null;
           }, 15000);
         }
       });
     }
   }
 
-  // 4) Kör din vanliga uppdateringslogik
   updatePoolBoatWidget();
 }
 
