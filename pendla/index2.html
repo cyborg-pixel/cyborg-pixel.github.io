@@ -397,35 +397,26 @@ function renderPoolBoatWidget() {
 
   const container = document.getElementById("main-view");
   if (!document.getElementById("poolboat-box")) {
+    // 1) Hämta sparad kod (eller tom sträng)
     const code = localStorage.getItem("poolboatCode") || "";
+
+    // 2) Bygg headern beroende på om det finns en kod
+    const hasCode = code.length > 0;
+    const dots = "•".repeat(code.length);
 
     const box = document.createElement("div");
     box.className = "site-box poolboat-box";
     box.id = "poolboat-box";
     box.innerHTML = `
-      <div style="display: flex; align-items: center;">
+      <div>
         <h2 style="margin: 0; display: inline-flex; align-items: center;">
-          Poolbåtarna
-          ${code
-            ? `<span id="poolboat-code-display"
-                     style="
-                       margin-left: 12px;
-                       visibility: hidden;
-                       font-size: inherit;
-                       font-weight: normal;
-                     ">
-                 ${code}
-               </span>
-               <span id="poolboat-code-toggle"
-                     style="
-                       cursor: pointer;
-                       user-select: none;
-                       margin-left: 6px;
-                       font-size: inherit;
-                     ">
-                 👁️
+          ${hasCode
+            ? `Poolbåtarna, kod: 
+               <span id="poolboat-code-dots"
+                     style="margin-left: 6px; cursor: pointer; font-size: inherit; user-select: none;">
+                 ${dots}
                </span>`
-            : ""}
+            : `Poolbåtarna`}
         </h2>
       </div>
       <ul id="poolboat-content">
@@ -434,17 +425,29 @@ function renderPoolBoatWidget() {
     `;
     container.appendChild(box);
 
-    if (code) {
-      const toggle = box.querySelector("#poolboat-code-toggle");
-      const disp   = box.querySelector("#poolboat-code-display");
-      toggle.addEventListener("click", () => {
-        const hidden = disp.style.visibility === "hidden";
-        disp.style.visibility = hidden ? "visible" : "hidden";
-        toggle.textContent   = hidden ? "🙈" : "👁️";
+    // 3) Fäst toggling om vi har en kod
+    if (hasCode) {
+      const span = box.querySelector("#poolboat-code-dots");
+      let timeoutId = null;
+      span.addEventListener("click", () => {
+        // om vi redan visar koden, dölj direkt
+        if (span.textContent !== dots) {
+          clearTimeout(timeoutId);
+          span.textContent = dots;
+        } else {
+          // visa koden
+          span.textContent = code;
+          // efter 15 sek dölj igen
+          timeoutId = setTimeout(() => {
+            span.textContent = dots;
+            timeoutId = null;
+          }, 15000);
+        }
       });
     }
   }
 
+  // 4) Kör din vanliga uppdateringslogik
   updatePoolBoatWidget();
 }
 
