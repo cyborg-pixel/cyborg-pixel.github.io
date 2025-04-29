@@ -126,9 +126,9 @@
       function getBarnacleRisk(week) {
         const ranges = [
           { from: 1, to: 22, level: "<span style='color:black'>låg</span>" },
-          { from: 23, to: 26, level: "<span style='color:orange'>medel</span>" },
+          { from: 23, to: 26, level: "<span style='color:brown'>medel</span>" },
           { from: 27, to: 35, level: "<span style='color:red'>hög 🔥</span>" },
-          { from: 36, to: 38, level: "<span style='color:orange'>medel</span>" },
+          { from: 36, to: 38, level: "<span style='color:brown'>medel</span>" },
           { from: 39, to: 52, level: "<span style='color:black'>låg</span>" }
         ];
         const r = ranges.find(r => week >= r.from && week <= r.to);
@@ -137,7 +137,7 @@
 
       const waterLevelConfig = {
         thresholds: [-6.8, 5.4, 21.3, 34.5],
-        colors: ['red', 'orange', 'black', 'orange', 'red']
+        colors: ['red', 'brown', 'black', 'brown', 'red']
       };
 
       function getWaterLevelColor(value) {
