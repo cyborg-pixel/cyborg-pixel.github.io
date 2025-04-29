@@ -638,7 +638,7 @@ function renderPoolBoatWidget() {
           const inputCode = document.createElement("input");
           inputCode.type = "text";
           inputCode.name = "poolboatCode";
-          inputCode.maxLength = 6;
+          inputCode.maxLength = 14;
           // Förifyll med tidigare sparad kod eller tomt
           inputCode.value = localStorage.getItem("poolboatCode") || "";
           labelCode.appendChild(inputCode);
