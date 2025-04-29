@@ -586,7 +586,6 @@
         form.appendChild(otherHeader);
 
         // --- Endast om poolbåtens widget är ikryssad ---
-        if (prefs.poolboat) {
           const labelCode = document.createElement("label");
           labelCode.textContent = "Koden till poolbåtarna: ";
           const inputCode = document.createElement("input");
@@ -598,7 +597,6 @@
           labelCode.appendChild(inputCode);
           form.appendChild(labelCode);
           form.appendChild(document.createElement("br"));
-        }
 
         const saveBtn = document.createElement("button");
         saveBtn.textContent = "Spara";
