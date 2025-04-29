@@ -399,7 +399,7 @@ function renderPoolBoatWidget() {
   if (!document.getElementById("poolboat-box")) {
     const code = localStorage.getItem("poolboatCode") || "";
     const hasCode = code.length > 0;
-    const dots    = "•".repeat(code.length);
+    const dots    = "●".repeat(code.length);
 
     // Skapa boxen
     const box = document.createElement("div");
