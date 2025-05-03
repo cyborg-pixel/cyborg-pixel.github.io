@@ -155,7 +155,13 @@
       async function fetchWaterLevel() {
         const url = "https://opendata-download-ocobs.smhi.se/api/version/1.0/parameter/6/station/2069/period/latest-day/data.json";
         try {
-          const res = await fetch(url);
+          const res = await fetch(url, {
+//            headers: {
+//              "User-Agent": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",       // din e-post som identifierar appen
+//              "From": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",       // din e-post som identifierar appen
+//              "Accept": "application/json"
+//            }
+          });
           const data = await res.json();
           const val = data.value.at(-1);
           return val.value;
@@ -210,7 +216,14 @@
       async function updateSlWidgetData({ siteId, mode, line, dir, id, filter }) {
         const url = `https://transport.integration.sl.se/v1/sites/${siteId}/departures?forecast=360&direction=${dir}`;
         try {
-          const res = await fetch(url);
+          const res = await fetch(url, {
+            headers: {
+              "User-Agent": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",
+              "From": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",
+              "Accept": "application/json"
+            }
+          });
+
           if (!res.ok) return;
           const data = await res.json();
           const departures = data.departures
@@ -318,7 +331,13 @@
       async function fetchOcean() {
         const url = "https://api.met.no/weatherapi/oceanforecast/2.0/complete?lat=59.37884&lon=18.08343";
         try {
-          const res = await fetch(url);
+          const res = await fetch(url, {
+            headers: {
+//              "User-Agent": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",
+//              "From": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",
+              "Accept": "application/vnd.noaa.oceanforecast+json;version=2"
+            }
+          });
           const data = await res.json();
           displayOcean(data);
         } catch {

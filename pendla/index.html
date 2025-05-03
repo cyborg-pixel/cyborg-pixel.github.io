@@ -9,19 +9,18 @@
     <meta name="theme-color" content="#cfe8ff" />
     <link rel="apple-touch-icon" href="icon.png" />
     <style>
-
       html, body {
-  height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
+        height: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
       body {
         font-family: Arial, sans-serif;
         font-size: 0.9em;
         margin: 0;
         padding: 0;
         background: linear-gradient(
-          90deg,
+          -90deg,
           #e3f2fd 0%,
           #90caf9 100%,
           #42a5f5 200%
@@ -31,34 +30,29 @@
         align-items: center;
         box-sizing: border-box;
       }
-
       #main-view {
         width: 100%;
         max-width: 800px;
         padding: 20px;
         box-sizing: border-box;
       }
-
       #last-updated {
         font-size: 0.75em;
         color: #888;
         text-align: center;
         margin-top: -15px;
       }
-
       h2 {
         font-size: 1.2em;
         margin-top: 2px;
         margin-bottom: 5px;
         line-height: 1;
       }
-
       ul {
         list-style-type: none;
         padding: 0;
         margin: 0;
       }
-
       .site-box {
         width: 100%;
         background-color: rgba(255, 255, 255, 0.9);
@@ -68,36 +62,17 @@
         margin-bottom: 15px;
         box-sizing: border-box;
       }
-
-      .weather-box {
-        background-color: #ffffff;
-      }
-
-      .schoolferry-box {
-        background-color: rgba(241, 220, 252, 1);
-      }
-
-      .ship-box {
-        background-color: rgba(230, 241, 224, 0.9);
-      }
-
-      .bus-box {
-        background-color: rgba(252, 237, 213, 0.9);
-      }
-
-      .metro-box {
-        background-color: rgba(247, 207, 207, 0.9);
-      }
-
-      .dummy-box {
-      background-color: rgba(202, 255, 229, 0.9);
-      }
-
+      .weather-box { background-color: #ffffff; }
+      .ocean-box { background-color: #d9f0ff; }
+      .schoolferry-box { background-color: rgba(241, 220, 252, 1); }
+      .ship-box { background-color: rgba(230, 241, 224, 0.9); }
+      .bus-box { background-color: rgba(252, 237, 213, 0.9); }
+      .metro-box { background-color: rgba(247, 207, 207, 0.9); }
+      .poolboat-box { background-color: rgba(202, 255, 229, 0.9); }
       .big {
         font-weight: bold;
         font-size: 1em;
       }
-
       .refresh-button {
         margin-top: 20px;
         padding: 10px 20px;
@@ -108,11 +83,9 @@
         border-radius: 5px;
         cursor: pointer;
       }
-
       .refresh-button:hover {
         background-color: #0056b3;
       }
-
       .config-link {
         font-size: 0.8em;
         cursor: pointer;
@@ -121,11 +94,7 @@
         text-align: center;
         margin: 20px 0;
       }
-
-      .hidden {
-        display: none;
-      }
-
+      .hidden { display: none; }
       .config-section {
         width: 100%;
         max-width: 800px;
@@ -135,9 +104,7 @@
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         box-sizing: border-box;
         margin: 20px;
-        /* OBS: ingen fixed height – den anpassar sig efter innehållet */
       }
-
       .strikethrough {
         text-decoration: line-through;
         color: black;
@@ -148,119 +115,60 @@
     <div id="main-view"></div>
     <div id="config-view" class="hidden config-section"></div>
     <script>
+      // === Helpers and Configuration ===
+      let autoRefreshTimer = null;
 
-  function renderOceanWidget() {
-    const prefs = loadPreferences();
-    if (prefs.ocean === false) return;
-
-    if (!document.getElementById("ocean-box")) {
-      const box = document.createElement("div");
-      box.className = "site-box";
-      box.style.backgroundColor = "#d9f0ff";
-      box.id = "ocean-box";
-      box.innerHTML = `
-        <h2>Vattnet runt Tranholmen</h2>
-        <div id="ocean-summary">🔄 Laddar...</div>
-      `;
-      document.getElementById("main-view").appendChild(box);
-    }
-    fetchOcean();
-  }
-
-  function getWeekNumber(date) {
-    const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-    const dayNum = d.getUTCDay() || 7;
-    d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-    const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-    return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
-  }
-
-  function getBarnacleRisk(week) {
-    const ranges = [
-    { from: 1, to: 22, level: "<span style='color:black'>låg</span>" },
-    { from: 23, to: 26, level: "<span style='color:brown'>medel</span>" },
-    { from: 27, to: 35, level: "<span style='color:red'>hög 🔥</span>" },
-    { from: 36, to: 38, level: "<span style='color:brown'>medel</span>" },
-    { from: 39, to: 52, level: "<span style='color:black'>låg</span>" }
-   ];
-    const r = ranges.find(r => week >= r.from && week <= r.to);
-    return r ? r.level : "❓";
-  }
-
-  // 1) Konfiguration för percentil­gränser och färger
-  // Dessa gränser grundar sig i en analys av percentilerna för våghöjder för 2020-04-01 till 2025-04-01
-  // De aktuella percentilerna har gränser vid 10%, 30%, 70%, 90% i histogrammet över historiskt vattenstånd
-  const waterLevelConfig = {
-    thresholds: [-6.8, 5.4, 21.3, 34.5], 
-    // => 5 intervaller: ≤-6.8, ≤5.4, ≤21.3, ≤34.5, >34.5
-    colors: ['red', 'brown', 'black', 'brown', 'red']
-    // => mycket låg, låg, normal, hög, mycket hög
-  };
-
-  // 2) Hjälpfunktion som väljer färg baserat på value
-  function getWaterLevelColor(value) {
-    for (let i = 0; i < waterLevelConfig.thresholds.length; i++) {
-      if (value <= waterLevelConfig.thresholds[i]) {
-        return waterLevelConfig.colors[i];
+      function getWeekNumber(date) {
+        const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+        const dayNum = d.getUTCDay() || 7;
+        d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+        const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+        return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
       }
-    }
-    // Om värdet är större än sista gränsen:
-    return waterLevelConfig.colors[ waterLevelConfig.colors.length - 1 ];
-  }
 
-  // 3) Gör om fetchWaterLevel så att den returnerar ett nummer (cm)
-  async function fetchWaterLevel() {
-    const url = "https://opendata-download-ocobs.smhi.se/api/version/1.0/parameter/6/station/2069/period/latest-day/data.json";
-    try {
-      const res = await fetch(url);
-      const data = await res.json();
-      const val = data.value.at(-1);
-      return val.value;      // returnerar t.ex. 23.4
-    } catch {
-      return null;           // hantera ej tillgängligt som null
-    }
-  }
+      function getBarnacleRisk(week) {
+        const ranges = [
+          { from: 1, to: 22, level: "<span style='color:black'>låg</span>" },
+          { from: 23, to: 26, level: "<span style='color:brown'>medel</span>" },
+          { from: 27, to: 35, level: "<span style='color:red'>hög 🔥</span>" },
+          { from: 36, to: 38, level: "<span style='color:brown'>medel</span>" },
+          { from: 39, to: 52, level: "<span style='color:black'>låg</span>" }
+        ];
+        const r = ranges.find(r => week >= r.from && week <= r.to);
+        return r ? r.level : "❓";
+      }
 
-  // 4) Anpassa displayOcean för färgad vattennivå
-  async function displayOcean(data) {
-    const ts = data.properties.timeseries[0];
-    const d = ts.data.instant.details;
+      const waterLevelConfig = {
+        thresholds: [-6.8, 5.4, 21.3, 34.5],
+        colors: ['red', 'brown', 'black', 'brown', 'red']
+      };
 
-    const temp = d.sea_water_temperature ?? "?";
-    const wave = d.sea_surface_wave_height != null
-      ? Math.round(d.sea_surface_wave_height * 100) + " cm"
-      : "?";
+      function getWaterLevelColor(value) {
+        for (let i = 0; i < waterLevelConfig.thresholds.length; i++) {
+          if (value <= waterLevelConfig.thresholds[i]) {
+            return waterLevelConfig.colors[i];
+          }
+        }
+        return waterLevelConfig.colors[waterLevelConfig.colors.length - 1];
+      }
 
-    const levelValue = await fetchWaterLevel();
-    let levelHTML;
-    if (levelValue === null) {
-      levelHTML = `📏: ej tillgängligt`;
-    } else {
-      const rounded = Math.round(levelValue) + " cm";
-      const color = getWaterLevelColor(levelValue);
-      levelHTML = `<span style="color:${color}">📏: ${rounded}</span>`;
-    }
-
-    const week = getWeekNumber(new Date());
-    const tulpan = getBarnacleRisk(week);
-
-    // OBS: använder innerHTML istället för textContent
-    document.getElementById("ocean-summary").innerHTML =
-      `${temp}°C, 🌊: ${wave}, ${levelHTML}, 🐚 risk: ${tulpan}`;
-  }
-
-  async function fetchOcean() {
-    const url = "https://api.met.no/weatherapi/oceanforecast/2.0/complete?lat=59.37884&lon=18.08343";
-    try {
-      const res = await fetch(url);
-      const data = await res.json();
-      displayOcean(data);
-    } catch {
-      document.getElementById("ocean-summary").textContent = "⚠️ Havsdata ej tillgänglig.";
-    }
-  }
-
-
+      async function fetchWaterLevel() {
+        const url = "https://opendata-download-ocobs.smhi.se/api/version/1.0/parameter/6/station/2069/period/latest-day/data.json";
+        try {
+          const res = await fetch(url, {
+//            headers: {
+//              "User-Agent": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",       // din e-post som identifierar appen
+//              "From": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",       // din e-post som identifierar appen
+//              "Accept": "application/json"
+//            }
+          });
+          const data = await res.json();
+          const val = data.value.at(-1);
+          return val.value;
+        } catch {
+          return null;
+        }
+      }
 
       const schoolFerryConfig = {
         startDate: "2025-04-22",
@@ -270,53 +178,18 @@
           "2025-05-29",
           "2025-05-30",
           "2025-06-06",
-          "2025-06-09",
-        ],
+          "2025-06-09"
+        ]
       };
 
       const schoolFerryTrips = [
-        {
-          from: "Tranholmen",
-          departure: "07:20",
-          to: "Stocksunds hamn",
-          arrival: "07:30",
-        },
-        {
-          from: "Tranholmen",
-          departure: "07:45",
-          to: "Lagman Linds väg",
-          arrival: "07:50",
-        },
-        {
-          from: "Lagman Linds väg",
-          departure: "07:50",
-          to: "Stocksunds hamn",
-          arrival: "08:00",
-        },
-        {
-          from: "Stocksunds hamn",
-          departure: "15:15",
-          to: "Lagman Linds väg",
-          arrival: "15:25",
-        },
-        {
-          from: "Lagman Linds väg",
-          departure: "15:25",
-          to: "Tranholmen",
-          arrival: "15:30",
-        },
-        {
-          from: "Stocksunds hamn",
-          departure: "16:25",
-          to: "Lagman Linds väg",
-          arrival: "16:35",
-        },
-        {
-          from: "Lagman Linds väg",
-          departure: "16:35",
-          to: "Tranholmen",
-          arrival: "16:40",
-        },
+        { from: "Tranholmen", departure: "07:20", to: "Stocksunds hamn", arrival: "07:30" },
+        { from: "Tranholmen", departure: "07:45", to: "Lagman Linds väg", arrival: "07:50" },
+        { from: "Lagman Linds väg", departure: "07:50", to: "Stocksunds hamn", arrival: "08:00" },
+        { from: "Stocksunds hamn", departure: "15:15", to: "Lagman Linds väg", arrival: "15:25" },
+        { from: "Lagman Linds väg", departure: "15:25", to: "Tranholmen", arrival: "15:30" },
+        { from: "Stocksunds hamn", departure: "16:25", to: "Lagman Linds väg", arrival: "16:35" },
+        { from: "Lagman Linds väg", departure: "16:35", to: "Tranholmen", arrival: "16:40" }
       ];
 
       function isRedDay(date) {
@@ -324,116 +197,188 @@
         return schoolFerryConfig.redDays.includes(iso);
       }
 
+      function loadPreferences() {
+        const stored = localStorage.getItem("visibleWidgets");
+        if (stored) {
+          return JSON.parse(stored);
+        }
+        const prefs = {};
+        widgets.forEach(widget => {
+          prefs[widget.id] = defaultVisibleWidgets.includes(widget.id);
+        });
+        return prefs;
+      }
+
+      function savePreferences(prefs) {
+        localStorage.setItem("visibleWidgets", JSON.stringify(prefs));
+      }
+
+      async function updateSlWidgetData({ siteId, mode, line, dir, id, filter }) {
+        const url = `https://transport.integration.sl.se/v1/sites/${siteId}/departures?forecast=360&direction=${dir}`;
+        try {
+          const res = await fetch(url, {
+            headers: {
+              "User-Agent": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",
+              "From": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",
+              "Accept": "application/json"
+            }
+          });
+
+          if (!res.ok) return;
+          const data = await res.json();
+          const departures = data.departures
+            .filter(d => d.line && d.line.transport_mode === mode && d.line.designation === line && (!filter || d.destination.includes(filter)))
+            .slice(0, 3);
+
+          const list = document.getElementById(id);
+          list.innerHTML = "";
+          if (departures.length === 0) {
+            list.innerHTML = "<li>Inga avgångar hittades.</li>";
+            return;
+          }
+          departures.forEach((dep, i) => {
+            const li = document.createElement("li");
+            if (i === 0) li.classList.add("big");
+            li.textContent = `${dep.display} → ${dep.destination}`;
+            list.appendChild(li);
+          });
+        } catch (err) {
+          console.error(err);
+        }
+      }
+
+      // === Widgets Array ===
+      const widgets = [
+        { id: "weather", title: "Vädret på Tranholmen", isWeather: true, bg: "weather-box" },
+        { id: "ocean", title: "Vattnet runt Tranholmen", isOcean: true, bg: "ocean-box" },
+        { id: "farja", title: "Färja 80 Tranholmen", siteId: 961, mode: "SHIP", line: "80", dir: 1, bg: "ship-box" },
+        { id: "ropsten", title: "Färja 80 Ropsten", siteId: 9220, mode: "SHIP", line: "80", dir: 1, bg: "ship-box" },
+        { id: "ekudden", title: "Färja 80 Ekudden", siteId: 962, mode: "SHIP", line: "80", dir: 1, bg: "ship-box" },
+        { id: "buss", title: "Buss 601 Svanholmsvägen", siteId: 2103, mode: "BUS", line: "601", dir: 2, bg: "bus-box" },
+        { id: "ds", title: "Buss 601 Danderyds sjukhus", siteId: 9201, mode: "BUS", line: "601", dir: 1, bg: "bus-box" },
+        { id: "lektorsstigen", title: "Buss 50 Lektorsstigen", siteId: 1180, mode: "BUS", line: "50", dir: 2, bg: "bus-box" },
+        { id: "odenplan", title: "Buss 50 Odenplan", siteId: 9117, mode: "BUS", line: "50", dir: 1, bg: "bus-box" },
+        { id: "tropsten", title: "T-bana 13 Ropsten", siteId: 9220, mode: "METRO", line: "13", dir: 2, bg: "metro-box" },
+        { id: "tdanderyd", title: "T-bana 14 Danderyds sjukhus", siteId: 9201, mode: "METRO", line: "14", dir: 2, bg: "metro-box" },
+        { id: "schoolferry", title: "Skolbåten", isSchoolFerry: true, bg: "schoolferry-box" },
+        { id: "poolboat", title: "Poolbåtarna", isPoolBoat: true, bg: "poolboat-box" }
+      ];
+
+      const defaultVisibleWidgets = [
+        "weather",
+        "farja",
+        "ropsten",
+        "buss",
+        "schoolferry"
+      ];
+
+      // === Widget Rendering Functions ===
+
+      // === Weather Widget ===
+      function renderWeatherWidget() {
+        const prefs = loadPreferences();
+        if (prefs.weather === false) return;
+        const container = document.getElementById("main-view");
+        if (!document.getElementById("weather-box")) {
+          const box = document.createElement("div");
+          box.className = "site-box weather-box";
+          box.id = "weather-box";
+          box.innerHTML = `<h2>Vädret på Tranholmen</h2><ul id="weather-summary">Laddar väderdata...</ul>`;
+          container.appendChild(box);
+        }
+      }
+
+      // === Ocean Widget ===
+      function renderOceanWidget() {
+        const prefs = loadPreferences();
+        if (prefs.ocean === false) return;
+        const container = document.getElementById("main-view");
+        if (!document.getElementById("ocean-box")) {
+          const box = document.createElement("div");
+          box.className = `site-box ocean-box`;
+          box.id = "ocean-box";
+          box.innerHTML = `
+            <h2>Vattnet runt Tranholmen</h2>
+            <div id="ocean-summary">🔄 Laddar...</div>
+          `;
+          container.appendChild(box);
+        }
+        fetchOcean();
+      }
+
+      async function displayOcean(data) {
+        const ts = data.properties.timeseries[0];
+        const d = ts.data.instant.details;
+        const temp = d.sea_water_temperature ?? "?";
+        const wave = d.sea_surface_wave_height != null
+          ? Math.round(d.sea_surface_wave_height * 100) + " cm"
+          : "?";
+        const levelValue = await fetchWaterLevel();
+        let levelHTML;
+        if (levelValue === null) {
+          levelHTML = `📏: ej tillgängligt`;
+        } else {
+          const rounded = Math.round(levelValue) + " cm";
+          const color = getWaterLevelColor(levelValue);
+          levelHTML = `<span style="color:${color}">📏: ${rounded}</span>`;
+        }
+        const week = getWeekNumber(new Date());
+        const tulpan = getBarnacleRisk(week);
+        document.getElementById("ocean-summary").innerHTML =
+          `${temp}°C, 🌊: ${wave}, ${levelHTML}, 🐚 risk: ${tulpan}`;
+      }
+
+      async function fetchOcean() {
+        const url = "https://api.met.no/weatherapi/oceanforecast/2.0/complete?lat=59.37884&lon=18.08343";
+        try {
+          const res = await fetch(url, {
+            headers: {
+//              "User-Agent": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",
+//              "From": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",
+              "Accept": "application/vnd.noaa.oceanforecast+json;version=2"
+            }
+          });
+          const data = await res.json();
+          displayOcean(data);
+        } catch {
+          document.getElementById("ocean-summary").textContent = "⚠️ Havsdata ej tillgänglig.";
+        }
+      }
+
+      // === School Ferry Widget ===
       function renderSchoolFerryWidget() {
         const prefs = loadPreferences();
         if (prefs.schoolferry === false) return;
-
+        const container = document.getElementById("main-view");
         if (!document.getElementById("schoolferry-box")) {
           const box = document.createElement("div");
           box.className = "site-box schoolferry-box";
           box.id = "schoolferry-box";
           box.innerHTML = `<h2>Skolbåten (22 april – 13 juni)</h2><ul id="schoolferry-list">Laddar avgångar...</ul>`;
-          document.getElementById("main-view").appendChild(box);
+          container.appendChild(box);
         }
-        updateSchoolFerryContent(); // fyll i innehållet direkt första gången
+        updateSchoolFerryContent();
       }
-
-      
-
-function renderDummyWidget() {
-  const prefs = loadPreferences();
-  if (prefs.dummy === false) return;
-
-  if (!document.getElementById("dummy-box")) {
-    const box = document.createElement("div");
-    box.className = "site-box dummy-box";
-    box.id = "dummy-box";
-    box.innerHTML = `
-      <h2>Poolbåtarna</h2>
-      <ul id="dummy-content"><li>Laddar...</li></ul>
-    `;
-    document.getElementById("main-view").appendChild(box);
-  }
-
-  updateDummyWidget(); // Ladda första gången
-}
-
-
-function updateDummyWidget() {
-  const prefs = loadPreferences();
-  if (prefs.dummy === false) return;
-
-  const ul = document.getElementById("dummy-content");
-  if (!ul) return;
-
- const tips = [
-  "🛶 Ta ur årorna och lägg dem i båten efteråt",
-  "🔒 Lås båten i låsstationen efter rodd",
-  "🦺 Flytväst räddar liv – använd",
-  "💨 Se upp för stark vind",
-  "🤝 Ta en båt på släp vid obalans i poolen",
-  "🌟 Lämna båten i fint skick",
-  "🚫 Endast transport – ingen nöjesrodd",
-  "👨‍👩‍👧‍👦 Endast medlemmar och deras gäster",
-  "🔑 Ge aldrig ut koden till kompisar",
-  "📬 Ingen kod? Du får ny via mail",
-  "🧭 Följ sjöfartsreglerna",
-  "🌙 Ror du i mörker? Ta med eget ljus!",
-  "🔁 Röd båt ska bogseras tillbaka direkt",
-  "❗ Röd båt = backup – endast vid behov",
-  "❗ Max en röd båt per strand",
-  "👀 Vuxna ansvarar för barns båtanvändning",
-  "🚫 Kompisar får inte ro utan dig",
-  "🚫 Ingen lek – bara ro till/från ön",
-  "🧒 Endast familjens barn får använda båten", 
-  "🧽 Hjälp till att hålla båtarna i gott skick",
-  "🧰 Vi ansvarar alla för underhåll av båtarna",
-  "🧑‍🔧 Även hantverkare och gäster får låna – via dig",
-  "📋 Alla som lånar via dig måste följa reglerna",
-  "🪪 Ge aldrig koden till någon du inte ansvarar för",
-  "💥 Du ansvarar för skador när du använder båten",
-  "🚫 Om du bryter mot reglerna kan du stängas av",
-  "📱 Regler finns på vår Facebookgrupp (86:tran...)"
-];
-
-  // Blanda tipsen och ta tre slumpmässiga
-  const shuffled = tips.sort(() => 0.5 - Math.random());
-  const selected = shuffled.slice(0, 3);
-
-  ul.innerHTML = "";
-  selected.forEach(tip => {
-    const li = document.createElement("li");
-    li.textContent = tip;
-    ul.appendChild(li);
-  });
-}
-
-
-
 
       function updateSchoolFerryContent() {
         const prefs = loadPreferences();
         if (prefs.schoolferry === false) return;
-
         const now = new Date();
         const startDate = new Date(schoolFerryConfig.startDate);
         const endDate = new Date(schoolFerryConfig.endDate);
         const isActivePeriod = now >= startDate && now <= endDate;
-
         const ul = document.getElementById("schoolferry-list");
-        if (!ul) return; // inget att uppdatera om boxen inte finns
-
+        if (!ul) return;
         ul.innerHTML = "";
-
         const futureTrips = schoolFerryTrips
-          .map((trip) => {
+          .map(trip => {
             const [h, m] = trip.departure.split(":").map(Number);
             const dep = new Date(now);
             dep.setHours(h, m, 0, 0);
             if (dep < now) dep.setDate(dep.getDate() + 1);
             return { ...trip, depDate: dep };
           })
-          .filter((trip) => {
+          .filter(trip => {
             const diffMin = (trip.depDate - now) / 60000;
             const weekday = trip.depDate.getDay();
             return (
@@ -446,18 +391,17 @@ function updateDummyWidget() {
           })
           .sort((a, b) => a.depDate - b.depDate)
           .slice(0, 4);
-
         if (futureTrips.length === 0) {
           ul.innerHTML = "<li>Inga avgångar hittades.</li>";
         } else {
-          futureTrips.forEach((trip, index) => {
+          futureTrips.forEach((trip, idx) => {
             const diffMin = Math.round((trip.depDate - now) / 60000);
             let depText = "";
             if (diffMin < 1) depText = "Nu";
             else if (diffMin < 60) depText = `${diffMin} min`;
             else depText = trip.departure;
             const li = document.createElement("li");
-            if (index === 0) li.classList.add("big");
+            if (idx === 0) li.classList.add("big");
             if (!isActivePeriod) li.classList.add("strikethrough");
             li.textContent = `${depText} ${trip.from} → ${trip.to}`;
             ul.appendChild(li);
@@ -465,260 +409,177 @@ function updateDummyWidget() {
         }
       }
 
-      const widgets = [
-        {
-          id: "weather",
-          title: "Vädret på Tranholmen",
-          isWeather: true,
-          bg: "weather-box",
-        },
-        {
-          id: "ocean",
-          title: "Vattnet runt Tranholmen",
-          isOcean: true,
-          bg: "",
-        },
-        {
-          id: "farja",
-          title: "Färja 80 Tranholmen",
-          siteId: 961,
-          mode: "SHIP",
-          line: "80",
-          dir: 1,
-          bg: "ship-box",
-        },
-        {
-          id: "ropsten",
-          title: "Färja 80 Ropsten",
-          siteId: 9220,
-          mode: "SHIP",
-          line: "80",
-          dir: 1,
-          bg: "ship-box",
-        },
-        {
-          id: "ekudden",
-          title: "Färja 80 Ekudden",
-          siteId: 962,
-          mode: "SHIP",
-          line: "80",
-          dir: 1,
-          bg: "ship-box",
-        },
-        {
-          id: "buss",
-          title: "Buss 601 Svanholmsvägen",
-          siteId: 2103,
-          mode: "BUS",
-          line: "601",
-          dir: 2,
-          bg: "bus-box",
-        },
-        {
-          id: "ds",
-          title: "Buss 601 Danderyds sjukhus",
-          siteId: 9201,
-          mode: "BUS",
-          line: "601",
-          dir: 1,
-          bg: "bus-box",
-        },
-        {
-          id: "lektorsstigen",
-          title: "Buss 50 Lektorsstigen",
-          siteId: 1180,
-          mode: "BUS",
-          line: "50",
-          dir: 2,
-          bg: "bus-box",
-        },
-        {
-          id: "odenplan",
-          title: "Buss 50 Odenplan",
-          siteId: 9117,
-          mode: "BUS",
-          line: "50",
-          dir: 1,
-          bg: "bus-box",
-        },
-        {
-          id: "tropsten",
-          title: "T-bana 13 Ropsten",
-          siteId: 9220,
-          mode: "METRO",
-          line: "13",
-          dir: 2,
-          bg: "metro-box",
-        },
-        {
-          id: "tdanderyd",
-          title: "T-bana 14 Danderyds sjukhus",
-          siteId: 9201,
-          mode: "METRO",
-          line: "14",
-          dir: 2,
-          bg: "metro-box",
-        },
-        {
-          id: "schoolferry",
-          title: "Skolbåten",
-          isSchoolFerry: true,
-          bg: "schoolferry-box",
-        },
-        {
-          id: "dummy",
-          title: "Poolbåtarna",
-          isDummy: true,
-          bg: "dummy-box",
+// === PoolBoat Widget ===
+function renderPoolBoatWidget() {
+  const prefs = loadPreferences();
+  if (prefs.poolboat === false) return;
+
+  const container = document.getElementById("main-view");
+  if (!document.getElementById("poolboat-box")) {
+    const code = localStorage.getItem("poolboatCode") || "";
+    const hasCode = code.length > 0;
+    const dots    = "●".repeat(code.length);
+
+    // Skapa boxen
+    const box = document.createElement("div");
+    box.className = "site-box poolboat-box";
+    box.id = "poolboat-box";
+
+    // Bygg upp headern
+    let headerHTML = "Poolbåtarna";
+    if (hasCode) {
+      headerHTML += `, kod: 
+        <span id="poolboat-code-dots"
+              style="
+                cursor: pointer;
+                font-size: inherit;
+                user-select: none;
+              ">
+          ${dots}
+        </span>`;
+    }
+
+    box.innerHTML = `
+      <div>
+        <h2 style="margin: 0;">${headerHTML}</h2>
+      </div>
+      <ul id="poolboat-content">
+        <li>Laddar...</li>
+      </ul>
+    `;
+    container.appendChild(box);
+
+    // Toggle-logik
+    if (hasCode) {
+      const span       = box.querySelector("#poolboat-code-dots");
+      let   timeoutId  = null;
+
+      span.addEventListener("click", () => {
+        // Om vi redan visar koden → göm
+        if (span.textContent === code) {
+          clearTimeout(timeoutId);
+          span.textContent = dots;
+        } else {
+          // Annars visa koden
+          span.textContent = code;
+          timeoutId = setTimeout(() => {
+            span.textContent = dots;
+          }, 15000);
         }
-      ];
+      });
+    }
+  }
 
-      const defaultVisibleWidgets = [
-        "weather",
-        "farja",
-        "ropsten",
-        "buss",
-        "ds"
-      ];
+  updatePoolBoatWidget();
+}
 
-      function loadPreferences() {
-        const stored = localStorage.getItem("visibleWidgets");
-        if (stored) {
-          return JSON.parse(stored);
-        }
-
-        // Skapa default-prefs om ingen data finns ännu
-        const prefs = {};
-        widgets.forEach((widget) => {
-          prefs[widget.id] = defaultVisibleWidgets.includes(widget.id);
-        });
-        return prefs;
-      }
-      function savePreferences(prefs) {
-        localStorage.setItem("visibleWidgets", JSON.stringify(prefs));
-      }
-
-      async function updateSlWidgetData({
-        siteId,
-        mode,
-        line,
-        dir,
-        id,
-        filter,
-      }) {
-        const url = `https://transport.integration.sl.se/v1/sites/${siteId}/departures?forecast=360&direction=${dir}`;
-        try {
-          const res = await fetch(url);
-          if (!res.ok) return;
-          const data = await res.json();
-          const departures = data.departures
-            .filter(
-              (d) =>
-                d.line &&
-                d.line.transport_mode === mode &&
-                d.line.designation === line &&
-                (!filter || d.destination.includes(filter)),
-            )
-            .slice(0, 3);
-
-          const list = document.getElementById(id);
-          list.innerHTML = "";
-
-          if (departures.length === 0) {
-            list.innerHTML = "<li>Inga avgångar hittades.</li>";
-            return;
-          }
-
-          departures.forEach((dep, i) => {
-            const li = document.createElement("li");
-            if (i === 0) li.classList.add("big");
-            li.textContent = `${dep.display} → ${dep.destination}`;
-            list.appendChild(li);
-          });
-        } catch (err) {
-          console.error(err);
-        }
-      }
-
-      function renderAllWidgets() {
+      function updatePoolBoatWidget() {
         const prefs = loadPreferences();
+        if (prefs.poolboat === false) return;
+        const ul = document.getElementById("poolboat-content");
+        if (!ul) return;
+        const tips = [
+          "🛶 Ta ur årorna och lägg dem i båten efteråt",
+          "🔒 Lås båten i låsstationen efter rodd",
+          "🦺 Flytväst räddar liv – använd",
+          "💨 Se upp för stark vind",
+          "🤝 Ta en båt på släp vid obalans i poolen",
+          "🌟 Lämna båten i fint skick",
+          "🚫 Endast transport – ingen nöjesrodd",
+          "👨‍👩‍👧‍👦 Endast medlemmar och deras gäster",
+          "🔑 Ge aldrig ut koden to kompisar",
+          "📬 Ingen kod? Du får ny via mail",
+          "🧭 Följ sjöfartsreglerna",
+          "🌙 Ror du i mörker? Ta med eget ljus!",
+          "🔁 Röd båt ska bogseras tillbaka direkt",
+          "❗ Röd båt = backup – endast vid behov",
+          "❗ Max en röd båt per strand",
+          "👀 Vuxna ansvarar för barns båtanvändning",
+          "🚫 Kompisar får inte ro utan dig",
+          "🚫 Ingen lek – bara ro till/från ön",
+          "🧒 Endast familjens barn får använda båten",
+          "🧽 Hjälp till att hålla båtarna i gott skick",
+          "🧰 Vi ansvarar alla för underhåll av båtarna",
+          "🧑‍🔧 Även hantverkare och gäster får låna – via dig",
+          "📋 Alla som lånar via dig måste följa reglerna",
+          "🪪 Ge aldrig koden till någon du inte ansvarar för",
+          "💥 Du ansvarar för skador när du använder båten",
+          "🚫 Om du bryter mot reglerna kan du stängas av",
+          "📱 Regler finns på vår Facebookgrupp (86:tran...)"
+        ];
+        const shuffled = tips.sort(() => 0.5 - Math.random());
+        const selected = shuffled.slice(0, 3);
+        ul.innerHTML = "";
+        selected.forEach(tip => {
+          const li = document.createElement("li");
+          li.textContent = tip;
+          ul.appendChild(li);
+        });
+      }
+
+      // === SL Widgets ===
+      function renderSlWidget(widget) {
+        const prefs = loadPreferences();
+        if (prefs[widget.id] === false) return;
+        const container = document.getElementById("main-view");
+        if (!document.getElementById(`${widget.id}-box`)) {
+          const box = document.createElement("div");
+          box.className = `site-box ${widget.bg || ""}`;
+          box.id = `${widget.id}-box`;
+          box.innerHTML = `<h2>${widget.title}</h2><ul id="${widget.id}">Laddar hållplatsdata...</ul>`;
+          container.appendChild(box);
+        }
+      }
+
+      // === Main Render & Update ===
+      function renderAllWidgets() {
         const container = document.getElementById("main-view");
         container.innerHTML = "";
-        widgets.forEach((widget) => {
-          if (prefs[widget.id] === false) return;
-
+        widgets.forEach(widget => {
           if (widget.isWeather) {
-            const box = document.createElement("div");
-            box.className = "site-box";
-            box.style.backgroundColor = "white";
-            box.innerHTML = `<h2>${widget.title}</h2><ul id="weather-summary">Laddar väderdata...</ul>`;
-            container.appendChild(box);
-            } 
-            else if (widget.isSchoolFerry) {
-              renderSchoolFerryWidget(); // hanteras separat
-            }
-            else if (widget.isDummy) {
-              renderDummyWidget();
-            }
-            else if (widget.isOcean) {
-              renderOceanWidget();
-            }
-           else {
-            const box = document.createElement("div");
-            box.className = `site-box ${widget.bg || ""}`;
-            box.innerHTML = `<h2>${widget.title}</h2><ul id="${widget.id}">Laddar hållplatsdata...</ul>`;
-            container.appendChild(box);
+            renderWeatherWidget();
+          } else if (widget.isOcean) {
+            renderOceanWidget();
+          } else if (widget.isSchoolFerry) {
+            renderSchoolFerryWidget();
+          } else if (widget.isPoolBoat) {
+            renderPoolBoatWidget();
+          } else {
+            renderSlWidget(widget);
           }
         });
 
-        // Lägg till konfiglänken under allt
+        // Inställningar-länk
         const configLink = document.createElement("div");
         configLink.className = "config-link";
         configLink.textContent = "Inställningar";
         configLink.onclick = () => toggleConfig(true);
         container.appendChild(configLink);
 
-        // Lägg till/återskapa last-updated
+        // Senast uppdaterad
         const lastUpdated = document.createElement("div");
         lastUpdated.id = "last-updated";
-        //lastUpdated.style.fontSize = '0.75em';
-        //lastUpdated.style.color = '#555';
-        //lastUpdated.style.textAlign = 'center';
-        //lastUpdated.style.marginTop = '-10px';
         lastUpdated.textContent = "Senast uppdaterad: laddar...";
         container.appendChild(lastUpdated);
       }
 
       function updateSlWidgets() {
-        const prefs = loadPreferences();
-        widgets.forEach((widget) => {
-          if (prefs[widget.id] === false) return;
-          if (widget.isWeather || widget.isSchoolFerry) return; // hoppa över väder och skolbåt
-          updateSlWidgetData(widget);
+      const prefs = loadPreferences();
+      widgets.forEach(widget => {
+        // Hoppa över om användaren stängt av widgeten
+        if (!prefs[widget.id]) return;
+        // Endast SL-widgets (de med siteId) ska uppdateras via SL-API:t
+        if (!widget.siteId) return;
+        updateSlWidgetData(widget);
         });
       }
 
-      function reloadWeatherScript() {
-        const oldScript = document.querySelector("script[data-weather]");
-        if (oldScript) oldScript.remove();
-
-        const script = document.createElement("script");
-        script.src = "weather.js";
-        script.defer = true;
-        script.setAttribute("data-weather", "true");
-        document.body.appendChild(script);
-      }
-
-
 
       function updateAllWidgets() {
-        updateSlWidgets(); // SL-data
-        updateSchoolFerryContent(); // Skolbåten
-        updateDummyWidget();          // 👈 Lägg till denna rad
-        fetchOcean(); // 👈 Uppdatera havsdata varje refresh
-
-
-        // Uppdatera "senast uppdaterad"-texten
+        updateSlWidgets();
+        updateSchoolFerryContent();
+        updatePoolBoatWidget();
+        fetchOcean();
         const now = new Date();
         const hh = now.getHours().toString().padStart(2, "0");
         const mm = now.getMinutes().toString().padStart(2, "0");
@@ -726,28 +587,40 @@ function updateDummyWidget() {
           `Senast uppdaterad: ${hh}:${mm}`;
       }
 
-      function startAutoRefresh() {
-        renderAllWidgets();
-        updateAllWidgets(); // första uppdateringen
-        reloadWeatherScript(); // väder
-        setInterval(updateAllWidgets, 30000); // uppdatera allt var 30s
+      function reloadWeatherScript() {
+        const oldScript = document.querySelector("script[data-weather]");
+        if (oldScript) oldScript.remove();
+        const script = document.createElement("script");
+        script.src = "weather.js";
+        script.defer = true;
+        script.setAttribute("data-weather", "true");
+        document.body.appendChild(script);
       }
 
-      document.addEventListener("visibilitychange", function () {
+      function startAutoRefresh() {
+        renderAllWidgets();
+        updateAllWidgets();
+        reloadWeatherScript();
+        // Rensa tidigare timer om den finns
+        if (autoRefreshTimer !== null) {
+          clearInterval(autoRefreshTimer);
+        }
+        // Spara det nya interval-ID:t
+        autoRefreshTimer = setInterval(updateAllWidgets, 30000);
+      }
+
+
+      document.addEventListener("visibilitychange", () => {
         if (!document.hidden) updateSlWidgets();
       });
 
       function toggleConfig(show) {
         document.getElementById("main-view").classList.toggle("hidden", show);
-        document
-          .getElementById("config-view")
-          .classList.toggle("hidden", !show);
+        document.getElementById("config-view").classList.toggle("hidden", !show);
         if (show) {
           renderConfig();
         } else {
-          renderAllWidgets();
-          updateAllWidgets();
-          reloadWeatherScript(); // uppdatera vädret
+          startAutoRefresh();
         }
       }
 
@@ -756,7 +629,8 @@ function updateDummyWidget() {
         const config = document.getElementById("config-view");
         config.innerHTML = "<h2>Välj info som ska visas</h2>";
         const form = document.createElement("form");
-        widgets.forEach((widget) => {
+        
+        widgets.forEach(widget => {
           const label = document.createElement("label");
           const checkbox = document.createElement("input");
           checkbox.type = "checkbox";
@@ -767,21 +641,56 @@ function updateDummyWidget() {
           form.appendChild(label);
           form.appendChild(document.createElement("br"));
         });
+
+
+
+        // --- Ny rubrik för övriga inställningar ---
+        const otherHeader = document.createElement("h2");
+        otherHeader.textContent = "Övriga inställningar";
+        otherHeader.style.marginTop = "20px"; 
+        form.appendChild(otherHeader);
+
+        // --- Endast om poolbåtens widget är ikryssad ---
+          const labelCode = document.createElement("label");
+          labelCode.textContent = "Koden till poolbåtarna: ";
+          const inputCode = document.createElement("input");
+          inputCode.type = "text";
+          inputCode.name = "poolboatCode";
+          inputCode.maxLength = 14;
+          // Förifyll med tidigare sparad kod eller tomt
+          inputCode.value = localStorage.getItem("poolboatCode") || "";
+          labelCode.appendChild(inputCode);
+          form.appendChild(labelCode);
+          form.appendChild(document.createElement("br"));
+
         const saveBtn = document.createElement("button");
         saveBtn.textContent = "Spara";
         saveBtn.type = "submit";
         saveBtn.className = "refresh-button";
         form.appendChild(saveBtn);
-        form.onsubmit = (e) => {
+
+        form.onsubmit = e => {
           e.preventDefault();
+
+          // Spara widget-inställningarna som tidigare
           const newPrefs = {};
-          widgets.forEach((widget) => {
+          widgets.forEach(widget => {
             newPrefs[widget.id] = form.elements[widget.id].checked;
-          });
-          savePreferences(newPrefs);
-          toggleConfig(false);
-        };
-        config.appendChild(form);
+        });
+        savePreferences(newPrefs);
+
+        // Spara poolbåts-koden
+        const codeInput = form.elements.poolboatCode;
+        if (codeInput) {
+          const code = codeInput.value.trim();
+          localStorage.setItem("poolboatCode", code);
+        }
+
+        toggleConfig(false);
+      };
+
+
+      config.appendChild(form);
       }
     </script>
   </body>

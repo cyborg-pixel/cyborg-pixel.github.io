@@ -11,11 +11,16 @@ async function fetchWeather() {
     const url = `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${lat}&lon=${lon}`;
 
     try {
-        const response = await fetch(url, {
+          const response = await fetch(url, {
             method: "GET",
             mode: "cors",  // Viktigt: Säkerställer CORS-stöd
             cache: "no-cache"  // Förhindrar cacheproblem
-        });
+//            headers: {
+//              "User-Agent": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",
+//              "From": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",
+//              "Accept": "application/json"
+//            }
+          });
 
         if (!response.ok) {
             throw new Error(`Fel vid hämtning: ${response.status}`);
