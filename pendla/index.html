@@ -214,7 +214,7 @@
       }
 
       async function updateSlWidgetData({ siteId, mode, line, dir, id, filter }) {
-        const url = `https://transport.integration.sl.se/v1/sites/${siteId}/departures?forecast=360&direction=${dir}`;
+        const url = `https://transport.integration.sl.sj/v1/sites/${siteId}/departures?forecast=360&direction=${dir}`;
         try {
           const res = await fetch(url);
 
