@@ -8,6 +8,7 @@
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#cfe8ff" />
     <link rel="apple-touch-icon" href="icon.png" />
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
     <style>
       html, body {
         height: 100%;
@@ -153,7 +154,7 @@
       }
 
       async function fetchWaterLevel() {
-        const url = "https://opendata-download-ocobs.smhi.se/api/version/1.0/parameter/6/station/2069/period/latest-day/data.json";
+        const url = "https://papi.pandulus.workers.dev/smhi/api/version/1.0/parameter/6/station/2069/period/latest-day/data.json";
         try {
           const res = await fetch(url, {
 //            headers: {
@@ -214,15 +215,10 @@
       }
 
       async function updateSlWidgetData({ siteId, mode, line, dir, id, filter }) {
-        const url = `https://transport.integration.sl.se/v1/sites/${siteId}/departures?forecast=360&direction=${dir}`;
+        const url = `https://papi.pandulus.workers.dev/sl/v1/sites/${siteId}/departures?forecast=360&direction=${dir}`;
         try {
-          const res = await fetch(url, {
-            headers: {
-              "User-Agent": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",
-              "From": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",
-              "Accept": "application/json"
-            }
-          });
+          const res = await fetch(url);
+          console.error(res)
 
           if (!res.ok) return;
           const data = await res.json();
@@ -236,12 +232,17 @@
             list.innerHTML = "<li>Inga avgångar hittades.</li>";
             return;
           }
-          departures.forEach((dep, i) => {
-            const li = document.createElement("li");
-            if (i === 0) li.classList.add("big");
-            li.textContent = `${dep.display} → ${dep.destination}`;
-            list.appendChild(li);
-          });
+departures.forEach((dep, i) => {
+  const li = document.createElement("li");
+  if (i === 0) li.classList.add("big");
+
+  const timeStr = new Date(dep.expected)
+    .toLocaleTimeString("sv-SE", { hour: "numeric", minute: "2-digit" });
+
+  li.textContent = `${timeStr} → ${dep.destination}`;
+  list.appendChild(li);
+});
+
         } catch (err) {
           console.error(err);
         }
@@ -329,7 +330,7 @@
       }
 
       async function fetchOcean() {
-        const url = "https://api.met.no/weatherapi/oceanforecast/2.0/complete?lat=59.37884&lon=18.08343";
+        const url = "https://papi.pandulus.workers.dev/yr/weatherapi/oceanforecast/2.0/complete?lat=59.37884&lon=18.08343";
         try {
           const res = await fetch(url, {
             headers: {
@@ -606,7 +607,7 @@ function renderPoolBoatWidget() {
           clearInterval(autoRefreshTimer);
         }
         // Spara det nya interval-ID:t
-        autoRefreshTimer = setInterval(updateAllWidgets, 30000);
+        autoRefreshTimer = setInterval(updateAllWidgets, 30000*5);
       }
 
 
