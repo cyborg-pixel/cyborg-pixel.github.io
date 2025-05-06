@@ -13,6 +13,7 @@
         sizes="16x16 32x32" 
         href="/favicon.png">
     <style>
+
       html, body {
         height: 100%;
         overflow-y: auto;
@@ -113,6 +114,13 @@
         text-decoration: line-through;
         color: black;
       }
+      .ferry-time {
+    display: inline-block;
+    width: 6ch; /* Ger plats för 'hh:mm' eller 'Nu'/'X min' */
+    text-align: right;
+    margin-right: 0.5em;
+    font-variant-numeric: tabular-nums;
+  }
     </style>
   </head>
   <body onload="startAutoRefresh()">
@@ -187,6 +195,7 @@
       };
 
       const schoolFerryTrips = [
+//        { from: "Julafton", departure: "10:31", to: "Fredag", arrival: "10:35" },
         { from: "Tranholmen", departure: "07:20", to: "Stocksunds hamn", arrival: "07:30" },
         { from: "Tranholmen", departure: "07:45", to: "Lagman Linds väg", arrival: "07:50" },
         { from: "Lagman Linds väg", departure: "07:50", to: "Stocksunds hamn", arrival: "08:00" },
@@ -364,54 +373,65 @@ departures.forEach((dep, i) => {
         updateSchoolFerryContent();
       }
 
-      function updateSchoolFerryContent() {
-        const prefs = loadPreferences();
-        if (prefs.schoolferry === false) return;
-        const now = new Date();
-        const startDate = new Date(schoolFerryConfig.startDate);
-        const endDate = new Date(schoolFerryConfig.endDate);
-        const isActivePeriod = now >= startDate && now <= endDate;
-        const ul = document.getElementById("schoolferry-list");
-        if (!ul) return;
-        ul.innerHTML = "";
-        const futureTrips = schoolFerryTrips
-          .map(trip => {
-            const [h, m] = trip.departure.split(":").map(Number);
-            const dep = new Date(now);
-            dep.setHours(h, m, 0, 0);
-            if (dep < now) dep.setDate(dep.getDate() + 1);
-            return { ...trip, depDate: dep };
-          })
-          .filter(trip => {
-            const diffMin = (trip.depDate - now) / 60000;
-            const weekday = trip.depDate.getDay();
-            return (
-              diffMin >= 0 &&
-              diffMin <= 1440 &&
-              weekday >= 1 &&
-              weekday <= 5 &&
-              !isRedDay(trip.depDate)
-            );
-          })
-          .sort((a, b) => a.depDate - b.depDate)
-          .slice(0, 4);
-        if (futureTrips.length === 0) {
-          ul.innerHTML = "<li>Inga avgångar hittades.</li>";
+  function updateSchoolFerryContent() {
+    const prefs = loadPreferences();
+    if (prefs.schoolferry === false) return;
+    const now = new Date();
+    const startDate = new Date(schoolFerryConfig.startDate);
+    const endDate = new Date(schoolFerryConfig.endDate);
+    const isActivePeriod = now >= startDate && now <= endDate;
+    const ul = document.getElementById("schoolferry-list");
+    if (!ul) return;
+    ul.innerHTML = "";
+    const futureTrips = schoolFerryTrips
+      .map(trip => {
+        const [h, m] = trip.departure.split(":").map(Number);
+        const dep = new Date(now);
+        dep.setHours(h, m, 0, 0);
+        if (dep < now) dep.setDate(dep.getDate() + 1);
+        return { ...trip, depDate: dep };
+      })
+      .filter(trip => {
+        const diffMin = (trip.depDate - now) / 60000;
+        const weekday = trip.depDate.getDay();
+        return (
+          diffMin >= 0 &&
+          diffMin <= 1440 &&
+          weekday >= 1 &&
+          weekday <= 5 &&
+          !isRedDay(trip.depDate)
+        );
+      })
+      .sort((a, b) => a.depDate - b.depDate)
+      .slice(0, 4);
+
+    if (futureTrips.length === 0) {
+      ul.innerHTML = "<li>Inga avgångar hittades.</li>";
+    } else {
+      futureTrips.forEach((trip, idx) => {
+        const diffMs = trip.depDate - now;
+        const mins = Math.floor(diffMs / 60000);
+        let displayText;
+        if (mins < 1) {
+          displayText = "Nu";
+        } else if (mins <= 30) {
+          displayText = `${mins} min`;
         } else {
-          futureTrips.forEach((trip, idx) => {
-            const diffMin = Math.round((trip.depDate - now) / 60000);
-            let depText = "";
-            if (diffMin < 1) depText = "Nu";
-            else if (diffMin < 60) depText = `${diffMin} min`;
-            else depText = trip.departure;
-            const li = document.createElement("li");
-            if (idx === 0) li.classList.add("big");
-            if (!isActivePeriod) li.classList.add("strikethrough");
-            li.textContent = `${depText} ${trip.from} → ${trip.to}`;
-            ul.appendChild(li);
-          });
+          displayText = trip.departure; // hh:mm
         }
-      }
+        const li = document.createElement("li");
+        if (idx === 0) li.classList.add("big");
+        if (!isActivePeriod) li.classList.add("strikethrough");
+        // Använd innerHTML för att kunna infoga span
+        li.innerHTML = `
+          <span class="ferry-time">${displayText}</span>
+          ${trip.from} &rarr; ${trip.to}
+        `.trim();
+        ul.appendChild(li);
+      });
+    }
+  }
+
 
 // === PoolBoat Widget ===
 function renderPoolBoatWidget() {
@@ -601,18 +621,18 @@ function renderPoolBoatWidget() {
         document.body.appendChild(script);
       }
 
-      function startAutoRefresh() {
-        renderAllWidgets();
-        updateAllWidgets();
-        reloadWeatherScript();
-        // Rensa tidigare timer om den finns
-        if (autoRefreshTimer !== null) {
-          clearInterval(autoRefreshTimer);
-        }
-        // Spara det nya interval-ID:t
-        autoRefreshTimer = setInterval(updateAllWidgets, 30000*2);
-      }
-
+ function startAutoRefresh() {
+    renderAllWidgets();
+    updateAllWidgets();
+    reloadWeatherScript();
+    if (autoRefreshTimer !== null) {
+      clearInterval(autoRefreshTimer);
+    }
+    // Generell uppdatering var 2 min
+    autoRefreshTimer = setInterval(updateAllWidgets, 120000);
+    // Endast skolfärjan uppdateras var 10:e sekund
+    setInterval(updateSchoolFerryContent, 10000);
+  }
 
       document.addEventListener("visibilitychange", () => {
         if (!document.hidden) updateSlWidgets();
