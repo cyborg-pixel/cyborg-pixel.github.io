@@ -8,18 +8,13 @@ function getCompassDirection(degrees) {
 async function fetchWeather() {
     const lat = "59.3750";  // Tranholmen
     const lon = "18.0892";  // Tranholmen
-    const url = `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${lat}&lon=${lon}`;
+    const url = `https://papi.pandulus.workers.dev/yr/weatherapi/locationforecast/2.0/complete?lat=${lat}&lon=${lon}`;
 
     try {
           const response = await fetch(url, {
-            method: "GET",
-            mode: "cors",  // Viktigt: Säkerställer CORS-stöd
-            cache: "no-cache"  // Förhindrar cacheproblem
-//            headers: {
-//              "User-Agent": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",
-//              "From": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",
-//              "Accept": "application/json"
-//            }
+            headers: {
+              "Accept": "application/vnd.noaa.oceanforecast+json;version=2"
+            }
           });
 
         if (!response.ok) {

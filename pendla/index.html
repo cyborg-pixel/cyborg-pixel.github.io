@@ -346,8 +346,6 @@ departures.forEach((dep, i) => {
         try {
           const res = await fetch(url, {
             headers: {
-//              "User-Agent": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",
-//              "From": "Pendla-appen Tranholmen (puller_overlay8s@icloud.com)",
               "Accept": "application/vnd.noaa.oceanforecast+json;version=2"
             }
           });
