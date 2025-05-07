@@ -316,7 +316,7 @@ departures.forEach((dep, i) => {
           `;
           container.appendChild(box);
         }
-        fetchOcean();
+        //fetchOcean();
       }
 
       async function displayOcean(data) {
@@ -345,9 +345,9 @@ departures.forEach((dep, i) => {
         const url = "https://papi.pandulus.workers.dev/yr/weatherapi/oceanforecast/2.0/complete?lat=59.37884&lon=18.08343";
         try {
           const res = await fetch(url, {
-            headers: {
-              "Accept": "application/vnd.noaa.oceanforecast+json;version=2"
-            }
+//            headers: {
+//              "Accept": "application/vnd.noaa.oceanforecast+json;version=2"
+//            }
           });
           const data = await res.json();
           displayOcean(data);
@@ -598,10 +598,11 @@ function renderPoolBoatWidget() {
 
 
       function updateAllWidgets() {
+        const prefs = loadPreferences();
         updateSlWidgets();
         updateSchoolFerryContent();
         updatePoolBoatWidget();
-        fetchOcean();
+        if (prefs.ocean) fetchOcean();
         const now = new Date();
         const hh = now.getHours().toString().padStart(2, "0");
         const mm = now.getMinutes().toString().padStart(2, "0");
@@ -622,7 +623,9 @@ function renderPoolBoatWidget() {
  function startAutoRefresh() {
     renderAllWidgets();
     updateAllWidgets();
-    reloadWeatherScript();
+  // Bara om väder-widgeten syns
+  const prefs = loadPreferences();
+  if (prefs.weather) reloadWeatherScript();
     if (autoRefreshTimer !== null) {
       clearInterval(autoRefreshTimer);
     }
