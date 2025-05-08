@@ -155,6 +155,30 @@
         colors: ['red', 'brown', 'black', 'brown', 'red']
       };
 
+function getWaterLevelBlock(value) {
+  const percentiles = [-4.7, 3.0, 8.4, 13.2, 18.3, 23.5, 31.8];
+  const blocks     = ['▁','▂','▃','▄','▅','▆','▇','█'];
+  const color      = '#0077be';
+  const bcolor      = '#AAAAAA';
+  let level = 0;
+  for (let i = 0; i < percentiles.length; i++) {
+    if (value >= percentiles[i]) level = i + 1;
+    else break;
+  }
+  return `<span style="
+    display:inline-block;
+    width:1.2ch;
+    height:1.2em;
+    line-height:1em;
+    text-align:center;
+    border:1px solid ${bcolor};
+    box-sizing:border-box;
+    color:${color};
+    font-family:monospace;
+  ">${blocks[level]}</span>`;
+}
+
+
       function getWaterLevelColor(value) {
         for (let i = 0; i < waterLevelConfig.thresholds.length; i++) {
           if (value <= waterLevelConfig.thresholds[i]) {
@@ -326,19 +350,20 @@ departures.forEach((dep, i) => {
         const wave = d.sea_surface_wave_height != null
           ? Math.round(d.sea_surface_wave_height * 100) + " cm"
           : "?";
+        
         const levelValue = await fetchWaterLevel();
         let levelHTML;
         if (levelValue === null) {
-          levelHTML = `📏: ej tillgängligt`;
+          levelHTML = `<span>⚠️ Vattenstånd ej tillgängligt</span>`;
         } else {
           const rounded = Math.round(levelValue) + " cm";
-          const color = getWaterLevelColor(levelValue);
-          levelHTML = `<span style="color:${color}">📏: ${rounded}</span>`;
+          levelHTML     = `${getWaterLevelBlock(levelValue)} ${rounded}`;
         }
+        
         const week = getWeekNumber(new Date());
         const tulpan = getBarnacleRisk(week);
         document.getElementById("ocean-summary").innerHTML =
-          `${temp}°C, 🌊: ${wave}, ${levelHTML}, 🐚 risk: ${tulpan}`;
+          `${temp}°C, 🌊${wave}, ${levelHTML}, 🐚 risk: ${tulpan}`;
       }
 
       async function fetchOcean() {
