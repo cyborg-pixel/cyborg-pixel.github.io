@@ -8,6 +8,42 @@
     <!-- Cloudflare Web Analytics -->
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "139f5620a6ff4b4391608cd03b75f915"}'></script>
     <!-- End Cloudflare Web Analytics -->
+<!-- Räkna unika besökare -->
+<script>
+  const STORAGE_KEY = 'unique_visitor_id';
+
+function generateClientId() {
+  const timestamp = new Date().toISOString(); // ex: 2025-05-10T14:03:00.000Z
+  const uuid = crypto.randomUUID();           // ex: 0f2d4ae2-...
+  return `${timestamp}_${uuid}`;
+}
+
+function getClientId() {
+  let id = localStorage.getItem(STORAGE_KEY);
+  if (!id) {
+    id = generateClientId();
+    localStorage.setItem(STORAGE_KEY, id);
+  }
+  return id;
+}
+
+async function registerVisit() {
+  const clientId = getClientId();
+  const url = `https://papi.pandulus.workers.dev/register?client_id=${encodeURIComponent(clientId)}`;
+  try {
+    const res = await fetch(url);
+    const text = await res.text();
+    console.log("Svar från Worker:", text);
+  } catch (err) {
+    console.error("Fel vid kontakt med räknare:", err);
+  }
+}
+
+registerVisit();
+<!-- END Räkna unika besökare -->
+
+</script>
+
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#cfe8ff" />
     <link rel="apple-touch-icon" href="icon.png" />
