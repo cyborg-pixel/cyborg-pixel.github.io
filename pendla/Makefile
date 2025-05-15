@@ -1,5 +1,5 @@
 # Variabler
-FILES = icon-192.png icon.png icon-512.png index.html index2.html manifest.json Makefile weather.js favicon-32x32.png favicon.ico
+FILES = icon-192.png icon.png icon-512.png index.html index2.html manifest.json Makefile weather.js favicon-32x32.png favicon.ico qr_out.png
 COMMIT_MSG ?= "Uppdateringar"
 
 # Standardmål - Visar tillgängliga kommandon

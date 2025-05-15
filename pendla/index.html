@@ -752,6 +752,34 @@ function renderPoolBoatWidget() {
           form.appendChild(labelCode);
           form.appendChild(document.createElement("br"));
 
+
+
+// --- Dela appen-sektion ---
+const shareHeader = document.createElement("h2");
+shareHeader.textContent = "Dela appen";
+shareHeader.style.marginTop = "20px";
+form.appendChild(shareHeader);
+
+// Länk till appen
+const shareLink = document.createElement("div");
+shareLink.innerHTML = `<a href="https://cyborg-pixel.github.io/pendla/" target="_blank">
+  https://cyborg-pixel.github.io/pendla/
+</a>`;
+form.appendChild(shareLink);
+
+// QR-kod
+const qr = document.createElement("img");
+qr.src = "qr_out.png";
+qr.alt = "QR-kod för att dela appen";
+qr.style.display = "block";
+qr.style.width = "30%";      // 30% av konfigurationssektionens bredd
+qr.style.marginTop = "10px";
+form.appendChild(qr);
+form.appendChild(document.createElement("br"));
+
+
+          
+
         const saveBtn = document.createElement("button");
         saveBtn.textContent = "Spara";
         saveBtn.type = "submit";
