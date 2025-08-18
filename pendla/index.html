@@ -28,6 +28,7 @@ function getClientId() {
   return id;
 }
 
+
 async function registerVisit() {
   const clientId = getClientId();
   const url = `https://papi.pandulus.workers.dev/register?client_id=${encodeURIComponent(clientId)}`;
