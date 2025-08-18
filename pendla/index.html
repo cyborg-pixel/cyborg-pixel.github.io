@@ -323,35 +323,25 @@ departures.forEach((dep, i) => {
   const li = document.createElement("li");
   if (i === 0) li.classList.add("big");
 
-  const schedStr = dep.scheduled
-    ? new Date(dep.scheduled).toLocaleTimeString("sv-SE", { hour: "2-digit", minute: "2-digit" })
-    : "";
-  const expStr = dep.expected
-    ? new Date(dep.expected).toLocaleTimeString("sv-SE", { hour: "2-digit", minute: "2-digit" })
-    : "";
+  const s = dep.scheduled ? new Date(dep.scheduled) : null;
+  const e = dep.expected  ? new Date(dep.expected)  : null;
+  const sStr = s ? s.toLocaleTimeString("sv-SE", { hour: "2-digit", minute: "2-digit" }) : "";
+  const eStr = e ? e.toLocaleTimeString("sv-SE", { hour: "2-digit", minute: "2-digit" }) : "";
+  const cancelled = dep.state === "CANCELLED" || dep.journey?.cancelled;
 
-  let timeHTML = "";
-
-  if (dep.state === "CANCELLED" || dep.journey?.cancelled) {
-    // Inställd: visa bara planerad tid överstruken
-    timeHTML = `<span class="strikethrough">${schedStr}</span>`;
+  let timeHTML;
+  if (cancelled && s) {
+    timeHTML = `<span class="strikethrough">${sStr}</span>`;
+  } else if (s && e && s.getTime() !== e.getTime()) {
+    timeHTML = `<span class="strikethrough">${sStr}</span> <span>${eStr}</span>`;
   } else {
-    const timesDiffer =
-      dep.scheduled && dep.expected &&
-      new Date(dep.scheduled).getTime() !== new Date(dep.expected).getTime();
-
-    if (!timesDiffer) {
-      // Allt enligt plan
-      timeHTML = `<span>${schedStr}</span>`;
-    } else {
-      // Försenad eller tidigarelagd
-      timeHTML = `<span class="strikethrough">${schedStr}</span> <span>${expStr}</span>`;
-    }
+    timeHTML = `<span>${sStr || eStr || "–:–"}</span>`;
   }
 
   li.innerHTML = `${timeHTML} &rarr; ${dep.destination}`;
   list.appendChild(li);
 });
+
 
         } catch (err) {
           console.error(err);
