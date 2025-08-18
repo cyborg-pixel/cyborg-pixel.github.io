@@ -313,10 +313,33 @@ departures.forEach((dep, i) => {
   const li = document.createElement("li");
   if (i === 0) li.classList.add("big");
 
-  const timeStr = new Date(dep.expected)
-    .toLocaleTimeString("sv-SE", { hour: "numeric", minute: "2-digit" });
+  const schedStr = dep.scheduled
+    ? new Date(dep.scheduled).toLocaleTimeString("sv-SE", { hour: "2-digit", minute: "2-digit" })
+    : "";
+  const expStr = dep.expected
+    ? new Date(dep.expected).toLocaleTimeString("sv-SE", { hour: "2-digit", minute: "2-digit" })
+    : "";
 
-  li.textContent = `${timeStr} → ${dep.destination}`;
+  let timeHTML = "";
+
+  if (dep.state === "CANCELLED" || dep.journey?.cancelled) {
+    // Inställd: visa bara planerad tid överstruken
+    timeHTML = `<span class="strikethrough">${schedStr}</span>`;
+  } else {
+    const timesDiffer =
+      dep.scheduled && dep.expected &&
+      new Date(dep.scheduled).getTime() !== new Date(dep.expected).getTime();
+
+    if (!timesDiffer) {
+      // Allt enligt plan
+      timeHTML = `<span>${schedStr}</span>`;
+    } else {
+      // Försenad eller tidigarelagd
+      timeHTML = `<span class="strikethrough">${schedStr}</span> <span>${expStr}</span>`;
+    }
+  }
+
+  li.innerHTML = `${timeHTML} &rarr; ${dep.destination}`;
   list.appendChild(li);
 });
 
