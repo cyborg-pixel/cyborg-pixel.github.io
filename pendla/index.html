@@ -319,20 +319,23 @@ function getWaterLevelBlock(value) {
             list.innerHTML = "<li>Inga avgångar hittades.</li>";
             return;
           }
+
 departures.forEach((dep, i) => {
   const li = document.createElement("li");
   if (i === 0) li.classList.add("big");
 
-  const s = dep.scheduled ? new Date(dep.scheduled) : null;
-  const e = dep.expected  ? new Date(dep.expected)  : null;
-  const sStr = s ? s.toLocaleTimeString("sv-SE", { hour: "2-digit", minute: "2-digit" }) : "";
-  const eStr = e ? e.toLocaleTimeString("sv-SE", { hour: "2-digit", minute: "2-digit" }) : "";
+  const sStr = dep.scheduled
+    ? new Date(dep.scheduled).toLocaleTimeString("sv-SE", { hour: "2-digit", minute: "2-digit" })
+    : "";
+  const eStr = dep.expected
+    ? new Date(dep.expected).toLocaleTimeString("sv-SE", { hour: "2-digit", minute: "2-digit" })
+    : "";
   const cancelled = dep.state === "CANCELLED" || dep.journey?.cancelled;
 
   let timeHTML;
-  if (cancelled && s) {
+  if (cancelled && sStr) {
     timeHTML = `<span class="strikethrough">${sStr}</span>`;
-  } else if (s && e && s.getTime() !== e.getTime()) {
+  } else if (sStr && eStr && sStr !== eStr) {
     timeHTML = `<span class="strikethrough">${sStr}</span> <span>${eStr}</span>`;
   } else {
     timeHTML = `<span>${sStr || eStr || "–:–"}</span>`;
