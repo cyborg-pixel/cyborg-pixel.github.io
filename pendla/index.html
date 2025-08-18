@@ -152,10 +152,20 @@ registerVisit();
         box-sizing: border-box;
         margin: 20px;
       }
-      .strikethrough {
-        text-decoration: line-through;
-        color: black;
-      }
+.strikethrough {
+  position: relative;
+  color: black; /* behåll textfärgen */
+}
+
+.strikethrough::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  border-top: 3px solid black; /* tjocklek och färg på linjen */
+  transform: translateY(-50%);
+}
       .ferry-time {
     display: inline-block;
     width: 6ch; /* Ger plats för 'hh:mm' eller 'Nu'/'X min' */
