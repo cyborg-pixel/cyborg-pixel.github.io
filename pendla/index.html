@@ -727,9 +727,23 @@ function renderPoolBoatWidget() {
     setInterval(updateSchoolFerryContent, 10000);
   }
 
-      document.addEventListener("visibilitychange", () => {
-        if (!document.hidden) updateSlWidgets();
-      });
+function refreshNow(reason="manual") {
+  updateAllWidgets();
+  const prefs = loadPreferences();
+  if (prefs.weather) reloadWeatherScript();
+}
+
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) refreshNow("visibility");
+});
+
+// Viktigt på macOS
+window.addEventListener("focus", () => refreshNow("focus"));
+
+// Viktigt om sidan återkommer via bfcache
+window.addEventListener("pageshow", (e) => {
+  refreshNow("pageshow");
+});
 
       function toggleConfig(show) {
         document.getElementById("main-view").classList.toggle("hidden", show);
