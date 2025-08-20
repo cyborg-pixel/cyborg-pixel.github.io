@@ -336,7 +336,7 @@ departures.forEach((dep, i) => {
   if (cancelled && sStr) {
     timeHTML = `<span class="strikethrough">${sStr}</span>`;
   } else if (sStr && eStr && sStr !== eStr) {
-    timeHTML = `<span class="strikethrough">${sStr}</span> <span>${eStr}</span>`;
+    timeHTML = `<span>${eStr}</span> <span class="strikethrough">${sStr}</span>`;
   } else {
     timeHTML = `<span>${sStr || eStr || "–:–"}</span>`;
   }
@@ -355,15 +355,15 @@ departures.forEach((dep, i) => {
       const widgets = [
         { id: "weather", title: "Vädret på Tranholmen", isWeather: true, bg: "weather-box" },
         { id: "ocean", title: "Vattnet runt Tranholmen", isOcean: true, bg: "ocean-box" },
-        { id: "farja", title: "Färja 80 Tranholmen", siteId: 961, mode: "SHIP", line: "80", dir: 1, bg: "ship-box" },
-        { id: "ropsten", title: "Färja 80 Ropsten", siteId: 9220, mode: "SHIP", line: "80", dir: 1, bg: "ship-box" },
-        { id: "ekudden", title: "Färja 80 Ekudden", siteId: 962, mode: "SHIP", line: "80", dir: 1, bg: "ship-box" },
-        { id: "buss", title: "Buss 601 Svanholmsvägen", siteId: 2103, mode: "BUS", line: "601", dir: 2, bg: "bus-box" },
-        { id: "ds", title: "Buss 601 Danderyds sjukhus", siteId: 9201, mode: "BUS", line: "601", dir: 1, bg: "bus-box" },
-        { id: "lektorsstigen", title: "Buss 50 Lektorsstigen", siteId: 1180, mode: "BUS", line: "50", dir: 2, bg: "bus-box" },
-        { id: "odenplan", title: "Buss 50 Odenplan", siteId: 9117, mode: "BUS", line: "50", dir: 1, bg: "bus-box" },
-        { id: "tropsten", title: "T-bana 13 Ropsten", siteId: 9220, mode: "METRO", line: "13", dir: 2, bg: "metro-box" },
-        { id: "tdanderyd", title: "T-bana 14 Danderyds sjukhus", siteId: 9201, mode: "METRO", line: "14", dir: 2, bg: "metro-box" },
+        { id: "farja", title: "Färja 80 fr. Tranholmen", siteId: 961, mode: "SHIP", line: "80", dir: 1, bg: "ship-box" },
+        { id: "ropsten", title: "Färja 80 fr. Ropsten", siteId: 9220, mode: "SHIP", line: "80", dir: 1, bg: "ship-box" },
+        { id: "ekudden", title: "Färja 80 fr. Ekudden", siteId: 962, mode: "SHIP", line: "80", dir: 1, bg: "ship-box" },
+        { id: "buss", title: "Buss 601 fr. Svanholmsvägen", siteId: 2103, mode: "BUS", line: "601", dir: 2, bg: "bus-box" },
+        { id: "ds", title: "Buss 601 fr. Danderyds sjukhus", siteId: 9201, mode: "BUS", line: "601", dir: 1, bg: "bus-box" },
+        { id: "lektorsstigen", title: "Buss 50 fr. Lektorsstigen", siteId: 1180, mode: "BUS", line: "50", dir: 2, bg: "bus-box" },
+        { id: "odenplan", title: "Buss 50 fr. Odenplan", siteId: 9117, mode: "BUS", line: "50", dir: 1, bg: "bus-box" },
+        { id: "tropsten", title: "T-bana 13 fr. Ropsten", siteId: 9220, mode: "METRO", line: "13", dir: 2, bg: "metro-box" },
+        { id: "tdanderyd", title: "T-bana 14 fr. Danderyds sjukhus", siteId: 9201, mode: "METRO", line: "14", dir: 2, bg: "metro-box" },
         { id: "schoolferry", title: "Skolbåten", isSchoolFerry: true, bg: "schoolferry-box" },
         { id: "poolboat", title: "Poolbåtarna", isPoolBoat: true, bg: "poolboat-box" }
       ];
