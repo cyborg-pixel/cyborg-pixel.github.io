@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SL-resor</title>
+  <title>Buss Danderyds gymnasium</title>
   <style>
     :root{
       --bg:#f6f7f9; --card:#fff; --muted:#667085; --ink:#111; --primary:#0b63f6;
@@ -15,7 +15,7 @@
     .row { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:12px; align-items:end }
     .card { background:var(--card); border-radius:14px; box-shadow:0 2px 10px rgba(0,0,0,.08); padding:16px; margin:12px 0 }
     label { font-size:.85rem; display:block; margin-bottom:6px; color:#333 }
-    input, select { width:100%; padding:10px 12px; border:1px solid #d6d8db; border-radius:10px; background:#fff }
+    input { width:100%; padding:10px 12px; border:1px solid #d6d8db; border-radius:10px; background:#fff }
     button { padding:10px 14px; border:0; border-radius:10px; background:var(--primary); color:#fff; font-weight:600; cursor:pointer }
     button:disabled { opacity:.6; cursor:not-allowed }
     .muted { color:var(--muted) }
@@ -24,7 +24,7 @@
     .journey{ border:1px solid #e6e8eb; border-radius:12px; margin:10px 0; background:#fff; overflow:hidden }
     .summary-row{
       display:flex; align-items:center; justify-content:space-between; gap:12px;
-      padding:12px 14px; cursor:pointer;
+      padding:12px 14px; cursor:pointer; user-select:none;
     }
     .summary-left{ display:flex; gap:10px; align-items:center; font-weight:700 }
     .pill { display:inline-flex; gap:6px; align-items:center; padding:3px 8px; border-radius:999px; background:var(--badge); font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace }
@@ -36,7 +36,7 @@
     .details{ display:none; border-top:1px dashed #e5e7eb; padding:10px 14px }
     .journey.open .details{ display:block }
 
-    /* Legs (samma stil som tidigare) */
+    /* Legs (detaljer) */
     .legs{ margin-top:6px; }
     .leg{ display:grid; grid-template-columns: 28px 1fr; gap:10px; padding:8px 0; border-top:1px dashed #e5e7eb }
     .leg:first-child{ border-top:0 }
@@ -51,16 +51,13 @@
   </style>
 </head>
 <body>
-  <h1 id="title">Resor</h1>
+  <h1 id="title">Buss Danderyds gymnasium</h1>
 
   <div class="card">
     <div class="row">
       <div>
-        <label for="direction">Riktning</label>
-        <select id="direction">
-          <option value="SG">Svanholmsvägen → Danderyds gymnasium</option>
-          <option value="GS">Danderyds gymnasium → Svanholmsvägen</option>
-        </select>
+        <label for="swapBtn">Riktning</label>
+        <button id="swapBtn" type="button">Svanholmsvägen → Danderyds gymnasium</button>
       </div>
       <div>
         <label for="dt">Datum & tid (Europe/Stockholm)</label>
@@ -76,18 +73,21 @@
   <div id="out" class="card"></div>
 
   <script>
-    // ==== Konstanter ====
+    // === Konstanter ===
     const STOPS = {
-      SVANHOLMSVAGEN: { id: "9091001000002103", name: "Svanholmsvägen" },
-      DGY:            { id: "9091001000002125", name: "Danderyds gymnasium" }
+      SVAN: { id: "9091001000002103", name: "Svanholmsvägen" },
+      DGY:  { id: "9091001000002125", name: "Danderyds gymnasium" }
     };
     const BASE = "https://journeyplanner.integration.sl.se/v2/trips";
     const TZ   = "Europe/Stockholm";
-    const MAX_CHANGES = 3;      // låst i API
-    const MAX_BATCHES = 3;      // max 3 hämtningar
-    const TRIPS_PER_CALL = 3;   // 3 per anrop
+    const MAX_CHANGES = 3;
+    const MAX_BATCHES = 3;
+    const TRIPS_PER_CALL = 3;
 
-    // ==== Tid/format ====
+    // Riktningstillstånd: true = Svan → DGY, false = DGY → Svan
+    let svanToDgy = true;
+
+    // === Tid/format ===
     const svDate = new Intl.DateTimeFormat('sv-SE', { timeZone: TZ, year:'numeric', month:'2-digit', day:'2-digit' });
     const svTime = new Intl.DateTimeFormat('sv-SE', { timeZone: TZ, hour:'2-digit', minute:'2-digit' });
     const svLong = new Intl.DateTimeFormat('sv-SE', { timeZone: TZ, weekday:'short', year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
@@ -100,7 +100,14 @@
     const fmtTime = d => svTime.format(d);
     const fmtDateTimeLong = d => svLong.format(d).replaceAll('.', '');
 
-    // ==== API URL ====
+    function updateSwapBtn(){
+      const btn = document.getElementById('swapBtn');
+      btn.textContent = svanToDgy
+        ? 'Svanholmsvägen → Danderyds gymnasium'
+        : 'Danderyds gymnasium → Svanholmsvägen';
+    }
+
+    // === API URL ===
     function buildTripsUrl(originId, destId, dateStr, timeStr){
       const p = new URLSearchParams({
         type_origin: 'any', name_origin: originId,
@@ -117,7 +124,7 @@
       return BASE + '?' + p.toString();
     }
 
-    // ==== Parser ====
+    // === Parser ===
     function parseFlex(s){
       if (!s) return null;
       const d = new Date(s);
@@ -145,7 +152,7 @@
     const legKind = l => (String(l?.transportMode||'').toUpperCase().includes('WALK') || (!l?.transportation && l?.footPathInfo?.length)) ? 'walk' : 'vehicle';
     const minutes = sec => Math.round((sec||0)/60);
 
-    // ==== Linjelista för kompakt rad ====
+    // === Linjelista för kompakt rad ===
     function extractLineLabel(l){
       const t = l.transportation || {};
       return t.disassembledName || t.number || t.name || l.product?.name || null;
@@ -158,30 +165,25 @@
           if (label) lines.push(String(label).trim());
         }
       }
-      // slå ihop “BUS 601” vs “601” → plocka sista token som är nummer om möjligt
-      const cleaned = lines.map(s => {
-        const m = s.match(/(\d+[A-Za-z]?)/);
-        return m ? m[1] : s;
-      });
-      // ta bort dubbletter men behåll ordning
+      const cleaned = lines.map(s => (s.match(/(\d+[A-Za-z]?)/) || [null, s])[1]);
       return [...new Set(cleaned)];
     }
 
-    // ==== Rendering ====
+    // === Rendering ===
     function renderJourneyCards(list, dirLabel){
       const host = document.getElementById('out');
-      const title = document.getElementById('title');
-      title.textContent = `Resor: ${dirLabel}`;
       if (!list.length){ host.innerHTML = '<div class="muted">Inga resor hittades.</div>'; return; }
       host.innerHTML = list.map(renderJourneyEntry).join('');
-
-      // Event delegation för expand/collapse
-      host.addEventListener('click', (e)=>{
-        const row = e.target.closest('.summary-row');
-        if (!row) return;
-        const box = row.closest('.journey');
-        box.classList.toggle('open');
-      }, { once:true }); // skapas en gång; delegation funkar för alla kort
+      // SAFARI-FIX: bind klick per rad (ingen delegation, ingen .closest på textnoder)
+      const rows = host.querySelectorAll('.summary-row');
+      rows.forEach(row => {
+        row.addEventListener('click', function(){
+          const box = this.parentNode; // .journey
+          box.classList.toggle('open');
+          // uppdatera aria
+          this.setAttribute('aria-expanded', box.classList.contains('open') ? 'true' : 'false');
+        });
+      });
     }
 
     function renderJourneyEntry(j){
@@ -194,7 +196,7 @@
       const lineStr = collectBusLines(legs).join(' · ');
       return `
         <div class="journey">
-          <div class="summary-row" role="button" aria-expanded="false">
+          <div class="summary-row" role="button" aria-expanded="false" tabindex="0">
             <div class="summary-left">
               <span class="pill">${depHM} → ${arrHM}</span>
               <span class="duration">${dur} min</span>
@@ -241,11 +243,10 @@
         </div>`;
     }
 
-    // ==== Hämtning + sammanfattning ====
+    // === Hämtning + sammanfattning (utan “9 resor” och utan “Avgångar …”) ===
     async function fetchTrips(){
-      const dir = document.getElementById('direction').value;
-      const from = dir === 'SG' ? STOPS.SVANHOLMSVAGEN : STOPS.DGY;
-      const to   = dir === 'SG' ? STOPS.DGY : STOPS.SVANHOLMSVAGEN;
+      const from = svanToDgy ? STOPS.SVAN : STOPS.DGY;
+      const to   = svanToDgy ? STOPS.DGY : STOPS.SVAN;
       const dirLabel = `${from.name} → ${to.name}`;
 
       const dtInput = document.getElementById('dt').value;
@@ -257,13 +258,12 @@
 
       const all = [];
       const seen = new Set();
-      let batches = 0, firstQueryMoment = new Date(cursor);
+      const firstQueryMoment = new Date(cursor);
 
       try {
-        while (batches < MAX_BATCHES) {
+        for (let b=0; b<MAX_BATCHES; b++){
           const url = buildTripsUrl(from.id, to.id, yyyymmdd(cursor), hhmm(cursor));
           const res = await fetch(url, { headers: { 'Accept':'application/json' }});
-          batches++;
           const data = await res.json();
           const journeys = data?.journeys || [];
 
@@ -277,14 +277,10 @@
             if (dep && !seen.has(key)) { seen.add(key); all.push(j); }
             if (dep && (!latestDep || dep > latestDep)) latestDep = dep;
           }
-
           cursor = latestDep && latestDep > cursor ? new Date(latestDep.getTime()+60*1000) : new Date(cursor.getTime()+60*1000);
         }
-      } catch (_) {
-        // tyst
-      } finally {
-        btn.disabled = false; btn.textContent = 'Hämta resor';
-      }
+      } catch (_) { /* tyst */ }
+      btn.disabled = false; btn.textContent = 'Hämta resor';
 
       all.sort((a,b)=>{
         const da = parseFlex(depFromLeg(a.legs?.[0]||{}))?.getTime()||0;
@@ -292,37 +288,29 @@
         return da - db;
       });
 
-      const dep0 = all.length ? parseFlex(depFromLeg(all[0].legs?.[0]||{})) : null;
-      const depN = all.length ? parseFlex(depFromLeg(all[all.length-1].legs?.[0]||{})) : null;
-
       document.getElementById('out-summary').innerHTML = `
-        <div><strong>${all.length}</strong> resor · ${dirLabel}</div>
-        <div class="muted" style="margin-top:6px">
-          Gäller: <strong>${fmtDateTimeLong(firstQueryMoment)}</strong>
-          ${dep0 ? ` · Avgångar <strong>${fmtTime(dep0)}</strong>–<strong>${fmtTime(depN)}</strong> (${fmtDate(dep0)})` : ''}
-        </div>
+        <div>${dirLabel}</div>
+        <div class="muted" style="margin-top:6px">Gäller: <strong>${fmtDateTimeLong(firstQueryMoment)}</strong></div>
       `;
 
       renderJourneyCards(all, dirLabel);
     }
 
-    // ==== Init ====
+    // === Init ===
     function setDefaultDatetime(){
       const d = nowMinus(5);
       const val = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}T${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
       document.getElementById('dt').value = val;
     }
-    function updateTitle(){
-      const dir = document.getElementById('direction').value;
-      const from = dir === 'SG' ? STOPS.SVANHOLMSVAGEN : STOPS.DGY;
-      const to   = dir === 'SG' ? STOPS.DGY : STOPS.SVANHOLMSVAGEN;
-      document.title = `SL-resor: ${from.name} → ${to.name}`;
-      document.getElementById('title').textContent = `Resor: ${from.name} → ${to.name}`;
-    }
 
     document.getElementById('btn').addEventListener('click', fetchTrips);
-    document.getElementById('direction').addEventListener('change', updateTitle);
-    setDefaultDatetime(); updateTitle();
+    document.getElementById('swapBtn').addEventListener('click', () => {
+      svanToDgy = !svanToDgy;
+      updateSwapBtn();
+    });
+
+    setDefaultDatetime();
+    updateSwapBtn();
   </script>
 </body>
 </html>
