@@ -20,7 +20,6 @@
     button:disabled { opacity:.6; cursor:not-allowed }
     .muted { color:var(--muted) }
 
-    /* Journey list */
     .journey{ padding:14px; border:1px solid #e6e8eb; border-radius:12px; margin:12px 0; background:#fff }
     .journey-header{ display:flex; flex-wrap:wrap; gap:8px 12px; align-items:center; justify-content:space-between; margin-bottom:8px }
     .title{ display:flex; gap:10px; align-items:center; font-weight:700 }
@@ -54,12 +53,6 @@
       <div>
         <label for="dt">Datum & tid (Europe/Stockholm)</label>
         <input id="dt" type="datetime-local" />
-        <div class="muted" style="margin-top:6px;font-size:.85rem">Standard: nu − 5 min</div>
-      </div>
-      <div>
-        <label>Max byten</label>
-        <input value="3" disabled />
-        <div class="muted" style="margin-top:6px;font-size:.85rem">Alltid 3</div>
       </div>
     </div>
     <div style="margin-top:12px; display:flex; gap:10px; align-items:center;">
@@ -78,30 +71,25 @@
     };
     const BASE = "https://journeyplanner.integration.sl.se/v2/trips";
     const TZ   = "Europe/Stockholm";
-    const MAX_CHANGES = 3;     // alltid 3
+    const MAX_CHANGES = 3;     // fortfarande låst till 3, men visas inte
     const MAX_BATCHES = 3;     // max 3 hämtningar
     const TRIPS_PER_CALL = 3;  // begär 3 per anrop
 
-    // ==== Tids-hjälpare (förenklade) ====
+    // ==== Tids-hjälpare ====
     const svDate = new Intl.DateTimeFormat('sv-SE', { timeZone: TZ, year:'numeric', month:'2-digit', day:'2-digit' });
     const svTime = new Intl.DateTimeFormat('sv-SE', { timeZone: TZ, hour:'2-digit', minute:'2-digit' });
-    const svLong = new Intl.DateTimeFormat('sv-SE', {
-      timeZone: TZ, weekday:'short', year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'
-    });
-
+    const svLong = new Intl.DateTimeFormat('sv-SE', { timeZone: TZ, weekday:'short', year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
     const pad = n => String(n).padStart(2,'0');
     const toTZ = d => new Date(d.toLocaleString('en-US', { timeZone: TZ }));
-    function nowMinus(minutes=5){
-      const d = toTZ(new Date()); d.setMinutes(d.getMinutes()-minutes); d.setSeconds(0,0); return d;
-    }
+    function nowMinus(minutes=5){ const d = toTZ(new Date()); d.setMinutes(d.getMinutes()-minutes); d.setSeconds(0,0); return d; }
     function yyyymmdd(d){ return `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}`; }
     function hhmm(d){ return `${pad(d.getHours())}${pad(d.getMinutes())}`; }
-    function fmtDate(d){ return svDate.format(d); }
-    function fmtTime(d){ return svTime.format(d); }
-    function fmtDateTimeLong(d){ return svLong.format(d).replaceAll('.', ''); } // lite snyggare
+    const fmtDate = d => svDate.format(d);
+    const fmtTime = d => svTime.format(d);
+    const fmtDateTimeLong = d => svLong.format(d).replaceAll('.', '');
 
-    // ==== API-URL (oförändrad logik, men tightare signatur) ====
-    function buildTripsUrl(originId, destId, yyyymmdd, hhmm){
+    // ==== API-URL ====
+    function buildTripsUrl(originId, destId, yyyymmddStr, hhmmStr){
       const p = new URLSearchParams({
         type_origin: 'any', name_origin: originId,
         type_destination: 'any', name_destination: destId,
@@ -110,14 +98,14 @@
         route_type: 'leasttime',
         calc_number_of_trips: String(TRIPS_PER_CALL),
         language: 'sv',
-        itd_date: yyyymmdd,
-        itd_time: hhmm,
+        itd_date: yyyymmddStr,
+        itd_time: hhmmStr,
         calc_one_direction: 'true'
       });
       return BASE + '?' + p.toString();
     }
 
-    // ==== Parser (förenklad men robust) ====
+    // ==== Parser ====
     function parseFlex(s){
       if (!s) return null;
       const d = new Date(s);
@@ -146,7 +134,7 @@
     const minutes = sec => Math.round((sec||0)/60);
 
     // ==== Rendering ====
-    function renderJourneyCards(list, dirLabel, queryStart){
+    function renderJourneyCards(list, dirLabel){
       const host = document.getElementById('out');
       const title = document.getElementById('title');
       title.textContent = `Resor: ${dirLabel}`;
@@ -158,12 +146,10 @@
       const dep = fmtTime(parseFlex(depFromLeg(legs[0]||{})));
       const arr = fmtTime(parseFlex(arrFromLeg(legs[legs.length-1]||{})));
       const dur = minutes(j.tripRtDuration ?? j.tripDuration);
-      const changes = (j.interchanges ?? Math.max(0, legs.length-1));
       return `
         <div class="journey">
           <div class="journey-header">
             <div class="title"><span class="pill mono">${dep} → ${arr}</span> <span>${dur} min</span></div>
-            <div class="muted">Byten: <strong>${changes}</strong></div>
           </div>
           <div class="legs">
             ${legs.map(renderLeg).join('')}
@@ -201,17 +187,16 @@
         </div>`;
     }
 
-    // ==== Hämta resor (max 3 batches), och skriv ut dag/tid ====
+    // ==== Hämta resor (max 3 batches) + sammanfattning med dag/tid ====
     async function fetchTrips(){
       const dir = document.getElementById('direction').value;
       const from = dir === 'SG' ? STOPS.SVANHOLMSVAGEN : STOPS.DGY;
       const to   = dir === 'SG' ? STOPS.DGY : STOPS.SVANHOLMSVAGEN;
       const dirLabel = `${from.name} → ${to.name}`;
 
-      // Starttid: valt eller nu-5 min
+      // Starttid: valt eller nu-5 min (visas inte som text)
       const dtInput = document.getElementById('dt').value;
       let cursor = dtInput ? new Date(dtInput) : nowMinus(5);
-      // Säkerställ SEKUNDER=0 (API:t bryr sig inte, men snyggare)
       cursor.setSeconds(0,0);
 
       const btn = document.getElementById('btn');
@@ -240,23 +225,20 @@
             if (dep && (!latestDep || dep > latestDep)) latestDep = dep;
           }
 
-          // Nästa förfrågan: 1 min efter senaste kända avgång, annars +1 min
           cursor = latestDep && latestDep > cursor ? new Date(latestDep.getTime()+60*1000) : new Date(cursor.getTime()+60*1000);
         }
       } catch (_) {
-        // Tyst enligt önskemål (ingen debuginfo)
+        // medvetet tyst
       } finally {
         btn.disabled = false; btn.textContent = 'Hämta resor';
       }
 
-      // Sortera efter avgång
       all.sort((a,b)=>{
         const da = parseFlex(depFromLeg(a.legs?.[0]||{}))?.getTime()||0;
         const db = parseFlex(depFromLeg(b.legs?.[0]||{}))?.getTime()||0;
         return da - db;
       });
 
-      // Sammanfattning med dag & tid
       const dep0 = all.length ? parseFlex(depFromLeg(all[0].legs?.[0]||{})) : null;
       const depN = all.length ? parseFlex(depFromLeg(all[all.length-1].legs?.[0]||{})) : null;
 
@@ -268,7 +250,7 @@
         </div>
       `;
 
-      renderJourneyCards(all, dirLabel, firstQueryMoment);
+      renderJourneyCards(all, dirLabel);
     }
 
     // ==== Init ====
