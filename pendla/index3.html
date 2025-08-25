@@ -11,42 +11,43 @@
     }
     *{box-sizing:border-box}
     body { font-family: system-ui, sans-serif; padding:20px; background:var(--bg); color:var(--ink) }
-    h1 { font-size:1.2rem; margin:0 0 12px }
-    .card { background:var(--card); border-radius:14px; box-shadow:0 2px 10px rgba(0,0,0,.08); padding:16px; margin:12px 0 }
-    label { font-size:.85rem; display:block; margin-bottom:6px; color:#333 }
-    input { width:100%; padding:8px 10px; border:1px solid #d6d8db; border-radius:8px; background:#fff; font-size:.9rem }
-    button { padding:8px 12px; border:0; border-radius:8px; background:var(--primary); color:#fff; font-weight:600; cursor:pointer; font-size:.9rem }
-    button:disabled { opacity:.6; cursor:not-allowed }
-    .muted { color:var(--muted); font-size:.85rem }
+    h1 { font-size:1.15rem; margin:0 0 12px }
+    .card { background:var(--card); border-radius:14px; box-shadow:0 2px 10px rgba(0,0,0,.08); padding:14px; margin:10px 0 }
 
-    /* Reselista */
-    .journey{ border:1px solid #e6e8eb; border-radius:10px; margin:8px 0; background:#fff; overflow:hidden; font-size:.9rem }
+    label { font-size:.8rem; display:block; margin-bottom:6px; color:#333 }
+    input { width:100%; padding:8px 10px; border:1px solid #d6d8db; border-radius:8px; background:#fff; font-size:.85rem }
+    button { padding:8px 12px; border:0; border-radius:8px; background:var(--primary); color:#fff; font-weight:600; cursor:pointer; font-size:.85rem }
+    button:disabled { opacity:.6; cursor:not-allowed }
+    .muted { color:var(--muted); font-size:.8rem }
+
+    /* Reselista – kompaktare */
+    .journey{ border:1px solid #e6e8eb; border-radius:10px; margin:6px 0; background:#fff; overflow:hidden; font-size:.85rem }
     .summary-row{
       display:flex; align-items:center; justify-content:space-between;
       gap:8px; padding:8px 10px; cursor:pointer; user-select:none;
     }
     .summary-left{ display:flex; gap:8px; align-items:center; font-weight:600; flex-shrink:0 }
-    .pill { display:inline-flex; gap:4px; align-items:center; padding:2px 6px; border-radius:6px; background:var(--badge); font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:.85rem }
-    .duration { font-size:.85rem; color:#334 }
-    .lines { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color:#334; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:.85rem; flex-grow:1; text-align:right }
+    .pill { display:inline-flex; gap:4px; align-items:center; padding:2px 6px; border-radius:6px; background:var(--badge); font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:.8rem }
+    .duration { font-size:.8rem; color:#334 }
+    .lines { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color:#334; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:.8rem; flex-grow:1; text-align:right }
     .chev { margin-left:6px; transition: transform .2s ease; flex-shrink:0 }
     .journey.open .chev { transform: rotate(90deg) }
 
     .details{ display:none; border-top:1px dashed #e5e7eb; padding:10px }
     .journey.open .details{ display:block }
 
-    /* Legs */
-    .legs{ margin-top:6px; }
-    .leg{ display:grid; grid-template-columns: 24px 1fr; gap:8px; padding:6px 0; border-top:1px dashed #e5e7eb; font-size:.85rem }
+    /* Detaljben */
+    .legs{ margin-top:4px; }
+    .leg{ display:grid; grid-template-columns: 22px 1fr; gap:8px; padding:6px 0; border-top:1px dashed #e5e7eb; font-size:.82rem }
     .leg:first-child{ border-top:0 }
-    .icon{ width:24px; height:24px; border-radius:6px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:.8rem; font-weight:700 }
+    .icon{ width:22px; height:22px; border-radius:6px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:.75rem; font-weight:700 }
     .icon.bus{ background:var(--bus) }
     .icon.walk{ background:var(--walk) }
     .icon.rail{ background:var(--rail) }
     .icon.ferry{ background:var(--ferry) }
     .leg-title{ font-weight:600 }
-    .leg-sub{ font-size:.8rem; color:var(--muted) }
-    .chip{ display:inline-block; padding:1px 6px; border-radius:999px; background:#eef; margin-left:4px; font-size:.75rem }
+    .leg-sub{ font-size:.78rem; color:var(--muted) }
+    .chip{ display:inline-block; padding:1px 6px; border-radius:999px; background:#eef; margin-left:4px; font-size:.72rem }
   </style>
 </head>
 <body>
@@ -93,6 +94,9 @@
     const fmtTime = d=>svTime.format(d);
     const fmtDateTimeLong = d=>svLong.format(d).replaceAll('.','');
 
+    // Rensa platsnamn: ta bort ", …"
+    const cleanName = s => String(s||'').replace(/,.*$/,'').trim();
+
     function updateSwapBtn(){
       document.getElementById('swapBtn').textContent = svanToDgy
         ? 'Svanholmsvägen → Danderyds gymnasium'
@@ -119,21 +123,47 @@
         const d2=new Date(`${y}-${mo}-${da}T${hh}:${mm}:${ss}`);return isNaN(d2)?null:d2;}
       return null;}
     const firstOf=(o,ks)=>ks.find(k=>o?.[k]!=null)?o[ks.find(k=>o?.[k]!=null)]:null;
-    function depFromLeg(l){return firstOf(l?.origin||{},['departureTimeEstimated','departureTimePlanned','rtDateTime','dateTime'])||firstOf(l||{},['rtDepartureTime','departure'])}
-    function arrFromLeg(l){return firstOf(l?.destination||{},['arrivalTimeEstimated','arrivalTimePlanned','rtDateTime','dateTime'])||firstOf(l||{},['rtArrivalTime','arrival'])}
+    function depFromLeg(l){
+      return firstOf(l?.origin||{},['departureTimeEstimated','departureTimePlanned','departureTimeBaseTimetable','rtDateTime','dateTime','dateTimePlanned','plannedDateTime','rtTime','time'])
+          || firstOf(l||{},['rtDepartureTime','plannedDepartureTime','departure','depTime'])
+          || firstOf(l?.destination||{},['rtDateTime','dateTime','plannedDateTime','rtTime','time']);
+    }
+    function arrFromLeg(l){
+      return firstOf(l?.destination||{},['arrivalTimeEstimated','arrivalTimePlanned','arrivalTimeBaseTimetable','rtDateTime','dateTime','dateTimePlanned','plannedDateTime','rtTime','time','arrDateTime'])
+          || firstOf(l||{},['rtArrivalTime','plannedArrivalTime','arrival','arrTime'])
+          || firstOf(l?.origin||{},['rtDateTime','dateTime','plannedDateTime','rtTime','time']);
+    }
+    const legKind = l => (String(l?.transportMode||'').toUpperCase().includes('WALK') || (!l?.transportation && l?.footPathInfo?.length)) ? 'walk' : 'vehicle';
+    const minutes = sec => Math.round((sec||0)/60);
 
-    const legKind=l=>String(l?.transportMode||'').toUpperCase().includes('WALK')?'walk':'vehicle';
-    const minutes=sec=>Math.round((sec||0)/60);
-    function collectBusLines(legs){const lines=[];for(const l of legs){if(legKind(l)==='vehicle'){const t=l.transportation||{};const lbl=t.number||t.name||'';if(lbl)lines.push(lbl)}}return[...new Set(lines)]}
+    // === Linjelista för kompakt rad ===
+    function extractLineLabel(l){
+      const t = l.transportation || {};
+      return t.disassembledName || t.number || t.name || l.product?.name || null;
+    }
+    function collectBusLines(legs){
+      const lines = [];
+      for (const l of legs){
+        if (legKind(l) === 'vehicle'){
+          const label = extractLineLabel(l);
+          if (label) lines.push(String(label).trim());
+        }
+      }
+      // försök få själva numret (ex “BUS 601” → “601”)
+      const cleaned = lines.map(s => (s.match(/(\d+[A-Za-z]?)/) || [null, s])[1]);
+      return [...new Set(cleaned)];
+    }
 
     // === Rendering ===
     function renderJourneyCards(list, dirLabel){
       const host=document.getElementById('out');
       if(!list.length){host.innerHTML='<div class="muted">Inga resor hittades.</div>';return;}
       host.innerHTML=list.map(renderJourneyEntry).join('');
+      // Safari-safe: bind per rad
       host.querySelectorAll('.summary-row').forEach(row=>{
         row.addEventListener('click',function(){
           const box=this.parentNode;box.classList.toggle('open');
+          this.setAttribute('aria-expanded', box.classList.contains('open') ? 'true' : 'false');
         });
       });
     }
@@ -147,7 +177,7 @@
       const lineStr=collectBusLines(legs).join(' · ');
       return `
         <div class="journey">
-          <div class="summary-row">
+          <div class="summary-row" role="button" aria-expanded="false" tabindex="0">
             <div class="summary-left">
               <span class="pill">${depHM}→${arrHM}</span>
               <span class="duration">${dur} min</span>
@@ -155,7 +185,11 @@
             <div class="lines">🚌 ${lineStr}</div>
             <div class="chev">▶</div>
           </div>
-          <div class="details"><div class="legs">${legs.map(renderLeg).join('')}</div></div>
+          <div class="details">
+            <div class="legs">
+              ${legs.map(renderLeg).join('')}
+            </div>
+          </div>
         </div>`;
     }
 
@@ -163,35 +197,81 @@
       const kind=legKind(l);
       const depT=fmtTime(parseFlex(depFromLeg(l)));
       const arrT=fmtTime(parseFlex(arrFromLeg(l)));
+
       if(kind==='walk'){
-        const dist=l.footPathInfo?.[0]?.footPathElem?.[0]?.attributes?.distance||'';
-        const durS=l.duration?`${minutes(l.duration)} min`:'';const extra=[dist?dist+' m':null,durS].filter(Boolean).join(' · ');
-        return `<div class="leg"><div class="icon walk">🚶</div><div><div class="leg-title">Gång ${extra?`<span class="chip">${extra}</span>`:''}</div><div class="leg-sub">${depT}→${arrT}</div></div></div>`;
+        const f = l.footPathInfo?.[0]?.footPathElem?.[0];
+        const dist = f?.attributes?.distance ? `${f.attributes.distance} m` : '';
+        const durS = l.duration ? `${minutes(l.duration)} min` : '';
+        const extra = [dist, durS].filter(Boolean).join(' · ');
+        const from = cleanName(l.origin?.name||'');
+        const to   = cleanName(l.destination?.name||'');
+        return `
+          <div class="leg">
+            <div class="icon walk">🚶</div>
+            <div>
+              <div class="leg-title">Gång ${extra?`<span class="chip">${extra}</span>`:''}</div>
+              <div class="leg-sub">${from?`${from} `:''}${depT} → ${to?`${to} `:''}${arrT}</div>
+            </div>
+          </div>`;
       }
-      const t=l.transportation||{};const line=t.number||t.name||'Linje';const dest=t.destination?.name||'';
-      return `<div class="leg"><div class="icon bus">🚌</div><div><div class="leg-title">${line}${dest?` → ${dest}`:''}</div><div class="leg-sub">${depT}→${arrT}</div></div></div>`;
+
+      // vehicle: visa linje, riktning, påstigning/avstigning + tider
+      const t=l.transportation||{};
+      const line = extractLineLabel(l) || 'Linje';
+      const direction = cleanName(t.destination?.name || l.destination?.parent?.name || l.destination?.name || '');
+      const from = cleanName(l.origin?.name||'');
+      const to   = cleanName(l.destination?.name||'');
+
+      return `
+        <div class="leg">
+          <div class="icon bus">🚌</div>
+          <div>
+            <div class="leg-title">${line}${direction?` → ${direction}`:''}</div>
+            <div class="leg-sub">
+              På: ${from} ${depT} · Av: ${to} ${arrT}
+            </div>
+          </div>
+        </div>`;
     }
 
     // === Hämtning ===
     async function fetchTrips(){
-      const from=svanToDgy?STOPS.SVAN:STOPS.DGY;const to=svanToDgy?STOPS.DGY:STOPS.SVAN;
+      const from=svanToDgy?STOPS.SVAN:STOPS.DGY;
+      const to=svanToDgy?STOPS.DGY:STOPS.SVAN;
       const dirLabel=`${from.name} → ${to.name}`;
       const dtInput=document.getElementById('dt').value;
       let cursor=dtInput?new Date(dtInput):nowMinus(5);cursor.setSeconds(0,0);
 
       const btn=document.getElementById('btn');btn.disabled=true;btn.textContent='Hämtar…';
       const all=[],seen=new Set(),firstMoment=new Date(cursor);
-      try{for(let b=0;b<MAX_BATCHES;b++){const url=buildTripsUrl(from.id,to.id,yyyymmdd(cursor),hhmm(cursor));
-        const res=await fetch(url,{headers:{'Accept':'application/json'}});const data=await res.json();const journeys=data?.journeys||[];
-        let latestDep=null;
-        for(const j of journeys){const legs=j.legs||[];if(!legs.length)continue;
-          const dep=parseFlex(depFromLeg(legs[0]));const arr=parseFlex(arrFromLeg(legs[legs.length-1]));
-          const key=`${dep?.toISOString()||''}_${arr?.toISOString()||''}_${(j.tripRtDuration||j.tripDuration)||0}`;
-          if(dep&&!seen.has(key)){seen.add(key);all.push(j);}if(dep&&(!latestDep||dep>latestDep))latestDep=dep;}
-        cursor=latestDep&&latestDep>cursor?new Date(latestDep.getTime()+60000):new Date(cursor.getTime()+60000);}}catch(_){}btn.disabled=false;btn.textContent='Hämta resor';
-      all.sort((a,b)=>parseFlex(depFromLeg(a.legs[0]))-parseFlex(depFromLeg(b.legs[0])));
-      document.getElementById('out-summary').innerHTML=`<div>${dirLabel}</div><div class="muted" style="margin-top:6px">Gäller: <strong>${fmtDateTimeLong(firstMoment)}</strong></div>`;
-      renderJourneyCards(all,dirLabel);
+
+      try{
+        for(let b=0;b<MAX_BATCHES;b++){
+          const url=buildTripsUrl(from.id,to.id,yyyymmdd(cursor),hhmm(cursor));
+          const res=await fetch(url,{headers:{'Accept':'application/json'}});
+          const data=await res.json();
+          const journeys=data?.journeys||[];
+          let latestDep=null;
+
+          for(const j of journeys){
+            const legs=j.legs||[]; if(!legs.length) continue;
+            const dep=parseFlex(depFromLeg(legs[0]));
+            const arr=parseFlex(arrFromLeg(legs[legs.length-1]));
+            const key=`${dep?.toISOString()||''}_${arr?.toISOString()||''}_${(j.tripRtDuration||j.tripDuration)||0}`;
+            if(dep && !seen.has(key)){ seen.add(key); all.push(j); }
+            if(dep && (!latestDep || dep>latestDep)) latestDep=dep;
+          }
+          cursor = latestDep && latestDep > cursor ? new Date(latestDep.getTime()+60000) : new Date(cursor.getTime()+60000);
+        }
+      } catch(_) { /* tyst */ }
+      btn.disabled=false; btn.textContent='Hämta resor';
+
+      all.sort((a,b)=>parseFlex(depFromLeg(a.legs?.[0]||{})) - parseFlex(depFromLeg(b.legs?.[0]||{})));
+
+      document.getElementById('out-summary').innerHTML =
+        `<div>${dirLabel}</div><div class="muted" style="margin-top:6px">Gäller: <strong>${fmtDateTimeLong(firstMoment)}</strong></div>`;
+
+      renderJourneyCards(all, dirLabel);
     }
 
     // === Init ===
