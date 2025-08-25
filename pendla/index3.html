@@ -20,11 +20,23 @@
     button:disabled { opacity:.6; cursor:not-allowed }
     .muted { color:var(--muted) }
 
-    .journey{ padding:14px; border:1px solid #e6e8eb; border-radius:12px; margin:12px 0; background:#fff }
-    .journey-header{ display:flex; flex-wrap:wrap; gap:8px 12px; align-items:center; justify-content:space-between; margin-bottom:8px }
-    .title{ display:flex; gap:10px; align-items:center; font-weight:700 }
+    /* Reselista */
+    .journey{ border:1px solid #e6e8eb; border-radius:12px; margin:10px 0; background:#fff; overflow:hidden }
+    .summary-row{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:12px 14px; cursor:pointer;
+    }
+    .summary-left{ display:flex; gap:10px; align-items:center; font-weight:700 }
     .pill { display:inline-flex; gap:6px; align-items:center; padding:3px 8px; border-radius:999px; background:var(--badge); font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace }
-    .chip{ display:inline-block; padding:2px 8px; border-radius:999px; background:#eef; margin-left:6px; font-size:.85rem }
+    .lines { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color:#334; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .duration { color:#334; font-weight:600 }
+    .chev { transition: transform .2s ease }
+    .journey.open .chev { transform: rotate(90deg) }
+
+    .details{ display:none; border-top:1px dashed #e5e7eb; padding:10px 14px }
+    .journey.open .details{ display:block }
+
+    /* Legs (samma stil som tidigare) */
     .legs{ margin-top:6px; }
     .leg{ display:grid; grid-template-columns: 28px 1fr; gap:10px; padding:8px 0; border-top:1px dashed #e5e7eb }
     .leg:first-child{ border-top:0 }
@@ -35,7 +47,7 @@
     .icon.ferry{ background:var(--ferry) }
     .leg-title{ font-weight:600 }
     .leg-sub{ font-size:.9rem; color:var(--muted) }
-    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace }
+    .chip{ display:inline-block; padding:2px 8px; border-radius:999px; background:#eef; margin-left:6px; font-size:.85rem }
   </style>
 </head>
 <body>
@@ -71,11 +83,11 @@
     };
     const BASE = "https://journeyplanner.integration.sl.se/v2/trips";
     const TZ   = "Europe/Stockholm";
-    const MAX_CHANGES = 3;     // fortfarande låst till 3, men visas inte
-    const MAX_BATCHES = 3;     // max 3 hämtningar
-    const TRIPS_PER_CALL = 3;  // begär 3 per anrop
+    const MAX_CHANGES = 3;      // låst i API
+    const MAX_BATCHES = 3;      // max 3 hämtningar
+    const TRIPS_PER_CALL = 3;   // 3 per anrop
 
-    // ==== Tids-hjälpare ====
+    // ==== Tid/format ====
     const svDate = new Intl.DateTimeFormat('sv-SE', { timeZone: TZ, year:'numeric', month:'2-digit', day:'2-digit' });
     const svTime = new Intl.DateTimeFormat('sv-SE', { timeZone: TZ, hour:'2-digit', minute:'2-digit' });
     const svLong = new Intl.DateTimeFormat('sv-SE', { timeZone: TZ, weekday:'short', year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
@@ -88,8 +100,8 @@
     const fmtTime = d => svTime.format(d);
     const fmtDateTimeLong = d => svLong.format(d).replaceAll('.', '');
 
-    // ==== API-URL ====
-    function buildTripsUrl(originId, destId, yyyymmddStr, hhmmStr){
+    // ==== API URL ====
+    function buildTripsUrl(originId, destId, dateStr, timeStr){
       const p = new URLSearchParams({
         type_origin: 'any', name_origin: originId,
         type_destination: 'any', name_destination: destId,
@@ -98,8 +110,8 @@
         route_type: 'leasttime',
         calc_number_of_trips: String(TRIPS_PER_CALL),
         language: 'sv',
-        itd_date: yyyymmddStr,
-        itd_time: hhmmStr,
+        itd_date: dateStr,
+        itd_time: timeStr,
         calc_one_direction: 'true'
       });
       return BASE + '?' + p.toString();
@@ -133,29 +145,71 @@
     const legKind = l => (String(l?.transportMode||'').toUpperCase().includes('WALK') || (!l?.transportation && l?.footPathInfo?.length)) ? 'walk' : 'vehicle';
     const minutes = sec => Math.round((sec||0)/60);
 
+    // ==== Linjelista för kompakt rad ====
+    function extractLineLabel(l){
+      const t = l.transportation || {};
+      return t.disassembledName || t.number || t.name || l.product?.name || null;
+    }
+    function collectBusLines(legs){
+      const lines = [];
+      for (const l of legs){
+        if (legKind(l) === 'vehicle'){
+          const label = extractLineLabel(l);
+          if (label) lines.push(String(label).trim());
+        }
+      }
+      // slå ihop “BUS 601” vs “601” → plocka sista token som är nummer om möjligt
+      const cleaned = lines.map(s => {
+        const m = s.match(/(\d+[A-Za-z]?)/);
+        return m ? m[1] : s;
+      });
+      // ta bort dubbletter men behåll ordning
+      return [...new Set(cleaned)];
+    }
+
     // ==== Rendering ====
     function renderJourneyCards(list, dirLabel){
       const host = document.getElementById('out');
       const title = document.getElementById('title');
       title.textContent = `Resor: ${dirLabel}`;
       if (!list.length){ host.innerHTML = '<div class="muted">Inga resor hittades.</div>'; return; }
-      host.innerHTML = list.map(renderJourneyCard).join('');
+      host.innerHTML = list.map(renderJourneyEntry).join('');
+
+      // Event delegation för expand/collapse
+      host.addEventListener('click', (e)=>{
+        const row = e.target.closest('.summary-row');
+        if (!row) return;
+        const box = row.closest('.journey');
+        box.classList.toggle('open');
+      }, { once:true }); // skapas en gång; delegation funkar för alla kort
     }
-    function renderJourneyCard(j){
+
+    function renderJourneyEntry(j){
       const legs = j.legs||[];
-      const dep = fmtTime(parseFlex(depFromLeg(legs[0]||{})));
-      const arr = fmtTime(parseFlex(arrFromLeg(legs[legs.length-1]||{})));
+      const dep = parseFlex(depFromLeg(legs[0]||{}));
+      const arr = parseFlex(arrFromLeg(legs[legs.length-1]||{}));
+      const depHM = fmtTime(dep);
+      const arrHM = fmtTime(arr);
       const dur = minutes(j.tripRtDuration ?? j.tripDuration);
+      const lineStr = collectBusLines(legs).join(' · ');
       return `
         <div class="journey">
-          <div class="journey-header">
-            <div class="title"><span class="pill mono">${dep} → ${arr}</span> <span>${dur} min</span></div>
+          <div class="summary-row" role="button" aria-expanded="false">
+            <div class="summary-left">
+              <span class="pill">${depHM} → ${arrHM}</span>
+              <span class="duration">${dur} min</span>
+            </div>
+            <div class="lines">🚌 ${lineStr}</div>
+            <div class="chev">▶</div>
           </div>
-          <div class="legs">
-            ${legs.map(renderLeg).join('')}
+          <div class="details">
+            <div class="legs">
+              ${legs.map(renderLeg).join('')}
+            </div>
           </div>
         </div>`;
     }
+
     function renderLeg(l){
       const kind = legKind(l);
       const depT = fmtTime(parseFlex(depFromLeg(l)));
@@ -187,14 +241,13 @@
         </div>`;
     }
 
-    // ==== Hämta resor (max 3 batches) + sammanfattning med dag/tid ====
+    // ==== Hämtning + sammanfattning ====
     async function fetchTrips(){
       const dir = document.getElementById('direction').value;
       const from = dir === 'SG' ? STOPS.SVANHOLMSVAGEN : STOPS.DGY;
       const to   = dir === 'SG' ? STOPS.DGY : STOPS.SVANHOLMSVAGEN;
       const dirLabel = `${from.name} → ${to.name}`;
 
-      // Starttid: valt eller nu-5 min (visas inte som text)
       const dtInput = document.getElementById('dt').value;
       let cursor = dtInput ? new Date(dtInput) : nowMinus(5);
       cursor.setSeconds(0,0);
@@ -228,7 +281,7 @@
           cursor = latestDep && latestDep > cursor ? new Date(latestDep.getTime()+60*1000) : new Date(cursor.getTime()+60*1000);
         }
       } catch (_) {
-        // medvetet tyst
+        // tyst
       } finally {
         btn.disabled = false; btn.textContent = 'Hämta resor';
       }
@@ -269,9 +322,7 @@
 
     document.getElementById('btn').addEventListener('click', fetchTrips);
     document.getElementById('direction').addEventListener('change', updateTitle);
-
-    setDefaultDatetime();
-    updateTitle();
+    setDefaultDatetime(); updateTitle();
   </script>
 </body>
 </html>
