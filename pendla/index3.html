@@ -3,24 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Buss Danderyds gymnasium</title>
+  <title>Resor</title>
   <style>
     :root{
       --bg:#f6f7f9; --card:#fff; --muted:#667085; --ink:#111; --primary:#0b63f6;
       --walk:#4caf50; --bus:#2563eb; --rail:#7c3aed; --ferry:#03989e; --badge:#eef2ff;
     }
     *{box-sizing:border-box}
-    body { font-family: system-ui, sans-serif; padding:20px; background:var(--bg); color:var(--ink) }
-    h1 { font-size:1.15rem; margin:0 0 12px }
-    .card { background:var(--card); border-radius:14px; box-shadow:0 2px 10px rgba(0,0,0,.08); padding:14px; margin:10px 0 }
+    body { font-family: system-ui, sans-serif; padding:14px; background:var(--bg); color:var(--ink) }
 
-    label { font-size:.8rem; display:block; margin-bottom:6px; color:#333 }
-    input { width:100%; padding:8px 10px; border:1px solid #d6d8db; border-radius:8px; background:#fff; font-size:.85rem }
+    /* Minimal verktygsrad */
+    .toolbar{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:10px }
+    input { padding:8px 10px; border:1px solid #d6d8db; border-radius:8px; background:#fff; font-size:.85rem }
     button { padding:8px 12px; border:0; border-radius:8px; background:var(--primary); color:#fff; font-weight:600; cursor:pointer; font-size:.85rem }
     button:disabled { opacity:.6; cursor:not-allowed }
-    .muted { color:var(--muted); font-size:.8rem }
 
-    /* Reselista – kompaktare */
+    /* Reselista – kompakt */
     .journey{ border:1px solid #e6e8eb; border-radius:10px; margin:6px 0; background:#fff; overflow:hidden; font-size:.85rem }
     .summary-row{
       display:flex; align-items:center; justify-content:space-between;
@@ -51,26 +49,13 @@
   </style>
 </head>
 <body>
-  <h1 id="title">Buss Danderyds gymnasium</h1>
-
-  <div class="card">
-    <div style="display:flex; gap:12px; align-items:end; flex-wrap:wrap">
-      <div>
-        <label>Riktning</label>
-        <button id="swapBtn" type="button">Svanholmsvägen → Danderyds gymnasium</button>
-      </div>
-      <div>
-        <label for="dt">Datum & tid (Europe/Stockholm)</label>
-        <input id="dt" type="datetime-local" />
-      </div>
-      <div>
-        <button id="btn">Hämta resor</button>
-      </div>
-    </div>
+  <div class="toolbar">
+    <button id="swapBtn" type="button">Svanholmsvägen → Danderyds gymnasium</button>
+    <input id="dt" type="datetime-local" />
+    <button id="btn">Hämta resor</button>
   </div>
 
-  <div id="out-summary" class="card"></div>
-  <div id="out" class="card"></div>
+  <div id="out"></div>
 
   <script>
     // === Konstanter ===
@@ -84,7 +69,6 @@
     let svanToDgy = true;
 
     // === Tid/format ===
-    const svLong = new Intl.DateTimeFormat('sv-SE', { timeZone: TZ, weekday:'short', year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
     const svTime = new Intl.DateTimeFormat('sv-SE', { timeZone: TZ, hour:'2-digit', minute:'2-digit' });
     const pad = n => String(n).padStart(2,'0');
     const toTZ = d => new Date(d.toLocaleString('en-US',{timeZone:TZ}));
@@ -92,11 +76,12 @@
     function yyyymmdd(d){return `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}`;}
     function hhmm(d){return `${pad(d.getHours())}${pad(d.getMinutes())}`;}
     const fmtTime = d=>svTime.format(d);
-    const fmtDateTimeLong = d=>svLong.format(d).replaceAll('.','');
 
     // Rensa platsnamn: ta bort ", …"
     const cleanName = s => String(s||'').replace(/,.*$/,'').trim();
 
+    // === UI helpers ===
+    function clearResults(){ document.getElementById('out').innerHTML = ''; }
     function updateSwapBtn(){
       document.getElementById('swapBtn').textContent = svanToDgy
         ? 'Svanholmsvägen → Danderyds gymnasium'
@@ -149,17 +134,15 @@
           if (label) lines.push(String(label).trim());
         }
       }
-      // försök få själva numret (ex “BUS 601” → “601”)
       const cleaned = lines.map(s => (s.match(/(\d+[A-Za-z]?)/) || [null, s])[1]);
       return [...new Set(cleaned)];
     }
 
     // === Rendering ===
-    function renderJourneyCards(list, dirLabel){
+    function renderJourneyCards(list){
       const host=document.getElementById('out');
-      if(!list.length){host.innerHTML='<div class="muted">Inga resor hittades.</div>';return;}
+      if(!list.length){host.innerHTML='<div style="color:#667085;font-size:.9rem">Inga resor hittades.</div>';return;}
       host.innerHTML=list.map(renderJourneyEntry).join('');
-      // Safari-safe: bind per rad
       host.querySelectorAll('.summary-row').forEach(row=>{
         row.addEventListener('click',function(){
           const box=this.parentNode;box.classList.toggle('open');
@@ -210,12 +193,15 @@
             <div class="icon walk">🚶</div>
             <div>
               <div class="leg-title">Gång ${extra?`<span class="chip">${extra}</span>`:''}</div>
-              <div class="leg-sub">${from?`${from} `:''}${depT} → ${to?`${to} `:''}${arrT}</div>
+              <div class="leg-sub">
+                ${from?`På: ${from} ${depT}`:''}
+                ${to?`<br>Av: ${to} ${arrT}`:''}
+              </div>
             </div>
           </div>`;
       }
 
-      // vehicle: visa linje, riktning, påstigning/avstigning + tider
+      // vehicle: visa linje, riktning, på/av på separata rader
       const t=l.transportation||{};
       const line = extractLineLabel(l) || 'Linje';
       const direction = cleanName(t.destination?.name || l.destination?.parent?.name || l.destination?.name || '');
@@ -228,7 +214,8 @@
           <div>
             <div class="leg-title">${line}${direction?` → ${direction}`:''}</div>
             <div class="leg-sub">
-              På: ${from} ${depT} · Av: ${to} ${arrT}
+              På: ${from} ${depT}<br>
+              Av: ${to} ${arrT}
             </div>
           </div>
         </div>`;
@@ -238,12 +225,11 @@
     async function fetchTrips(){
       const from=svanToDgy?STOPS.SVAN:STOPS.DGY;
       const to=svanToDgy?STOPS.DGY:STOPS.SVAN;
-      const dirLabel=`${from.name} → ${to.name}`;
       const dtInput=document.getElementById('dt').value;
       let cursor=dtInput?new Date(dtInput):nowMinus(5);cursor.setSeconds(0,0);
 
       const btn=document.getElementById('btn');btn.disabled=true;btn.textContent='Hämtar…';
-      const all=[],seen=new Set(),firstMoment=new Date(cursor);
+      const all=[],seen=new Set();
 
       try{
         for(let b=0;b<MAX_BATCHES;b++){
@@ -264,20 +250,17 @@
           cursor = latestDep && latestDep > cursor ? new Date(latestDep.getTime()+60000) : new Date(cursor.getTime()+60000);
         }
       } catch(_) { /* tyst */ }
-      btn.disabled=false; btn.textContent='Hämta resor';
+      btn.disabled=false;btn.textContent='Hämta resor';
 
       all.sort((a,b)=>parseFlex(depFromLeg(a.legs?.[0]||{})) - parseFlex(depFromLeg(b.legs?.[0]||{})));
-
-      document.getElementById('out-summary').innerHTML =
-        `<div>${dirLabel}</div><div class="muted" style="margin-top:6px">Gäller: <strong>${fmtDateTimeLong(firstMoment)}</strong></div>`;
-
-      renderJourneyCards(all, dirLabel);
+      renderJourneyCards(all);
     }
 
-    // === Init ===
+    // === Init & events ===
     function setDefaultDatetime(){const d=nowMinus(5);const val=`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;document.getElementById('dt').value=val;}
     document.getElementById('btn').addEventListener('click',fetchTrips);
-    document.getElementById('swapBtn').addEventListener('click',()=>{svanToDgy=!svanToDgy;updateSwapBtn();});
+    document.getElementById('swapBtn').addEventListener('click',()=>{svanToDgy=!svanToDgy;updateSwapBtn();clearResults();});
+    document.getElementById('dt').addEventListener('change',()=>{clearResults();});
     function updateSwapBtn(){document.getElementById('swapBtn').textContent=svanToDgy?'Svanholmsvägen → Danderyds gymnasium':'Danderyds gymnasium → Svanholmsvägen';}
     setDefaultDatetime();updateSwapBtn();
   </script>
