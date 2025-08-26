@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Resor</title>
+  <style>
+    :root{
+      --bg:#f6f7f9; --card:#fff; --muted:#667085; --ink:#111; --primary:#0b63f6; --badge:#eef2ff;
+      --bus:#f59e0b; --metro:#111827; --tram:#7c3aed; --rail:#0ea5e9; --ferry:#06b6d4; --walk:#22c55e;
+    }
+    *{box-sizing:border-box}
+    body{ font-family:system-ui,sans-serif; padding:14px; background:var(--bg); color:var(--ink) }
+
+    .toolbar{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:10px }
+    input{ padding:8px 10px; border:1px solid #d6d8db; border-radius:8px; background:#fff; font-size:.9rem }
+    button{ padding:8px 12px; border:0; border-radius:8px; background:var(--primary); color:#fff; font-weight:700; cursor:pointer; font-size:.9rem }
+    button:disabled{ opacity:.6; cursor:not-allowed }
+
+    .journey{ border:1px solid #e6e8eb; border-radius:10px; margin:6px 0; background:#fff; overflow:hidden; font-size:.9rem }
+    .summary-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; cursor:pointer; user-select:none }
+    .summary-left{ display:flex; gap:10px; align-items:center; font-weight:700; flex-shrink:0 }
+    .pill{ display:inline-flex; gap:8px; align-items:center; padding:3px 10px; border-radius:999px; background:var(--badge);
+           font-family:ui-monospace, Menlo, Consolas, monospace; font-size:.9rem }
+    .duration{ font-size:.9rem; color:#334 }
+    .lines{ font-family:ui-monospace, Menlo, Consolas, monospace; color:#334; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:.9rem; flex-grow:1; text-align:right }
+    .chev{ margin-left:6px; transition:transform .2s ease; flex-shrink:0 }
+    .journey.open .chev{ transform:rotate(90deg) }
+
+    .details{ display:none; border-top:1px dashed #e5e7eb; padding:10px 12px }
+    .journey.open .details{ display:block }
+
+    .legs{ margin-top:4px }
+    .leg{ display:grid; grid-template-columns: 26px 1fr; gap:10px; padding:8px 0; border-top:1px dashed #e5e7eb; font-size:.9rem }
+    .leg:first-child{ border-top:0 }
+    .icon{ width:26px; height:26px; border-radius:7px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:1rem }
+    .bus{ background:var(--bus) } .metro{ background:var(--metro) } .tram{ background:var(--tram) } .rail{ background:var(--rail) } .ferry{ background:var(--ferry) } .walk{ background:var(--walk) }
+    .leg-title{ font-weight:700 }
+    .leg-sub{ font-size:.86rem; color:#667085 }
+
+    .debug{ background:var(--card); border:1px dashed #cbd5e1; border-radius:10px; padding:10px; margin-top:10px;
+            font-family:ui-monospace, Menlo, Consolas, monospace; font-size:.86rem; color:#1f2937; display:none }
+    .debug pre{ white-space:pre-wrap; word-break:break-word; margin:6px 0 }
+    .muted{ color:#667085 }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button id="swapBtn" type="button">Tranholmen → VR samskola</button>
+    <input id="dt" type="datetime-local" />
+    <button id="btn">Hämta resor</button>
+    <button id="dbgToggle" type="button" style="background:#475569">Debug</button>
+  </div>
+
+  <div id="out"></div>
+  <div id="debug" class="debug"></div>
+
+  <script>
+    /* ===== Koordinater ===== */
+    function toSLCoord(lat, lon){
+      const fix = n => Number(n).toFixed(6);
+      return `${fix(lon)}:${fix(lat)}:WGS84[dd.ddddd]`;
+    }
+    const ORIG = { id: toSLCoord(59.37560952758223, 18.088214567991976), name: "Tranholmen" };
+    const DEST = { id: toSLCoord(59.402731530255174, 18.0825747819761), name: "VR samskola" };
+    let forward = true;
+
+    /* ===== Tid ===== */
+    const TZ="Europe/Stockholm";
+    const pad=n=>String(n).padStart(2,'0');
+    const toTZ=d=>new Date(d.toLocaleString('en-US',{timeZone:TZ}));
+    function nowMinus(min=5){ const d=toTZ(new Date()); d.setMinutes(d.getMinutes()-min); d.setSeconds(0,0); return d; }
+    function yyyymmdd(d){ return `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}`; }
+    function hhmm(d){ return `${pad(d.getHours())}${pad(d.getMinutes())}`; }
+    const fmtTime = d => new Intl.DateTimeFormat('sv-SE',{ timeZone:TZ, hour:'2-digit', minute:'2-digit' }).format(d);
+
+    /* ===== UI helpers ===== */
+    function clearResults(){ document.getElementById('out').innerHTML=''; }
+    function updateSwapBtn(){ document.getElementById('swapBtn').textContent = forward ? 'Tranholmen → VR samskola' : 'VR samskola → Tranholmen'; }
+    const cleanName = s => String(s||'').replace(/,.*$/,'').trim();
+
+    /* ===== Debug ===== */
+    let dbgOn=false; const dbgHost=document.getElementById('debug');
+    document.getElementById('dbgToggle').addEventListener('click',()=>{ dbgOn=!dbgOn; dbgHost.style.display=dbgOn?'block':'none'; });
+    function dbg(msg){ if(!dbgOn) return; const t=new Date().toLocaleTimeString('sv-SE'); dbgHost.innerHTML+=`<div><span class="muted">${t}</span> — ${msg}</div>`; }
+    function dbgPre(title,obj){ if(!dbgOn) return; const s=typeof obj==='string'?obj:JSON.stringify(obj,null,2); dbgHost.innerHTML+=`<div><strong>${title}</strong><pre>${s.slice(0,4000)}</pre></div>`; }
+
+    /* ===== API-url ===== */
+    const BASE="https://journeyplanner.integration.sl.se/v2/trips";
+    const MAX_BATCHES=4, TRIPS_PER_CALL=3, MAX_CHANGES=3;
+    function buildUrl(from, to, dateStr, timeStr){
+      const p=new URLSearchParams({
+        type_origin:'coord', name_origin: from.id,
+        type_destination:'coord', name_destination: to.id,
+        route_type:'leasttime',
+        max_changes:String(MAX_CHANGES),
+        calc_number_of_trips:String(TRIPS_PER_CALL),
+        language:'sv',
+        itd_date:dateStr, itd_time:timeStr,
+        calc_one_direction:'true',
+        use_near_stops:'true',
+        incl_walk:'true',
+        use_prox_footpaths:'true'
+      });
+      for(let i=0;i<=11;i++) p.set(`incl_mot_${i}`,'true');
+      return BASE+'?'+p.toString();
+    }
+
+    /* ===== Parsing ===== */
+    function parseFlex(s){ if(!s) return null; const d=new Date(s); return isNaN(d)?null:d; }
+    const firstOf=(o,ks)=>ks.find(k=>o?.[k]!=null)?o[ks.find(k=>o?.[k]!=null)]:null;
+    function depFromLeg(l){ return firstOf(l?.origin||{},['departureTimeEstimated','departureTimePlanned','rtDateTime','dateTime']); }
+    function arrFromLeg(l){ return firstOf(l?.destination||{},['arrivalTimeEstimated','arrivalTimePlanned','rtDateTime','dateTime']); }
+    function legDurationSec(l){
+      if (typeof l?.duration === 'number') return l.duration;
+      const a=parseFlex(arrFromLeg(l)), d=parseFlex(depFromLeg(l));
+      if(a&&d) return Math.max(0,(a-d)/1000); return 0;
+    }
+    const minutes=sec=>Math.round((sec||0)/60);
+    function filterTinyEdgeLegs(legs){
+      if(!Array.isArray(legs)||!legs.length) return [];
+      let i=0,j=legs.length-1;
+      while(i<=j && legDurationSec(legs[i])<60) i++;
+      while(j>=i && legDurationSec(legs[j])<60) j--;
+      return legs.slice(i,j+1);
+    }
+
+    /* ===== Mode detektion ===== */
+    function textBag(l){
+      const arr=[l?.transportMode,l?.mode,l?.type,
+        l?.product?.name,l?.product?.class,l?.product?.category,
+        l?.transportation?.name,l?.transportation?.type,l?.transportation?.category,
+        l?.transportation?.product?.name,l?.transportation?.product?.class
+      ].filter(Boolean).map(x=>String(x));
+      return arr.join('|').toUpperCase();
+    }
+    function extractLineLabel(l){
+      const t=l?.transportation||{};
+      const lbl=t.disassembledName||t.number||t.name||l?.product?.name||'';
+      const short=(String(lbl).match(/(\d+[A-Za-z]?|[A-ZÅÄÖ]{1,3}\s?\d+)/)||[null,lbl])[1];
+      return (short||lbl).toString().trim();
+    }
+    function isWalkLeg(l){
+      if(Array.isArray(l?.footPathInfo)&&l.footPathInfo.length) return true;
+      const bag=textBag(l);
+      if(bag.match(/WALK|FOOT|GÅNG/)) return true;
+      if(!extractLineLabel(l)&&!l?.transportation) return true;
+      return false;
+    }
+    function modeOf(l){
+      if(isWalkLeg(l)) return 'walk';
+      const bag=textBag(l);
+      if(bag.match(/FERRY|SHIP|BOAT|BÅT/)) return 'ferry';
+      if(bag.match(/METRO|SUBWAY|TUNNEL/)) return 'metro';
+      if(bag.match(/TRAM|SPÅRVAGN/)) return 'tram';
+      if(bag.match(/RAIL|TRAIN|PENDELTÅG/)) return 'rail';
+      if(bag.match(/BUS/)) return 'bus';
+      return l?.transportation ? 'bus':'walk';
+    }
+    function modeEmoji(mode){
+      return mode==='metro'?'🚇'
+           :mode==='tram'?'🚊'
+           :mode==='rail'?'🚆'
+           :mode==='ferry'?'⛴️'
+           :mode==='walk'?'🚶'
+           :'🚌';
+    }
+    function vehicleTokens(legs){
+      const tokens=[];
+      for(const l of legs){
+        if(isWalkLeg(l)) continue;
+        const m=modeOf(l), lbl=extractLineLabel(l);
+        tokens.push(`${modeEmoji(m)} ${lbl}`);
+      }
+      return [...new Set(tokens)];
+    }
+
+    /* ===== Rendering ===== */
+    function render(list){
+      const host=document.getElementById('out');
+      if(!list.length){ host.innerHTML='<div style="color:#667085">Inga resor hittades.</div>'; return; }
+      host.innerHTML=list.map(j=>{
+        let legs=filterTinyEdgeLegs(j.legs||[]);
+        if(!legs.length) return '';
+        const dep=parseFlex(depFromLeg(legs[0]||{})), arr=parseFlex(arrFromLeg(legs[legs.length-1]||{}));
+        const dur=minutes(j.tripRtDuration??j.tripDuration);
+        const tokens=vehicleTokens(legs).join(' · ');
+        // etiketter för start/slut som vi vill tvinga in i detaljerna
+        const startLabel = forward ? ORIG.name : DEST.name;
+        const endLabel   = forward ? DEST.name : ORIG.name;
+
+        return `<div class="journey">
+          <div class="summary-row" role="button" aria-expanded="false" tabindex="0">
+            <div class="summary-left">
+              <span class="pill">${fmtTime(dep)}&nbsp;&nbsp;→&nbsp;&nbsp;${fmtTime(arr)}</span>
+              <span class="duration">${dur} min</span>
+            </div>
+            <div class="lines">${tokens}</div>
+            <div class="chev">▶</div>
+          </div>
+          <div class="details"><div class="legs">${legs.map((l,idx)=>renderLeg(l, idx, legs.length, startLabel, endLabel)).join('')}</div></div>
+        </div>`;
+      }).join('');
+      host.querySelectorAll('.summary-row').forEach(row=>{
+        row.addEventListener('click',function(){
+          const box=this.parentNode; box.classList.toggle('open');
+          this.setAttribute('aria-expanded',box.classList.contains('open')?'true':'false');
+        });
+      });
+    }
+
+    // renderLeg nu med start/slut-override för visade namn
+    function renderLeg(l, idx, len, startLabel, endLabel){
+      const depT=fmtTime(parseFlex(depFromLeg(l))), arrT=fmtTime(parseFlex(arrFromLeg(l)));
+      let from=cleanName(l.origin?.name||''), to=cleanName(l.destination?.name||'');
+      // Tvinga visade namn för första/sista benet
+      if (idx === 0)   from = startLabel;
+      if (idx === len-1) to = endLabel;
+
+      const mode=modeOf(l);
+
+      if(mode==='walk'){
+        const secs=legDurationSec(l);
+        const durS=secs?`${minutes(secs)} min`:'';
+        return `<div class="leg"><div class="icon walk">🚶</div><div>
+          <div class="leg-title">Gång ${durS?`<span class="muted">(${durS})</span>`:''}</div>
+          <div class="leg-sub">På: ${from} ${depT}<br>Av: ${to} ${arrT}</div>
+        </div></div>`;
+      }
+
+      const icon=modeEmoji(mode);
+      const line=extractLineLabel(l)||'Linje';
+      const dir=cleanName(l.transportation?.destination?.name||l.destination?.name||'');
+      return `<div class="leg"><div class="icon ${mode}">${icon}</div><div>
+        <div class="leg-title">${line}${dir?` → ${dir}`:''}</div>
+        <div class="leg-sub">På: ${from} ${depT}<br>Av: ${to} ${arrT}</div>
+      </div></div>`;
+    }
+
+    /* ===== Hämtning ===== */
+    async function fetchTrips(){
+      const from=forward?ORIG:DEST, to=forward?DEST:ORIG;
+      const dt=document.getElementById('dt').value;
+      let cursor=dt?new Date(dt):nowMinus(5); cursor.setSeconds(0,0);
+      const btn=document.getElementById('btn'); btn.disabled=true; btn.textContent='Hämtar…';
+      const all=[], seen=new Set();
+
+      for(let b=0;b<MAX_BATCHES;b++){
+        const url=buildUrl(from,to,yyyymmdd(cursor),hhmm(cursor));
+        dbg(`Batch ${b+1}/${MAX_BATCHES} — ${forward?'Tranholmen→VR':'VR→Tranholmen'} @ ${cursor.toISOString()}`);
+        dbg(`URL: ${url}`);
+        let res,data=null;
+        try{ res=await fetch(url,{headers:{'Accept':'application/json'}}); dbg(`HTTP ${res.status}`); data=await res.json(); }
+        catch(e){ dbg(`FEL: ${e.message}`); break; }
+        const journeys=data?.journeys||[];
+        dbg(`journeys: ${journeys.length}`);
+        let latestDep=null;
+        for(const j of journeys){
+          let legs=filterTinyEdgeLegs(j.legs||[]); if(!legs.length) continue;
+          const dep=parseFlex(depFromLeg(legs[0])); const arr=parseFlex(arrFromLeg(legs[legs.length-1]));
+          const key=`${dep?.toISOString()||''}_${arr?.toISOString()||''}_${(j.tripRtDuration||j.tripDuration)||0}`;
+          if(dep && !seen.has(key)){ seen.add(key); all.push({...j,legs}); }
+          if(dep && (!latestDep||dep>latestDep)) latestDep=dep;
+        }
+        cursor=latestDep&&latestDep>cursor?new Date(latestDep.getTime()+60000):new Date(cursor.getTime()+60000);
+      }
+
+      btn.disabled=false; btn.textContent='Hämta resor';
+      all.sort((a,b)=>parseFlex(depFromLeg(a.legs?.[0]||{}))-parseFlex(depFromLeg(b.legs?.[0]||{})));
+      render(all);
+      if(!all.length) dbg('OBS: Inga resor returnerades.');
+    }
+
+    /* ===== Init ===== */
+    function setDefaultDatetime(){
+      const d=nowMinus(5);
+      document.getElementById('dt').value=`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    }
+    document.getElementById('btn').addEventListener('click',()=>{clearResults();fetchTrips();});
+    document.getElementById('swapBtn').addEventListener('click',()=>{forward=!forward;updateSwapBtn();clearResults();});
+    document.getElementById('dt').addEventListener('change',()=>{clearResults();});
+    updateSwapBtn(); setDefaultDatetime();
+  </script>
+</body>
+</html>
