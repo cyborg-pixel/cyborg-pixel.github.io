@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Familjeloggen (ANON DEMO)</title>
+  <style>
+    :root{--bg:#f6f7f9;--card:#fff;--muted:#667085;--ink:#111;--primary:#0b63f6;--danger:#b91c1c}
+    *{box-sizing:border-box}
+    body{font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);margin:0;color:var(--ink)}
+    .wrap{max-width:900px;margin:24px auto;padding:16px}
+    .card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 1px 6px rgba(0,0,0,.06);margin-bottom:16px;overflow-x:auto}
+    h1{font-size:20px;margin:0 0 8px}
+    input,select,button,textarea{padding:10px 12px;border:1px solid #ddd;border-radius:10px;font:inherit}
+    button{background:var(--primary);color:#fff;border:none;cursor:pointer}
+    .row{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+    .muted{color:var(--muted);font-size:14px}
+    .hidden{display:none}
+    /* Nav */
+    .nav{position:sticky;top:0;background:rgba(255,255,255,.9);backdrop-filter:saturate(180%) blur(6px);z-index:10;border-bottom:1px solid #eee}
+    .nav-inner{max-width:900px;margin:0 auto;display:flex;gap:8px;padding:8px 16px;align-items:center}
+    .nav h1{margin:0;font-size:18px}
+    .spacer{flex:1}
+    .tab{padding:8px 12px;border-radius:10px;border:1px solid #ddd;background:#fff;color:#111}
+    .tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+    /* Heatmap table */
+    table{border-collapse:collapse;width:100%;margin-top:12px}
+    th,td{border:1px solid #ccc;padding:8px;text-align:center;min-width:60px}
+    th{background:#f0f0f0}
+    .lock{color:var(--danger);font-weight:600}
+  </style>
+</head>
+<body>
+  <noscript>
+    <div class="wrap"><div class="card"><b>Den här appen kräver JavaScript.</b></div></div>
+  </noscript>
+
+  <div class="nav">
+    <div class="nav-inner">
+      <h1>Familjeloggen</h1>
+      <div class="spacer"></div>
+      <button id="tabMain" class="tab active" type="button">Loggning</button>
+      <button id="tabSettings" class="tab" type="button">Inställningar</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- MAIN VIEW -->
+    <section id="viewMain">
+      <div class="card" id="lockedCard">
+        <h2>🔒 Låst</h2>
+        <p class="lock">Inget innehåll visas förrän ett lokalt lösenord har ställts in i <b>Inställningar</b>.</p>
+        <button id="goSettingsBtn" type="button">Gå till Inställningar</button>
+      </div>
+
+      <div class="card" id="logCard" class="hidden">
+        <h2>Logga en uppgift</h2>
+        <div class="row">
+          <select id="person"></select>
+          <select id="task"></select>
+        </div>
+        <div class="row">
+          <textarea id="comment" placeholder="Valfri kommentar (t.ex. vad du gjorde/extra detaljer)" rows="2" style="flex:1"></textarea>
+        </div>
+        <div class="row">
+          <button id="logBtn">Logga</button>
+        </div>
+        <p class="muted">Demo: sparar endast lokalt i webbläsaren. Ingen personlig information är hårdkodad i denna fil.</p>
+      </div>
+
+      <div class="card" id="statsCard" class="hidden">
+        <div class="row">
+          <label for="range" class="muted">Visa statistik för:</label>
+          <select id="range">
+            <option value="7">7 dagar</option>
+            <option value="30" selected>30 dagar</option>
+            <option value="90">90 dagar</option>
+            <option value="180">180 dagar</option>
+            <option value="360">360 dagar</option>
+          </select>
+          <button id="refreshBtn">Uppdatera</button>
+        </div>
+        <h3 style="margin-top:0">Matris (Uppgift × Person)</h3>
+        <div id="matrixContainer"></div>
+      </div>
+    </section>
+
+    <!-- SETTINGS VIEW -->
+    <section id="viewSettings" class="hidden">
+      <div class="card">
+        <h2>Inställningar</h2>
+        <p class="muted">Alla inställningar lagras lokalt på denna enhet. Den här versionen är anonym.</p>
+        <div class="row">
+          <input id="passwordInput" placeholder="Sätt ett lokalt lösenord (krävs för att visa innehåll)" />
+          <button id="savePasswordBtn">Spara lösenord</button>
+        </div>
+        <hr style="margin:16px 0;border:none;border-top:1px solid #eee">
+        <h3>Personer</h3>
+        <p class="muted">Kommaseparerad lista med användarnamn (anonyma).</p>
+        <div class="row"><input id="peopleInput" placeholder="t.ex. Person A,Person B,Person C" style="flex:1"/></div>
+        <div class="row"><button id="savePeopleBtn">Spara personer</button></div>
+        <h3>Uppgifter</h3>
+        <p class="muted">Kommaseparerad lista med uppgiftsnamn.</p>
+        <div class="row"><input id="tasksInput" placeholder="t.ex. Chores,Laundry,Trash,Pet Care,Cooking,Cleaning" style="flex:1"/></div>
+        <div class="row"><button id="saveTasksBtn">Spara uppgifter</button></div>
+        <hr style="margin:16px 0;border:none;border-top:1px solid #eee">
+        <div class="row">
+          <button id="resetDemoBtn" style="background:#6b7280">Rensa lokal demo-data</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOG LIST VIEW -->
+    <section id="viewLogList">
+      <div class="card">
+        <h2>Senaste loggar (30)</h2>
+        <div id="logList" class="muted" style="font-family:monospace;white-space:pre-wrap"></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+  (function(){
+    // ====== Local storage helpers ======
+    const ls = (k,v)=> v===undefined? JSON.parse(localStorage.getItem(k)||'null') : localStorage.setItem(k, JSON.stringify(v));
+
+    // Anonymous defaults (no personal data)
+    const DEFAULT_PASSWORD = ''; // inget hårdkodat lösenord
+    const DEFAULT_PEOPLE = ['Person A','Person B','Person C'];
+    const DEFAULT_TASKS  = ['Chores','Laundry','Trash','Pet Care','Cooking','Cleaning'];
+
+    // Elements
+    const viewMain = document.getElementById('viewMain');
+    const viewSettings = document.getElementById('viewSettings');
+    const tabMain = document.getElementById('tabMain');
+    const tabSettings = document.getElementById('tabSettings');
+    const goSettingsBtn = document.getElementById('goSettingsBtn');
+
+    const personSel = document.getElementById('person');
+    const taskSel   = document.getElementById('task');
+    const commentEl = document.getElementById('comment');
+    const rangeSel  = document.getElementById('range');
+    const matrixContainer = document.getElementById('matrixContainer');
+    const lockedCard = document.getElementById('lockedCard');
+    const logCard    = document.getElementById('logCard');
+    const statsCard  = document.getElementById('statsCard');
+
+    const passwordInput = document.getElementById('passwordInput');
+    const savePasswordBtn = document.getElementById('savePasswordBtn');
+    const peopleInput = document.getElementById('peopleInput');
+    const savePeopleBtn = document.getElementById('savePeopleBtn');
+    const tasksInput = document.getElementById('tasksInput');
+    const saveTasksBtn = document.getElementById('saveTasksBtn');
+    const resetDemoBtn = document.getElementById('resetDemoBtn');
+
+    // Initialize stored values if missing
+    if (ls('password')===null) ls('password', DEFAULT_PASSWORD);
+    if (ls('people')===null) ls('people', DEFAULT_PEOPLE);
+    if (ls('tasks')===null)  ls('tasks',  DEFAULT_TASKS);
+    if (ls('logs')===null)   ls('logs',   []); // demo loggar
+
+    // Seed a few demo logs on FIRST RUN so the log list always shows something
+    (function seedDemoLogs(){
+      const seeded = ls('demo_seeded');
+      let logs = ls('logs') || [];
+      if (!seeded && logs.length === 0) {
+        const people = ls('people') || DEFAULT_PEOPLE;
+        const tasks  = ls('tasks')  || DEFAULT_TASKS;
+        const now = Date.now();
+        for (let i=0;i<10;i++){
+          const p = people[i % people.length];
+          const t = tasks[i % tasks.length];
+          logs.push({ ts: now - (i+1)*3600_000, person: p, task: t, comment: 'Demo-logg #' + (i+1) });
+        }
+        ls('logs', logs);
+        ls('demo_seeded', true);
+      }
+    })();
+
+    // Access check: only show main content if a password has been set locally
+    function hasAccess(){ const pwd = ls('password'); return pwd && pwd.length>0; }
+
+    function setActiveView(which){
+      const main = which === 'main';
+      viewMain.classList.toggle('hidden', !main);
+      viewSettings.classList.toggle('hidden', main);
+      tabMain.classList.toggle('active', main);
+      tabSettings.classList.toggle('active', !main);
+    }
+
+    // Nav events
+    tabMain.addEventListener('click', ()=> setActiveView('main'));
+    tabSettings.addEventListener('click', ()=> setActiveView('settings'));
+    goSettingsBtn.addEventListener('click', ()=> setActiveView('settings'));
+
+    // Fill selects
+    function fillSelect(el, arr){ el.innerHTML = arr.map(v=>`<option>${v}</option>`).join(''); }
+    function refreshSelectors(){
+      const people = ls('people') || DEFAULT_PEOPLE;
+      const tasks  = ls('tasks')  || DEFAULT_TASKS;
+      fillSelect(personSel, people);
+      fillSelect(taskSel, tasks);
+    }
+
+    // DEMO stats generator
+    function generateDummyStats(days, people, tasks, logs){
+      const perMatrix = {}; for (const t of tasks){ perMatrix[t] = {}; for(const p of people){ perMatrix[t][p] = 0; } }
+      // Random baseline for demo
+      for (let i=0;i<days;i++){
+        let n = Math.floor(Math.random()*6);
+        for(let j=0;j<n;j++){
+          const p = people[Math.floor(Math.random()*people.length)];
+          const t = tasks[Math.floor(Math.random()*tasks.length)];
+          perMatrix[t][p]++;
+        }
+      }
+      // Apply local logs within the selected window
+      const since = Date.now() - days*86400000;
+      for (const L of logs){ if (!L.ts || L.ts < since) continue; if (perMatrix[L.task] && perMatrix[L.task][L.person]!==undefined){ perMatrix[L.task][L.person]++; } }
+      return { perMatrix };
+    }
+
+    function renderMatrix(perMatrix, people, tasks){
+      let max=0; for(const t of tasks){ for(const p of people){ if(perMatrix[t][p]>max) max=perMatrix[t][p]; }}
+      let html='<table><tr><th>Uppgift</th>'+people.map(p=>`<th>${p}</th>`).join('')+'<th>Summa</th></tr>';
+      for(const t of tasks){
+        let rowsum=0;
+        html+='<tr><th>'+t+'</th>';
+        for(const p of people){
+          const val=perMatrix[t][p]; rowsum+=val;
+          const intensity=max?Math.floor((val/max)*200):0; // 0..200
+          const r = 255 - intensity; const g = 255 - Math.floor(intensity/3); const b = 255 - intensity;
+          const color=`rgb(${r},${g},${b})`;
+          html+=`<td style="background:${color};">${val}</td>`;
+        }
+        html+=`<td style="font-weight:600">${rowsum}</td>`;
+        html+='</tr>';
+      }
+      // footer with column sums
+      let footer='<tr><td style="font-weight:600">Summa</td>';
+      let grand=0;
+      for(const p of people){ let col=0; for(const t of tasks){ col+=perMatrix[t][p]; } grand+=col; footer+=`<td style="font-weight:600">${col}</td>`; }
+      footer+=`<td style="font-weight:700">${grand}</td></tr>`;
+      html+=footer;
+      html+='</table>';
+      matrixContainer.innerHTML=html;
+    }
+
+    function updateAccessUI(){
+      const allowed = hasAccess();
+      lockedCard.classList.toggle('hidden', allowed);
+      logCard.classList.toggle('hidden', !allowed);
+      statsCard.classList.toggle('hidden', !allowed);
+    }
+
+    function renderLogList(logs){
+      const container = document.getElementById('logList');
+      if(!container) return;
+      const recent = logs.slice(-30).reverse();
+      let out='';
+      for(const L of recent){
+        const d = new Date(L.ts||Date.now()).toISOString().slice(0,10);
+        let cmt = (L.comment||'').replace(/\n/g,' ');
+        if (cmt.length>20) cmt = cmt.slice(0,20)+'…';
+        out += `${d} | ${L.person||''} | ${L.task||''} | ${cmt}\n`;
+      }
+      container.textContent = out || '(Inga loggar än)';
+    }
+
+    function loadStats(){
+      const days=parseInt(rangeSel.value,10);
+      const people = ls('people') || DEFAULT_PEOPLE;
+      const tasks  = ls('tasks')  || DEFAULT_TASKS;
+      const logs   = ls('logs')   || [];
+      const { perMatrix } = generateDummyStats(days, people, tasks, logs);
+      renderMatrix(perMatrix, people, tasks);
+      renderLogList(logs);
+    }
+
+    // Log button: store person, task, and comment locally (demo)
+    document.getElementById('logBtn').addEventListener('click',()=>{
+      if (!hasAccess()) { alert('Sätt ett lösenord i Inställningar för att börja logga.'); return; }
+      const person = personSel.value; const task = taskSel.value; const text = commentEl.value.trim();
+      const logs = ls('logs') || [];
+      logs.push({ ts: Date.now(), person, task, comment: text });
+      ls('logs', logs);
+      commentEl.value='';
+      loadStats();
+      alert('Demo: logg sparad lokalt.');
+    });
+
+    document.getElementById('refreshBtn').addEventListener('click', loadStats);
+
+    // Settings handlers
+    passwordInput.value = ls('password') || '';
+    peopleInput.value   = (ls('people') || DEFAULT_PEOPLE).join(',');
+    tasksInput.value    = (ls('tasks')  || DEFAULT_TASKS).join(',');
+
+    savePasswordBtn.addEventListener('click', ()=>{
+      const pwd = passwordInput.value.trim();
+      ls('password', pwd);
+      updateAccessUI();
+      loadStats();
+      alert('Lösenord sparat lokalt.');
+    });
+    savePeopleBtn.addEventListener('click', ()=>{
+      const arr = peopleInput.value.split(',').map(s=>s.trim()).filter(Boolean);
+      if (arr.length) ls('people', arr);
+      refreshSelectors();
+      loadStats();
+      alert('Personer sparade.');
+    });
+    saveTasksBtn.addEventListener('click', ()=>{
+      const arr = tasksInput.value.split(',').map(s=>s.trim()).filter(Boolean);
+      if (arr.length) ls('tasks', arr);
+      refreshSelectors();
+      loadStats();
+      alert('Uppgifter sparade.');
+    });
+    resetDemoBtn.addEventListener('click', ()=>{
+      if (!confirm('Rensa lokal demo-data (loggar)?')) return;
+      ls('logs', []);
+      loadStats();
+      alert('Lokal demo-data rensad.');
+    });
+
+    // First render
+    refreshSelectors();
+    updateAccessUI();
+    loadStats();
+  })();
+  </script>
+</body>
+</html>
