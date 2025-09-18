@@ -223,27 +223,17 @@ document.addEventListener('DOMContentLoaded', function(){
   const ls = (k,v)=> v===undefined? JSON.parse(localStorage.getItem(k)||'null') : localStorage.setItem(k, JSON.stringify(v));
 
   const quotes = [
-    "🧹 Teamwork-tricket: 10 minuter nu sparar 30 sen. Välj en sak – kör! 💪",
-    "✨ Små steg, stor skillnad: lägg tillbaka tre saker där de ska vara. High five! 🙌",
-    "🍽️ Diskdans: sätt på en låt och plocka av bordet innan refrängen! 🎵",
-    "🧦 Strumpspaning! Hitta ett par och lägg i tvättkorgen – mission complete. ✅",
-    "🧠 Smart move: gör det svåraste först i 3 minuter. Ofta räcker det! ⏱️",
-    "🚪 Innan du går: titta runt – kan en sak följa med till rätt plats? 🧭",
-    "🛋️ Soffräddaren: ta med tre grejer från soffbordet när du reser dig. 🔁",
-    "📚 1 bok in i hyllan = pluspoäng för hjärnan. Ordning gör det lättare att plugga! 🧠✨",
-    "🧴 Torka handfatet när du borstar tänderna. Multitasking-pro! 😎",
-    "🗑️ Mini-städ: släng 5 onödiga saker. Snabbt, snyggt, klart. ⚡",
-    "🛗 2-våningsregeln: Gå aldrig tomhänt i trappan – ta med något upp/ner. 🧳",
-    "🎯 Välj en yta – skrivbord, nattduksbord eller diskbänk – och gör den 10% bättre. 🔟%",
-    "🎧 Podcast-städning: lyssna på något kul medan du fixar. Tid flyger! 🕊️",
-    "🧩 Delar ihop: hitta ett lego/pussel på fel plats? Lägg i rätt låda direkt. 🧺",
-    "🌱 Hjälp hemma = träningspass för självständighet. Du blir starkare varje dag. 💥",
-    "🧼 1 trasa + 60 sekunder = superglans. Välj en yta och ge den kärlek. ❤️",
-    "📦 Hemma-base: ha en “på väg ut”-korg för saker till skola/kompisar. 🚀",
-    "🏁 Starta litet: 5 plagg i tvättkorgen nu. Resten blir lättare sen. 🧺",
-    "🌟 Vinnardag: gör en mini-sak före skärmen. Du styr dagen! 🕹️",
-    "🤝 Bäst i laget: när alla gör lite, blir hemmet mycket. Tack för att du är med! 💙"
-  ];
+  "🧹 10-minutersfix: Ställ timern, städa lite snabbt. Du blir klar innan du märker det – och allt känns lättare sen.",
+  "✨ Tre-saker-regeln: Plocka upp tre grejer som ligger fel och lägg dem rätt. Litet jobb, stor skillnad.",
+  "🍽️ Snabbt bort med tallriken: När du ätit, ta tallrik och bestick direkt. Då slipper någon annan göra det åt dig.",
+  "🧦 Strumpspaning: Ser du ensamma strumpor? Släng dem i tvättkorgen så de hittar sin partner.",
+  "🚪 Kolla innan du går: På väg ut ur rummet? Ta med minst en sak som ska till ett annat ställe.",
+  "🛋️ Soffknepet: Lämna aldrig soffan tomhänt – ta med skräp, glas eller kläder.",
+  "📚 Boksmart: Lägg tillbaka en bok, tidning eller spel på rätt plats. Lätt att hitta nästa gång.",
+  "🧼 Snabbputs: Använd en trasa och torka av handfat, bord eller bänk på 1 minut. Ser fräscht ut direkt.",
+  "🗑️ Rensa lite: Släng fem småsaker du inte behöver (papper, skräp, trasiga grejer). Skönt rent!",
+  "🤝 Alla gör lite: Om alla hemma fixar småsaker varje dag blir huset mysigare och roligare att vara i."
+];
 
   const viewMain = $('viewMain'), viewSettings = $('viewSettings'), viewLogList = $('viewLogList');
   const tabMain = $('tabMain'), tabSettings = $('tabSettings'), goSettingsBtn = $('goSettingsBtn');
