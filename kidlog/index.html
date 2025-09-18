@@ -2,73 +2,131 @@
 <html lang="sv">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Familjeloggen (ANON DEMO)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Familjeloggen – Sheets-klient</title>
   <style>
-    :root{--bg:#f6f7f9;--card:#fff;--muted:#667085;--ink:#111;--primary:#0b63f6;--danger:#b91c1c}
+    :root{
+      --bg:#f6f7f9;--card:#fff;--muted:#667085;--ink:#111;--primary:#0b63f6;--danger:#b91c1c;
+      --tap:44px;
+    }
     *{box-sizing:border-box}
-    body{font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);margin:0;color:var(--ink)}
+    body{font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);margin:0;color:var(--ink)}
     .wrap{max-width:900px;margin:24px auto;padding:16px}
     .card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 1px 6px rgba(0,0,0,.06);margin-bottom:16px;overflow-x:auto}
-    h1{font-size:20px;margin:0 0 8px}
-    input,select,button,textarea{padding:10px 12px;border:1px solid #ddd;border-radius:10px;font:inherit}
+    h1{font-size:18px;margin:0}
+    h2{font-size:18px;margin:0 0 8px}
+    input,select,button,textarea{padding:12px;border:1px solid #ddd;border-radius:10px;font:inherit;min-height:var(--tap)}
     button{background:var(--primary);color:#fff;border:none;cursor:pointer}
-    .row{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+    button[disabled]{opacity:.55;cursor:not-allowed}
+    .row{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;align-items:center}
     .muted{color:var(--muted);font-size:14px}
     .hidden{display:none}
-    /* Nav */
-    .nav{position:sticky;top:0;background:rgba(255,255,255,.9);backdrop-filter:saturate(180%) blur(6px);z-index:10;border-bottom:1px solid #eee}
-    .nav-inner{max-width:900px;margin:0 auto;display:flex;gap:8px;padding:8px 16px;align-items:center}
-    .nav h1{margin:0;font-size:18px}
+
+    /* Nav (med logoplats) */
+    .nav{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(6px);z-index:10;border-bottom:1px solid #eee}
+    .nav-inner{max-width:900px;margin:0 auto;display:flex;gap:10px;padding:8px 16px;align-items:center}
+    .brand{display:flex;align-items:center;gap:10px;min-width:0}
+    .brand-logo{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,#0b63f6,#5b9dff);box-shadow:0 1px 4px rgba(11,99,246,.25)}
     .spacer{flex:1}
-    .tab{padding:8px 12px;border-radius:10px;border:1px solid #ddd;background:#fff;color:#111}
+    .tab{padding:10px 12px;border-radius:10px;border:1px solid #ddd;background:#fff;color:#111;min-height:var(--tap)}
     .tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-    /* Heatmap table */
+
+    /* Tabell */
     table{border-collapse:collapse;width:100%;margin-top:12px}
     th,td{border:1px solid #ccc;padding:8px;text-align:center;min-width:60px}
     th{background:#f0f0f0}
     .lock{color:var(--danger);font-weight:600}
+    pre{white-space:pre-wrap;word-break:break-word;background:#0f172a;color:#e5e7eb;border-radius:8px;padding:10px}
+    .ok{color:#047857;font-weight:600}
+    .err{color:#b91c1c;font-weight:600}
+    #logList { white-space: pre-wrap; }
+
+    /* Loading overlay */
+    #loading {
+      position: fixed; inset: 0; background: rgba(255,255,255,.8);
+      backdrop-filter: saturate(180%) blur(6px);
+      display: none; align-items: center; justify-content: center; z-index: 9999;
+    }
+    #loading.show { display: flex; }
+    .loader {
+      display:flex; flex-direction:column; align-items:center; gap:12px;
+      padding:22px 26px; border-radius:16px; background: var(--card);
+      box-shadow:0 8px 30px rgba(0,0,0,.1); min-width:240px;
+    }
+    .spinner { width:34px; height:34px; border-radius:50%; border:4px solid #e5e7eb; border-top-color: var(--primary); animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* iPhone-friendly tweaks */
+    @media (max-width:600px){
+      .wrap{padding:12px}
+      .nav-inner{padding:8px 12px}
+      .row > *{flex:1}
+      button, select, input, textarea{width:100%}
+    }
   </style>
 </head>
 <body>
-  <noscript>
-    <div class="wrap"><div class="card"><b>Den här appen kräver JavaScript.</b></div></div>
-  </noscript>
-
   <div class="nav">
     <div class="nav-inner">
-      <h1>Familjeloggen</h1>
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true"><img src="applogo.png" alt="Logo" class="brand-logo" style="object-fit:contain"></div>
+        <h1>Familjeloggen</h1>
+      </div>
       <div class="spacer"></div>
       <button id="tabMain" class="tab active" type="button">Loggning</button>
       <button id="tabSettings" class="tab" type="button">Inställningar</button>
     </div>
   </div>
 
+  <!-- Loading overlay -->
+  <div id="loading" aria-live="polite" aria-busy="true">
+    <div class="loader">
+      <div class="spinner" role="status" aria-label="Laddar"></div>
+      <div class="muted">Laddar data…</div>
+    </div>
+  </div>
+
   <div class="wrap">
     <!-- MAIN VIEW -->
     <section id="viewMain">
+      <div class="card" id="welcomeCard">
+        <h2 id="welcomeMsg">Välkommen!</h2>
+        <p class="muted">Välj <b>Min person</b> under <b>Inställningar</b> för att logga snabbare.</p>
+      </div>
+
       <div class="card" id="lockedCard">
         <h2>🔒 Låst</h2>
-        <p class="lock">Inget innehåll visas förrän ett lokalt lösenord har ställts in i <b>Inställningar</b>.</p>
+        <p class="lock">Ange backend-URL och lösenord i <b>Inställningar</b>, och testa anslutning.</p>
         <button id="goSettingsBtn" type="button">Gå till Inställningar</button>
       </div>
 
-      <div class="card" id="logCard" class="hidden">
-        <h2>Logga en uppgift</h2>
+      <!-- Visa denna om Min person ej vald -->
+      <div class="card hidden" id="needPersonCard">
+        <h2>Välj din person</h2>
+        <p class="muted">För att logga behöver du först välja <b>Min person</b> under <b>Inställningar</b>.</p>
+        <button id="goPickPersonBtn" type="button">Gå till Inställningar</button>
+      </div>
+
+      <div class="card hidden" id="logCard">
+        <div class="row" style="justify-content:space-between;align-items:center">
+          <h2>Logga en uppgift</h2>
+          <div class="muted">Loggar som: <b id="currentUserLabel">–</b></div>
+        </div>
         <div class="row">
-          <select id="person"></select>
+          <!-- Personval borttaget här: styrs endast i Inställningar -->
           <select id="task"></select>
         </div>
         <div class="row">
-          <textarea id="comment" placeholder="Valfri kommentar (t.ex. vad du gjorde/extra detaljer)" rows="2" style="flex:1"></textarea>
+          <textarea id="comment" placeholder="Valfri kommentar" rows="2" style="flex:1"></textarea>
         </div>
         <div class="row">
           <button id="logBtn">Logga</button>
+          <span id="logStatus" class="muted"></span>
         </div>
-        <p class="muted">Demo: sparar endast lokalt i webbläsaren. Ingen personlig information är hårdkodad i denna fil.</p>
+        <p class="muted">Postar till Google Sheets-backend. Fungerar även från <code>file://</code>.</p>
       </div>
 
-      <div class="card" id="statsCard" class="hidden">
+      <div class="card hidden" id="statsCard">
         <div class="row">
           <label for="range" class="muted">Visa statistik för:</label>
           <select id="range">
@@ -79,6 +137,7 @@
             <option value="360">360 dagar</option>
           </select>
           <button id="refreshBtn">Uppdatera</button>
+          <span id="fetchStatus" class="muted"></span>
         </div>
         <h3 style="margin-top:0">Matris (Uppgift × Person)</h3>
         <div id="matrixContainer"></div>
@@ -89,246 +148,353 @@
     <section id="viewSettings" class="hidden">
       <div class="card">
         <h2>Inställningar</h2>
-        <p class="muted">Alla inställningar lagras lokalt på denna enhet. Den här versionen är anonym.</p>
         <div class="row">
-          <input id="passwordInput" placeholder="Sätt ett lokalt lösenord (krävs för att visa innehåll)" />
-          <button id="savePasswordBtn">Spara lösenord</button>
+          <label for="backendUrl">Backend URL</label>
+          <input id="backendUrl" style="flex:1"
+            value="https://script.google.com/macros/s/AKfycbzh9NA85T-zNiZ4mgWOkXtF2PZS1sHv6HvxU0u2p891Iddgh1a6ViHhQrl3cJ61Blzj/exec" />
         </div>
-        <hr style="margin:16px 0;border:none;border-top:1px solid #eee">
-        <h3>Personer</h3>
-        <p class="muted">Kommaseparerad lista med användarnamn (anonyma).</p>
-        <div class="row"><input id="peopleInput" placeholder="t.ex. Person A,Person B,Person C" style="flex:1"/></div>
-        <div class="row"><button id="savePeopleBtn">Spara personer</button></div>
-        <h3>Uppgifter</h3>
-        <p class="muted">Kommaseparerad lista med uppgiftsnamn.</p>
-        <div class="row"><input id="tasksInput" placeholder="t.ex. Chores,Laundry,Trash,Pet Care,Cooking,Cleaning" style="flex:1"/></div>
-        <div class="row"><button id="saveTasksBtn">Spara uppgifter</button></div>
-        <hr style="margin:16px 0;border:none;border-top:1px solid #eee">
         <div class="row">
-          <button id="resetDemoBtn" style="background:#6b7280">Rensa lokal demo-data</button>
+          <label for="password">Lösenord</label>
+          <input id="password" value="SmulanBadass" />
+          <button id="saveSettingsBtn">Spara</button>
+          <button id="testBtn" type="button">Testa anslutning</button>
         </div>
+
+        <hr style="margin:4px 0 8px;border:none;border-top:1px solid #eee">
+
+        <!-- Min person – hämtas från Sheets (config.people) -->
+        <div class="row">
+          <label for="myPersonSel">Min person</label>
+          <select id="myPersonSel" style="flex:1"></select>
+        </div>
+        <p class="muted" id="myPersonHint">
+          (Tips: Kör <b>Testa anslutning</b> först för att hämta personlistan. Ditt val sparas lokalt.)
+        </p>
+
+        <div class="row">
+          <span id="settingsStatus" class="muted"></span>
+        </div>
+
+        <hr style="margin:16px 0;border:none;border-top:1px solid #eee">
+        <h3>Lokala data</h3>
+        <div class="row">
+          <button id="resetLocalBtn" style="background:#6b7280">Rensa lokal cache</button>
+        </div>
+        <pre id="debug">(start)</pre>
       </div>
     </section>
 
     <!-- LOG LIST VIEW -->
-    <section id="viewLogList">
+    <section id="viewLogList" class="hidden">
       <div class="card">
         <h2>Senaste loggar (30)</h2>
-        <div id="logList" class="muted" style="font-family:monospace;white-space:pre-wrap"></div>
+        <div id="logList" class="muted" style="font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;"></div>
       </div>
     </section>
   </div>
 
-  <script>
-  (function(){
-    // ====== Local storage helpers ======
-    const ls = (k,v)=> v===undefined? JSON.parse(localStorage.getItem(k)||'null') : localStorage.setItem(k, JSON.stringify(v));
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  // ===== helpers & state =====
+  const $ = (id)=>document.getElementById(id);
+  const ls = (k,v)=> v===undefined? JSON.parse(localStorage.getItem(k)||'null') : localStorage.setItem(k, JSON.stringify(v));
+  const dbg = $('debug');
+  function log(){ const s=[...arguments].map(x=> typeof x==='string'? x : JSON.stringify(x)).join(' ');
+    if (dbg) dbg.textContent += `\n${s}`; console.log('[DBG]',...arguments); }
 
-    // Anonymous defaults (no personal data)
-    const DEFAULT_PASSWORD = ''; // inget hårdkodat lösenord
-    const DEFAULT_PEOPLE = ['Person A','Person B','Person C'];
-    const DEFAULT_TASKS  = ['Chores','Laundry','Trash','Pet Care','Cooking','Cleaning'];
+  const viewMain = $('viewMain'), viewSettings = $('viewSettings'), viewLogList = $('viewLogList');
+  const tabMain = $('tabMain'), tabSettings = $('tabSettings'), goSettingsBtn = $('goSettingsBtn');
+  const lockedCard = $('lockedCard'), logCard=$('logCard'), statsCard=$('statsCard'), needPersonCard=$('needPersonCard');
+  const welcomeMsg = $('welcomeMsg'), loading = $('loading');
 
-    // Elements
-    const viewMain = document.getElementById('viewMain');
-    const viewSettings = document.getElementById('viewSettings');
-    const tabMain = document.getElementById('tabMain');
-    const tabSettings = document.getElementById('tabSettings');
-    const goSettingsBtn = document.getElementById('goSettingsBtn');
+  const taskSel=$('task'), commentEl=$('comment');
+  const rangeSel=$('range'), matrixContainer=$('matrixContainer'), logList=$('logList');
+  const backendUrlEl=$('backendUrl'), passwordEl=$('password');
+  const settingsStatus=$('settingsStatus'), fetchStatus=$('fetchStatus'), logStatus=$('logStatus');
+  const resetLocalBtn = $('resetLocalBtn');
+  const myPersonSel = $('myPersonSel'), myPersonHint = $('myPersonHint');
+  const currentUserLabel = $('currentUserLabel');
+  const goPickPersonBtn = $('goPickPersonBtn');
+  const logBtn = $('logBtn');
 
-    const personSel = document.getElementById('person');
-    const taskSel   = document.getElementById('task');
-    const commentEl = document.getElementById('comment');
-    const rangeSel  = document.getElementById('range');
-    const matrixContainer = document.getElementById('matrixContainer');
-    const lockedCard = document.getElementById('lockedCard');
-    const logCard    = document.getElementById('logCard');
-    const statsCard  = document.getElementById('statsCard');
+  // ===== defaults & init =====
+  const DEFAULTS = {
+    backendUrl: backendUrlEl.value,
+    password: passwordEl.value,
+    myPerson: null,
+    peopleCache: []
+  };
+  if (ls('backendUrl')===null) ls('backendUrl', DEFAULTS.backendUrl);
+  if (ls('password')===null)   ls('password',   DEFAULTS.password);
+  if (ls('myPerson')===null)   ls('myPerson',   DEFAULTS.myPerson);
+  if (ls('peopleCache')===null) ls('peopleCache', DEFAULTS.peopleCache);
 
-    const passwordInput = document.getElementById('passwordInput');
-    const savePasswordBtn = document.getElementById('savePasswordBtn');
-    const peopleInput = document.getElementById('peopleInput');
-    const savePeopleBtn = document.getElementById('savePeopleBtn');
-    const tasksInput = document.getElementById('tasksInput');
-    const saveTasksBtn = document.getElementById('saveTasksBtn');
-    const resetDemoBtn = document.getElementById('resetDemoBtn');
+  backendUrlEl.value = ls('backendUrl') || '';
+  passwordEl.value   = ls('password')   || '';
 
-    // Initialize stored values if missing
-    if (ls('password')===null) ls('password', DEFAULT_PASSWORD);
-    if (ls('people')===null) ls('people', DEFAULT_PEOPLE);
-    if (ls('tasks')===null)  ls('tasks',  DEFAULT_TASKS);
-    if (ls('logs')===null)   ls('logs',   []); // demo loggar
+  function showLoading(on){
+    loading.classList.toggle('show', !!on);
+    loading.setAttribute('aria-busy', on ? 'true' : 'false');
+  }
 
-    // Seed a few demo logs on FIRST RUN so the log list always shows something
-    (function seedDemoLogs(){
-      const seeded = ls('demo_seeded');
-      let logs = ls('logs') || [];
-      if (!seeded && logs.length === 0) {
-        const people = ls('people') || DEFAULT_PEOPLE;
-        const tasks  = ls('tasks')  || DEFAULT_TASKS;
-        const now = Date.now();
-        for (let i=0;i<10;i++){
-          const p = people[i % people.length];
-          const t = tasks[i % tasks.length];
-          logs.push({ ts: now - (i+1)*3600_000, person: p, task: t, comment: 'Demo-logg #' + (i+1) });
-        }
-        ls('logs', logs);
-        ls('demo_seeded', true);
+  function updateWelcome(){
+    const name = (ls('myPerson')||'') || '';
+    welcomeMsg.textContent = name ? `Välkommen, ${name}!` : 'Välkommen!';
+    currentUserLabel.textContent = name || '–';
+  }
+  updateWelcome();
+
+  function setActive(which){
+    const main = which==='main';
+    viewMain.classList.toggle('hidden', !main);
+    viewSettings.classList.toggle('hidden', which!=='settings');
+
+    const showLogs = (which==='main');
+    viewLogList.classList.toggle('hidden', !showLogs);
+    if (!showLogs) { logList.textContent = ''; }
+
+    tabMain.classList.toggle('active', main);
+    tabSettings.classList.toggle('active', which==='settings');
+  }
+
+  tabMain.addEventListener('click', ()=> setActive('main'));
+  tabSettings.addEventListener('click', ()=> setActive('settings'));
+  if (goSettingsBtn) goSettingsBtn.addEventListener('click', ()=> setActive('settings'));
+  if (goPickPersonBtn) goPickPersonBtn.addEventListener('click', ()=> setActive('settings'));
+
+  function hasCreds(){
+    return !!(ls('backendUrl') && ls('password'));
+  }
+
+  // ===== backend helpers =====
+  function apiBase(){ return ls('backendUrl'); }
+  function apiPwd(){ return ls('password'); }
+
+  async function fetchJSON(url, opts){
+    const r = await fetch(url, opts);
+    const txt = await r.text();
+    try { return JSON.parse(txt); } catch(e) {
+      throw new Error('JSON-parse-fel: '+e.message+'\nBody: '+txt.slice(0,800));
+    }
+  }
+
+  async function getConfig(){
+    const url = `${apiBase()}?mode=config&password=${encodeURIComponent(apiPwd())}`;
+    return await fetchJSON(url);
+  }
+
+  async function getLogs(rangeDays){
+    const url = `${apiBase()}?mode=logs&range=${encodeURIComponent(rangeDays)}&password=${encodeURIComponent(apiPwd())}`;
+    return await fetchJSON(url);
+  }
+
+  // POST med GET-fallback
+  async function postLog({person, task, comment, client='pwa v1'}){
+    const body = { password: apiPwd(), person, task, comment, client };
+    try{
+      const res = await fetchJSON(apiBase(), {
+        method:'POST',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body: JSON.stringify(body)
+      });
+      return { ...res, via:'post/plain' };
+    }catch(e){
+      log('[post fallback]', e.message);
+      const q = new URLSearchParams({ mode:'postlog', password: apiPwd(), person, task, comment, client });
+      const url = `${apiBase()}?${q.toString()}`;
+      const res = await fetchJSON(url);
+      return { ...res, via:'get/postlog' };
+    }
+  }
+
+  // ===== UI render =====
+  function fillSelect(el, arr){
+    el.innerHTML = (arr||[]).map(v=>`<option>${v}</option>`).join('');
+  }
+
+  function renderMatrix(matrix, people, tasks){
+    let max=0; for(const t of tasks){ for(const p of people){ max = Math.max(max, matrix[t][p]||0); } }
+    let html = '<table><tr><th>Uppgift</th>'+people.map(p=>`<th>${p}</th>`).join('')+'<th>Summa</th></tr>';
+    for(const t of tasks){
+      let rowsum=0;
+      html += `<tr><th>${t}</th>`;
+      for(const p of people){
+        const val = matrix[t][p]||0; rowsum+=val;
+        const intensity=max?Math.floor((val/max)*200):0;
+        const r = 255 - intensity, g = 255 - Math.floor(intensity/3), b = 255 - intensity;
+        html += `<td style="background:rgb(${r},${g},${b})">${val}</td>`;
       }
-    })();
-
-    // Access check: only show main content if a password has been set locally
-    function hasAccess(){ const pwd = ls('password'); return pwd && pwd.length>0; }
-
-    function setActiveView(which){
-      const main = which === 'main';
-      viewMain.classList.toggle('hidden', !main);
-      viewSettings.classList.toggle('hidden', main);
-      tabMain.classList.toggle('active', main);
-      tabSettings.classList.toggle('active', !main);
+      html += `<td style="font-weight:600">${rowsum}</td></tr>`;
     }
+    let footer = '<tr><td style="font-weight:600">Summa</td>';
+    let grand=0;
+    for(const p of people){ let col=0; for(const t of tasks){ col += matrix[t][p]||0; } grand+=col; footer+=`<td style="font-weight:600">${col}</td>`; }
+    footer += `<td style="font-weight:700">${grand}</td></tr>`;
+    html += footer + '</table>';
+    matrixContainer.innerHTML = html;
+  }
 
-    // Nav events
-    tabMain.addEventListener('click', ()=> setActiveView('main'));
-    tabSettings.addEventListener('click', ()=> setActiveView('settings'));
-    goSettingsBtn.addEventListener('click', ()=> setActiveView('settings'));
-
-    // Fill selects
-    function fillSelect(el, arr){ el.innerHTML = arr.map(v=>`<option>${v}</option>`).join(''); }
-    function refreshSelectors(){
-      const people = ls('people') || DEFAULT_PEOPLE;
-      const tasks  = ls('tasks')  || DEFAULT_TASKS;
-      fillSelect(personSel, people);
-      fillSelect(taskSel, tasks);
+  function buildMatrixFromLogs(people, tasks, logs){
+    const m = {}; for(const t of tasks){ m[t] = {}; for(const p of people){ m[t][p] = 0; } }
+    for(const L of logs){
+      const p=L.person, t=L.task;
+      if (m[t] && m[t][p]!==undefined) m[t][p] += 1;
     }
+    return m;
+  }
 
-    // DEMO stats generator
-    function generateDummyStats(days, people, tasks, logs){
-      const perMatrix = {}; for (const t of tasks){ perMatrix[t] = {}; for(const p of people){ perMatrix[t][p] = 0; } }
-      // Random baseline for demo
-      for (let i=0;i<days;i++){
-        let n = Math.floor(Math.random()*6);
-        for(let j=0;j<n;j++){
-          const p = people[Math.floor(Math.random()*people.length)];
-          const t = tasks[Math.floor(Math.random()*tasks.length)];
-          perMatrix[t][p]++;
-        }
-      }
-      // Apply local logs within the selected window
-      const since = Date.now() - days*86400000;
-      for (const L of logs){ if (!L.ts || L.ts < since) continue; if (perMatrix[L.task] && perMatrix[L.task][L.person]!==undefined){ perMatrix[L.task][L.person]++; } }
-      return { perMatrix };
+  function renderLogList(logs){
+    const recent = (logs||[]).slice(-30).reverse();
+    logList.textContent = recent.length? recent.map(L=>{
+      const d=(L.timestamp||'').slice(0,10);
+      let c=(L.comment||'').replace(/\n/g,' ');
+      if (c.length>20) c=c.slice(0,20)+'…';
+      return `${d} | ${L.person||''} | ${L.task||''} | ${c}`;
+    }).join('\n') : '(Inga loggar än)';
+  }
+
+  function setUnlockedUI(unlocked){
+    lockedCard.classList.toggle('hidden', unlocked);
+    logCard.classList.toggle('hidden', !unlocked);
+    statsCard.classList.toggle('hidden', !unlocked);
+  }
+
+  function enforceMyPerson(people){
+    const my = ls('myPerson') || '';
+    const valid = my && Array.isArray(people) && people.includes(my);
+    // Visa varning om ej vald, disabla loggning
+    needPersonCard.classList.toggle('hidden', !!valid);
+    logBtn.disabled = !valid;
+    commentEl.disabled = !valid;
+    currentUserLabel.textContent = valid ? my : '–';
+    return valid;
+  }
+
+  // ===== people cache & myPerson UI =====
+  function cachePeople(people){
+    if (Array.isArray(people)) ls('peopleCache', people);
+  }
+  function renderMyPersonSelect(){
+    const people = ls('peopleCache') || [];
+    fillSelect(myPersonSel, people);
+    const saved = ls('myPerson') || '';
+    if (saved && people.includes(saved)) myPersonSel.value = saved;
+    myPersonHint.style.display = people.length ? 'none' : 'block';
+  }
+
+  // ===== actions =====
+  async function refreshAll(){
+    if (!hasCreds()){
+      setUnlockedUI(false);
+      settingsStatus.textContent = 'Fyll i URL & lösenord och tryck Testa.';
+      return;
     }
+    showLoading(true);
+    fetchStatus.textContent = 'Hämtar…';
+    try{
+      const cfg = await getConfig();
+      if (!cfg.ok) throw new Error(cfg.error||'config error');
 
-    function renderMatrix(perMatrix, people, tasks){
-      let max=0; for(const t of tasks){ for(const p of people){ if(perMatrix[t][p]>max) max=perMatrix[t][p]; }}
-      let html='<table><tr><th>Uppgift</th>'+people.map(p=>`<th>${p}</th>`).join('')+'<th>Summa</th></tr>';
-      for(const t of tasks){
-        let rowsum=0;
-        html+='<tr><th>'+t+'</th>';
-        for(const p of people){
-          const val=perMatrix[t][p]; rowsum+=val;
-          const intensity=max?Math.floor((val/max)*200):0; // 0..200
-          const r = 255 - intensity; const g = 255 - Math.floor(intensity/3); const b = 255 - intensity;
-          const color=`rgb(${r},${g},${b})`;
-          html+=`<td style="background:${color};">${val}</td>`;
-        }
-        html+=`<td style="font-weight:600">${rowsum}</td>`;
-        html+='</tr>';
-      }
-      // footer with column sums
-      let footer='<tr><td style="font-weight:600">Summa</td>';
-      let grand=0;
-      for(const p of people){ let col=0; for(const t of tasks){ col+=perMatrix[t][p]; } grand+=col; footer+=`<td style="font-weight:600">${col}</td>`; }
-      footer+=`<td style="font-weight:700">${grand}</td></tr>`;
-      html+=footer;
-      html+='</table>';
-      matrixContainer.innerHTML=html;
+      cachePeople(cfg.people||[]);
+      renderMyPersonSelect();
+
+      fillSelect(taskSel, cfg.tasks||[]);
+
+      const myValid = enforceMyPerson(cfg.people||[]);
+      updateWelcome();
+
+      const logs = await getLogs(Number(rangeSel.value||30));
+      if (!logs.ok) throw new Error(logs.error||'logs error');
+
+      const matrix = buildMatrixFromLogs(cfg.people||[], cfg.tasks||[], logs.logs||[]);
+      renderMatrix(matrix, cfg.people||[], cfg.tasks||[]);
+      renderLogList(logs.logs||[]);
+
+      setUnlockedUI(true);
+      fetchStatus.textContent = 'Klar.';
+      setActive('main');
+    }catch(e){
+      setUnlockedUI(false);
+      fetchStatus.textContent = '';
+      settingsStatus.innerHTML = `<span class="err">Fel: ${e.message}</span>`;
+      log('[refreshAll error]', e);
+    }finally{
+      showLoading(false);
     }
+  }
 
-    function updateAccessUI(){
-      const allowed = hasAccess();
-      lockedCard.classList.toggle('hidden', allowed);
-      logCard.classList.toggle('hidden', !allowed);
-      statsCard.classList.toggle('hidden', !allowed);
+  // ===== event handlers =====
+  $('saveSettingsBtn').addEventListener('click', ()=>{
+    ls('backendUrl', backendUrlEl.value.trim());
+    ls('password',   passwordEl.value.trim());
+    settingsStatus.innerHTML = '<span class="ok">Sparat lokalt.</span>';
+  });
+
+  $('testBtn').addEventListener('click', async()=>{
+    ls('backendUrl', backendUrlEl.value.trim());
+    ls('password',   passwordEl.value.trim());
+    settingsStatus.textContent = 'Testar…';
+    showLoading(true);
+    try{
+      const cfg = await getConfig();
+      if (!cfg.ok) throw new Error(cfg.error||'config error');
+      cachePeople(cfg.people||[]);
+      renderMyPersonSelect();
+      enforceMyPerson(cfg.people||[]);
+      updateWelcome();
+      settingsStatus.innerHTML = `<span class="ok">Anslutning OK. (${(cfg.people||[]).length} personer, ${(cfg.tasks||[]).length} uppgifter)</span>`;
+      await refreshAll();
+    }catch(e){
+      settingsStatus.innerHTML = `<span class="err">Fel: ${e.message}</span>`;
+    }finally{
+      showLoading(false);
     }
+  });
 
-    function renderLogList(logs){
-      const container = document.getElementById('logList');
-      if(!container) return;
-      const recent = logs.slice(-30).reverse();
-      let out='';
-      for(const L of recent){
-        const d = new Date(L.ts||Date.now()).toISOString().slice(0,10);
-        let cmt = (L.comment||'').replace(/\n/g,' ');
-        if (cmt.length>20) cmt = cmt.slice(0,20)+'…';
-        out += `${d} | ${L.person||''} | ${L.task||''} | ${cmt}\n`;
-      }
-      container.textContent = out || '(Inga loggar än)';
-    }
+  myPersonSel.addEventListener('change', ()=>{
+    const val = myPersonSel.value || '';
+    ls('myPerson', val);
+    updateWelcome();
+    settingsStatus.innerHTML = '<span class="ok">Din person är sparad.</span>';
+    // Uppdatera loggkortets state direkt
+    const people = ls('peopleCache') || [];
+    enforceMyPerson(people);
+  });
 
-    function loadStats(){
-      const days=parseInt(rangeSel.value,10);
-      const people = ls('people') || DEFAULT_PEOPLE;
-      const tasks  = ls('tasks')  || DEFAULT_TASKS;
-      const logs   = ls('logs')   || [];
-      const { perMatrix } = generateDummyStats(days, people, tasks, logs);
-      renderMatrix(perMatrix, people, tasks);
-      renderLogList(logs);
-    }
+  $('refreshBtn').addEventListener('click', refreshAll);
 
-    // Log button: store person, task, and comment locally (demo)
-    document.getElementById('logBtn').addEventListener('click',()=>{
-      if (!hasAccess()) { alert('Sätt ett lösenord i Inställningar för att börja logga.'); return; }
-      const person = personSel.value; const task = taskSel.value; const text = commentEl.value.trim();
-      const logs = ls('logs') || [];
-      logs.push({ ts: Date.now(), person, task, comment: text });
-      ls('logs', logs);
+  $('logBtn').addEventListener('click', async()=>{
+    if (!hasCreds()){ alert('Fyll i inställningar först.'); setActive('settings'); return; }
+    const my = ls('myPerson') || '';
+    if (!my){ alert('Välj din person under Inställningar.'); setActive('settings'); return; }
+    logStatus.textContent = 'Skickar…';
+    try{
+      const task = taskSel.value, comment = commentEl.value;
+      const res = await postLog({person: my, task, comment});
+      if (!res.ok) throw new Error(res.error||'post error');
+      logStatus.innerHTML = `<span class="ok">Sparat (${res.via})</span>`;
       commentEl.value='';
-      loadStats();
-      alert('Demo: logg sparad lokalt.');
-    });
+      await refreshAll();
+    }catch(e){
+      logStatus.innerHTML = `<span class="err">Fel: ${e.message}</span>`;
+      log('[post error]', e);
+    }
+  });
 
-    document.getElementById('refreshBtn').addEventListener('click', loadStats);
+  resetLocalBtn.addEventListener('click', ()=>{
+    localStorage.clear();
+    settingsStatus.innerHTML = '<span class="ok">Lokal cache rensad. Ladda om sidan.</span>';
+    updateWelcome();
+    setUnlockedUI(false);
+    renderMyPersonSelect();
+    enforceMyPerson(ls('peopleCache')||[]);
+  });
 
-    // Settings handlers
-    passwordInput.value = ls('password') || '';
-    peopleInput.value   = (ls('people') || DEFAULT_PEOPLE).join(',');
-    tasksInput.value    = (ls('tasks')  || DEFAULT_TASKS).join(',');
-
-    savePasswordBtn.addEventListener('click', ()=>{
-      const pwd = passwordInput.value.trim();
-      ls('password', pwd);
-      updateAccessUI();
-      loadStats();
-      alert('Lösenord sparat lokalt.');
-    });
-    savePeopleBtn.addEventListener('click', ()=>{
-      const arr = peopleInput.value.split(',').map(s=>s.trim()).filter(Boolean);
-      if (arr.length) ls('people', arr);
-      refreshSelectors();
-      loadStats();
-      alert('Personer sparade.');
-    });
-    saveTasksBtn.addEventListener('click', ()=>{
-      const arr = tasksInput.value.split(',').map(s=>s.trim()).filter(Boolean);
-      if (arr.length) ls('tasks', arr);
-      refreshSelectors();
-      loadStats();
-      alert('Uppgifter sparade.');
-    });
-    resetDemoBtn.addEventListener('click', ()=>{
-      if (!confirm('Rensa lokal demo-data (loggar)?')) return;
-      ls('logs', []);
-      loadStats();
-      alert('Lokal demo-data rensad.');
-    });
-
-    // First render
-    refreshSelectors();
-    updateAccessUI();
-    loadStats();
-  })();
-  </script>
+  // initial
+  log('[ready] JS loaded', new Date().toISOString());
+  renderMyPersonSelect(); // rendera ev. cache direkt
+  if (!ls('backendUrl') || !ls('password')) setActive('settings'); else refreshAll();
+});
+</script>
 </body>
 </html>
