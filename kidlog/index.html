@@ -6,53 +6,69 @@
   <title>Familjeloggen – Sheets-klient</title>
   <style>
     :root{
-      --bg:#f6f7f9;--card:#fff;--muted:#667085;--ink:#111;--primary:#0b63f6;--danger:#b91c1c;
+      --bg:#f7fafc;--card:#fff;--muted:#667085;--ink:#0f172a;--primary:#2563eb;--primary-2:#60a5fa;--danger:#dc2626;
       --tap:44px;
     }
     *{box-sizing:border-box}
-    body{font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);margin:0;color:var(--ink)}
-    .wrap{max-width:900px;margin:24px auto;padding:16px}
-    .card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 1px 6px rgba(0,0,0,.06);margin-bottom:16px;overflow-x:auto}
-    h1{font-size:18px;margin:0}
+    body{font:16px/1.5 ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;background:var(--bg);margin:0;color:var(--ink)}
+    .wrap{max-width:900px;margin:20px auto;padding:0 16px}
+    .card{background:var(--card);border-radius:14px;padding:16px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:16px;overflow-x:auto}
     h2{font-size:18px;margin:0 0 8px}
-    input,select,button,textarea{padding:12px;border:1px solid #ddd;border-radius:10px;font:inherit;min-height:var(--tap)}
-    button{background:var(--primary);color:#fff;border:none;cursor:pointer}
+    input,select,button,textarea{padding:12px;border:1px solid #e5e7eb;border-radius:12px;font:inherit;min-height:var(--tap)}
+    button{background:linear-gradient(180deg,var(--primary) 0%, #1d4ed8 100%);color:#fff;border:none;cursor:pointer;font-weight:600}
+    button:hover{filter:brightness(1.05)}
     button[disabled]{opacity:.55;cursor:not-allowed}
-    .row{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;align-items:center}
+    .row{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
     .muted{color:var(--muted);font-size:14px}
     .hidden{display:none}
 
-    /* Formfält på egen rad (label över input) */
+    /* Formfält (label ovanför input) */
     .field{display:flex;flex-direction:column;gap:6px;width:100%}
-    .field label{font-weight:600}
+    .field label{font-weight:700}
 
-    /* Nav med logo (dubbelt så stor) */
-    .nav{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(6px);z-index:10;border-bottom:1px solid #eee}
+    /* Nav med logo (ingen titeltext) */
+    .nav{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(6px);z-index:10;border-bottom:1px solid #eef2f7}
     .nav-inner{max-width:900px;margin:0 auto;display:flex;gap:10px;padding:8px 16px;align-items:center}
     .brand{display:flex;align-items:center;gap:10px;min-width:0}
-    .brand-logo{width:56px;height:56px;border-radius:12px;object-fit:contain;box-shadow:0 1px 4px rgba(11,99,246,.25);background:#fff}
+    .brand-logo{width:56px;height:56px;border-radius:12px;object-fit:contain;box-shadow:0 1px 4px rgba(37,99,235,.25);background:#fff}
+
     .spacer{flex:1}
 
-    /* Flik-knappar – kompakta, storlek ≈ texten */
+    /* Flik-knappar – kompakta (storlek ≈ texten) */
     .tab{
-      padding:.35rem .65rem;border-radius:10px;border:1px solid #ddd;background:#fff;color:#111;
-      min-height:auto; line-height:1.1;
+      padding:.4rem .7rem;border-radius:12px;border:1px solid #e5e7eb;background:#fff;color:#111;
+      min-height:auto; line-height:1.1; font-weight:600;
     }
     .tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 
+    /* Välkomstsektion (inte card) */
+    .welcome{
+      margin:14px 0 16px 0;
+      padding:0 2px;
+    }
+    .welcome h1{
+      font-size:20px;margin:0 0 6px 0; font-weight:800;
+      background: linear-gradient(90deg, var(--primary), var(--primary-2));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .quote{
+      font-size:15px; background:#ffffff; border:1px solid #eef2f7; border-radius:12px;
+      padding:10px 12px; color:#0f172a; box-shadow:0 1px 6px rgba(0,0,0,.04)
+    }
+
     /* Tabell */
     table{border-collapse:collapse;width:100%;margin-top:12px}
-    th,td{border:1px solid #ccc;padding:8px;text-align:center;min-width:60px}
-    th{background:#f0f0f0}
-    .lock{color:var(--danger);font-weight:600}
-    .ok{color:#047857;font-weight:600}
-    .err{color:#b91c1c;font-weight:600}
+    th,td{border:1px solid #e5e7eb;padding:8px;text-align:center;min-width:60px}
+    th{background:#f1f5f9}
+    .lock{color:var(--danger);font-weight:700}
+    .ok{color:#047857;font-weight:700}
+    .err{color:#b91c1c;font-weight:700}
     #logList { white-space: pre-wrap; }
 
     /* Loading overlay */
     #loading {
-      position: fixed; inset: 0; background: rgba(255,255,255,.8);
-      backdrop-filter: saturate(180%) blur(6px);
+      position: fixed; inset: 0; background: rgba(255,255,255,.85);
+      backdrop-filter: saturate(180%) blur(8px);
       display: none; align-items: center; justify-content: center; z-index: 9999;
     }
     #loading.show { display: flex; }
@@ -64,7 +80,7 @@
 
     /* iPhone-friendly tweaks */
     @media (max-width:600px){
-      .wrap{padding:12px}
+      .wrap{padding:0 12px}
       .nav-inner{padding:8px 12px}
       .row > *{flex:1}
       button, select, input, textarea{width:100%}
@@ -75,9 +91,8 @@
   <div class="nav">
     <div class="nav-inner">
       <div class="brand">
-        <!-- Byt till din bild: applogo.png -->
+        <!-- Logo-bild (dubbelt så stor): -->
         <img src="applogo.png" alt="Familjeloggen" class="brand-logo">
-        <h1>Familjeloggen</h1>
       </div>
       <div class="spacer"></div>
       <button id="tabMain" class="tab active" type="button">Loggning</button>
@@ -94,13 +109,15 @@
   </div>
 
   <div class="wrap">
+    <!-- Välkomstsektion (inte card) -->
+    <section class="welcome">
+      <h1 id="welcomeMsg">Välkommen!</h1>
+      <p class="muted" id="chooseHint">Välj <b>Min person</b> under <b>Inställningar</b> för att logga snabbare.</p>
+      <div class="quote" id="kidsQuote">🌟 Dagens pepp kommer här …</div>
+    </section>
+
     <!-- MAIN VIEW -->
     <section id="viewMain">
-      <div class="card" id="welcomeCard">
-        <h2 id="welcomeMsg">Välkommen!</h2>
-        <p class="muted" id="chooseHint">Välj <b>Min person</b> under <b>Inställningar</b> för att logga snabbare.</p>
-      </div>
-
       <div class="card" id="lockedCard">
         <h2>🔒 Låst</h2>
         <p class="lock">Ange backend-URL och lösenord i <b>Inställningar</b>, och testa anslutning.</p>
@@ -115,10 +132,7 @@
       </div>
 
       <div class="card hidden" id="logCard">
-        <div class="row" style="justify-content:space-between;align-items:center">
-          <h2>Logga en uppgift</h2>
-          <div class="muted">Loggar som: <b id="currentUserLabel">–</b></div>
-        </div>
+        <h2>Logga en uppgift</h2>
         <div class="row">
           <select id="task"></select>
         </div>
@@ -198,21 +212,47 @@ document.addEventListener('DOMContentLoaded', function(){
   // ===== helpers & state =====
   const $ = (id)=>document.getElementById(id);
   const ls = (k,v)=> v===undefined? JSON.parse(localStorage.getItem(k)||'null') : localStorage.setItem(k, JSON.stringify(v));
-  function log(){ console.log('[DBG]', ...arguments); }
+
+  const quotes = [
+    "🧹 Teamwork-tricket: 10 minuter nu sparar 30 sen. Välj en sak – kör! 💪",
+    "✨ Små steg, stor skillnad: lägg tillbaka tre saker där de ska vara. High five! 🙌",
+    "🍽️ Diskdans: sätt på en låt och plocka av bordet innan refrängen! 🎵",
+    "🧦 Strumpspaning! Hitta ett par och lägg i tvättkorgen – mission complete. ✅",
+    "🧠 Smart move: gör det svåraste först i 3 minuter. Ofta räcker det! ⏱️",
+    "🚪 Innan du går: titta runt – kan en sak följa med till rätt plats? 🧭",
+    "🛋️ Soffräddaren: ta med tre grejer från soffbordet när du reser dig. 🔁",
+    "📚 1 bok in i hyllan = pluspoäng för hjärnan. Ordning gör det lättare att plugga! 🧠✨",
+    "🧴 Torka handfatet när du borstar tänderna. Multitasking-pro! 😎",
+    "🗑️ Mini-städ: släng 5 onödiga saker. Snabbt, snyggt, klart. ⚡",
+    "🛗 2-våningsregeln: Gå aldrig tomhänt i trappan – ta med något upp/ner. 🧳",
+    "🎯 Välj en yta – skrivbord, nattduksbord eller diskbänk – och gör den 10% bättre. 🔟%",
+    "🎧 Podcast-städning: lyssna på något kul medan du fixar. Tid flyger! 🕊️",
+    "🧩 Delar ihop: hitta ett lego/pussel på fel plats? Lägg i rätt låda direkt. 🧺",
+    "🌱 Hjälp hemma = träningspass för självständighet. Du blir starkare varje dag. 💥",
+    "🧼 1 trasa + 60 sekunder = superglans. Välj en yta och ge den kärlek. ❤️",
+    "📦 Hemma-base: ha en “på väg ut”-korg för saker till skola/kompisar. 🚀",
+    "🏁 Starta litet: 5 plagg i tvättkorgen nu. Resten blir lättare sen. 🧺",
+    "🌟 Vinnardag: gör en mini-sak före skärmen. Du styr dagen! 🕹️",
+    "🤝 Bäst i laget: när alla gör lite, blir hemmet mycket. Tack för att du är med! 💙"
+  ];
 
   const viewMain = $('viewMain'), viewSettings = $('viewSettings'), viewLogList = $('viewLogList');
   const tabMain = $('tabMain'), tabSettings = $('tabSettings'), goSettingsBtn = $('goSettingsBtn');
   const lockedCard = $('lockedCard'), logCard=$('logCard'), statsCard=$('statsCard'), needPersonCard=$('needPersonCard');
-  const welcomeMsg = $('welcomeMsg'), loading = $('loading'), chooseHint = $('chooseHint');
+  const loading = $('loading');
 
   const taskSel=$('task'), commentEl=$('comment');
   const rangeSel=$('range'), matrixContainer=$('matrixContainer'), logList=$('logList');
   const backendUrlEl=$('backendUrl'), passwordEl=$('password');
   const settingsStatus=$('settingsStatus'), fetchStatus=$('fetchStatus'), logStatus=$('logStatus');
   const myPersonSel = $('myPersonSel'), myPersonHint = $('myPersonHint');
-  const currentUserLabel = $('currentUserLabel');
+  const chooseHint = $('chooseHint'), welcomeMsg = $('welcomeMsg');
   const goPickPersonBtn = $('goPickPersonBtn');
   const logBtn = $('logBtn');
+  const kidsQuote = $('kidsQuote');
+
+  // slumpa budskap
+  kidsQuote.textContent = quotes[Math.floor(Math.random()*quotes.length)];
 
   // ===== defaults & init =====
   const DEFAULTS = {
@@ -237,8 +277,6 @@ document.addEventListener('DOMContentLoaded', function(){
   function updateWelcome(){
     const name = (ls('myPerson')||'') || '';
     welcomeMsg.textContent = name ? `Välkommen, ${name}!` : 'Välkommen!';
-    currentUserLabel.textContent = name || '–';
-    // Dölj tipsraden när person är vald
     chooseHint.classList.toggle('hidden', !!name);
   }
   updateWelcome();
@@ -360,11 +398,9 @@ document.addEventListener('DOMContentLoaded', function(){
   function enforceMyPerson(people){
     const my = ls('myPerson') || '';
     const valid = my && Array.isArray(people) && people.includes(my);
-    // Visa varning om ej vald, disabla loggning
     needPersonCard.classList.toggle('hidden', !!valid);
     logBtn.disabled = !valid;
     if (commentEl) commentEl.disabled = !valid;
-    currentUserLabel.textContent = valid ? my : '–';
     return valid;
   }
 
@@ -398,7 +434,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
       fillSelect(taskSel, cfg.tasks||[]);
 
-      const myValid = enforceMyPerson(cfg.people||[]);
+      enforceMyPerson(cfg.people||[]);
       updateWelcome();
 
       const logs = await getLogs(Number(rangeSel.value||30));
@@ -415,7 +451,7 @@ document.addEventListener('DOMContentLoaded', function(){
       setUnlockedUI(false);
       fetchStatus.textContent = '';
       settingsStatus.innerHTML = `<span class="err">Fel: ${e.message}</span>`;
-      log('[refreshAll error]', e);
+      console.error('[refreshAll error]', e);
     }finally{
       showLoading(false);
     }
@@ -474,7 +510,7 @@ document.addEventListener('DOMContentLoaded', function(){
       await refreshAll();
     }catch(e){
       logStatus.innerHTML = `<span class="err">Fel: ${e.message}</span>`;
-      log('[post error]', e);
+      console.error('[post error]', e);
     }
   });
 
