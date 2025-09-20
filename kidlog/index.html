@@ -515,6 +515,7 @@ document.addEventListener('DOMContentLoaded', function(){
     settingsStatus.innerHTML = '<span class="ok">Sparat lokalt.</span>';
   });
 
+  // 🔧 Testa anslutning ska INTE byta sida: den hämtar config, uppdaterar listor och skriver status – stannar kvar i Inställningar.
   $('testBtn').addEventListener('click', async()=>{
     ls('backendUrl', backendUrlEl.value.trim());
     ls('password',   passwordEl.value.trim());
@@ -523,9 +524,18 @@ document.addEventListener('DOMContentLoaded', function(){
     try{
       const cfg = await getConfig();
       if (!cfg.ok) throw new Error(cfg.error||'config error');
-      cacheSet('cfgCache', {people: cfg.people||[], tasks: cfg.tasks||[]});
-      await initLoad();
-      settingsStatus.innerHTML = `<span class="ok">Anslutning OK. (${(cfg.people||[]).length} personer, ${(cfg.tasks||[]).length} uppgifter)</span>`;
+
+      // uppdatera cache och state + UI i Inställningar (utan att lämna sidan)
+      const cfgData = {people: cfg.people||[], tasks: cfg.tasks||[]};
+      cacheSet('cfgCache', cfgData);
+      state.cfg = cfgData;
+      cachePeople(cfgData.people);
+      renderMyPersonSelect();
+      fillSelect(taskSel, cfgData.tasks);     // så logg-sidan får nya tasks nästa gång man går dit
+      enforceMyPerson(cfgData.people);
+
+      settingsStatus.innerHTML = `<span class="ok">Anslutning OK. (${cfgData.people.length} personer, ${cfgData.tasks.length} uppgifter)</span>`;
+      // stanna kvar i Inställningar – ingen setActive('main') här
     }catch(e){
       settingsStatus.innerHTML = `<span class="err">Fel: ${e.message}</span>`;
     }finally{
