@@ -37,8 +37,11 @@
     .spacer{flex:1}
     .nav .tab{padding:.38rem .62rem;border-radius:12px;border:1px solid #e5e7eb;background:#fff;color:#111;min-height:auto;line-height:1.1;font-weight:600;white-space:nowrap;flex:0 0 auto;width:auto}
     .tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+    /* Uppdatera-ikon (utan text) */
     .refresh-btn{
-      display:inline-flex;align-items:center;gap:6px;padding:.38rem .62rem;border-radius:12px;border:1px solid #e5e7eb;background:#fff;color:#111;font-weight:600;white-space:nowrap;flex:0 0 auto
+      display:inline-flex;align-items:center;justify-content:center;
+      width:38px;height:38px;border-radius:12px;border:1px solid #e5e7eb;background:#fff;color:#111;
+      font-size:18px;flex:0 0 auto
     }
 
     /* Välkomstsektion (inte card) */
@@ -63,32 +66,33 @@
 
     /* Logglista: exakt en rad per entry, horisontell scroll, inga automatiska radbrytningar */
     #logList{
-      white-space:pre; /* en rad exakt */
+      white-space:pre; /* exakt en rad per logg */
       overflow-x:auto;
       font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size:13px;
       padding-bottom:4px;
     }
 
-    /* Loading overlay */
+    /* Loading overlay – med app-ikon i mitten + texten "Laddar om data" */
     #loading {
-      position: fixed; inset: 0; background: rgba(255,255,255,.85);
+      position: fixed; inset: 0; background: rgba(255,255,255,.88);
       backdrop-filter: saturate(180%) blur(8px);
       display: none; align-items: center; justify-content: center; z-index: 9999;
     }
     #loading.show { display: flex; }
-    .loader { display:flex; flex-direction:column; align-items:center; gap:12px;
+    .loader {
+      display:flex; flex-direction:column; align-items:center; gap:12px;
       padding:22px 26px; border-radius:16px; background: var(--card);
-      box-shadow:0 8px 30px rgba(0,0,0,.1); min-width:240px; }
-    .spinner { width:34px; height:34px; border-radius:50%; border:4px solid #e5e7eb; border-top-color: var(--primary); animation: spin 1s linear infinite; }
+      box-shadow:0 8px 30px rgba(0,0,0,.1); min-width:240px;
+    }
+    .loader img{width:72px;height:72px;border-radius:14px;object-fit:contain;box-shadow:0 1px 6px rgba(0,0,0,.08)}
+    .spinner { width:28px; height:28px; border-radius:50%; border:3px solid #e5e7eb; border-top-color: var(--primary); animation: spin 1s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
     /* Pull-to-refresh indikator */
-    #ptr{
-      position:sticky;top:0;z-index:9;height:0;overflow:visible;pointer-events:none;
-    }
+    #ptr{position:sticky;top:0;z-index:9;height:0;overflow:visible;pointer-events:none}
     #ptr .ptr-inner{
-      position:absolute;left:0;right:0;top:-48px;margin:auto;width:180px;height:36px;
+      position:absolute;left:0;right:0;top:-48px;margin:auto;width:200px;height:36px;
       background:#ffffff;border:1px solid #e5e7eb;border-radius:999px;
       display:flex;align-items:center;justify-content:center;gap:8px;
       opacity:0;transform:translateY(-8px);transition:opacity .2s, transform .2s;
@@ -106,7 +110,7 @@
       .brand-logo{width:44px;height:44px}
       .nav-inner{gap:6px;padding:8px}
       .nav .tab{padding:.32rem .54rem;font-size:15px;border-radius:10px}
-      .refresh-btn{padding:.32rem .54rem;font-size:15px;border-radius:10px}
+      .refresh-btn{width:34px;height:34px;font-size:16px;border-radius:10px}
     }
     @media (max-width:600px){
       .wrap{padding:0 12px}
@@ -125,7 +129,8 @@
       <div class="spacer"></div>
       <button id="tabMain" class="tab active" type="button">Loggning</button>
       <button id="tabSettings" class="tab" type="button">Inställningar</button>
-      <button id="refreshAllBtn" class="refresh-btn" type="button" title="Uppdatera allt">↻ Uppdatera</button>
+      <!-- ikon utan text -->
+      <button id="refreshAllBtn" class="refresh-btn" type="button" title="Uppdatera" aria-label="Uppdatera">↻</button>
     </div>
   </div>
 
@@ -135,8 +140,9 @@
   <!-- Loading overlay -->
   <div id="loading" aria-live="polite" aria-busy="true">
     <div class="loader">
+      <img src="applogo.png" alt="App-ikon">
       <div class="spinner" role="status" aria-label="Laddar"></div>
-      <div class="muted">Uppdaterar data…</div>
+      <div class="muted" id="loadingText">Laddar om data…</div>
     </div>
   </div>
 
@@ -178,7 +184,9 @@
       </div>
 
       <div class="card hidden" id="statsCard">
-        <div class="row">
+        <h3 style="margin-top:0">Vem gjorde vad</h3>
+        <!-- val av dagar direkt efter rubriken -->
+        <div class="row" style="margin-top:6px">
           <select id="range">
             <option value="7">7 dagar</option>
             <option value="30" selected>30 dagar</option>
@@ -186,10 +194,8 @@
             <option value="180">180 dagar</option>
             <option value="360">360 dagar</option>
           </select>
-          <button id="refreshBtn">Uppdatera</button>
           <span id="fetchStatus" class="muted"></span>
         </div>
-        <h3 style="margin-top:0">Matris (Uppgift × Person)</h3>
         <div id="matrixContainer"></div>
       </div>
     </section>
@@ -232,7 +238,7 @@
     <!-- LOG LIST VIEW -->
     <section id="viewLogList" class="hidden">
       <div class="card">
-        <h2>Senaste loggar (30)</h2>
+        <!-- Ingen rubrik här längre -->
         <div id="logList"></div>
       </div>
     </section>
@@ -256,15 +262,13 @@ document.addEventListener('DOMContentLoaded', function(){
     "🗑️ Rensa lite: Släng fem småsaker du inte behöver (papper, skräp, trasiga grejer). Skönt rent!",
     "🤝 Alla gör lite: Om alla hemma fixar småsaker varje dag blir huset mysigare och roligare att vara i."
   ];
-
-  const kidsQuote = $('kidsQuote');
-  kidsQuote.textContent = quotes[Math.floor(Math.random()*quotes.length)];
+  $('kidsQuote').textContent = quotes[Math.floor(Math.random()*quotes.length)];
 
   // Elements
   const viewMain = $('viewMain'), viewSettings = $('viewSettings'), viewLogList = $('viewLogList');
   const tabMain = $('tabMain'), tabSettings = $('tabSettings'), goSettingsBtn = $('goSettingsBtn');
   const lockedCard = $('lockedCard'), logCard=$('logCard'), statsCard=$('statsCard'), needPersonCard=$('needPersonCard');
-  const loading = $('loading'), ptr = $('ptr');
+  const loading = $('loading'), loadingText = $('loadingText'), ptr = $('ptr');
 
   const taskSel=$('task'), commentEl=$('comment');
   const rangeSel=$('range'), matrixContainer=$('matrixContainer'), logList=$('logList');
@@ -274,7 +278,6 @@ document.addEventListener('DOMContentLoaded', function(){
   const chooseHint = $('chooseHint'), welcomeMsg = $('welcomeMsg');
   const goPickPersonBtn = $('goPickPersonBtn');
   const logBtn = $('logBtn');
-  const refreshBtn = $('refreshBtn');
   const refreshAllBtn = $('refreshAllBtn');
 
   // State & cache
@@ -297,7 +300,8 @@ document.addEventListener('DOMContentLoaded', function(){
   backendUrlEl.value = ls('backendUrl') || '';
   passwordEl.value   = ls('password')   || '';
 
-  function showLoading(on){
+  function showLoading(on, text="Laddar om data…"){
+    loadingText.textContent = text;
     loading.classList.toggle('show', !!on);
     loading.setAttribute('aria-busy', on ? 'true' : 'false');
   }
@@ -370,16 +374,9 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 
   // ===== Caching (mindre nät-anrop) =====
-  // cache i localStorage med tidsstämplar
   const CACHE_TTL_MS = 10 * 60 * 1000; // 10 min
-  function cacheSet(key, data){
-    ls(key, { ts: Date.now(), data });
-  }
-  function cacheGet(key){
-    const v = ls(key);
-    if (!v) return null;
-    return v;
-  }
+  function cacheSet(key, data){ ls(key, { ts: Date.now(), data }); }
+  function cacheGet(key){ return ls(key) || null; }
   function cacheValid(entry){ return entry && (Date.now() - entry.ts) < CACHE_TTL_MS; }
 
   async function ensureConfig(force=false){
@@ -387,6 +384,10 @@ document.addEventListener('DOMContentLoaded', function(){
       const cached = cacheGet('cfgCache');
       if (cacheValid(cached)){
         state.cfg = cached.data;
+        fillSelect(taskSel, state.cfg.tasks);
+        cachePeople(state.cfg.people);
+        renderMyPersonSelect();
+        enforceMyPerson(state.cfg.people);
         return state.cfg;
       }
     }
@@ -394,7 +395,6 @@ document.addEventListener('DOMContentLoaded', function(){
     if (!cfg.ok) throw new Error(cfg.error||'config error');
     state.cfg = { people: cfg.people||[], tasks: cfg.tasks||[] };
     cacheSet('cfgCache', state.cfg);
-    // uppdatera UI kopplat till config
     fillSelect(taskSel, state.cfg.tasks);
     cachePeople(state.cfg.people);
     renderMyPersonSelect();
@@ -403,8 +403,9 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 
   async function ensureLogs(force=false){
+    const key = 'logsCache_'+state.range;
     if (!force){
-      const cached = cacheGet('logsCache_'+state.range);
+      const cached = cacheGet(key);
       if (cacheValid(cached)){
         state.logs = cached.data || [];
         state.matrix = buildMatrixFromLogs(state.cfg.people, state.cfg.tasks, state.logs);
@@ -414,7 +415,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const logs = await getLogs(state.range);
     if (!logs.ok) throw new Error(logs.error||'logs error');
     state.logs = logs.logs || [];
-    cacheSet('logsCache_'+state.range, state.logs);
+    cacheSet(key, state.logs);
     state.matrix = buildMatrixFromLogs(state.cfg.people, state.cfg.tasks, state.logs);
     return state.logs;
   }
@@ -423,25 +424,20 @@ document.addEventListener('DOMContentLoaded', function(){
   function fillSelect(el, arr){ el.innerHTML = (arr||[]).map(v=>`<option>${v}</option>`).join(''); }
 
   function renderMatrix(matrix, people, tasks){
-    let max=0; for(const t of tasks){ for(const p of people){ max = Math.max(max, (matrix?.[t]?.[p])||0); } }
-    let html = '<table><tr><th>Uppgift</th>'+people.map(p=>`<th>${p}</th>`).join('')+'<th>Summa</th></tr>';
+    // Header: tom första cell (ingen "Uppgift"), sedan people, ingen summa-kolumn
+    let html = '<table><tr><th></th>' + people.map(p=>`<th>${p}</th>`).join('') + '</tr>';
     for(const t of tasks){
-      let rowsum=0;
       html += `<tr><th>${t}</th>`;
       for(const p of people){
-        const val = (matrix?.[t]?.[p])||0; rowsum+=val;
-        const intensity=max?Math.floor((val/max)*200):0;
+        const val = (matrix?.[t]?.[p])||0;
+        // enkel intensitet
+        const intensity = Math.min(200, val*40); // 0,40,80,... mjuk skala
         const r = 255 - intensity, g = 255 - Math.floor(intensity/3), b = 255 - intensity;
         html += `<td style="background:rgb(${r},${g},${b})">${val}</td>`;
       }
-      html += `<td style="font-weight:600">${rowsum}</td></tr>`;
+      html += `</tr>`;
     }
-    // footer sums
-    let footer = '<tr><td style="font-weight:600">Summa</td>';
-    let grand=0;
-    for(const p of people){ let col=0; for(const t of tasks){ col += (matrix?.[t]?.[p])||0; } grand+=col; footer+=`<td style="font-weight:600">${col}</td>`; }
-    footer += `<td style="font-weight:700">${grand}</td></tr>`;
-    html += footer + '</table>';
+    html += '</table>';
     matrixContainer.innerHTML = html;
   }
 
@@ -452,12 +448,12 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 
   function renderLogList(logs){
-    const recent = (logs||[]).slice(-30).reverse();
-    // exakt en rad per logg, ingen radbrytning
+    // samma antal dagar som matrisen (state.logs redan hämtad för range)
+    const recent = (logs||[]).slice().reverse(); // visa senaste överst
     logList.textContent = recent.length? recent.map(L=>{
       const d=(L.timestamp||'').slice(0,10);
-      let c=(L.comment||'').replace(/\n/g,' '); // inga \n i loggraden
-      if (c.length>80) c=c.slice(0,80)+'…';     // lägg gärna mild trim så en rad inte blir 1000 tecken
+      let c=(L.comment||'').replace(/\n/g,' '); // ingen radbrytning i raden
+      if (c.length>120) c=c.slice(0,120)+'…';
       return `${d} | ${L.person||''} | ${L.task||''} | ${c}`;
     }).join('\n') : '(Inga loggar än)';
   }
@@ -487,17 +483,12 @@ document.addEventListener('DOMContentLoaded', function(){
     myPersonHint.style.display = people.length ? 'none' : 'block';
   }
 
-  // ===== Effektiv refresh: bara när man drar hårt nedåt eller trycker på refresh-knappar =====
+  // ===== Effektiv refresh =====
   async function refreshAll(forceConfig=false){
-    if (!hasCreds()){
-      setUnlockedUI(false);
-      settingsStatus.textContent = 'Fyll i URL & lösenord och tryck Testa.';
-      return;
-    }
-    showLoading(true);
+    showLoading(true, "Laddar om data…");
     try{
       await ensureConfig(forceConfig);
-      await ensureLogs(true); // vid manuell refresh vill du uppdatera både matris & logg
+      await ensureLogs(true); // hämta nya loggar för valt spann
       renderMatrix(state.matrix, state.cfg.people, state.cfg.tasks);
       renderLogList(state.logs);
       setUnlockedUI(true);
@@ -513,13 +504,13 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }
 
-  // ===== Init-laddning: hämta config (med cache), hämta logs (med cache), rendera =====
+  // Init: ladda med cache om möjligt
   async function initLoad(){
     if (!hasCreds()){ setActive('settings'); return; }
-    showLoading(true);
+    showLoading(true, "Laddar om data…");
     try{
-      await ensureConfig(false);      // använd cache om fräsch
-      await ensureLogs(false);        // använd cache om fräsch
+      await ensureConfig(false);
+      await ensureLogs(false);
       renderMatrix(state.matrix, state.cfg.people, state.cfg.tasks);
       renderLogList(state.logs);
       setUnlockedUI(true);
@@ -532,31 +523,23 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }
 
-  // ===== Pull to refresh (kraftig drag nedåt från top) =====
+  // Pull-to-refresh (dra nedåt)
   let touchStartY = 0, pulling = false;
   window.addEventListener('touchstart', (e)=>{
-    if (window.scrollY === 0){
-      touchStartY = e.touches[0].clientY;
-      pulling = true;
-    }else{
-      pulling = false;
-    }
+    if (window.scrollY === 0){ touchStartY = e.touches[0].clientY; pulling = true; }
+    else pulling = false;
   }, {passive:true});
   window.addEventListener('touchmove', (e)=>{
     if (!pulling) return;
     const dy = e.touches[0].clientY - touchStartY;
-    if (dy > 30){
-      ptr.classList.add('show');
-    } else {
-      ptr.classList.remove('show');
-    }
+    if (dy > 30){ ptr.classList.add('show'); } else { ptr.classList.remove('show'); }
   }, {passive:true});
   window.addEventListener('touchend', async ()=>{
     if (!pulling) return;
     pulling = false;
     if (ptr.classList.contains('show')){
       ptr.classList.remove('show');
-      await refreshAll(false); // använd cache för config, men hämta nya loggar i refreshAll
+      await refreshAll(false);
     }
   });
 
@@ -571,11 +554,10 @@ document.addEventListener('DOMContentLoaded', function(){
     ls('backendUrl', backendUrlEl.value.trim());
     ls('password',   passwordEl.value.trim());
     settingsStatus.textContent = 'Testar…';
-    showLoading(true);
+    showLoading(true, "Laddar om data…");
     try{
       const cfg = await getConfig();
       if (!cfg.ok) throw new Error(cfg.error||'config error');
-      // uppdatera cache och UI
       cacheSet('cfgCache', {people: cfg.people||[], tasks: cfg.tasks||[]});
       await initLoad();
       settingsStatus.innerHTML = `<span class="ok">Anslutning OK. (${(cfg.people||[]).length} personer, ${(cfg.tasks||[]).length} uppgifter)</span>`;
@@ -595,17 +577,27 @@ document.addEventListener('DOMContentLoaded', function(){
     enforceMyPerson(people);
   });
 
-  // Manuell refresh-knapp (i statistik-kortet)
-  refreshBtn.addEventListener('click', ()=> refreshAll(false));
-  // Global refresh-knapp (i nav)
+  // Global refresh-ikon i nav
   refreshAllBtn.addEventListener('click', ()=> refreshAll(false));
 
-  // Byt intervall (range) påverkar nästa refresh
-  rangeSel.addEventListener('change', ()=>{
+  // Byt intervall (range) → uppdatera direkt (utan extra knapp) och håll logg + matris i synk
+  rangeSel.addEventListener('change', async ()=>{
     state.range = Number(rangeSel.value || 30);
+    showLoading(true, "Laddar om data…");
+    try{
+      await ensureLogs(true); // hämta nya loggar för nytt spann
+      renderMatrix(state.matrix, state.cfg.people, state.cfg.tasks);
+      renderLogList(state.logs);
+      showDone(fetchStatus);
+    }catch(e){
+      fetchStatus.textContent = '';
+      settingsStatus.innerHTML = `<span class="err">Fel: ${e.message}</span>`;
+    }finally{
+      showLoading(false);
+    }
   });
 
-  // Logga utan att ladda om allt (vi uppdaterar UI lokalt och hämtar från server först vid manuell refresh)
+  // Logga: uppdatera UI lokalt (ingen full reload)
   logBtn.addEventListener('click', async()=>{
     if (!hasCreds()){ alert('Fyll i inställningar först.'); setActive('settings'); return; }
     const my = ls('myPerson') || '';
@@ -618,16 +610,14 @@ document.addEventListener('DOMContentLoaded', function(){
 
       // Lokalt UI-uppdatering
       const newEntry = { person: my, task, comment, timestamp: new Date().toISOString() };
-      state.logs = (state.logs||[]).concat([newEntry]);                 // lägg till ny logg lokalt
-      state.matrix = buildMatrixFromLogs(state.cfg.people, state.cfg.tasks, state.logs); // bygg matris lokalt
+      state.logs = (state.logs||[]).concat([newEntry]);
+      state.matrix = buildMatrixFromLogs(state.cfg.people, state.cfg.tasks, state.logs);
       renderMatrix(state.matrix, state.cfg.people, state.cfg.tasks);
       renderLogList(state.logs);
-      // Spara logs i cache (så de ligger kvar tills nästa riktiga refresh)
       cacheSet('logsCache_'+state.range, state.logs);
 
       commentEl.value='';
       showDone(logStatus); // "Klart!" med fade
-      // INGEN refreshAll här – vi håller det snabbt
     }catch(e){
       logStatus.innerHTML = `<span class="err">Fel: ${e.message}</span>`;
       console.error('[post error]', e);
