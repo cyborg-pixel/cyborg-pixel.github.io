@@ -22,9 +22,11 @@
     .muted{color:var(--muted);font-size:14px}
     .hidden{display:none}
 
+    /* Formfält (label ovanför input) */
     .field{display:flex;flex-direction:column;gap:6px;width:100%}
     .field label{font-weight:700}
 
+    /* NAV */
     .nav{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(6px);z-index:10;border-bottom:1px solid #eef2f7}
     .nav-inner{
       max-width:900px;margin:0 auto;display:flex;align-items:center;
@@ -35,12 +37,14 @@
     .spacer{flex:1}
     .nav .tab{padding:.38rem .62rem;border-radius:12px;border:1px solid #e5e7eb;background:#fff;color:#111;min-height:auto;line-height:1.1;font-weight:600;white-space:nowrap;flex:0 0 auto;width:auto}
     .tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+    /* Uppdatera-ikon (utan text) */
     .refresh-btn{
       display:inline-flex;align-items:center;justify-content:center;
       width:38px;height:38px;border-radius:12px;border:1px solid #e5e7eb;background:#fff;color:#111;
       font-size:18px;flex:0 0 auto
     }
 
+    /* Välkomstsektion (inte card) */
     .welcome{margin:14px 0 16px 0;padding:0 2px}
     .welcome h1{
       font-size:20px;margin:0 0 6px 0; font-weight:800;
@@ -52,6 +56,7 @@
       padding:10px 12px; color:#0f172a; box-shadow:0 1px 6px rgba(0,0,0,.04)
     }
 
+    /* Tabell */
     table{border-collapse:collapse;width:100%;margin-top:12px}
     th,td{border:1px solid #e5e7eb;padding:8px;text-align:center;min-width:60px}
     th{background:#f1f5f9}
@@ -59,16 +64,16 @@
     .ok{color:#047857;font-weight:700}
     .err{color:#b91c1c;font-weight:700}
 
-    /* Logglista: exakt en rad per entry, horisontell scroll */
+    /* Logglista: exakt en rad per entry, horisontell scroll, inga automatiska radbrytningar */
     #logList{
-      white-space:pre;
+      white-space:pre; /* exakt en rad per logg */
       overflow-x:auto;
       font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size:13px;
       padding-bottom:4px;
     }
 
-    /* Loading overlay med app-ikon + text */
+    /* Loading overlay – med app-ikon i mitten + texten "Laddar om data" */
     #loading {
       position: fixed; inset: 0; background: rgba(255,255,255,.88);
       backdrop-filter: saturate(180%) blur(8px);
@@ -84,17 +89,6 @@
     .spinner { width:28px; height:28px; border-radius:50%; border:3px solid #e5e7eb; border-top-color: var(--primary); animation: spin 1s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    #ptr{position:sticky;top:0;z-index:9;height:0;overflow:visible;pointer-events:none}
-    #ptr .ptr-inner{
-      position:absolute;left:0;right:0;top:-48px;margin:auto;width:200px;height:36px;
-      background:#ffffff;border:1px solid #e5e7eb;border-radius:999px;
-      display:flex;align-items:center;justify-content:center;gap:8px;
-      opacity:0;transform:translateY(-8px);transition:opacity .2s, transform .2s;
-      box-shadow:0 4px 14px rgba(0,0,0,.06)
-    }
-    #ptr.show .ptr-inner{opacity:1;transform:translateY(0)}
-    #ptr strong{font-size:13px;color:#0f172a}
-
     .flash{opacity:1;transition:opacity .6s ease}
     .flash.fade-out{opacity:0}
 
@@ -107,6 +101,7 @@
     @media (max-width:600px){
       .wrap{padding:0 12px}
       .row > *{flex:1}
+      /* endast innehåll i .wrap får bli 100% bred */
       .wrap button, .wrap select, .wrap input, .wrap textarea{width:100%}
     }
   </style>
@@ -125,8 +120,7 @@
     </div>
   </div>
 
-  <div id="ptr"><div class="ptr-inner">⬇️ <strong>Dra ned för att uppdatera</strong></div></div>
-
+  <!-- Loading overlay -->
   <div id="loading" aria-live="polite" aria-busy="true">
     <div class="loader">
       <img src="applogo.png" alt="App-ikon">
@@ -136,6 +130,7 @@
   </div>
 
   <div class="wrap">
+    <!-- Välkomstsektion (inte card) -->
     <section class="welcome">
       <h1 id="welcomeMsg">Välkommen!</h1>
       <p class="muted" id="chooseHint">Välj <b>Min person</b> under <b>Inställningar</b> för att logga snabbare.</p>
@@ -150,6 +145,7 @@
         <button id="goSettingsBtn" type="button">Gå till Inställningar</button>
       </div>
 
+      <!-- Visas om Min person ej vald -->
       <div class="card hidden" id="needPersonCard">
         <h2>Välj din person</h2>
         <p class="muted">För att logga behöver du först välja <b>Min person</b> under <b>Inställningar</b>.</p>
@@ -172,6 +168,7 @@
 
       <div class="card hidden" id="statsCard">
         <h3 style="margin-top:0">Vem gjorde vad</h3>
+        <!-- val av dagar direkt efter rubriken -->
         <div class="row" style="margin-top:6px">
           <select id="range">
             <option value="7">7 dagar</option>
@@ -210,6 +207,7 @@
 
         <hr style="margin:8px 0 12px;border:none;border-top:1px solid #eee">
 
+        <!-- Min person – hämtas från Sheets (config.people) -->
         <div class="field">
           <label for="myPersonSel">Min person</label>
           <select id="myPersonSel"></select>
@@ -221,8 +219,9 @@
     </section>
 
     <!-- LOG LIST VIEW -->
-    <section id="viewLogList" class="hidden">
+    <section id="viewLogList" class="">
       <div class="card">
+        <!-- Ingen rubrik här -->
         <div id="logList"></div>
       </div>
     </section>
@@ -230,6 +229,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function(){
+  // ===== helpers & state =====
   const $ = (id)=>document.getElementById(id);
   const ls = (k,v)=> v===undefined? JSON.parse(localStorage.getItem(k)||'null') : localStorage.setItem(k, JSON.stringify(v));
 
@@ -247,10 +247,12 @@ document.addEventListener('DOMContentLoaded', function(){
   ];
   $('kidsQuote').textContent = quotes[Math.floor(Math.random()*quotes.length)];
 
+  // Elements
   const viewMain = $('viewMain'), viewSettings = $('viewSettings'), viewLogList = $('viewLogList');
   const tabMain = $('tabMain'), tabSettings = $('tabSettings'), goSettingsBtn = $('goSettingsBtn');
   const lockedCard = $('lockedCard'), logCard=$('logCard'), statsCard=$('statsCard'), needPersonCard=$('needPersonCard');
-  const loading = $('loading'), loadingText = $('loadingText'), ptr = $('ptr');
+
+  const loading = $('loading'), loadingText = $('loadingText');
 
   const taskSel=$('task'), commentEl=$('comment');
   const rangeSel=$('range'), matrixContainer=$('matrixContainer'), logList=$('logList');
@@ -262,12 +264,23 @@ document.addEventListener('DOMContentLoaded', function(){
   const logBtn = $('logBtn');
   const refreshAllBtn = $('refreshAllBtn');
 
-  let state = { cfg:null, logs:[], matrix:null, range:Number(rangeSel.value||30) };
+  // State & cache
+  let state = {
+    cfg: null,          // {people, tasks}
+    logs: [],           // array of logs
+    matrix: null,       // built from logs
+    range: Number(rangeSel.value || 30)
+  };
 
-  const DEFAULTS = { backendUrl: backendUrlEl.value, password: passwordEl.value, myPerson: null };
+  const DEFAULTS = {
+    backendUrl: backendUrlEl.value,
+    password: passwordEl.value,
+    myPerson: null
+  };
   if (ls('backendUrl')===null) ls('backendUrl', DEFAULTS.backendUrl);
   if (ls('password')===null)   ls('password',   DEFAULTS.password);
   if (ls('myPerson')===null)   ls('myPerson',   DEFAULTS.myPerson);
+
   backendUrlEl.value = ls('backendUrl') || '';
   passwordEl.value   = ls('password')   || '';
 
@@ -276,6 +289,7 @@ document.addEventListener('DOMContentLoaded', function(){
     loading.classList.toggle('show', !!on);
     loading.setAttribute('aria-busy', on ? 'true' : 'false');
   }
+
   function showDone(el){
     if(!el) return;
     el.textContent = 'Klart!';
@@ -283,6 +297,7 @@ document.addEventListener('DOMContentLoaded', function(){
     setTimeout(()=> el.classList.add('fade-out'), 10000);
     setTimeout(()=> { el.textContent=''; el.classList.remove('flash','fade-out'); }, 10650);
   }
+
   function updateWelcome(){
     const name = (ls('myPerson')||'') || '';
     welcomeMsg.textContent = name ? `Välkommen, ${name}!` : 'Välkommen!';
@@ -294,12 +309,15 @@ document.addEventListener('DOMContentLoaded', function(){
     const main = which==='main';
     viewMain.classList.toggle('hidden', !main);
     viewSettings.classList.toggle('hidden', which!=='settings');
+
+    // Logglistan ska bara döljas/visas, inte rensas – så den finns kvar när man kommer tillbaka
     const showLogs = (which==='main');
     viewLogList.classList.toggle('hidden', !showLogs);
-    if (!showLogs) { logList.textContent = ''; }
+
     tabMain.classList.toggle('active', main);
     tabSettings.classList.toggle('active', which==='settings');
   }
+
   tabMain.addEventListener('click', ()=> setActive('main'));
   tabSettings.addEventListener('click', ()=> setActive('settings'));
   if (goSettingsBtn) goSettingsBtn.addEventListener('click', ()=> setActive('settings'));
@@ -312,7 +330,9 @@ document.addEventListener('DOMContentLoaded', function(){
   async function fetchJSON(url, opts){
     const r = await fetch(url, opts);
     const txt = await r.text();
-    try { return JSON.parse(txt); } catch(e) { throw new Error('JSON-parse-fel: '+e.message+'\nBody: '+txt.slice(0,800)); }
+    try { return JSON.parse(txt); } catch(e) {
+      throw new Error('JSON-parse-fel: '+e.message+'\nBody: '+txt.slice(0,800));
+    }
   }
   async function getConfig(){
     const url = `${apiBase()}?mode=config&password=${encodeURIComponent(apiPwd())}`;
@@ -339,6 +359,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }
 
+  // ===== Caching (mindre nät-anrop) =====
   const CACHE_TTL_MS = 10 * 60 * 1000; // 10 min
   function cacheSet(key, data){ ls(key, { ts: Date.now(), data }); }
   function cacheGet(key){ return ls(key) || null; }
@@ -385,15 +406,17 @@ document.addEventListener('DOMContentLoaded', function(){
     return state.logs;
   }
 
+  // ===== UI render =====
   function fillSelect(el, arr){ el.innerHTML = (arr||[]).map(v=>`<option>${v}</option>`).join(''); }
 
   function renderMatrix(matrix, people, tasks){
+    // Header: tom första cell (ingen "Uppgift"), sedan people, ingen summa-kolumn/-rad
     let html = '<table><tr><th></th>' + people.map(p=>`<th>${p}</th>`).join('') + '</tr>';
     for(const t of tasks){
       html += `<tr><th>${t}</th>`;
       for(const p of people){
         const val = (matrix?.[t]?.[p])||0;
-        const intensity = Math.min(200, val*40);
+        const intensity = Math.min(200, val*40); // enkel mjuk skala
         const r = 255 - intensity, g = 255 - Math.floor(intensity/3), b = 255 - intensity;
         html += `<td style="background:rgb(${r},${g},${b})">${val}</td>`;
       }
@@ -410,10 +433,11 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 
   function renderLogList(logs){
-    const recent = (logs||[]).slice().reverse();
+    // samma antal dagar som matrisen (state.logs redan hämtad för range)
+    const recent = (logs||[]).slice().reverse(); // visa senaste överst
     logList.textContent = recent.length? recent.map(L=>{
       const d=(L.timestamp||'').slice(0,10);
-      let c=(L.comment||'').replace(/\n/g,' ');
+      let c=(L.comment||'').replace(/\n/g,' '); // ingen radbrytning i raden
       if (c.length>120) c=c.slice(0,120)+'…';
       return `${d} | ${L.person||''} | ${L.task||''} | ${c}`;
     }).join('\n') : '(Inga loggar än)';
@@ -434,6 +458,7 @@ document.addEventListener('DOMContentLoaded', function(){
     return valid;
   }
 
+  // people cache & myPerson UI
   function cachePeople(people){ if (Array.isArray(people)) ls('peopleCache', people); }
   function renderMyPersonSelect(){
     const people = ls('peopleCache') || [];
@@ -443,16 +468,17 @@ document.addEventListener('DOMContentLoaded', function(){
     myPersonHint.style.display = people.length ? 'none' : 'block';
   }
 
+  // ===== Effektiv refresh (manuellt via knapp) =====
   async function refreshAll(forceConfig=false){
     showLoading(true, "Laddar om data…");
     try{
       await ensureConfig(forceConfig);
-      await ensureLogs(true);
+      await ensureLogs(true); // hämta nya loggar för valt spann
       renderMatrix(state.matrix, state.cfg.people, state.cfg.tasks);
       renderLogList(state.logs);
       setUnlockedUI(true);
       setActive('main');
-      showDone(fetchStatus);
+      showDone(fetchStatus); // "Klart!" med fade
     }catch(e){
       setUnlockedUI(false);
       fetchStatus.textContent = '';
@@ -463,12 +489,13 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }
 
+  // Init: ladda med cache om möjligt
   async function initLoad(){
     if (!hasCreds()){ setActive('settings'); return; }
     showLoading(true, "Laddar om data…");
     try{
-      await ensureConfig(false);
-      await ensureLogs(false);
+      await ensureConfig(false);      // använd cache om fräsch
+      await ensureLogs(false);        // använd cache om fräsch
       renderMatrix(state.matrix, state.cfg.people, state.cfg.tasks);
       renderLogList(state.logs);
       setUnlockedUI(true);
@@ -481,27 +508,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }
 
-  // Pull-to-refresh
-  let touchStartY = 0, pulling = false;
-  window.addEventListener('touchstart', (e)=>{
-    if (window.scrollY === 0){ touchStartY = e.touches[0].clientY; pulling = true; }
-    else pulling = false;
-  }, {passive:true});
-  window.addEventListener('touchmove', (e)=>{
-    if (!pulling) return;
-    const dy = e.touches[0].clientY - touchStartY;
-    if (dy > 30){ $('ptr').classList.add('show'); } else { $('ptr').classList.remove('show'); }
-  }, {passive:true});
-  window.addEventListener('touchend', async ()=>{
-    if (!pulling) return;
-    pulling = false;
-    if ($('ptr').classList.contains('show')){
-      $('ptr').classList.remove('show');
-      await refreshAll(false); // PTR uppdaterar loggar; config tas från cache (ändra till true om du vill tvinga även här)
-    }
-  });
-
-  // Handlers
+  // ===== Event handlers =====
   $('saveSettingsBtn').addEventListener('click', ()=>{
     ls('backendUrl', backendUrlEl.value.trim());
     ls('password',   passwordEl.value.trim());
@@ -535,15 +542,15 @@ document.addEventListener('DOMContentLoaded', function(){
     enforceMyPerson(people);
   });
 
-  // Global refresh-ikon i nav — **tvingar config att laddas om**
+  // Global refresh-ikon i nav — tvingar config att laddas om
   refreshAllBtn.addEventListener('click', ()=> refreshAll(true));
 
-  // Byt intervall → uppdatera loggar & matris direkt
+  // Byt intervall (range) → uppdatera direkt (utan extra knapp) och håll logg + matris i synk
   rangeSel.addEventListener('change', async ()=>{
     state.range = Number(rangeSel.value || 30);
     showLoading(true, "Laddar om data…");
     try{
-      await ensureLogs(true);
+      await ensureLogs(true); // hämta nya loggar för nytt spann
       renderMatrix(state.matrix, state.cfg.people, state.cfg.tasks);
       renderLogList(state.logs);
       showDone(fetchStatus);
@@ -555,8 +562,8 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   });
 
-  // Logga: snabb lokal uppdatering
-  $('logBtn').addEventListener('click', async()=>{
+  // Logga utan full reload (uppdatera UI lokalt)
+  logBtn.addEventListener('click', async()=>{
     if (!hasCreds()){ alert('Fyll i inställningar först.'); setActive('settings'); return; }
     const my = ls('myPerson') || '';
     if (!my){ alert('Välj din person under Inställningar.'); setActive('settings'); return; }
@@ -566,21 +573,24 @@ document.addEventListener('DOMContentLoaded', function(){
       const res = await postLog({person: my, task, comment});
       if (!res.ok) throw new Error(res.error||'post error');
 
+      // Lokalt UI-uppdatering
       const newEntry = { person: my, task, comment, timestamp: new Date().toISOString() };
-      state.logs = (state.logs||[]).concat([newEntry]);
-      state.matrix = buildMatrixFromLogs(state.cfg.people, state.cfg.tasks, state.logs);
+      state.logs = (state.logs||[]).concat([newEntry]);                 // lägg till ny logg lokalt
+      state.matrix = buildMatrixFromLogs(state.cfg.people, state.cfg.tasks, state.logs); // bygg matris lokalt
       renderMatrix(state.matrix, state.cfg.people, state.cfg.tasks);
       renderLogList(state.logs);
+      // Spara logs i cache (så de ligger kvar tills nästa riktiga refresh)
       cacheSet('logsCache_'+state.range, state.logs);
 
       commentEl.value='';
-      showDone(logStatus);
+      showDone(logStatus); // "Klart!" med fade
     }catch(e){
       logStatus.innerHTML = `<span class="err">Fel: ${e.message}</span>`;
       console.error('[post error]', e);
     }
   });
 
+  // initial
   if (!ls('backendUrl') || !ls('password')) setActive('settings'); else initLoad();
 });
 </script>
