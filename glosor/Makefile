@@ -1,5 +1,5 @@
 # Variabler
-FILES = index2.html fysik13.json fysik12.json fysik11.json fysik10.json fysik09.json fysik08.json fysik07.json fysik06.json fysik05.json fysik04.json fysik03.json fysik02.json fysik01.json Makefile logo.png questions_2.json setup.json icon-192.png manifest.webmanifest questions_3.json icon-512.png questions_1.json questions_ebba_youtube.json index.html questions_1_misc.json questions_test2.json
+FILES = noter.png index2.html fysik13.json fysik12.json fysik11.json fysik10.json fysik09.json fysik08.json fysik07.json fysik06.json fysik05.json fysik04.json fysik03.json fysik02.json fysik01.json Makefile logo.png questions_2.json setup.json icon-192.png manifest.webmanifest questions_3.json icon-512.png questions_1.json questions_ebba_youtube.json index.html questions_1_misc.json questions_test2.json
 COMMIT_MSG ?= "Uppdateringar"
 
 # Standardmål - Visar tillgängliga kommandon
