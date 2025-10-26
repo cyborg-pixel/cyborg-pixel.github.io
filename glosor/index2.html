@@ -2,7 +2,8 @@
 <html lang="sv">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <!-- Stoppa zoom på iPhone + stöd för notch -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Flashcards – FR ↔ SV</title>
@@ -15,8 +16,7 @@
       --acc3: #00e3a2;
       --text: #e9ecf1;
       --muted:#9aa3b2;
-      --card:#0f132a99;
-      --glass:#ffffff0f;
+      --glass:#ffffff14;
       --shadow: 0 20px 40px rgba(0,0,0,.35);
       --radius: 22px;
     }
@@ -32,9 +32,7 @@
       background-attachment: fixed;
     }
     .container{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:16px;padding-bottom: calc(16px + env(safe-area-inset-bottom));}
-    header{
-      width:100%;max-width:820px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 4px 6px;
-    }
+    header{width:100%;max-width:820px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 4px 6px;}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--acc1),var(--acc2));box-shadow: inset 0 0 14px #ffffff40, 0 6px 16px #0006}
     h1{font-size:20px;letter-spacing:.3px;margin:0;font-weight:700;opacity:.95}
@@ -42,28 +40,17 @@
 
     .controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
     .segmented{display:flex;background:var(--glass);border:1px solid #ffffff22;border-radius:999px;padding:4px;backdrop-filter: blur(10px);-webkit-backdrop-filter: blur(10px)}
-    .segmented button{appearance:none;border:0;background:transparent;color:var(--muted);padding:8px 12px;border-radius:999px;font-weight:600;letter-spacing:.2px}
+    .segmented button{appearance:none;border:0;background:transparent;color:var(--muted);padding:8px 12px;border-radius:999px;font-weight:600;letter-spacing:.2px;touch-action: manipulation}
     .segmented button.active{background:linear-gradient(135deg,#ffffff1f,#ffffff08);color:var(--text);box-shadow:0 6px 14px #0005,inset 0 0 0 1px #ffffff22}
 
     main{width:100%;max-width:820px;display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:center}
 
     .card-wrap{perspective:1400px;width:100%}
-    .card{
-      width:100%;min-height:46vh;max-height:64vh;display:grid;place-items:center;position:relative;border-radius:var(--radius);
-      background: linear-gradient(180deg, #0b0f25, #0b102c);
-      border: 1px solid #ffffff1c;
-      box-shadow: var(--shadow), inset 0 0 0 1px #ffffff10;
-      overflow:hidden;
-      /* Behåll 3D-känslan men rotera INTE hela kortet – undviker spegelvänd text på iOS */
-      perspective: 1400px;
-      user-select:none;
-    }
-    .card-inner{position:absolute;inset:0;padding:28px;display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden}
-    .card-inner{position:absolute;inset:0;padding:28px;display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+    .card{position:relative;width:100%;min-height:46vh;max-height:64vh;border-radius:var(--radius);background: linear-gradient(180deg, #0b0f25, #0b102c);border: 1px solid #ffffff1c;box-shadow: var(--shadow), inset 0 0 0 1px #ffffff10;overflow:hidden;user-select:none}
+    /* Front/back roteras – inte hela kortet → undvik spegelvänd text på iOS */
+    .card-inner{position:absolute;inset:0;padding:28px;display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition: transform 700ms cubic-bezier(.2,.8,.2,1)}
     .card .front{transform: rotateY(0deg)}
     .card .back{transform: rotateY(180deg)}
-    /* Lägg transition på sidorna i stället för hela kortet */
-    .card .front, .card .back{transition: transform 700ms cubic-bezier(.2,.8,.2,1)}
     .card.flipped .front{transform: rotateY(180deg)}
     .card.flipped .back{transform: rotateY(0deg)}
 
@@ -71,7 +58,7 @@
     .note{margin-top:10px;color:var(--muted);font-size:13px;text-align:center}
 
     .actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;width:100%}
-    .btn{appearance:none;border:0;border-radius:14px;padding:14px 16px;font-weight:700;letter-spacing:.3px;cursor:pointer;transition: transform .08s ease, filter .2s ease; backdrop-filter: blur(8px);-webkit-backdrop-filter: blur(8px)}
+    .btn{appearance:none;border:0;border-radius:14px;padding:14px 16px;font-weight:700;letter-spacing:.3px;cursor:pointer;transition: transform .08s ease, filter .2s ease; backdrop-filter: blur(8px);-webkit-backdrop-filter: blur(8px); touch-action: manipulation}
     .btn:active{transform:scale(.98)}
     .primary{color:#0b1220;background:linear-gradient(135deg,var(--acc3),var(--acc2));box-shadow:0 12px 30px #00c7a933,inset 0 0 0 1px #ffffff60}
     .ghost{color:var(--text);background: #ffffff10;border:1px solid #ffffff1f}
@@ -94,7 +81,7 @@
         <div class="logo" aria-hidden="true"></div>
         <div>
           <h1>Flashcards – Indefinita pronomen</h1>
-          <div class="sub">Franska ↔ Svenska · Tryck för att vända · Nya kort i all oändlighet</div>
+          <div class="sub">Franska ↔ Svenska · Tryck för att vända · Svep för nästa</div>
         </div>
       </div>
       <div class="controls">
@@ -131,17 +118,15 @@
     </main>
 
     <footer>
-      <div class="mini">Källa: kursblad "les pronoms indéfinis" (anpassade meningar)</div>
-      <div class="mini">iPhone-optimerad · Inget poängsystem – bara nötning</div>
+      <div class="mini">Källa: kursblad "les pronoms indéfinis"</div>
+      <div class="mini">Kort i quizzet: <span id="countBadge">…</span></div>
     </footer>
   </div>
 
   <script>
     // --- Dataset ------------------------------------------------------------
     // Varje post: { fr: "…", sv: "…" }
-    // Urval ur dokumentet användarens PDF (indefinita pronomen) – manuellt extraherade meningar & glosor
     const PAIRS = [
-      // Ord/enstaka uttryck
       {fr:"chaque", sv:"varje"},
       {fr:"tous", sv:"alla"},
       {fr:"tout", sv:"allt; helt"},
@@ -164,7 +149,6 @@
       {fr:"on", sv:"man; vi (i talspråk)"},
       {fr:"quiconque", sv:"vem som helst; den som"},
 
-      // Korta fraser/satser
       {fr:"Tu connais quelqu’un à Västerås ?", sv:"Känner du någon i Västerås?"},
       {fr:"Non, je ne connais personne.", sv:"Nej, jag känner ingen."},
       {fr:"Personne ne connaît Vallby.", sv:"Ingen känner till Vallby."},
@@ -228,7 +212,7 @@
       {fr:"Quelque chose est arrivé.", sv:"Något har hänt."},
       {fr:"Elle a vu quelque chose d’intéressant.", sv:"Hon såg något intressant."},
 
-      {fr:"Il est aussi compétent que quiconque.", sv:"Han är lika kompetent som vem som helst."},
+      {fr:"Il est aussi kompetent que quiconque.", sv:"Han är lika kompetent som vem som helst."},
       {fr:"Il a agi sans en faire part à quiconque.", sv:"Han handlade utan att meddela någon det."},
       {fr:"Quiconque casse quelque chose doit payer la facture.", sv:"Vem som än har sönder något måste betala räkningen."},
 
@@ -257,30 +241,20 @@
     ];
 
     // --- State --------------------------------------------------------------
-    const state = {
-      mode: 'mix',      // 'mix' | 'fr2sv' | 'sv2fr'
-      lastIndex: -1,
-      frontIsFR: true
-    };
+    const state = { mode: 'mix', lastIndex: -1, frontIsFR: true };
 
     // --- Helpers ------------------------------------------------------------
     const rand = (n)=> Math.floor(Math.random()*n);
 
     function pickNext(){
       let i;
-      // undvik omedelbar upprepning
       do { i = rand(PAIRS.length); } while (PAIRS.length>1 && i === state.lastIndex);
       state.lastIndex = i;
-
-      // bestäm riktning
       if(state.mode==='fr2sv') state.frontIsFR = true;
       else if(state.mode==='sv2fr') state.frontIsFR = false;
-      else state.frontIsFR = Math.random() < 0.5; // blandad
-
+      else state.frontIsFR = Math.random() < 0.5;
       const item = PAIRS[i];
-      const front = state.frontIsFR ? item.fr : item.sv;
-      const back  = state.frontIsFR ? item.sv : item.fr;
-      render(front, back, true);
+      render(state.frontIsFR ? item.fr : item.sv, state.frontIsFR ? item.sv : item.fr, true);
     }
 
     function render(front, back, resetFlip){
@@ -290,12 +264,31 @@
       if(resetFlip) card.classList.remove('flipped');
     }
 
+    function updateCount(){
+      const el = document.getElementById('countBadge');
+      if(el) el.textContent = PAIRS.length;
+    }
+
     // --- UI wiring ----------------------------------------------------------
     const cardEl = document.getElementById('card');
     cardEl.addEventListener('click', ()=> cardEl.classList.toggle('flipped'));
 
-    document.getElementById('btn-flip').addEventListener('click', ()=> cardEl.classList.toggle('flipped'));
-    document.getElementById('btn-next').addEventListener('click', pickNext);
+    const btnFlip = document.getElementById('btn-flip');
+    const btnNext = document.getElementById('btn-next');
+
+    btnFlip.addEventListener('click', (e)=>{ e.preventDefault(); cardEl.classList.toggle('flipped'); });
+    btnNext.addEventListener('click', (e)=>{ e.preventDefault(); pickNext(); });
+
+    // Double‑tap zoom guard för iOS på knappar
+    let lastTouchEnd = 0;
+    function preventDoubleTapZoom(e){
+      const now = Date.now();
+      if (now - lastTouchEnd <= 300) { e.preventDefault(); }
+      lastTouchEnd = now;
+    }
+    for (const el of [btnFlip, btnNext]){
+      el.addEventListener('touchend', preventDoubleTapZoom, {passive:false});
+    }
 
     // Läge-knappar
     function setMode(m){
@@ -315,20 +308,19 @@
     document.getElementById('mode-frsv').addEventListener('click', ()=> setMode('fr2sv'));
     document.getElementById('mode-svfr').addEventListener('click', ()=> setMode('sv2fr'));
 
-    // Svepgest (vänster/höger) för nästa / vänd
+    // Svep: vänster eller höger ⇒ nästa kort
     let touchStartX = 0, touchEndX = 0;
     cardEl.addEventListener('touchstart', e=>{ touchStartX = e.changedTouches[0].screenX; }, {passive:true});
     cardEl.addEventListener('touchend', e=>{
       touchEndX = e.changedTouches[0].screenX;
       const dx = touchEndX - touchStartX;
-      if (Math.abs(dx) > 50) {
-        // Svep åt valfritt håll = nästa kort (tap för att vända)
-        pickNext();
-      }
-    }, {passive:true});
+      if (Math.abs(dx) > 50) { e.preventDefault(); pickNext(); }
+    }, {passive:false});
 
-    // Första kortet
+    // Init
+    updateCount();
     setMode('mix');
+    updateCount();
   </script>
 </body>
 </html>
