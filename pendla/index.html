@@ -143,26 +143,8 @@ registerVisit();
         margin: 20px;
       }
       .strikethrough {
-        position: relative;
-      }
-      .strikethrough::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 50%;
-        border-top: 2px solid currentColor;
-        transform: translateY(-50%);
-        pointer-events: none;
-      }
-      /* Li-element (skolbåten) behöver block för full bredd */
-      li.strikethrough {
-        display: block;
-        width: 100%;
-      }
-      /* Span-element (enskilda tider) ska förbli inline */
-      span.strikethrough {
-        display: inline;
+        text-decoration: line-through;
+        text-decoration-thickness: 2px;
       }
       .ferry-time {
         display: inline-block;
