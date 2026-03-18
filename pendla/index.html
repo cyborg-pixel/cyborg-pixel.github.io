@@ -54,40 +54,40 @@ registerVisit();
         type="image/png" 
         sizes="16x16 32x32" 
         href="/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&family=Raleway:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-
+      /* ============================================
+         BASE LAYOUT
+         ============================================ */
+      * { box-sizing: border-box; }
       html, body {
         height: 100%;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
+        margin: 0;
+        padding: 0;
       }
       body {
         font-family: Arial, sans-serif;
         font-size: 0.9em;
-        margin: 0;
-        padding: 0;
-        background: linear-gradient(
-          -90deg,
-          #e3f2fd 0%,
-          #90caf9 100%,
-          #42a5f5 200%
-        );
         display: flex;
         flex-direction: column;
         align-items: center;
-        box-sizing: border-box;
+        transition: background 0.5s ease, color 0.3s ease;
       }
       #main-view {
         width: 100%;
         max-width: 800px;
         padding: 20px;
-        box-sizing: border-box;
       }
       #last-updated {
         font-size: 0.75em;
         color: #888;
         text-align: center;
         margin-top: -15px;
+        transition: color 0.3s;
       }
       h2 {
         font-size: 1.2em;
@@ -100,22 +100,13 @@ registerVisit();
         padding: 0;
         margin: 0;
       }
+      li { padding: 1px 0; }
       .site-box {
         width: 100%;
-        background-color: rgba(255, 255, 255, 0.9);
-        border-radius: 15px;
-        padding: 10px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        margin-bottom: 15px;
-        box-sizing: border-box;
+        padding: 12px 14px;
+        margin-bottom: 14px;
+        transition: all 0.4s ease;
       }
-      .weather-box { background-color: #ffffff; }
-      .ocean-box { background-color: #d9f0ff; }
-      .schoolferry-box { background-color: #F0DBFC; }
-      .ship-box { background-color: #E5F2E0; }
-      .bus-box { background-color: #FBEDD5; }
-      .metro-box { background-color: #F6CFCE }
-      .poolboat-box { background-color:  #99ffcc; }
       .big {
         font-weight: bold;
         font-size: 1em;
@@ -131,7 +122,7 @@ registerVisit();
         cursor: pointer;
       }
       .refresh-button:hover {
-        background-color: #0056b3;
+        opacity: 0.85;
       }
       .config-link {
         font-size: 0.8em;
@@ -149,31 +140,466 @@ registerVisit();
         border-radius: 15px;
         padding: 20px;
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        box-sizing: border-box;
         margin: 20px;
       }
-.strikethrough {
-  position: relative;
-  color: black; /* behåll textfärgen */
-}
-
-.strikethrough::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  border-top: 2px solid black; /* tjocklek och färg på linjen */
-  transform: translateY(-50%);
-}
+      .strikethrough {
+        position: relative;
+      }
+      .strikethrough::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        border-top: 2px solid currentColor;
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
+      /* Li-element (skolbåten) behöver block för full bredd */
+      li.strikethrough {
+        display: block;
+        width: 100%;
+      }
+      /* Span-element (enskilda tider) ska förbli inline */
+      span.strikethrough {
+        display: inline;
+      }
       .ferry-time {
-    display: inline-block;
-    width: 6ch; /* Ger plats för 'hh:mm' eller 'Nu'/'X min' */
-    text-align: left;
-    margin-right: 0.1em;
-    font-variant-numeric: tabular-nums;
-  }
+        display: inline-block;
+        width: 6ch;
+        text-align: left;
+        margin-right: 0.1em;
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* ============================================
+         THEME: Original (Pendla classic)
+         ============================================ */
+      body.theme-original {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(-90deg, #e3f2fd 0%, #90caf9 100%, #42a5f5 200%);
+        color: #000;
+      }
+      .theme-original .site-box {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      }
+      .theme-original .weather-box { background-color: #ffffff; }
+      .theme-original .ocean-box { background-color: #d9f0ff; }
+      .theme-original .schoolferry-box { background-color: #F0DBFC; }
+      .theme-original .ship-box { background-color: #E5F2E0; }
+      .theme-original .bus-box { background-color: #FBEDD5; }
+      .theme-original .metro-box { background-color: #F6CFCE; }
+      .theme-original .poolboat-box { background-color: #99ffcc; }
+      .theme-original #last-updated { color: #888; }
+      .theme-original .config-link { color: #004488; }
+      .theme-original .config-section { background-color: rgba(255,255,255,0.95); border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+      .theme-original .refresh-button { background-color: #007bff; }
+
+      /* ============================================
+         SHARED: T-Centralen header-band pattern
+         ============================================ */
+      body:not(.theme-original) .site-box {
+        position: relative;
+        overflow: hidden;
+      }
+      body:not(.theme-original) .site-box h2 {
+        margin: -12px -14px 10px -14px;
+        padding: 10px 16px;
+        font-size: 1em;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      /* ============================================
+         THEME: Isblå
+         ============================================ */
+      body.theme-isbla {
+        font-family: 'Inter', 'Helvetica Neue', sans-serif;
+        background: #e4edf4;
+        background-image:
+          repeating-linear-gradient(0deg, transparent, transparent 44px, rgba(100,140,180,0.06) 44px, rgba(100,140,180,0.06) 45px),
+          repeating-linear-gradient(90deg, transparent, transparent 44px, rgba(100,140,180,0.06) 44px, rgba(100,140,180,0.06) 45px);
+        color: #1a2838;
+      }
+      .theme-isbla .site-box {
+        background: #f4f8fc; border: none; border-radius: 4px;
+        box-shadow: 0 1px 4px rgba(80,120,160,0.12), inset 0 0 0 1px rgba(80,120,160,0.08);
+        color: #1a2838;
+      }
+      .theme-isbla .site-box h2 { background: #2a6a9a; color: #fff; }
+      .theme-isbla .metro-box h2 { background: #a82030; }
+      .theme-isbla .ship-box h2 { background: #1a7a6a; }
+      .theme-isbla .bus-box h2 { background: #4a7aa0; }
+      .theme-isbla .weather-box h2 { background: #5a7a90; }
+      .theme-isbla .ocean-box h2 { background: #2a6a80; }
+      .theme-isbla .schoolferry-box h2 { background: #6a3a6a; }
+      .theme-isbla .poolboat-box h2 { background: #2a6a4a; }
+      .theme-isbla #last-updated { color: #8a9aaa; }
+      .theme-isbla .config-link { color: #2a6a9a; }
+      .theme-isbla .config-section { background: #f4f8fc; border-radius: 4px; }
+      .theme-isbla .refresh-button { background: #2a6a9a; border-radius: 4px; }
+
+      /* ============================================
+         THEME: Midsommar (DEFAULT)
+         ============================================ */
+      body.theme-midsommar {
+        font-family: 'Inter', 'Helvetica Neue', sans-serif;
+        background: #c8e0f4;
+        background-image:
+          repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.3) 59px, rgba(255,255,255,0.3) 60px),
+          repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.3) 59px, rgba(255,255,255,0.3) 60px);
+        color: #0a1828;
+      }
+      .theme-midsommar .site-box {
+        background: #ffffff; border: none; border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,60,120,0.1);
+        color: #0a1828;
+      }
+      .theme-midsommar .site-box h2 { background: #1878c8; color: #fff; border-radius: 8px 8px 0 0; }
+      .theme-midsommar .metro-box h2 { background: #d82030; }
+      .theme-midsommar .ship-box h2 { background: #00884a; }
+      .theme-midsommar .bus-box h2 { background: #e07018; }
+      .theme-midsommar .weather-box h2 { background: #5888a0; }
+      .theme-midsommar .ocean-box h2 { background: #007888; }
+      .theme-midsommar .schoolferry-box h2 { background: #9828a0; }
+      .theme-midsommar .poolboat-box h2 { background: #288838; }
+      .theme-midsommar #last-updated { color: #688898; }
+      .theme-midsommar .config-link { color: #1878c8; }
+      .theme-midsommar .config-section { background: #fff; border-radius: 10px; }
+      .theme-midsommar .refresh-button { background: #1878c8; border-radius: 8px; }
+
+      /* ============================================
+         THEME: Tranholmen.se
+         Kopierar designspråket från www.tranholmen.se
+         Raleway headings, Roboto body, #3b5a7b primary
+         ============================================ */
+      body.theme-tranholmen {
+        font-family: 'Roboto', Arial, Helvetica, sans-serif;
+        background: #f3f4f7;
+        color: #111;
+      }
+      .theme-tranholmen .site-box {
+        background: #ffffff;
+        border: none;
+        border-radius: 3px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 1px 8px rgba(0,0,0,0.04);
+        color: #111;
+      }
+      .theme-tranholmen .site-box h2 {
+        font-family: 'Raleway', 'Roboto', Arial, sans-serif;
+        background: #3b5a7b;
+        color: #fff;
+        border-radius: 3px 3px 0 0;
+        letter-spacing: 0.04em;
+        font-weight: 700;
+      }
+      .theme-tranholmen .metro-box h2 { background: #9b2335; }
+      .theme-tranholmen .ship-box h2 { background: #3b7b5a; }
+      .theme-tranholmen .bus-box h2 { background: #7b6a3b; }
+      .theme-tranholmen .weather-box h2 { background: #5a6a7b; }
+      .theme-tranholmen .ocean-box h2 { background: #3b6a7b; }
+      .theme-tranholmen .schoolferry-box h2 { background: #6b3b6a; }
+      .theme-tranholmen .poolboat-box h2 { background: #3b6b4a; }
+      .theme-tranholmen #last-updated { color: #999; }
+      .theme-tranholmen .config-link { color: #598bd2; }
+      .theme-tranholmen .config-section {
+        background: #fff;
+        border-radius: 3px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+      }
+      .theme-tranholmen .refresh-button {
+        background: #3b5a7b;
+        border-radius: 3px;
+        font-family: 'Raleway', 'Roboto', Arial, sans-serif;
+        font-weight: 500;
+      }
+      .theme-tranholmen .refresh-button:hover { background: #2a4159; }
+
+      /* ============================================
+         THEME: Halloween
+         Mörk natt, orange pumpa, lila spöken
+         ============================================ */
+      body.theme-halloween {
+        font-family: 'Inter', 'Helvetica Neue', sans-serif;
+        background: #0e0a14;
+        background-image:
+          radial-gradient(ellipse at 20% 80%, rgba(120,40,200,0.06) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 20%, rgba(220,120,0,0.06) 0%, transparent 50%);
+        color: #e0d0c0;
+      }
+      .theme-halloween .site-box {
+        background: #1a1420;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.5), inset 0 1px 0 rgba(220,120,0,0.05);
+        color: #e0d0c0;
+      }
+      .theme-halloween .site-box h2 { background: #c85a00; color: #fff; }
+      .theme-halloween .metro-box h2 { background: #8a1a28; }
+      .theme-halloween .ship-box h2 { background: #2a6830; }
+      .theme-halloween .bus-box h2 { background: #b86800; }
+      .theme-halloween .weather-box h2 { background: #5a3a7a; }
+      .theme-halloween .ocean-box h2 { background: #2a4a5a; }
+      .theme-halloween .schoolferry-box h2 { background: #7a2a6a; }
+      .theme-halloween .poolboat-box h2 { background: #3a5a2a; }
+      .theme-halloween #last-updated { color: #4a3a2a; }
+      .theme-halloween .config-link { color: #e8a040; }
+      .theme-halloween .config-section { background: #1a1420; border-radius: 8px; color: #e0d0c0; }
+      .theme-halloween .refresh-button { background: #c85a00; border-radius: 8px; }
+
+      /* ============================================
+         THEME: Julmarknad
+         Svenska julfärger – röd, grön, guld, vit
+         Samma layout/font som Midsommar
+         ============================================ */
+      body.theme-julmarknad {
+        font-family: 'Inter', 'Helvetica Neue', sans-serif;
+        background: #c41e2a;
+        background-image:
+          repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.08) 59px, rgba(255,255,255,0.08) 60px),
+          repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.08) 59px, rgba(255,255,255,0.08) 60px);
+        color: #1a0808;
+      }
+      .theme-julmarknad .site-box {
+        background: #fff8f0; border: none; border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(120,20,20,0.15);
+        color: #1a0808;
+      }
+      .theme-julmarknad .site-box h2 { background: #1a6a30; color: #fff; border-radius: 8px 8px 0 0; }
+      .theme-julmarknad .metro-box h2 { background: #c41e2a; }
+      .theme-julmarknad .ship-box h2 { background: #1a6a30; }
+      .theme-julmarknad .bus-box h2 { background: #b8860b; color: #fff; }
+      .theme-julmarknad .weather-box h2 { background: #8b1a1a; }
+      .theme-julmarknad .ocean-box h2 { background: #1a5060; }
+      .theme-julmarknad .schoolferry-box h2 { background: #6a2040; }
+      .theme-julmarknad .poolboat-box h2 { background: #2a6a2a; }
+      .theme-julmarknad #last-updated { color: rgba(255,255,255,0.5); }
+      .theme-julmarknad .config-link { color: #fff8f0; }
+      .theme-julmarknad .config-section { background: #fff8f0; border-radius: 10px; color: #1a0808; }
+      .theme-julmarknad .refresh-button { background: #1a6a30; border-radius: 8px; }
+
+      /* ============================================
+         THEME: Städdag
+         Fräscht, grönt, utomhuskänsla, vårigt
+         ============================================ */
+      body.theme-staddag {
+        font-family: 'Inter', 'Helvetica Neue', sans-serif;
+        background: #e8f0e0;
+        background-image:
+          repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(80,140,60,0.06) 59px, rgba(80,140,60,0.06) 60px),
+          repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(80,140,60,0.06) 59px, rgba(80,140,60,0.06) 60px);
+        color: #1a2818;
+      }
+      .theme-staddag .site-box {
+        background: #f4faf0;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(40,100,30,0.1);
+        color: #1a2818;
+      }
+      .theme-staddag .site-box h2 { background: #4a8a30; color: #fff; }
+      .theme-staddag .metro-box h2 { background: #b83020; }
+      .theme-staddag .ship-box h2 { background: #2a7a5a; }
+      .theme-staddag .bus-box h2 { background: #8a7a20; }
+      .theme-staddag .weather-box h2 { background: #5a7a50; }
+      .theme-staddag .ocean-box h2 { background: #2a6a7a; }
+      .theme-staddag .schoolferry-box h2 { background: #6a4a6a; }
+      .theme-staddag .poolboat-box h2 { background: #3a7a30; }
+      .theme-staddag #last-updated { color: #7a9a70; }
+      .theme-staddag .config-link { color: #4a8a30; }
+      .theme-staddag .config-section { background: #f4faf0; border-radius: 8px; }
+      .theme-staddag .refresh-button { background: #4a8a30; border-radius: 8px; }
+
+      /* ============================================
+         THEME: Storm
+         Mörka moln, blixtblå accenter, regntung
+         ============================================ */
+      body.theme-storm {
+        font-family: 'Inter', 'Helvetica Neue', sans-serif;
+        background: #0e1018;
+        background-image:
+          linear-gradient(180deg,
+            #0e1018 0%,
+            #141822 30%,
+            #1a2030 60%,
+            #0e1018 100%
+          );
+        color: #b0b8c8;
+      }
+      .theme-storm .site-box {
+        background: #161c28;
+        border: none;
+        border-radius: 6px;
+        box-shadow:
+          0 2px 12px rgba(0,0,0,0.5),
+          inset 0 1px 0 rgba(100,140,220,0.04);
+        color: #b0b8c8;
+      }
+      .theme-storm .site-box h2 {
+        background: #2a3a58;
+        color: #8ab4ff;
+        border-bottom: 2px solid rgba(100,160,255,0.15);
+      }
+      .theme-storm .metro-box h2 { background: #3a1a20; color: #ff7080; border-bottom-color: rgba(255,80,80,0.15); }
+      .theme-storm .ship-box h2 { background: #1a3028; color: #60c8a0; border-bottom-color: rgba(60,200,140,0.15); }
+      .theme-storm .bus-box h2 { background: #3a3020; color: #e0c060; border-bottom-color: rgba(220,180,60,0.15); }
+      .theme-storm .weather-box h2 { background: #282838; color: #90a0c0; }
+      .theme-storm .ocean-box h2 { background: #1a2838; color: #60a0d0; }
+      .theme-storm .schoolferry-box h2 { background: #2a1a30; color: #c080d0; }
+      .theme-storm .poolboat-box h2 { background: #1a2a1a; color: #70c070; }
+      .theme-storm #last-updated { color: #384050; }
+      .theme-storm .config-link { color: #6090d0; }
+      .theme-storm .config-section { background: #161c28; border-radius: 6px; color: #b0b8c8; }
+      .theme-storm .refresh-button { background: #2a3a58; color: #8ab4ff; border-radius: 6px; }
+
+      /* ============================================
+         THEME: Årsstämma
+         Formellt, strikt, ordning och reda
+         ============================================ */
+      body.theme-arsstamma {
+        font-family: 'Inter', 'Helvetica Neue', sans-serif;
+        background: #f5f5f0;
+        color: #1a1a1a;
+      }
+      .theme-arsstamma .site-box {
+        background: #ffffff;
+        border: 1px solid #d0d0d0;
+        border-radius: 0;
+        box-shadow: none;
+        color: #1a1a1a;
+      }
+      .theme-arsstamma .site-box h2 {
+        background: #1a1a1a;
+        color: #ffffff;
+        letter-spacing: 0.1em;
+        border-radius: 0;
+      }
+      .theme-arsstamma .metro-box h2 { background: #333; }
+      .theme-arsstamma .ship-box h2 { background: #333; }
+      .theme-arsstamma .bus-box h2 { background: #333; }
+      .theme-arsstamma .weather-box h2 { background: #444; }
+      .theme-arsstamma .ocean-box h2 { background: #444; }
+      .theme-arsstamma .schoolferry-box h2 { background: #444; }
+      .theme-arsstamma .poolboat-box h2 { background: #444; }
+      .theme-arsstamma #last-updated { color: #999; }
+      .theme-arsstamma .config-link { color: #333; }
+      .theme-arsstamma .config-section { background: #fff; border: 1px solid #d0d0d0; border-radius: 0; }
+      .theme-arsstamma .refresh-button { background: #1a1a1a; border-radius: 0; }
+
+      /* ============================================
+         THEME: Tranbär
+         Glatt, barnsligt, mjukt, färgglatt
+         ============================================ */
+      body.theme-tranbar {
+        font-family: 'Inter', 'Helvetica Neue', sans-serif;
+        background: #fff0f5;
+        background-image:
+          radial-gradient(circle at 10% 20%, rgba(255,180,200,0.3) 0%, transparent 40%),
+          radial-gradient(circle at 90% 70%, rgba(180,220,255,0.3) 0%, transparent 40%),
+          radial-gradient(circle at 50% 50%, rgba(255,240,140,0.2) 0%, transparent 50%);
+        color: #3a2040;
+      }
+      .theme-tranbar .site-box {
+        background: #ffffff;
+        border: 2px solid #f0c0d8;
+        border-radius: 18px;
+        box-shadow: 0 4px 12px rgba(220,120,180,0.12);
+        color: #3a2040;
+      }
+      .theme-tranbar .site-box h2 {
+        background: #e86aaa;
+        color: #fff;
+        border-radius: 14px 14px 0 0;
+      }
+      .theme-tranbar .metro-box { border-color: #ffb0b0; }
+      .theme-tranbar .metro-box h2 { background: #e85a6a; }
+      .theme-tranbar .ship-box { border-color: #b0e8c0; }
+      .theme-tranbar .ship-box h2 { background: #4aba6a; }
+      .theme-tranbar .bus-box { border-color: #ffe0a0; }
+      .theme-tranbar .bus-box h2 { background: #e8a020; }
+      .theme-tranbar .weather-box { border-color: #c0d8f0; }
+      .theme-tranbar .weather-box h2 { background: #60a0d8; }
+      .theme-tranbar .ocean-box { border-color: #a0e0e8; }
+      .theme-tranbar .ocean-box h2 { background: #30b0c0; }
+      .theme-tranbar .schoolferry-box { border-color: #d8c0f0; }
+      .theme-tranbar .schoolferry-box h2 { background: #a060d0; }
+      .theme-tranbar .poolboat-box { border-color: #b8f0b0; }
+      .theme-tranbar .poolboat-box h2 { background: #50b848; }
+      .theme-tranbar #last-updated { color: #c090a8; }
+      .theme-tranbar .config-link { color: #e86aaa; }
+      .theme-tranbar .config-section { background: #fff; border-radius: 18px; border: 2px solid #f0c0d8; }
+      .theme-tranbar .refresh-button { background: #e86aaa; border-radius: 14px; }
+
+      /* ============================================
+         THEME: Valborg
+         Lila skymning, eldgul glöd, gnistor, vårkväll
+         ============================================ */
+      body.theme-valborg {
+        font-family: 'Inter', 'Helvetica Neue', sans-serif;
+        background: #1a1030;
+        background-image:
+          linear-gradient(180deg, #2a1848 0%, #1a1030 40%, #181020 70%, #100818 100%),
+          radial-gradient(ellipse at 50% 95%, rgba(255,180,40,0.12) 0%, transparent 40%),
+          radial-gradient(circle at 15% 8%, rgba(255,220,80,0.03) 0%, transparent 20%),
+          radial-gradient(circle at 80% 5%, rgba(120,255,180,0.03) 0%, transparent 18%),
+          radial-gradient(circle at 60% 12%, rgba(255,100,200,0.03) 0%, transparent 15%);
+        color: #e8dcc8;
+      }
+      .theme-valborg .site-box {
+        background: linear-gradient(180deg, #221838 0%, #1e1430 100%);
+        border: 1px solid rgba(255,180,40,0.08);
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 40px rgba(255,160,30,0.02);
+        color: #e8dcc8;
+      }
+      .theme-valborg .site-box h2 {
+        background: linear-gradient(135deg, #d4a010 0%, #e8b830 100%);
+        color: #1a1030;
+        font-weight: 700;
+        border-radius: 8px 8px 0 0;
+      }
+      .theme-valborg .metro-box h2 { background: linear-gradient(135deg, #c03040 0%, #d84050 100%); color: #fff; }
+      .theme-valborg .ship-box h2 { background: linear-gradient(135deg, #30885a 0%, #40a070 100%); color: #fff; }
+      .theme-valborg .bus-box h2 { background: linear-gradient(135deg, #c89020 0%, #e0a830 100%); color: #1a1030; }
+      .theme-valborg .weather-box h2 { background: linear-gradient(135deg, #6840a0 0%, #7850b8 100%); color: #e0d0f0; }
+      .theme-valborg .ocean-box h2 { background: linear-gradient(135deg, #2868a0 0%, #3878b8 100%); color: #d0e0f0; }
+      .theme-valborg .schoolferry-box h2 { background: linear-gradient(135deg, #a03070 0%, #c04088 100%); color: #f8e0f0; }
+      .theme-valborg .poolboat-box h2 { background: linear-gradient(135deg, #389040 0%, #48a850 100%); color: #fff; }
+      .theme-valborg #last-updated { color: #4a3860; }
+      .theme-valborg .config-link { color: #e8b830; }
+      .theme-valborg .config-section { background: #221838; border-radius: 10px; color: #e8dcc8; border: 1px solid rgba(255,180,40,0.08); }
+      .theme-valborg .refresh-button { background: linear-gradient(135deg, #d4a010 0%, #e8b830 100%); color: #1a1030; border-radius: 8px; font-weight: 700; }
     </style>
+    <script>
+      // === Theme system ===
+      const THEME_OPTIONS = [
+        { id: 'midsommar', label: 'Midsommar' },
+        { id: 'original', label: 'Original' },
+        { id: 'isbla', label: 'Islandskap' },
+        { id: 'tranholmen', label: 'Tranholmen' },
+        { id: 'halloween', label: 'Halloween' },
+        { id: 'julmarknad', label: 'Julmarknad' },
+        { id: 'staddag', label: 'Städdag' },
+        { id: 'storm', label: 'Storm' },
+        { id: 'arsstamma', label: 'Årsstämma' },
+        { id: 'tranbar', label: 'Tranbär' },
+        { id: 'valborg', label: 'Valborg' },
+      ];
+      const DEFAULT_THEME = 'midsommar';
+
+      function getSelectedTheme() {
+        return localStorage.getItem('pendlaTheme') || DEFAULT_THEME;
+      }
+      function applyTheme(id) {
+        document.body.className = 'theme-' + id;
+        localStorage.setItem('pendlaTheme', id);
+      }
+      // Apply saved theme immediately (before onload)
+      document.addEventListener('DOMContentLoaded', () => applyTheme(getSelectedTheme()));
+    </script>
   </head>
   <body onload="startAutoRefresh()">
     <div id="main-view"></div>
@@ -775,10 +1201,33 @@ window.addEventListener("pageshow", (e) => {
 
 
 
+        // --- Tema ---
+        const themeHeader = document.createElement("h2");
+        themeHeader.textContent = "Utseende";
+        themeHeader.style.marginTop = "20px";
+        form.appendChild(themeHeader);
+
+        const themeLabel = document.createElement("label");
+        themeLabel.textContent = "Tema: ";
+        const themeSelect = document.createElement("select");
+        themeSelect.name = "pendlaTheme";
+        const currentTheme = getSelectedTheme();
+        THEME_OPTIONS.forEach(t => {
+          const opt = document.createElement("option");
+          opt.value = t.id;
+          opt.textContent = t.label;
+          if (t.id === currentTheme) opt.selected = true;
+          themeSelect.appendChild(opt);
+        });
+        themeSelect.addEventListener("change", () => applyTheme(themeSelect.value));
+        themeLabel.appendChild(themeSelect);
+        form.appendChild(themeLabel);
+        form.appendChild(document.createElement("br"));
+
         // --- Ny rubrik för övriga inställningar ---
         const otherHeader = document.createElement("h2");
         otherHeader.textContent = "Övriga inställningar";
-        otherHeader.style.marginTop = "20px"; 
+        otherHeader.style.marginTop = "20px";
         form.appendChild(otherHeader);
 
         // --- Endast om poolbåtens widget är ikryssad ---
@@ -814,8 +1263,11 @@ const qr = document.createElement("img");
 qr.src = "qr_out.png";
 qr.alt = "QR-kod för att dela appen";
 qr.style.display = "block";
-qr.style.width = "30%";      // 30% av konfigurationssektionens bredd
+qr.style.width = "30%";
 qr.style.marginTop = "10px";
+qr.style.background = "#fff";
+qr.style.padding = "8px";
+qr.style.borderRadius = "6px";
 form.appendChild(qr);
 form.appendChild(document.createElement("br"));
 
@@ -837,6 +1289,10 @@ form.appendChild(document.createElement("br"));
             newPrefs[widget.id] = form.elements[widget.id].checked;
         });
         savePreferences(newPrefs);
+
+        // Spara tema
+        const themeVal = form.elements.pendlaTheme;
+        if (themeVal) applyTheme(themeVal.value);
 
         // Spara poolbåts-koden
         const codeInput = form.elements.poolboatCode;
