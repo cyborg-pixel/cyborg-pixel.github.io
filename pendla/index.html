@@ -307,35 +307,39 @@ registerVisit();
 
       /* ============================================
          THEME: Halloween
-         Mörk natt, orange pumpa, lila spöken
+         Mörk oktobernatt, pumpa, spöklila, mysigt
          ============================================ */
       body.theme-halloween {
         font-family: 'Inter', 'Helvetica Neue', sans-serif;
-        background: #0e0a14;
+        background: #10080e;
         background-image:
-          radial-gradient(ellipse at 20% 80%, rgba(120,40,200,0.06) 0%, transparent 50%),
-          radial-gradient(ellipse at 80% 20%, rgba(220,120,0,0.06) 0%, transparent 50%);
+          radial-gradient(ellipse at 50% 100%, rgba(200,90,0,0.08) 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, rgba(120,50,180,0.06) 0%, transparent 40%);
         color: #e0d0c0;
       }
       .theme-halloween .site-box {
-        background: #1a1420;
+        background: #1a1218;
         border: none;
-        border-radius: 8px;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.5), inset 0 1px 0 rgba(220,120,0,0.05);
+        border-radius: 10px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.5);
         color: #e0d0c0;
       }
-      .theme-halloween .site-box h2 { background: #c85a00; color: #fff; }
-      .theme-halloween .metro-box h2 { background: #8a1a28; }
-      .theme-halloween .ship-box h2 { background: #2a6830; }
-      .theme-halloween .bus-box h2 { background: #b86800; }
-      .theme-halloween .weather-box h2 { background: #5a3a7a; }
-      .theme-halloween .ocean-box h2 { background: #2a4a5a; }
-      .theme-halloween .schoolferry-box h2 { background: #7a2a6a; }
-      .theme-halloween .poolboat-box h2 { background: #3a5a2a; }
-      .theme-halloween #last-updated { color: #4a3a2a; }
-      .theme-halloween .config-link { color: #e8a040; }
-      .theme-halloween .config-section { background: #1a1420; border-radius: 8px; color: #e0d0c0; }
-      .theme-halloween .refresh-button { background: #c85a00; border-radius: 8px; }
+      .theme-halloween .site-box h2 {
+        background: #d07010;
+        color: #fff;
+        border-radius: 8px 8px 0 0;
+      }
+      .theme-halloween .metro-box h2 { background: #a82030; }
+      .theme-halloween .ship-box h2 { background: #6a3a90; }
+      .theme-halloween .bus-box h2 { background: #c87010; }
+      .theme-halloween .weather-box h2 { background: #684098; }
+      .theme-halloween .ocean-box h2 { background: #28506a; }
+      .theme-halloween .schoolferry-box h2 { background: #882878; }
+      .theme-halloween .poolboat-box h2 { background: #3a6830; }
+      .theme-halloween #last-updated { color: #3a2828; }
+      .theme-halloween .config-link { color: #e89030; }
+      .theme-halloween .config-section { background: #1a1218; border-radius: 10px; color: #e0d0c0; }
+      .theme-halloween .refresh-button { background: #d07010; border-radius: 8px; }
 
       /* ============================================
          THEME: Julmarknad
@@ -522,43 +526,39 @@ registerVisit();
 
       /* ============================================
          THEME: Valborg
-         Lila skymning, eldgul glöd, gnistor, vårkväll
+         Skymningshimmel, brasa nerifrån, vårligt mjukt
          ============================================ */
       body.theme-valborg {
         font-family: 'Inter', 'Helvetica Neue', sans-serif;
-        background: #1a1030;
-        background-image:
-          linear-gradient(180deg, #2a1848 0%, #1a1030 40%, #181020 70%, #100818 100%),
-          radial-gradient(ellipse at 50% 95%, rgba(255,180,40,0.12) 0%, transparent 40%),
-          radial-gradient(circle at 15% 8%, rgba(255,220,80,0.03) 0%, transparent 20%),
-          radial-gradient(circle at 80% 5%, rgba(120,255,180,0.03) 0%, transparent 18%),
-          radial-gradient(circle at 60% 12%, rgba(255,100,200,0.03) 0%, transparent 15%);
-        color: #e8dcc8;
+        background: linear-gradient(180deg, #1a1040 0%, #2a1850 25%, #3a2050 50%, #30182a 75%, #201010 100%);
+        color: #ece0d0;
       }
       .theme-valborg .site-box {
-        background: linear-gradient(180deg, #221838 0%, #1e1430 100%);
-        border: 1px solid rgba(255,180,40,0.08);
-        border-radius: 10px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 40px rgba(255,160,30,0.02);
-        color: #e8dcc8;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,200,100,0.1);
+        border-radius: 14px;
+        box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+        color: #ece0d0;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
       }
       .theme-valborg .site-box h2 {
-        background: linear-gradient(135deg, #d4a010 0%, #e8b830 100%);
-        color: #1a1030;
+        background: linear-gradient(135deg, #d4a020 0%, #e8c040 100%);
+        color: #2a1040;
         font-weight: 700;
-        border-radius: 8px 8px 0 0;
+        border-radius: 12px 12px 0 0;
       }
-      .theme-valborg .metro-box h2 { background: linear-gradient(135deg, #c03040 0%, #d84050 100%); color: #fff; }
-      .theme-valborg .ship-box h2 { background: linear-gradient(135deg, #30885a 0%, #40a070 100%); color: #fff; }
-      .theme-valborg .bus-box h2 { background: linear-gradient(135deg, #c89020 0%, #e0a830 100%); color: #1a1030; }
-      .theme-valborg .weather-box h2 { background: linear-gradient(135deg, #6840a0 0%, #7850b8 100%); color: #e0d0f0; }
-      .theme-valborg .ocean-box h2 { background: linear-gradient(135deg, #2868a0 0%, #3878b8 100%); color: #d0e0f0; }
-      .theme-valborg .schoolferry-box h2 { background: linear-gradient(135deg, #a03070 0%, #c04088 100%); color: #f8e0f0; }
-      .theme-valborg .poolboat-box h2 { background: linear-gradient(135deg, #389040 0%, #48a850 100%); color: #fff; }
-      .theme-valborg #last-updated { color: #4a3860; }
-      .theme-valborg .config-link { color: #e8b830; }
-      .theme-valborg .config-section { background: #221838; border-radius: 10px; color: #e8dcc8; border: 1px solid rgba(255,180,40,0.08); }
-      .theme-valborg .refresh-button { background: linear-gradient(135deg, #d4a010 0%, #e8b830 100%); color: #1a1030; border-radius: 8px; font-weight: 700; }
+      .theme-valborg .metro-box h2 { background: linear-gradient(135deg, #b83848 0%, #d04858 100%); color: #fff; }
+      .theme-valborg .ship-box h2 { background: linear-gradient(135deg, #488860 0%, #58a870 100%); color: #fff; }
+      .theme-valborg .bus-box h2 { background: linear-gradient(135deg, #c89828 0%, #e0b040 100%); color: #2a1040; }
+      .theme-valborg .weather-box h2 { background: linear-gradient(135deg, #7050a8 0%, #8868c0 100%); color: #f0e8ff; }
+      .theme-valborg .ocean-box h2 { background: linear-gradient(135deg, #3870a8 0%, #4888c0 100%); color: #e0f0ff; }
+      .theme-valborg .schoolferry-box h2 { background: linear-gradient(135deg, #a84878 0%, #c06090 100%); color: #ffe8f4; }
+      .theme-valborg .poolboat-box h2 { background: linear-gradient(135deg, #489848 0%, #60b060 100%); color: #fff; }
+      .theme-valborg #last-updated { color: rgba(255,255,255,0.25); }
+      .theme-valborg .config-link { color: #e8c040; }
+      .theme-valborg .config-section { background: rgba(40,24,60,0.95); border-radius: 14px; color: #ece0d0; border: 1px solid rgba(255,200,100,0.1); }
+      .theme-valborg .refresh-button { background: linear-gradient(135deg, #d4a020 0%, #e8c040 100%); color: #2a1040; border-radius: 10px; font-weight: 700; }
     </style>
     <script>
       // === Theme system ===
@@ -605,11 +605,11 @@ registerVisit();
 
       function getBarnacleRisk(week) {
         const ranges = [
-          { from: 1, to: 22, level: "<span style='color:black'>låg</span>" },
-          { from: 23, to: 26, level: "<span style='color:black'>medel</span>" },
-          { from: 27, to: 35, level: "<span style='color:black'>hög</span>" },
-          { from: 36, to: 38, level: "<span style='color:black'>medel</span>" },
-          { from: 39, to: 52, level: "<span style='color:black'>låg</span>" }
+          { from: 1, to: 22, level: "<span style='color:inherit'>låg</span>" },
+          { from: 23, to: 26, level: "<span style='color:inherit'>medel</span>" },
+          { from: 27, to: 35, level: "<span style='color:inherit'>hög</span>" },
+          { from: 36, to: 38, level: "<span style='color:inherit'>medel</span>" },
+          { from: 39, to: 52, level: "<span style='color:inherit'>låg</span>" }
         ];
         const r = ranges.find(r => week >= r.from && week <= r.to);
         return r ? r.level : "❓";
