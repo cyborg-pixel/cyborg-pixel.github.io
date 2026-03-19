@@ -564,6 +564,114 @@ registerVisit();
       .theme-valborg .config-link { color: #e8c040; }
       .theme-valborg .config-section { background: rgba(40,24,60,0.95); border-radius: 14px; color: #ece0d0; border: 1px solid rgba(255,200,100,0.1); }
       .theme-valborg .refresh-button { background: linear-gradient(135deg, #d4a020 0%, #e8c040 100%); color: #2a1040; border-radius: 10px; font-weight: 700; }
+
+      /* ============================================
+         THEME: Lila
+         Död lila. Gråaktig. Spooky. Dimma på kyrkogården.
+         ============================================ */
+      body.theme-lila {
+        font-family: 'Inter', 'Helvetica Neue', sans-serif;
+        background: #1a161e;
+        background-image:
+          radial-gradient(ellipse at 30% 80%, rgba(80,50,90,0.15) 0%, transparent 50%),
+          radial-gradient(ellipse at 70% 20%, rgba(60,40,70,0.1) 0%, transparent 40%);
+        min-height: 100vh;
+        color: #9a8a9e;
+      }
+      .theme-lila .site-box {
+        background: rgba(35,28,40,0.9);
+        border: 1px solid rgba(100,80,110,0.2);
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        color: #9a8a9e;
+      }
+      .theme-lila .site-box h2 {
+        color: #c0b0c8;
+        border-radius: 6px 6px 0 0;
+        font-weight: 700;
+      }
+      .theme-lila .weather-box h2 { background: hsl(275, 12%, 38%); }
+      .theme-lila .ocean-box h2 { background: hsl(275, 12%, 35%); }
+      .theme-lila .ship-box h2 { background: hsl(275, 12%, 32%); }
+      .theme-lila .bus-box h2 { background: hsl(275, 12%, 29%); }
+      .theme-lila .metro-box h2 { background: hsl(275, 12%, 26%); }
+      .theme-lila .schoolferry-box h2 { background: hsl(275, 12%, 23%); }
+      .theme-lila .poolboat-box h2 { background: hsl(275, 12%, 20%); }
+      .theme-lila #last-updated { color: #4a3a50; }
+      .theme-lila .config-link { color: #6a5a70; }
+      .theme-lila .config-section { background: rgba(35,28,40,0.95); border-radius: 8px; color: #9a8a9e; border: 1px solid rgba(100,80,110,0.2); }
+      .theme-lila .refresh-button { background: hsl(275, 12%, 28%); border-radius: 6px; color: #c0b0c8; }
+
+      /* ============================================
+         THEME: Hamburger
+         Hamburgarlager med röd bakgrund
+         ============================================ */
+      body.theme-hamburger {
+        font-family: 'Inter', 'Helvetica Neue', sans-serif;
+        background: #a03838;
+        color: #222;
+      }
+      .theme-hamburger .site-box {
+        background: #fff;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        color: #222;
+      }
+      .theme-hamburger .site-box h2 {
+        color: #fff;
+        border-radius: 8px 8px 0 0;
+        font-weight: 700;
+      }
+      /* Hamburgar-lager per widget (uppifrån och ner) */
+      /* 1.  Bröd */   .theme-hamburger #weather-box h2       { background: #c4a06a; }
+      /* 2.  Bröd */   .theme-hamburger #ocean-box h2         { background: #b8925a; }
+      /* 3.  Bröd */   .theme-hamburger #farja-box h2         { background: #c4a06a; }
+      /* 4.  Sallad */ .theme-hamburger #ropsten-box h2       { background: #7a9a5a; }
+      /* 5.  Tomat */  .theme-hamburger #ekudden-box h2       { background: #b06858; }
+      /* 6.  Tomat */  .theme-hamburger #buss-box h2          { background: #a86050; }
+      /* 7.  Ost */    .theme-hamburger #ds-box h2            { background: #c8a840; }
+      /* 8.  Kött */   .theme-hamburger #lektorsstigen-box h2 { background: #6a4e3e; }
+      /* 9.  Sallad */ .theme-hamburger #odenplan-box h2      { background: #7a9a5a; }
+      /* 10. Sallad */ .theme-hamburger #tropsten-box h2      { background: #6e8e50; }
+      /* 11. Bröd */   .theme-hamburger #tdanderyd-box h2     { background: #b8925a; }
+      /* 12. Bröd */   .theme-hamburger #schoolferry-box h2   { background: #c4a06a; }
+      .theme-hamburger #poolboat-box h2     { background: #b8925a; }
+      /* Hamburgare-logga */
+      .theme-hamburger .burger-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        margin: 14px auto 18px;
+        width: 54px;
+      }
+      .theme-hamburger .burger-logo span { display: block; width: 100%; }
+      .theme-hamburger .burger-logo .bl-bun1   { background: #c4a06a; height: 14px; border-radius: 28px 28px 2px 2px; }
+      .theme-hamburger .burger-logo .bl-bun2   { background: #b8925a; height: 5px; }
+      .theme-hamburger .burger-logo .bl-bun3   { background: #c4a06a; height: 5px; }
+      .theme-hamburger .burger-logo .bl-salad  { background: #7a9a5a; height: 5px; }
+      .theme-hamburger .burger-logo .bl-tom1   { background: #b06858; height: 5px; }
+      .theme-hamburger .burger-logo .bl-tom2   { background: #a86050; height: 5px; }
+      .theme-hamburger .burger-logo .bl-cheese { background: #c8a840; height: 4px; width: 110%; margin-left: -5%; }
+      .theme-hamburger .burger-logo .bl-meat   { background: #6a4e3e; height: 10px; border-radius: 2px; }
+      .theme-hamburger .burger-logo .bl-sal1   { background: #7a9a5a; height: 5px; }
+      .theme-hamburger .burger-logo .bl-sal2   { background: #6e8e50; height: 5px; }
+      .theme-hamburger .burger-logo .bl-bot1   { background: #c4a06a; height: 5px; }
+      .theme-hamburger .burger-logo .bl-bot2   { background: #b8925a; height: 5px; }
+      .theme-hamburger .burger-logo .bl-bot3   { background: #c4a06a; height: 12px; border-radius: 2px 2px 14px 14px; }
+      .theme-hamburger .burger-tagline {
+        text-align: center;
+        color: #e8c870;
+        font-size: 1.4em;
+        font-weight: 600;
+        margin: -10px 0 16px;
+        letter-spacing: 0.04em;
+      }
+      .theme-hamburger #last-updated { color: #999; }
+      .theme-hamburger .config-link { color: #555; }
+      .theme-hamburger .config-section { background: #fff; border-radius: 10px; }
+      .theme-hamburger .refresh-button { background: #555; border-radius: 8px; }
     </style>
     <script>
       // === Theme system ===
@@ -579,6 +687,8 @@ registerVisit();
         { id: 'arsstamma', label: 'Årsstämma' },
         { id: 'tranbar', label: 'Tranbär' },
         { id: 'valborg', label: 'Valborg' },
+        { id: 'lila', label: 'Lila' },
+        { id: 'hamburger', label: 'Hamburger' },
       ];
       const DEFAULT_THEME = 'midsommar';
 
@@ -1065,6 +1175,19 @@ function renderPoolBoatWidget() {
       function renderAllWidgets() {
         const container = document.getElementById("main-view");
         container.innerHTML = "";
+
+        // Hamburgare-logga (bara Hamburger-temat)
+        if (getSelectedTheme() === 'hamburger') {
+          const b = document.createElement("div");
+          b.className = "burger-logo";
+          b.innerHTML = `<span class="bl-bun1"></span><span class="bl-bun2"></span><span class="bl-bun3"></span><span class="bl-salad"></span><span class="bl-tom1"></span><span class="bl-tom2"></span><span class="bl-cheese"></span><span class="bl-meat"></span><span class="bl-sal1"></span><span class="bl-sal2"></span><span class="bl-bot1"></span><span class="bl-bot2"></span><span class="bl-bot3"></span>`;
+          container.appendChild(b);
+          const tag = document.createElement("div");
+          tag.className = "burger-tagline";
+          tag.textContent = "when burger the buss?";
+          container.appendChild(tag);
+        }
+
         widgets.forEach(widget => {
           if (widget.isWeather) {
             renderWeatherWidget();
