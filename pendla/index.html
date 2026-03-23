@@ -61,7 +61,7 @@ registerVisit();
       /* ============================================
          BASE LAYOUT
          ============================================ */
-      * { box-sizing: border-box; }
+      * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
       html, body {
         height: 100%;
         overflow-y: auto;
@@ -70,77 +70,108 @@ registerVisit();
         padding: 0;
       }
       body {
-        font-family: Arial, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Helvetica Neue', Arial, sans-serif;
         font-size: 0.9em;
         display: flex;
         flex-direction: column;
         align-items: center;
         transition: background 0.5s ease, color 0.3s ease;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
       }
       #main-view {
         width: 100%;
         max-width: 800px;
-        padding: 20px;
+        padding: 16px 16px 20px;
       }
       #last-updated {
-        font-size: 0.75em;
+        font-size: 0.7em;
         color: #888;
         text-align: center;
-        margin-top: -15px;
+        margin-top: -8px;
+        padding: 8px 0 4px;
         transition: color 0.3s;
+        letter-spacing: 0.02em;
       }
       h2 {
-        font-size: 1.2em;
+        font-size: 1.1em;
         margin-top: 2px;
         margin-bottom: 5px;
         line-height: 1;
+        font-weight: 600;
       }
       ul {
         list-style-type: none;
         padding: 0;
         margin: 0;
       }
-      li { padding: 1px 0; }
+      li { padding: 2px 0; }
       .site-box {
         width: 100%;
         padding: 12px 14px;
-        margin-bottom: 14px;
-        transition: all 0.4s ease;
+        margin-bottom: 12px;
+        transition: transform 0.15s ease, box-shadow 0.3s ease, background 0.4s ease;
+      }
+      .site-box:active {
+        transform: scale(0.985);
       }
       .big {
-        font-weight: bold;
+        font-weight: 600;
         font-size: 1em;
       }
       .refresh-button {
-        margin-top: 20px;
-        padding: 10px 20px;
+        display: block;
+        width: 100%;
+        margin-top: 16px;
+        padding: 14px 20px;
         font-size: 1em;
+        font-weight: 600;
         background-color: #007bff;
         color: white;
         border: none;
-        border-radius: 5px;
+        border-radius: 12px;
         cursor: pointer;
+        letter-spacing: 0.02em;
+        transition: transform 0.12s ease, opacity 0.2s ease;
       }
       .refresh-button:hover {
+        opacity: 0.9;
+      }
+      .refresh-button:active {
+        transform: scale(0.97);
         opacity: 0.85;
       }
       .config-link {
-        font-size: 0.8em;
+        font-size: 0.85em;
+        font-weight: 500;
         cursor: pointer;
-        text-decoration: underline;
+        text-decoration: none;
         color: #004488;
         text-align: center;
-        margin: 20px 0;
+        margin: 20px 0 8px;
+        padding: 10px 24px;
+        border-radius: 20px;
+        background: rgba(0,0,0,0.04);
+        transition: background 0.2s ease, transform 0.12s ease;
+        display: inline-block;
+        width: auto;
+        letter-spacing: 0.02em;
+      }
+      .config-link:active {
+        transform: scale(0.96);
+        background: rgba(0,0,0,0.08);
       }
       .hidden { display: none; }
       .config-section {
         width: 100%;
         max-width: 800px;
-        background-color: rgba(255, 255, 255, 0.95);
-        border-radius: 15px;
-        padding: 20px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        margin: 20px;
+        background-color: transparent;
+        border-radius: 0;
+        padding: 0 0 40px;
+        box-shadow: none;
+        margin: 0;
       }
       .strikethrough {
         text-decoration: line-through;
@@ -168,9 +199,9 @@ registerVisit();
         color: #000;
       }
       .theme-original .site-box {
-        background-color: rgba(255, 255, 255, 0.9);
-        border-radius: 15px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        background-color: rgba(255, 255, 255, 0.92);
+        border-radius: 14px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
       }
       .theme-original .weather-box { background-color: #ffffff; }
       .theme-original .ocean-box { background-color: #d9f0ff; }
@@ -181,8 +212,9 @@ registerVisit();
       .theme-original .poolboat-box { background-color: #99ffcc; }
       .theme-original #last-updated { color: #888; }
       .theme-original .config-link { color: #004488; }
-      .theme-original .config-section { background-color: rgba(255,255,255,0.95); border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
-      .theme-original .refresh-button { background-color: #007bff; }
+      .theme-original .config-link { background: rgba(0,68,136,0.08); color: #004488; }
+      .theme-original .config-section { background: transparent; box-shadow: none; border-radius: 0; }
+      .theme-original .refresh-button { background-color: #007bff; border-radius: 12px; }
 
       /* ============================================
          SHARED: T-Centralen header-band pattern
@@ -193,10 +225,10 @@ registerVisit();
       }
       body:not(.theme-original) .site-box h2 {
         margin: -12px -14px 10px -14px;
-        padding: 10px 16px;
-        font-size: 1em;
+        padding: 11px 16px;
+        font-size: 0.8em;
         font-weight: 700;
-        letter-spacing: 0.06em;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
       }
 
@@ -212,11 +244,11 @@ registerVisit();
         color: #1a2838;
       }
       .theme-isbla .site-box {
-        background: #f4f8fc; border: none; border-radius: 4px;
-        box-shadow: 0 1px 4px rgba(80,120,160,0.12), inset 0 0 0 1px rgba(80,120,160,0.08);
+        background: #f4f8fc; border: none; border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(80,120,160,0.08), 0 4px 16px rgba(80,120,160,0.1);
         color: #1a2838;
       }
-      .theme-isbla .site-box h2 { background: #2a6a9a; color: #fff; }
+      .theme-isbla .site-box h2 { background: #2a6a9a; color: #fff; border-radius: 10px 10px 0 0; }
       .theme-isbla .metro-box h2 { background: #a82030; }
       .theme-isbla .ship-box h2 { background: #1a7a6a; }
       .theme-isbla .bus-box h2 { background: #4a7aa0; }
@@ -226,8 +258,9 @@ registerVisit();
       .theme-isbla .poolboat-box h2 { background: #2a6a4a; }
       .theme-isbla #last-updated { color: #8a9aaa; }
       .theme-isbla .config-link { color: #2a6a9a; }
-      .theme-isbla .config-section { background: #f4f8fc; border-radius: 4px; }
-      .theme-isbla .refresh-button { background: #2a6a9a; border-radius: 4px; }
+      .theme-isbla .config-link { background: rgba(42,106,154,0.08); color: #2a6a9a; }
+      .theme-isbla .config-section { background: transparent; box-shadow: none; border-radius: 0; }
+      .theme-isbla .refresh-button { background: #2a6a9a; border-radius: 12px; }
 
       /* ============================================
          THEME: Midsommar (DEFAULT)
@@ -241,11 +274,11 @@ registerVisit();
         color: #0a1828;
       }
       .theme-midsommar .site-box {
-        background: #ffffff; border: none; border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0,60,120,0.1);
+        background: #ffffff; border: none; border-radius: 14px;
+        box-shadow: 0 1px 3px rgba(0,60,120,0.06), 0 4px 20px rgba(0,60,120,0.1);
         color: #0a1828;
       }
-      .theme-midsommar .site-box h2 { background: #1878c8; color: #fff; border-radius: 8px 8px 0 0; }
+      .theme-midsommar .site-box h2 { background: #1878c8; color: #fff; border-radius: 12px 12px 0 0; }
       .theme-midsommar .metro-box h2 { background: #d82030; }
       .theme-midsommar .ship-box h2 { background: #00884a; }
       .theme-midsommar .bus-box h2 { background: #e07018; }
@@ -255,8 +288,9 @@ registerVisit();
       .theme-midsommar .poolboat-box h2 { background: #288838; }
       .theme-midsommar #last-updated { color: #688898; }
       .theme-midsommar .config-link { color: #1878c8; }
-      .theme-midsommar .config-section { background: #fff; border-radius: 10px; }
-      .theme-midsommar .refresh-button { background: #1878c8; border-radius: 8px; }
+      .theme-midsommar .config-link { background: rgba(24,120,200,0.08); color: #1878c8; }
+      .theme-midsommar .config-section { background: transparent; box-shadow: none; border-radius: 0; }
+      .theme-midsommar .refresh-button { background: #1878c8; border-radius: 12px; }
 
       /* ============================================
          THEME: Tranholmen.se
@@ -271,15 +305,15 @@ registerVisit();
       .theme-tranholmen .site-box {
         background: #ffffff;
         border: none;
-        border-radius: 3px;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 1px 8px rgba(0,0,0,0.04);
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
         color: #111;
       }
       .theme-tranholmen .site-box h2 {
         font-family: 'Raleway', 'Roboto', Arial, sans-serif;
         background: #3b5a7b;
         color: #fff;
-        border-radius: 3px 3px 0 0;
+        border-radius: 10px 10px 0 0;
         letter-spacing: 0.04em;
         font-weight: 700;
       }
@@ -292,16 +326,13 @@ registerVisit();
       .theme-tranholmen .poolboat-box h2 { background: #3b6b4a; }
       .theme-tranholmen #last-updated { color: #999; }
       .theme-tranholmen .config-link { color: #598bd2; }
-      .theme-tranholmen .config-section {
-        background: #fff;
-        border-radius: 3px;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.08);
-      }
+      .theme-tranholmen .config-link { background: rgba(59,90,123,0.08); color: #598bd2; }
+      .theme-tranholmen .config-section { background: transparent; box-shadow: none; border-radius: 0; }
       .theme-tranholmen .refresh-button {
         background: #3b5a7b;
-        border-radius: 3px;
+        border-radius: 12px;
         font-family: 'Raleway', 'Roboto', Arial, sans-serif;
-        font-weight: 500;
+        font-weight: 600;
       }
       .theme-tranholmen .refresh-button:hover { background: #2a4159; }
 
@@ -320,14 +351,14 @@ registerVisit();
       .theme-halloween .site-box {
         background: #1a1218;
         border: none;
-        border-radius: 10px;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+        border-radius: 14px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 8px 32px rgba(0,0,0,0.4);
         color: #e0d0c0;
       }
       .theme-halloween .site-box h2 {
         background: #d07010;
         color: #fff;
-        border-radius: 8px 8px 0 0;
+        border-radius: 12px 12px 0 0;
       }
       .theme-halloween .metro-box h2 { background: #a82030; }
       .theme-halloween .ship-box { background: #161020; }
@@ -343,8 +374,9 @@ registerVisit();
       .theme-halloween .poolboat-box h2 { background: #2a5a20; color: #90e880; }
       .theme-halloween #last-updated { color: #3a2828; }
       .theme-halloween .config-link { color: #e89030; }
-      .theme-halloween .config-section { background: #1a1218; border-radius: 10px; color: #e0d0c0; }
-      .theme-halloween .refresh-button { background: #d07010; border-radius: 8px; }
+      .theme-halloween .config-link { background: rgba(232,144,48,0.1); color: #e89030; }
+      .theme-halloween .config-section { background: transparent; box-shadow: none; border-radius: 0; color: #e0d0c0; }
+      .theme-halloween .refresh-button { background: #d07010; border-radius: 12px; }
 
       /* ============================================
          THEME: Julmarknad
@@ -360,11 +392,11 @@ registerVisit();
         color: #1a0808;
       }
       .theme-julmarknad .site-box {
-        background: #fff8f0; border: none; border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(120,20,20,0.15);
+        background: #fff8f0; border: none; border-radius: 14px;
+        box-shadow: 0 1px 3px rgba(120,20,20,0.08), 0 6px 24px rgba(120,20,20,0.12);
         color: #1a0808;
       }
-      .theme-julmarknad .site-box h2 { background: #1a6a30; color: #fff; border-radius: 8px 8px 0 0; }
+      .theme-julmarknad .site-box h2 { background: #1a6a30; color: #fff; border-radius: 12px 12px 0 0; }
       .theme-julmarknad .metro-box h2 { background: #c41e2a; }
       .theme-julmarknad .ship-box h2 { background: #1a6a30; }
       .theme-julmarknad .bus-box h2 { background: #b8860b; color: #fff; }
@@ -374,8 +406,9 @@ registerVisit();
       .theme-julmarknad .poolboat-box h2 { background: #2a6a2a; }
       .theme-julmarknad #last-updated { color: rgba(255,255,255,0.5); }
       .theme-julmarknad .config-link { color: #fff8f0; }
-      .theme-julmarknad .config-section { background: #fff8f0; border-radius: 10px; color: #1a0808; }
-      .theme-julmarknad .refresh-button { background: #1a6a30; border-radius: 8px; }
+      .theme-julmarknad .config-link { background: rgba(255,248,240,0.2); color: #fff8f0; }
+      .theme-julmarknad .config-section { background: transparent; box-shadow: none; border-radius: 0; color: #1a0808; }
+      .theme-julmarknad .refresh-button { background: #1a6a30; border-radius: 12px; }
 
       /* ============================================
          THEME: Städdag
@@ -392,11 +425,11 @@ registerVisit();
       .theme-staddag .site-box {
         background: #f4faf0;
         border: none;
-        border-radius: 8px;
-        box-shadow: 0 2px 6px rgba(40,100,30,0.1);
+        border-radius: 14px;
+        box-shadow: 0 1px 3px rgba(40,100,30,0.06), 0 4px 20px rgba(40,100,30,0.1);
         color: #1a2818;
       }
-      .theme-staddag .site-box h2 { background: #4a8a30; color: #fff; }
+      .theme-staddag .site-box h2 { background: #4a8a30; color: #fff; border-radius: 12px 12px 0 0; }
       .theme-staddag .metro-box h2 { background: #b83020; }
       .theme-staddag .ship-box h2 { background: #2a7a5a; }
       .theme-staddag .bus-box h2 { background: #8a7a20; }
@@ -406,8 +439,9 @@ registerVisit();
       .theme-staddag .poolboat-box h2 { background: #3a7a30; }
       .theme-staddag #last-updated { color: #7a9a70; }
       .theme-staddag .config-link { color: #4a8a30; }
-      .theme-staddag .config-section { background: #f4faf0; border-radius: 8px; }
-      .theme-staddag .refresh-button { background: #4a8a30; border-radius: 8px; }
+      .theme-staddag .config-link { background: rgba(74,138,48,0.08); color: #4a8a30; }
+      .theme-staddag .config-section { background: transparent; box-shadow: none; border-radius: 0; }
+      .theme-staddag .refresh-button { background: #4a8a30; border-radius: 12px; }
 
       /* ============================================
          THEME: Storm
@@ -428,9 +462,10 @@ registerVisit();
       .theme-storm .site-box {
         background: #161c28;
         border: none;
-        border-radius: 6px;
+        border-radius: 14px;
         box-shadow:
-          0 2px 12px rgba(0,0,0,0.5),
+          0 2px 8px rgba(0,0,0,0.3),
+          0 8px 32px rgba(0,0,0,0.4),
           inset 0 1px 0 rgba(100,140,220,0.04);
         color: #b0b8c8;
       }
@@ -438,6 +473,7 @@ registerVisit();
         background: #2a3a58;
         color: #8ab4ff;
         border-bottom: 2px solid rgba(100,160,255,0.15);
+        border-radius: 12px 12px 0 0;
       }
       .theme-storm .metro-box h2 { background: #3a1a20; color: #ff7080; border-bottom-color: rgba(255,80,80,0.15); }
       .theme-storm .ship-box h2 { background: #1a3028; color: #60c8a0; border-bottom-color: rgba(60,200,140,0.15); }
@@ -448,8 +484,9 @@ registerVisit();
       .theme-storm .poolboat-box h2 { background: #1a2a1a; color: #70c070; }
       .theme-storm #last-updated { color: #384050; }
       .theme-storm .config-link { color: #6090d0; }
-      .theme-storm .config-section { background: #161c28; border-radius: 6px; color: #b0b8c8; }
-      .theme-storm .refresh-button { background: #2a3a58; color: #8ab4ff; border-radius: 6px; }
+      .theme-storm .config-link { background: rgba(96,144,208,0.08); color: #6090d0; }
+      .theme-storm .config-section { background: transparent; box-shadow: none; border-radius: 0; color: #b0b8c8; }
+      .theme-storm .refresh-button { background: #2a3a58; color: #8ab4ff; border-radius: 12px; }
 
       /* ============================================
          THEME: Årsstämma
@@ -462,16 +499,16 @@ registerVisit();
       }
       .theme-arsstamma .site-box {
         background: #ffffff;
-        border: 1px solid #d0d0d0;
-        border-radius: 0;
-        box-shadow: none;
+        border: 1px solid #d8d8d8;
+        border-radius: 4px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
         color: #1a1a1a;
       }
       .theme-arsstamma .site-box h2 {
         background: #1a1a1a;
         color: #ffffff;
         letter-spacing: 0.1em;
-        border-radius: 0;
+        border-radius: 2px 2px 0 0;
       }
       .theme-arsstamma .metro-box h2 { background: #333; }
       .theme-arsstamma .ship-box h2 { background: #333; }
@@ -482,8 +519,9 @@ registerVisit();
       .theme-arsstamma .poolboat-box h2 { background: #444; }
       .theme-arsstamma #last-updated { color: #999; }
       .theme-arsstamma .config-link { color: #333; }
-      .theme-arsstamma .config-section { background: #fff; border: 1px solid #d0d0d0; border-radius: 0; }
-      .theme-arsstamma .refresh-button { background: #1a1a1a; border-radius: 0; }
+      .theme-arsstamma .config-link { background: rgba(26,26,26,0.06); color: #333; }
+      .theme-arsstamma .config-section { background: transparent; box-shadow: none; border: none; border-radius: 0; }
+      .theme-arsstamma .refresh-button { background: #1a1a1a; border-radius: 6px; }
 
       /* ============================================
          THEME: Tranbär
@@ -502,13 +540,13 @@ registerVisit();
         background: #ffffff;
         border: 2px solid #f0c0d8;
         border-radius: 18px;
-        box-shadow: 0 4px 12px rgba(220,120,180,0.12);
+        box-shadow: 0 2px 6px rgba(220,120,180,0.08), 0 8px 24px rgba(220,120,180,0.1);
         color: #3a2040;
       }
       .theme-tranbar .site-box h2 {
         background: #e86aaa;
         color: #fff;
-        border-radius: 14px 14px 0 0;
+        border-radius: 16px 16px 0 0;
       }
       .theme-tranbar .metro-box { border-color: #ffb0b0; }
       .theme-tranbar .metro-box h2 { background: #e85a6a; }
@@ -526,7 +564,8 @@ registerVisit();
       .theme-tranbar .poolboat-box h2 { background: #50b848; }
       .theme-tranbar #last-updated { color: #c090a8; }
       .theme-tranbar .config-link { color: #e86aaa; }
-      .theme-tranbar .config-section { background: #fff; border-radius: 18px; border: 2px solid #f0c0d8; }
+      .theme-tranbar .config-link { background: rgba(232,106,170,0.08); color: #e86aaa; }
+      .theme-tranbar .config-section { background: transparent; box-shadow: none; border: none; border-radius: 0; }
       .theme-tranbar .refresh-button { background: #e86aaa; border-radius: 14px; }
 
       /* ============================================
@@ -541,11 +580,11 @@ registerVisit();
       .theme-valborg .site-box {
         background: rgba(255,255,255,0.06);
         border: 1px solid rgba(255,200,100,0.1);
-        border-radius: 14px;
-        box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+        border-radius: 16px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2), 0 8px 32px rgba(0,0,0,0.25);
         color: #ece0d0;
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
       }
       .theme-valborg .site-box h2 {
         background: linear-gradient(135deg, #d4a020 0%, #e8c040 100%);
@@ -562,8 +601,9 @@ registerVisit();
       .theme-valborg .poolboat-box h2 { background: linear-gradient(135deg, #489848 0%, #60b060 100%); color: #fff; }
       .theme-valborg #last-updated { color: rgba(255,255,255,0.25); }
       .theme-valborg .config-link { color: #e8c040; }
-      .theme-valborg .config-section { background: rgba(40,24,60,0.95); border-radius: 14px; color: #ece0d0; border: 1px solid rgba(255,200,100,0.1); }
-      .theme-valborg .refresh-button { background: linear-gradient(135deg, #d4a020 0%, #e8c040 100%); color: #2a1040; border-radius: 10px; font-weight: 700; }
+      .theme-valborg .config-link { background: rgba(232,192,64,0.1); color: #e8c040; }
+      .theme-valborg .config-section { background: transparent; box-shadow: none; border: none; border-radius: 0; color: #ece0d0; }
+      .theme-valborg .refresh-button { background: linear-gradient(135deg, #d4a020 0%, #e8c040 100%); color: #2a1040; border-radius: 12px; font-weight: 700; }
 
       /* ============================================
          THEME: Lila
@@ -580,14 +620,14 @@ registerVisit();
       }
       .theme-lila .site-box {
         background: rgba(35,28,40,0.9);
-        border: 1px solid rgba(100,80,110,0.2);
-        border-radius: 8px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        border: 1px solid rgba(100,80,110,0.15);
+        border-radius: 14px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2), 0 8px 32px rgba(0,0,0,0.3);
         color: #9a8a9e;
       }
       .theme-lila .site-box h2 {
         color: #c0b0c8;
-        border-radius: 6px 6px 0 0;
+        border-radius: 12px 12px 0 0;
         font-weight: 700;
       }
       .theme-lila .weather-box h2 { background: hsl(275, 12%, 38%); }
@@ -599,8 +639,9 @@ registerVisit();
       .theme-lila .poolboat-box h2 { background: hsl(275, 12%, 20%); }
       .theme-lila #last-updated { color: #4a3a50; }
       .theme-lila .config-link { color: #6a5a70; }
-      .theme-lila .config-section { background: rgba(35,28,40,0.95); border-radius: 8px; color: #9a8a9e; border: 1px solid rgba(100,80,110,0.2); }
-      .theme-lila .refresh-button { background: hsl(275, 12%, 28%); border-radius: 6px; color: #c0b0c8; }
+      .theme-lila .config-link { background: rgba(106,90,112,0.12); color: #6a5a70; }
+      .theme-lila .config-section { background: transparent; box-shadow: none; border: none; border-radius: 0; color: #9a8a9e; }
+      .theme-lila .refresh-button { background: hsl(275, 12%, 28%); border-radius: 12px; color: #c0b0c8; }
 
       /* ============================================
          THEME: Hamburger
@@ -614,13 +655,13 @@ registerVisit();
       .theme-hamburger .site-box {
         background: #fff;
         border: none;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        border-radius: 14px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 20px rgba(0,0,0,0.08);
         color: #222;
       }
       .theme-hamburger .site-box h2 {
         color: #fff;
-        border-radius: 8px 8px 0 0;
+        border-radius: 12px 12px 0 0;
         font-weight: 700;
       }
       /* Hamburgar-lager per widget (uppifrån och ner) */
@@ -670,8 +711,212 @@ registerVisit();
       }
       .theme-hamburger #last-updated { color: #999; }
       .theme-hamburger .config-link { color: #555; }
-      .theme-hamburger .config-section { background: #fff; border-radius: 10px; }
-      .theme-hamburger .refresh-button { background: #555; border-radius: 8px; }
+      .theme-hamburger .config-link { background: rgba(85,85,85,0.08); color: #555; }
+      .theme-hamburger .config-section { background: transparent; box-shadow: none; border-radius: 0; }
+      .theme-hamburger .refresh-button { background: #555; border-radius: 12px; }
+
+      /* ============================================
+         CONFIG SCREEN – native app feel
+         ============================================ */
+      .config-section h2.config-title {
+        font-size: 1.5em;
+        font-weight: 700;
+        text-align: center;
+        padding: 8px 16px 20px;
+        margin: 0;
+      }
+      .config-section .config-back {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        font-size: 0.95em;
+        font-weight: 400;
+        padding: 16px 16px 0;
+        cursor: pointer;
+        color: #007aff;
+        transition: opacity 0.15s;
+      }
+      .config-section .config-back:active { opacity: 0.4; }
+      .theme-halloween .config-back { color: #e89030; }
+      .theme-storm .config-back { color: #6090d0; }
+      .theme-valborg .config-back { color: #e8c040; }
+      .theme-lila .config-back { color: #6a5a70; }
+      .config-group {
+        margin: 0 16px 24px;
+        border-radius: 12px;
+      }
+      .config-group-label {
+        font-size: 0.7em;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 0 16px 6px;
+        opacity: 0.45;
+      }
+      .config-group-inner {
+        border-radius: 12px;
+        overflow: hidden;
+        background: rgba(255,255,255,0.85);
+        box-shadow: 0 0.5px 0 rgba(0,0,0,0.04);
+      }
+      /* Dark themes override */
+      .theme-halloween .config-group-inner {
+        background: rgba(26,18,24,0.9);
+      }
+      .theme-storm .config-group-inner {
+        background: rgba(22,28,40,0.9);
+      }
+      .theme-valborg .config-group-inner {
+        background: rgba(255,255,255,0.08);
+        backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      }
+      .theme-lila .config-group-inner {
+        background: rgba(35,28,40,0.85);
+      }
+      .config-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+        min-height: 44px;
+        font-size: 0.95em;
+        cursor: pointer;
+        position: relative;
+        transition: background 0.1s;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      .config-row:active {
+        background: rgba(0,0,0,0.04);
+      }
+      .theme-halloween .config-row:active,
+      .theme-storm .config-row:active,
+      .theme-valborg .config-row:active,
+      .theme-lila .config-row:active {
+        background: rgba(255,255,255,0.04);
+      }
+      .config-row + .config-row {
+        border-top: 0.5px solid rgba(60,60,67,0.15);
+      }
+      .config-row-label {
+        flex: 1;
+        font-weight: 400;
+      }
+      /* iOS-style toggle switch */
+      .toggle-switch {
+        position: relative;
+        width: 50px;
+        height: 30px;
+        flex-shrink: 0;
+      }
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        position: absolute;
+      }
+      .toggle-track {
+        position: absolute;
+        inset: 0;
+        background: rgba(128,128,128,0.3);
+        border-radius: 15px;
+        transition: background 0.25s ease;
+        cursor: pointer;
+      }
+      .toggle-track::after {
+        content: '';
+        position: absolute;
+        width: 26px;
+        height: 26px;
+        left: 2px;
+        top: 2px;
+        background: #fff;
+        border-radius: 50%;
+        transition: transform 0.25s ease;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      }
+      .toggle-switch input:checked + .toggle-track {
+        background: #34c759;
+      }
+      .toggle-switch input:checked + .toggle-track::after {
+        transform: translateX(20px);
+      }
+      /* Select styling */
+      .config-select {
+        appearance: none;
+        -webkit-appearance: none;
+        background: rgba(0,0,0,0.06);
+        border: none;
+        border-radius: 8px;
+        padding: 8px 32px 8px 12px;
+        font-size: 0.9em;
+        font-weight: 500;
+        color: inherit;
+        cursor: pointer;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        min-width: 140px;
+      }
+      .theme-halloween .config-select,
+      .theme-storm .config-select,
+      .theme-valborg .config-select,
+      .theme-lila .config-select {
+        background-color: rgba(255,255,255,0.1);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23aaa' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      }
+      /* Text input styling */
+      .config-input {
+        appearance: none;
+        -webkit-appearance: none;
+        background: rgba(0,0,0,0.06);
+        border: none;
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 0.9em;
+        color: inherit;
+        width: 140px;
+      }
+      .theme-halloween .config-input,
+      .theme-storm .config-input,
+      .theme-valborg .config-input,
+      .theme-lila .config-input {
+        background: rgba(255,255,255,0.1);
+      }
+      .config-input:focus, .config-select:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(52,199,89,0.4);
+      }
+      /* Share section */
+      .config-share {
+        text-align: center;
+        padding: 16px 16px;
+        background: rgba(255,255,255,0.85);
+        border-radius: 12px;
+        box-shadow: 0 0.5px 0 rgba(0,0,0,0.04);
+      }
+      .theme-halloween .config-share { background: rgba(26,18,24,0.9); }
+      .theme-storm .config-share { background: rgba(22,28,40,0.9); }
+      .theme-valborg .config-share { background: rgba(255,255,255,0.08); }
+      .theme-lila .config-share { background: rgba(35,28,40,0.85); }
+      .config-share a {
+        font-size: 0.85em;
+        word-break: break-all;
+        color: #007aff;
+        text-decoration: none;
+      }
+      .config-share img {
+        display: block;
+        width: 240px;
+        margin: 12px auto 0;
+        padding: 0;
+        border-radius: 8px;
+      }
+      /* Save button in config */
+      .config-section .refresh-button {
+        margin: 24px 16px 0;
+        width: calc(100% - 32px);
+      }
     </style>
     <script>
       // === Theme system ===
@@ -1203,11 +1448,14 @@ function renderPoolBoatWidget() {
         });
 
         // Inställningar-länk
-        const configLink = document.createElement("div");
+        const configWrap = document.createElement("div");
+        configWrap.style.textAlign = "center";
+        const configLink = document.createElement("span");
         configLink.className = "config-link";
         configLink.textContent = "Inställningar";
         configLink.onclick = () => toggleConfig(true);
-        container.appendChild(configLink);
+        configWrap.appendChild(configLink);
+        container.appendChild(configWrap);
 
         // Senast uppdaterad
         const lastUpdated = document.createElement("div");
@@ -1297,33 +1545,88 @@ window.addEventListener("pageshow", (e) => {
       function renderConfig() {
         const prefs = loadPreferences();
         const config = document.getElementById("config-view");
-        config.innerHTML = "<h2>Välj info som ska visas</h2>";
+        config.innerHTML = "";
         const form = document.createElement("form");
-        
+        form.onsubmit = e => e.preventDefault();
+
+        // --- Back button ---
+        const back = document.createElement("div");
+        back.className = "config-back";
+        back.innerHTML = "&#8249; Tillbaka";
+        back.onclick = () => {
+          // Save everything on close
+          const newPrefs = {};
+          widgets.forEach(w => { newPrefs[w.id] = form.elements[w.id]?.checked ?? true; });
+          savePreferences(newPrefs);
+          const themeVal = form.elements.pendlaTheme;
+          if (themeVal) applyTheme(themeVal.value);
+          const codeInput = form.elements.poolboatCode;
+          if (codeInput) localStorage.setItem("poolboatCode", codeInput.value.trim());
+          toggleConfig(false);
+        };
+        form.appendChild(back);
+
+        // --- Title ---
+        const title = document.createElement("h2");
+        title.className = "config-title";
+        title.textContent = "Inställningar";
+        form.appendChild(title);
+
+        // --- Helper: create a toggle row ---
+        function makeToggleRow(name, label, checked) {
+          const row = document.createElement("label");
+          row.className = "config-row";
+          const span = document.createElement("span");
+          span.className = "config-row-label";
+          span.textContent = label;
+          row.appendChild(span);
+          const toggle = document.createElement("div");
+          toggle.className = "toggle-switch";
+          const input = document.createElement("input");
+          input.type = "checkbox";
+          input.name = name;
+          input.checked = checked;
+          const track = document.createElement("span");
+          track.className = "toggle-track";
+          toggle.appendChild(input);
+          toggle.appendChild(track);
+          row.appendChild(toggle);
+          return row;
+        }
+
+        // --- Widgets group ---
+        const widgetGroup = document.createElement("div");
+        widgetGroup.className = "config-group";
+        const widgetLabel = document.createElement("div");
+        widgetLabel.className = "config-group-label";
+        widgetLabel.textContent = "Visa widgets";
+        widgetGroup.appendChild(widgetLabel);
+        const widgetInner = document.createElement("div");
+        widgetInner.className = "config-group-inner";
         widgets.forEach(widget => {
-          const label = document.createElement("label");
-          const checkbox = document.createElement("input");
-          checkbox.type = "checkbox";
-          checkbox.name = widget.id;
-          checkbox.checked = prefs[widget.id] !== false;
-          label.appendChild(checkbox);
-          label.append(` ${widget.title}`);
-          form.appendChild(label);
-          form.appendChild(document.createElement("br"));
+          widgetInner.appendChild(makeToggleRow(widget.id, widget.title, prefs[widget.id] !== false));
         });
+        widgetGroup.appendChild(widgetInner);
+        form.appendChild(widgetGroup);
 
-
-
-        // --- Tema ---
-        const themeHeader = document.createElement("h2");
-        themeHeader.textContent = "Utseende";
-        themeHeader.style.marginTop = "20px";
-        form.appendChild(themeHeader);
-
-        const themeLabel = document.createElement("label");
-        themeLabel.textContent = "Tema: ";
+        // --- Theme group ---
+        const themeGroup = document.createElement("div");
+        themeGroup.className = "config-group";
+        const themeLabel = document.createElement("div");
+        themeLabel.className = "config-group-label";
+        themeLabel.textContent = "Utseende";
+        themeGroup.appendChild(themeLabel);
+        const themeInner = document.createElement("div");
+        themeInner.className = "config-group-inner";
+        const themeRow = document.createElement("div");
+        themeRow.className = "config-row";
+        const themeRowLabel = document.createElement("span");
+        themeRowLabel.className = "config-row-label";
+        themeRowLabel.textContent = "Tema";
+        themeRow.appendChild(themeRowLabel);
         const themeSelect = document.createElement("select");
         themeSelect.name = "pendlaTheme";
+        themeSelect.className = "config-select";
         const currentTheme = getSelectedTheme();
         THEME_OPTIONS.forEach(t => {
           const opt = document.createElement("option");
@@ -1333,92 +1636,73 @@ window.addEventListener("pageshow", (e) => {
           themeSelect.appendChild(opt);
         });
         themeSelect.addEventListener("change", () => applyTheme(themeSelect.value));
-        themeLabel.appendChild(themeSelect);
-        form.appendChild(themeLabel);
-        form.appendChild(document.createElement("br"));
+        themeRow.appendChild(themeSelect);
+        themeInner.appendChild(themeRow);
+        themeGroup.appendChild(themeInner);
+        form.appendChild(themeGroup);
 
-        // --- Ny rubrik för övriga inställningar ---
-        const otherHeader = document.createElement("h2");
-        otherHeader.textContent = "Övriga inställningar";
-        otherHeader.style.marginTop = "20px";
-        form.appendChild(otherHeader);
+        // --- Other settings group ---
+        const otherGroup = document.createElement("div");
+        otherGroup.className = "config-group";
+        const otherLabel = document.createElement("div");
+        otherLabel.className = "config-group-label";
+        otherLabel.textContent = "Övrigt";
+        otherGroup.appendChild(otherLabel);
+        const otherInner = document.createElement("div");
+        otherInner.className = "config-group-inner";
+        const codeRow = document.createElement("div");
+        codeRow.className = "config-row";
+        const codeRowLabel = document.createElement("span");
+        codeRowLabel.className = "config-row-label";
+        codeRowLabel.textContent = "Poolbåtskod";
+        codeRow.appendChild(codeRowLabel);
+        const inputCode = document.createElement("input");
+        inputCode.type = "text";
+        inputCode.name = "poolboatCode";
+        inputCode.className = "config-input";
+        inputCode.maxLength = 14;
+        inputCode.placeholder = "Ange kod";
+        inputCode.value = localStorage.getItem("poolboatCode") || "";
+        codeRow.appendChild(inputCode);
+        otherInner.appendChild(codeRow);
+        otherGroup.appendChild(otherInner);
+        form.appendChild(otherGroup);
 
-        // --- Endast om poolbåtens widget är ikryssad ---
-          const labelCode = document.createElement("label");
-          labelCode.textContent = "Koden till poolbåtarna: ";
-          const inputCode = document.createElement("input");
-          inputCode.type = "text";
-          inputCode.name = "poolboatCode";
-          inputCode.maxLength = 14;
-          // Förifyll med tidigare sparad kod eller tomt
-          inputCode.value = localStorage.getItem("poolboatCode") || "";
-          labelCode.appendChild(inputCode);
-          form.appendChild(labelCode);
-          form.appendChild(document.createElement("br"));
+        // --- Share section ---
+        const shareGroup = document.createElement("div");
+        shareGroup.className = "config-group";
+        const shareLabel = document.createElement("div");
+        shareLabel.className = "config-group-label";
+        shareLabel.textContent = "Dela appen";
+        shareGroup.appendChild(shareLabel);
+        const shareContent = document.createElement("div");
+        shareContent.className = "config-share";
+        shareContent.innerHTML = `<a href="https://cyborg-pixel.github.io/pendla/" target="_blank">cyborg-pixel.github.io/pendla</a>`;
+        const qr = document.createElement("img");
+        qr.src = "qr_out.png";
+        qr.alt = "QR-kod för att dela appen";
+        shareContent.appendChild(qr);
+        shareGroup.appendChild(shareContent);
+        form.appendChild(shareGroup);
 
-
-
-// --- Dela appen-sektion ---
-const shareHeader = document.createElement("h2");
-shareHeader.textContent = "Dela appen";
-shareHeader.style.marginTop = "20px";
-form.appendChild(shareHeader);
-
-// Länk till appen
-const shareLink = document.createElement("div");
-shareLink.innerHTML = `<a href="https://cyborg-pixel.github.io/pendla/" target="_blank">
-  https://cyborg-pixel.github.io/pendla/
-</a>`;
-form.appendChild(shareLink);
-
-// QR-kod
-const qr = document.createElement("img");
-qr.src = "qr_out.png";
-qr.alt = "QR-kod för att dela appen";
-qr.style.display = "block";
-qr.style.width = "30%";
-qr.style.marginTop = "10px";
-qr.style.background = "#fff";
-qr.style.padding = "8px";
-qr.style.borderRadius = "6px";
-form.appendChild(qr);
-form.appendChild(document.createElement("br"));
-
-
-          
-
+        // --- Save button ---
         const saveBtn = document.createElement("button");
         saveBtn.textContent = "Spara";
-        saveBtn.type = "submit";
+        saveBtn.type = "button";
         saveBtn.className = "refresh-button";
+        saveBtn.onclick = () => {
+          const newPrefs = {};
+          widgets.forEach(w => { newPrefs[w.id] = form.elements[w.id]?.checked ?? true; });
+          savePreferences(newPrefs);
+          const themeVal = form.elements.pendlaTheme;
+          if (themeVal) applyTheme(themeVal.value);
+          const codeInput2 = form.elements.poolboatCode;
+          if (codeInput2) localStorage.setItem("poolboatCode", codeInput2.value.trim());
+          toggleConfig(false);
+        };
         form.appendChild(saveBtn);
 
-        form.onsubmit = e => {
-          e.preventDefault();
-
-          // Spara widget-inställningarna som tidigare
-          const newPrefs = {};
-          widgets.forEach(widget => {
-            newPrefs[widget.id] = form.elements[widget.id].checked;
-        });
-        savePreferences(newPrefs);
-
-        // Spara tema
-        const themeVal = form.elements.pendlaTheme;
-        if (themeVal) applyTheme(themeVal.value);
-
-        // Spara poolbåts-koden
-        const codeInput = form.elements.poolboatCode;
-        if (codeInput) {
-          const code = codeInput.value.trim();
-          localStorage.setItem("poolboatCode", code);
-        }
-
-        toggleConfig(false);
-      };
-
-
-      config.appendChild(form);
+        config.appendChild(form);
       }
     </script>
 
