@@ -1032,13 +1032,19 @@ function getWaterLevelBlock(value) {
       }
 
       const schoolFerryConfig = {
-        startDate: "2025-08-18",
-        endDate: "2025-10-24T23:59:59",
+        periods: [
+          { startDate: "2025-08-18", endDate: "2025-10-24T23:59:59" },
+          { startDate: "2026-04-13", endDate: "2026-06-11T23:59:59" }
+        ],
         redDays: [
           "2025-05-01",
           "2025-05-29",
           "2025-05-30",
-          "2025-06-06"
+          "2025-06-06",
+          "2026-05-01",
+          "2026-05-14",
+          "2026-05-15",
+          "2026-06-06"
         ]
       };
 
@@ -1230,7 +1236,12 @@ departures.forEach((dep, i) => {
           const box = document.createElement("div");
           box.className = "site-box schoolferry-box";
           box.id = "schoolferry-box";
-          box.innerHTML = `<h2>Skolbåten (19 augusti – 24 oktober)</h2><ul id="schoolferry-list">Laddar avgångar...</ul>`;
+          const now = new Date();
+          const currentPeriod = schoolFerryConfig.periods.find(p => now >= new Date(p.startDate) && now <= new Date(p.endDate)) || schoolFerryConfig.periods.find(p => now < new Date(p.startDate)) || schoolFerryConfig.periods[schoolFerryConfig.periods.length - 1];
+          const pStart = new Date(currentPeriod.startDate);
+          const pEnd = new Date(currentPeriod.endDate);
+          const fmtDate = d => `${d.getDate()} ${["januari","februari","mars","april","maj","juni","juli","augusti","september","oktober","november","december"][d.getMonth()]}`;
+          box.innerHTML = `<h2>Skolbåten (${fmtDate(pStart)} – ${fmtDate(pEnd)})</h2><ul id="schoolferry-list">Laddar avgångar...</ul>`;
           container.appendChild(box);
         }
         updateSchoolFerryContent();
@@ -1240,9 +1251,11 @@ departures.forEach((dep, i) => {
     const prefs = loadPreferences();
     if (prefs.schoolferry === false) return;
     const now = new Date();
-    const startDate = new Date(schoolFerryConfig.startDate);
-    const endDate = new Date(schoolFerryConfig.endDate);
-    const isActivePeriod = now >= startDate && now <= endDate;
+    const isActivePeriod = schoolFerryConfig.periods.some(p => {
+      const start = new Date(p.startDate);
+      const end = new Date(p.endDate);
+      return now >= start && now <= end;
+    });
     const ul = document.getElementById("schoolferry-list");
     if (!ul) return;
     ul.innerHTML = "";
