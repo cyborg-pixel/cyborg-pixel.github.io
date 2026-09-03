@@ -190,6 +190,54 @@ registerVisit();
         text-overflow: ellipsis;
       }
 
+      /* Öns kalender */
+      #island-list li {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 0 0.5em;
+        padding: 3px 0;
+      }
+      .cal-when {
+        flex: 0 0 auto;
+        min-width: 6.5em;
+        font-variant-numeric: tabular-nums;
+        opacity: 0.75;
+      }
+      .cal-title { flex: 1 1 8em; }
+      .cal-badge {
+        flex: 0 0 auto;
+        font-size: 0.72em;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 1px 7px;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.08);
+      }
+      li.cal-active { font-weight: 600; }
+      li.cal-active .cal-when { opacity: 1; }
+      li.cal-active .cal-badge { background: #d64b2a; color: #fff; }
+      .cal-approx { opacity: 0.6; }
+      .island-toggle {
+        display: inline-block;
+        margin-top: 10px;
+        font-size: 0.8em;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 5px 12px;
+        border-radius: 12px;
+        background: rgba(0, 0, 0, 0.06);
+        letter-spacing: 0.02em;
+      }
+      .island-toggle:active { transform: scale(0.96); }
+      .island-foot {
+        font-size: 0.75em;
+        opacity: 0.6;
+        margin-top: 8px;
+        line-height: 1.35;
+      }
+
       /* ============================================
          THEME: Original (Pendla classic)
          ============================================ */
@@ -210,6 +258,7 @@ registerVisit();
       .theme-original .bus-box { background-color: #FBEDD5; }
       .theme-original .metro-box { background-color: #F6CFCE; }
       .theme-original .poolboat-box { background-color: #99ffcc; }
+      .theme-original .island-box { background-color: #FFF3D6; }
       .theme-original #last-updated { color: #888; }
       .theme-original .config-link { color: #004488; }
       .theme-original .config-link { background: rgba(0,68,136,0.08); color: #004488; }
@@ -1073,14 +1122,14 @@ function getWaterLevelBlock(value) {
       }
 
       function loadPreferences() {
-        const stored = localStorage.getItem("visibleWidgets");
-        if (stored) {
-          return JSON.parse(stored);
-        }
         const prefs = {};
         widgets.forEach(widget => {
           prefs[widget.id] = defaultVisibleWidgets.includes(widget.id);
         });
+        const stored = localStorage.getItem("visibleWidgets");
+        if (stored) {
+          Object.assign(prefs, JSON.parse(stored));
+        }
         return prefs;
       }
 
@@ -1152,7 +1201,8 @@ departures.forEach((dep, i) => {
         { id: "tropsten", title: "T-bana 13 fr. Ropsten", siteId: 9220, mode: "METRO", line: "13", dir: 2, bg: "metro-box" },
         { id: "tdanderyd", title: "T-bana 14 fr. Danderyds sjukhus", siteId: 9201, mode: "METRO", line: "14", dir: 2, bg: "metro-box" },
         { id: "schoolferry", title: "Skolbåten", isSchoolFerry: true, bg: "schoolferry-box" },
-        { id: "poolboat", title: "Poolbåtarna", isPoolBoat: true, bg: "poolboat-box" }
+        { id: "poolboat", title: "Poolbåtarna", isPoolBoat: true, bg: "poolboat-box" },
+        { id: "island", title: "Öns kalender", isIsland: true, bg: "island-box" }
       ];
 
       const defaultVisibleWidgets = [
@@ -1317,6 +1367,227 @@ departures.forEach((dep, i) => {
   }
 
 
+
+// === Öns kalender (Tranholmen & Danderyd) ===
+// Datumen är återkommande regler, inte en lista med hårdkodade år.
+// Källor: tranholmen.se (stadgar 1990 §13/§15, ordningsregler, Nyinflyttad,
+// nyhetsarkivets "Viktiga datum" 2020-2026) samt danderyd.se och Transportstyrelsen.
+
+let islandCalendarExpanded = false;
+
+// Mobila återvinningscentralens stopp vid Långängsstrand 9, vid Käppalatunneln.
+// Fasta datum ur kommunens årsschema (danderyd.se/MAVC) – går inte att räkna fram,
+// så listan måste fyllas på när kommunen publicerar ett nytt år.
+const MAVC_LANGANGSSTRAND = {
+  2026: ["02-04", "04-29", "05-27", "08-19", "10-07", "11-11"]
+};
+
+const CAL_MONTHS = ["jan", "feb", "mar", "apr", "maj", "jun", "jul", "aug", "sep", "okt", "nov", "dec"];
+
+function calAddDays(d, n) {
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+}
+function calStartOfDay(d) {
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+}
+// n:te veckodagen i en månad, t.ex. första lördagen i oktober
+function calNthWeekday(y, month, weekday, n) {
+  const first = new Date(y, month, 1);
+  const offset = (weekday - first.getDay() + 7) % 7;
+  return new Date(y, month, 1 + offset + (n - 1) * 7);
+}
+// Sista veckodagen i en månad, t.ex. sista lördagen i april
+function calLastWeekday(y, month, weekday) {
+  const last = new Date(y, month + 1, 0);
+  const offset = (last.getDay() - weekday + 7) % 7;
+  return new Date(y, month + 1, 0 - offset);
+}
+// Måndagen i ett givet ISO-veckonummer (4 januari ligger alltid i vecka 1)
+function calIsoWeekMonday(y, week) {
+  const jan4 = new Date(y, 0, 4);
+  const mondayOffset = (jan4.getDay() + 6) % 7;
+  return new Date(y, 0, 4 - mondayOffset + (week - 1) * 7);
+}
+// Midsommarafton = fredagen mellan 19 och 25 juni
+function calMidsummerEve(y) {
+  for (let d = 19; d <= 25; d++) {
+    const day = new Date(y, 5, d);
+    if (day.getDay() === 5) return day;
+  }
+}
+
+function buildIslandEvents(y) {
+  const varStaddag = calLastWeekday(y, 3, 6);        // sista lördagen i april
+  const hostStaddag = calNthWeekday(y, 9, 6, 1);     // första lördagen i oktober
+  const eldVar = calIsoWeekMonday(y, 16);
+  const eldHost = calIsoWeekMonday(y, 41);
+  const midsommar = calMidsummerEve(y);
+
+  const events = [
+    { t: "Sista dag för motioner", s: new Date(y, 1, 15),
+      // n: "Stadgarna §15: motioner ska vara styrelsen tillhanda senast 15 februari."
+    },
+    { t: "Årsstämmor TSF & TFF", s: calNthWeekday(y, 2, 2, 2), approx: true,
+      // n: "Stadgarna §13: ordinarie stämma hålls före mars månads utgång. Kallelse senast två veckor före, revisionsberättelse senast tre veckor före."
+    },
+    { t: "Vinterbron tas bort", s: new Date(y, 3, 15),
+      // n: "Gångbron tomt 86–Svanholmsparken. Exakt dag varierar med helger och isläge."
+    },
+    { t: "Eldningsveckor v.16–17", s: calAddDays(eldVar, -2), e: calAddDays(eldVar, 13),
+      // n: "Danderyd tillåter eldning v.16–17 med föregående lördag och söndag. Endast torrt vedartat trädgårdsavfall – aldrig gräs och löv. Kontrollera att eldningsförbud inte råder."
+    },
+    { t: "Valborgsmässoeld", s: new Date(y, 3, 30),
+      // n: "Enda tillåtna eldningsdagen utanför eldningsveckorna. Öns eldplats är Grottviken."
+    },
+    { t: "Vårens städdag", s: varStaddag, approx: true,
+      // n: "Brukar ligga sista lördagen i april och avslutas med gemensam lunch. Eldplatsen i Grottviken får fyllas på tidigast två veckor före."
+    },
+    { t: "Midsommarfirande", s: midsommar,
+      // n: "Dans kring stången på midsommarängen."
+    },
+    { t: "Båtar ska vara sjösatta", s: midsommar, e: new Date(y, 7, 31),
+      // n: "Ordningsregel 3: inga privata upplag på allmänningarna – båtar undantagna endast midsommar–sista augusti."
+    },
+    { t: "Vattenavläsningen öppnar", s: new Date(y, 8, 1),
+      // n: "Registreras på Mitt Tranholmen. Ordningsregel 1: alla anslutna fastigheter ska ha vattenmätare och rapportera årligen."
+    },
+    { t: "Höstens städdag", s: hostStaddag,
+      // n: "Första lördagen i oktober fem år i rad (2021–2025)."
+    },
+    { t: "Sista dag för vattenavläsning", s: calAddDays(hostStaddag, 1), approx: true,
+      // n: "Har legat dagen efter höstens städdag 2021–2025. En schablon debiteras om avläsningen inte kommit in i tid."
+    },
+    { t: "Eldningsveckor v.41–42", s: calAddDays(eldHost, -2), e: calAddDays(eldHost, 13),
+      // n: "Danderyd tillåter eldning v.41–42 med föregående lördag och söndag. Endast torrt vedartat trädgårdsavfall."
+    },
+    { t: "Dubbdäck tillåtna", s: new Date(y, 9, 1), e: new Date(y + 1, 3, 15),
+      // n: "1 oktober–15 april. Utanför perioden bara om det är eller väntas bli vinterväglag."
+    },
+    { t: "Dubbdäcken ska vara av", s: new Date(y, 3, 16),
+      // n: "Sista dagen dubbdäck är tillåtna är 15 april, så från 16 april ska de vara avmonterade – om det inte är eller väntas bli vinterväglag. Det finns inget lagkrav på att använda sommardäck under någon period; det är bara dubbarna som är reglerade."
+    },
+    { t: "Vinterbron läggs ut", s: new Date(y, 10, 1),
+      // n: "Gångbron tomt 86–Svanholmsparken ligger ute 1 november–15 april."
+    },
+    { t: "Vinterdäck vid vinterväglag", s: new Date(y, 11, 1), e: new Date(y + 1, 2, 31),
+      // n: "Krav 1 december–31 mars när det är snö, is, snömodd eller frost på vägen. Minst 3 mm mönsterdjup."
+    }
+  ];
+
+  // multi: alla årets stopp visas i den expanderade listan, inte bara nästa
+  (MAVC_LANGANGSSTRAND[y] || []).forEach(md => {
+    const [month, day] = md.split("-").map(Number);
+    events.push({
+      t: "Mobil ÅVC, Långängsstrand", s: new Date(y, month - 1, day), multi: true,
+      // n: "Långängsstrand 9 vid Käppalatunneln, onsdagar kl. 16.30–19.30. Tar grovavfall och elavfall, men inte soppåsar, förpackningar, tidningar, vitvaror, tryckimpregnerat trä eller bildäck."
+    });
+  });
+
+  return events;
+}
+
+function renderIslandWidget() {
+  const prefs = loadPreferences();
+  if (!prefs.island) return;
+
+  const container = document.getElementById("main-view");
+  if (!document.getElementById("island-box")) {
+    const box = document.createElement("div");
+    box.className = "site-box island-box";
+    box.id = "island-box";
+    box.innerHTML = `<h2>Öns kalender</h2><ul id="island-list"></ul><span class="island-toggle" id="island-toggle"></span><div class="island-foot" id="island-foot"></div>`;
+    container.appendChild(box);
+  }
+  updateIslandWidget();
+}
+
+function updateIslandWidget() {
+  const ul = document.getElementById("island-list");
+  if (!ul) return;
+
+  const now = new Date();
+  const today = calStartOfDay(now);
+  const horizon = calAddDays(today, 365);
+  const year = today.getFullYear();
+
+  // Bygg tre år så att perioder över årsskiftet (dubbdäck, vinterdäck, bron) kommer med
+  const seen = new Set();
+  const events = [];
+  [year - 1, year, year + 1].forEach(yy => {
+    buildIslandEvents(yy).forEach(ev => {
+      const key = ev.t + "|" + ev.s.getTime();
+      if (seen.has(key)) return;
+      seen.add(key);
+      const end = ev.e || ev.s;
+      if (end < today || ev.s > horizon) return;
+      events.push({ ...ev, end: end, active: ev.s <= today && today <= end });
+    });
+  });
+
+  // Pågående först (den som tar slut snarast överst), därefter kommande i datumordning
+  events.sort((a, b) => {
+    if (a.active !== b.active) return a.active ? -1 : 1;
+    return a.active ? a.end - b.end : a.s - b.s;
+  });
+
+  // Expanderat: varje händelse en gång, utom de som är märkta multi (alla
+  // stopp för mobila ÅVC ska synas). Hopfällt: bara nästa förekomst av varje sak.
+  const seenAll = new Set();
+  const unique = events.filter(ev => {
+    if (ev.multi) return true;
+    if (seenAll.has(ev.t)) return false;
+    seenAll.add(ev.t);
+    return true;
+  });
+  const seenNext = new Set();
+  const next = unique.filter(ev => {
+    if (seenNext.has(ev.t)) return false;
+    seenNext.add(ev.t);
+    return true;
+  });
+
+  const shown = islandCalendarExpanded ? unique : next.slice(0, 4);
+  const fmt = d => `${d.getDate()} ${CAL_MONTHS[d.getMonth()]}`;
+
+  ul.innerHTML = "";
+  shown.forEach(ev => {
+    const li = document.createElement("li");
+    if (ev.active) li.classList.add("cal-active");
+
+    const when = ev.e ? `${fmt(ev.s)}–${fmt(ev.end)}` : fmt(ev.s);
+    const days = Math.round((ev.s - today) / 86400000);
+    let badge = "";
+    if (ev.active) badge = "Pågår nu";
+    else if (days === 0) badge = "Idag";
+    else if (days === 1) badge = "Imorgon";
+
+    li.innerHTML = `
+      <span class="cal-when${ev.approx ? " cal-approx" : ""}">${ev.approx ? "~" : ""}${when}</span>
+      <span class="cal-title">${ev.t}</span>
+      ${badge ? `<span class="cal-badge">${badge}</span>` : ""}
+    `.trim();
+    ul.appendChild(li);
+  });
+
+  const toggle = document.getElementById("island-toggle");
+  if (toggle) {
+    toggle.textContent = islandCalendarExpanded
+      ? "Visa färre ▴"
+      : `Visa hela året (${unique.length}) ▾`;
+    toggle.onclick = () => {
+      islandCalendarExpanded = !islandCalendarExpanded;
+      updateIslandWidget();
+    };
+  }
+
+  const foot = document.getElementById("island-foot");
+  if (foot) {
+    foot.innerHTML = islandCalendarExpanded
+      ? "Datumen bygger på officiella källor – Tranholmens samfällighet, Danderyds kommun och Transportstyrelsen – och är delvis härledda ur tidigare års mönster (markerade med ~). Datum, tider och regler kan ändras utan att det syns här. Kontrollera alltid mot källan innan du planerar efter ett datum."
+      : "";
+  }
+}
+
 // === PoolBoat Widget ===
 function renderPoolBoatWidget() {
   const prefs = loadPreferences();
@@ -1463,6 +1734,8 @@ function renderPoolBoatWidget() {
             renderSchoolFerryWidget();
           } else if (widget.isPoolBoat) {
             renderPoolBoatWidget();
+          } else if (widget.isIsland) {
+            renderIslandWidget();
           } else {
             renderSlWidget(widget);
           }
